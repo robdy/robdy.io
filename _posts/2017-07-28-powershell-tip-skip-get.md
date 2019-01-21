@@ -1,0 +1,86 @@
+---
+published: true
+layout: post
+title: PowerShell tip - skip "Get"
+---
+Interesting thing which I discovered today (BTW, SysAdmin day). In PowerShell you can skip the verb “Get” (at least for most cmdlets – it wasn’t working for Get-Process).
+
+So instead of using
+
+``` powershell
+Get-Mailbox yourname@domain.com
+```
+
+you can just use
+``` powershell
+Mailbox yourname@domain.com
+```
+
+It looks like it’s not an alias as Get-Alias cmdlet doesn’t show anything for these noun-only cmdlets.
+
+~~Unfortunately it has one significant drawback: Tab completion/Intellisense in ISE will not be working with such cmdlets which makes them quite useless. But for ad-hoc checking can be helpful.~~
+
+### Update 2018-12-06:
+
+After digging a bit more I found far more information about that default verb feature. First of all, I check if that is something built into some modules so I tried cmdlets from multiple modules:
+
+``` powershell
+service
+aduser mySan
+ExcelColumnName # random cmdlet from ImportExcel module
+```
+
+The only cmdlet I cannot run is 
+
+    process
+
+But it's due to conflict with `begin process end`.
+
+I also discovered that tab completion apparently works (in contrary to what I wrote in that post previously) but only for parameters, not for cmdlets.
+
+### How I investigated?
+
+<!--more-->
+
+As stated in [About Command Precedence](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_command_precedence?view=powershell-6):
+
+> If you do not specify a path, PowerShell uses the following precedence
+> order when it runs commands:
+> 
+>   1. Alias
+>   1. Function
+>   1. Cmdlet
+>   1. Native Windows commands
+
+Checking one by one (based on `Get-Service`):
+
+    # Checking for alias
+    PS C:\> Get-Alias service
+    Get-Alias : This command cannot find a matching alias because an alias
+    with the name 'service' does not exist.
+
+    # Checking for function
+    PS C:\> Get-Command -Name service -CommandType Function
+    Get-Command : The term 'service' is not recognized as the name of a cmdlet,
+    function, script file, or operable program. Check the spelling of the name,
+    or if a path was included, verify that the path is correct and try again.
+    
+    # Checking for cmdlet
+    PS C:\> Get-Command -Name service -CommandType Cmdlet
+    Get-Command : The term 'service' is not recognized as the name of a cmdlet, 
+    function, script file, or operable program. Check the spelling of the name,
+    or if a path was included, verify that the path is correct and try again.
+
+Next in cmd (for native Windows commands):
+
+    C:\>service
+    'service' is not recognized as an internal or external command,
+    operable program or batch file.
+    
+### What next?
+
+What gave me the answer was searching in [Stack Overflow](https://stackoverflow.com). First interesting thing I found was [this answer](https://stackoverflow.com/a/44476385/9902555):
+
+> If the command name does *not* contain a dash or a slash, and no command has been found after exhausting the last option in the list above, it'll try again, but [with `Get-` prepended](https://github.com/PowerShell/PowerShell/blob/02b5f357a20e6dee9f8e60e3adb9025be3c94490/src/System.Management.Automation/engine/CommandDiscovery.cs#L1193).
+
+And below, there's an explanation [why `Get-Command` doesn't follow that logic](https://stackoverflow.com/a/44477329/9902555).
