@@ -14,7 +14,7 @@ git config user.name "robdy"
 git config user.email $EMAIL
 
 if ! git remote | grep upstream > /dev/null; then
-git remote add upstream "https://$GITHUB_TOKEN@github.com/robdy/blog.git"
+git remote add upstream "https://$GITHUB_TOKEN@github.com/robdy/robdy.github.io.git"
 fi
 git fetch upstream
 git reset upstream/master
