@@ -43,13 +43,16 @@ google_analytics:
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
-url:
+url: https://robdy,github.io
 
 # If you're hosting your site at a Project repository on GitHub pages
 # (http://yourusername.github.io/repository-name)
 # and NOT your User repository (http://yourusername.github.io)
 # then add in the baseurl here, like this: "/repository-name"
 baseurl: "/"
+
+# GitHub repository
+github_repo: https://github.com/robdy/robdy.github.io
 
 #
 # !! You don't need to change any of the configuration flags below !!
@@ -83,8 +86,8 @@ plugins:
   - jekyll-paginate
  
 # redirects to robdy.github.io from Netlify
-include: _redirects
-
+include:
+  - _redirects
   
 # Exclude these files from your production _site
 exclude:
