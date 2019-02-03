@@ -84,7 +84,8 @@ sass:
 plugins:
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
   - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
-  - jekyll-paginate
+  - jekyll-paginate # Allows pagination of articles
+  - jekyll-target-blank # Converts external links to open in new tab and add recommended properties
  
 # redirects to robdy.github.io from Netlify
 include:
