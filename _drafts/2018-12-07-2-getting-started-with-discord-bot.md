@@ -6,6 +6,25 @@ categories: blog
 ---
 If you want to write Discord bot, there are several options for getting started. I'll describe what I checked when I started looking at that.
 
+### Creating webhook
+
+For the first two attempts you'll have to create a webhook. Assume you have rights to create webhooks on your server, go to server settings:
+
+![2019_01_30_20_48_18_pokecord.png]({{site.baseurl}}images/posts/2019_01_30_20_48_18_pokecord.png)
+
+Then go to `Webhooks` and click `Create webhook button`:
+
+![2019-01-30 20_50_14-pokecord.png]({{site.baseurl}}images/posts/2019-01-30 20_50_14-pokecord.png)
+
+Enter name of your webhook (for your own use only so choose the descriptive one), choose the appropriate channel and save the link to clipboard. You'll use it later:
+
+![2019-01-30 20_52_39-pokecord.png]({{site.baseurl}}images/posts/2019-01-30 20_52_39-pokecord.png)
+
+**NOTE**: webhook is assigned to specific channel so if you want to post in multiple channels, you have to create one webhook per channel.
+{:.message}
+
+Now you can start implementing.
+
 ### No coding at all
 
 My first attempt was based on [Mark Ramsey's article](https://medium.com/dolphin-squad/bringing-twitter-tweets-into-discord-channels-e8ded1581da8). If you happen to follow Tweets of specific user and post them to your Discord, read it and you're done. However, if you need to do anything else (i.e reposting top Reddit posts from specific sub, getting weather alerts etc.), follow this tutorial.
@@ -66,9 +85,13 @@ Now you just need to upvote something using your account. You might sometimes us
 
 ### A little bit of coding
 
-Another (more flexible) way would be to integrate web request into your code. Same as previously, you have to create the webhook. [You can just follow the instruction here](https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks)
+Another (more flexible) way would be to integrate web request into your code. Same as previously, you have to create the webhook.
 
-Once your webhook is created, you need to send web requests from your code. How you do this, will depend on the language. For example in JavaScript it'd look like this (example taken from [here](https://stackoverflow.com/a/12999483/9902555)):
+Once your webhook is created, you need to send web requests from your code. How you do this, will depend on the language.
+
+On that example, I use Node.js. If you don't have the environment installed, you can sign up to [repl.it](https://repl.it) and [create new Node.js project](https://repl.it/languages/nodejs). 
+
+You code would look like this (example taken from [here](https://stackoverflow.com/a/12999483/9902555)):
 ``` javascript
 var request = require('request');
 
@@ -86,7 +109,9 @@ request.post(
     }
 );
 ```
-And in PowerShell:
+Later on, remember to [save your webhook url using `.env` file] (https://repl.it/site/docs/repls/secret-keys).
+
+And if you prefer PowerShell, use the below:
 
 ``` powershell
 $url = 'https://discordapp.com/api/webhooks/somethingsomething'

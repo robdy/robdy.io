@@ -35,7 +35,7 @@ When you create the meeting, there are some useful options which could make your
 
 On 'Meeting' ribbon in your Outlook you can specify whether you want to receive all the responses to your mailbox. For big meetings it's usually good to unmark the option and avoid reply flood (if you really need it, you can [create a rule in Outlook](https://support.office.com/en-us/article/use-inbox-rules-in-outlook-com-4b094371-a5d7-49bd-8b1b-4e4896a7cc5d){:target="_blank"} to redirect the replies to a folder).
 
-![2019-01-29 08_13_03-.png]({{site.baseurl}}images/posts/2019-01-29 08_13_03-.png)
+![2019-01-31 15_35_58-Untitled - Meeting.png]({{site.baseurl}}images/posts/2019-01-31 15_35_58-Untitled - Meeting.png)
 
 The invitees will see the information that the organizer hasn't requested the response for the invitation.
 
@@ -47,7 +47,7 @@ When someone accepts the meeting you, as an organizer, won't receive the respons
 
 To change the meeting options, you need to go to 'Meeting Options' on the ribbon:
 
-![2019-01-29 09_33_56-.png]({{site.baseurl}}images/posts/2019-01-29 09_33_56-.png)
+![2019-01-31 15_36_16-Untitled - Meeting.png]({{site.baseurl}}images/posts/2019-01-31 15_36_16-Untitled - Meeting.png)
 
 Here's the list of options available for Skype for Business meeting with the suggested configuration:
 
@@ -76,7 +76,10 @@ An **attendee** can only hear, chat and talk, nothing else.
  The alternate option would be to choose the presenters upfront (the option `People I choose` lets you to add anyone you want to the list of presenters)  
  
 * Do you want to limit participation?  
-  I recommend choosing `Mute all attendees` and `Block attendees' video`. Therefore, all the participants who join the meeting will be muted by default. They can unmute themselves if they want to speak but you'll avoid the situation when people join the meeting and all the audience can hear them until they mute their microphone.  
+  I recommend choosing `Mute all attendees` and `Block attendees' video`. Therefore, all the participants who join the meeting will be muted by default. They won't be able to speak until the audience is unmuted (see [participant actions](#participant-actions) to learn how to do this). 
+  
+  **Note**: people who joined via phone will still be able to unmute themselves.
+  {:.message}
   IM (chat) is usually useful to confirm that people are able to hear you and can see the presentation.
   
 You can also check which setting is recommended for your scenario [on Microsoft KB article](https://support.office.com/en-us/article/change-participant-settings-for-skype-for-business-meetings-9175e297-de5f-43b2-8e0f-85cc05e24986){:target="_blank"}.
@@ -125,7 +128,7 @@ Once you click it, new window will be opened with various options available:
   Rarely used (usually if you forgot to invite someone you can just add them to the conference manually)
   
 ### Desktop sharing
-If any additional content (other than PowerPoint presentation) must be shared, it’s generally preferred to use desktop sharing instead application sharing (it uses newer technology which is Video-Based Screen Sharing and should work smoother). In addition, switching between windows is easier when you present your desktop than when you present specific application.
+If any additional content (other than PowerPoint presentation) must be shared, it’s generally preferred to use desktop sharing instead application sharing (it uses newer technology which is [Video Based Screen Sharing](http://blog.schertz.name/2015/10/video-based-screen-sharing-in-skype-for-business/){:target="_blank"} and should work smoother). In addition, switching between windows is easier when you present your desktop than when you present specific application.
 
-  **Note**: if at least one of your participants join using outdated client version, screensharing will anyway fallback to RDP (old technology) but usually there isn't much to avoid that.
+  **Note**: if at least one of your participants joins using outdated client version, screensharing will anyway fallback to RDP (old technology) but usually there isn't much to avoid that.
 {:.message}
