@@ -6,7 +6,7 @@ layout: default
 <div class="post">
   <h1 class="post-title">{{ page.title }}</h1>
   <span class="post-date">{{ page.date | date_to_string }}</span>
-  {% include anchor_headings.html html=content anchorBody="#" %}
+  {% include anchor_headings.html html=content anchorBody="#" anchorClass="header-anchor" %}
 </div>
 
 <div class="related">
