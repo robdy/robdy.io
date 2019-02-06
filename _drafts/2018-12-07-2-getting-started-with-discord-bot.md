@@ -10,15 +10,15 @@ If you want to write Discord bot, there are several options for getting started.
 
 For the first two attempts you'll have to create a webhook. Assume you have rights to create webhooks on your server, go to server settings:
 
-![2019_01_30_20_48_18_pokecord.png]({{site.baseurl}}images/posts/2019_01_30_20_48_18_pokecord.png)
+![2019_01_30_20_48_18_pokecord.png]({{site.baseurl}}/images/posts/2019_01_30_20_48_18_pokecord.png)
 
 Then go to `Webhooks` and click `Create webhook button`:
 
-![2019-01-30 20_50_14-pokecord.png]({{site.baseurl}}images/posts/2019-01-30 20_50_14-pokecord.png)
+![2019-01-30 20_50_14-pokecord.png]({{site.baseurl}}/images/posts/2019-01-30 20_50_14-pokecord.png)
 
 Enter name of your webhook (for your own use only so choose the descriptive one), choose the appropriate channel and save the link to clipboard. You'll use it later:
 
-![2019-01-30 20_52_39-pokecord.png]({{site.baseurl}}images/posts/2019-01-30 20_52_39-pokecord.png)
+![2019-01-30 20_52_39-pokecord.png]({{site.baseurl}}/images/posts/2019-01-30 20_52_39-pokecord.png)
 
 **NOTE**: webhook is assigned to specific channel so if you want to post in multiple channels, you have to create one webhook per channel.
 {:.message}
@@ -35,27 +35,27 @@ Before you start, you have to create the webhook. [You can just follow the instr
 
 First, go to [creating new applet page on IFTTT](https://ifttt.com/create). Choose the service:
 
-![2018-12-07 12_06_08-Make an Applet - IFTTT.png]({{site.baseurl}}images/posts/2018-12-07 12_06_08-Make an Applet - IFTTT.png)
+![2018-12-07 12_06_08-Make an Applet - IFTTT.png]({{site.baseurl}}/images/posts/2018-12-07 12_06_08-Make an Applet - IFTTT.png)
 
 and specific action (I chose post upvote as it's easy to trigger for testing)
 
-![2018-12-07 12_06_29-Make an Applet - IFTTT.png]({{site.baseurl}}images/posts/2018-12-07 12_06_29-Make an Applet - IFTTT.png)
+![2018-12-07 12_06_29-Make an Applet - IFTTT.png]({{site.baseurl}}/images/posts/2018-12-07 12_06_29-Make an Applet - IFTTT.png)
 
 Once you configured the trigger, go to action configuration:
 
-![2018-12-07 12_07_16-Make an Applet - IFTTT.png]({{site.baseurl}}images/posts/2018-12-07 12_07_16-Make an Applet - IFTTT.png)
+![2018-12-07 12_07_16-Make an Applet - IFTTT.png]({{site.baseurl}}/images/posts/2018-12-07 12_07_16-Make an Applet - IFTTT.png)
 
 Your actions service will be `Webhooks`:
 
-![2018-12-07 12_07_28-Make an Applet - IFTTT.png]({{site.baseurl}}images/posts/2018-12-07 12_07_28-Make an Applet - IFTTT.png)
+![2018-12-07 12_07_28-Make an Applet - IFTTT.png]({{site.baseurl}}/images/posts/2018-12-07 12_07_28-Make an Applet - IFTTT.png)
 
 In `URL` field you just have to paste your webhook URL. Do not forget to change method to `POST` (default is `GET`):
 
-![2018-12-07 12_10_06-Make an Applet - IFTTT.png]({{site.baseurl}}images/posts/2018-12-07 12_10_06-Make an Applet - IFTTT.png)
+![2018-12-07 12_10_06-Make an Applet - IFTTT.png]({{site.baseurl}}/images/posts/2018-12-07 12_10_06-Make an Applet - IFTTT.png)
 
 `Content Type` should be `application/json` and in the body you enter the message you want to be sent.
 
-![2018-12-07 12_21_29-Make an Applet - IFTTT.png]({{site.baseurl}}images/posts/2018-12-07 12_21_29-Make an Applet - IFTTT.png)
+![2018-12-07 12_21_29-Make an Applet - IFTTT.png]({{site.baseurl}}/images/posts/2018-12-07 12_21_29-Make an Applet - IFTTT.png)
 
 There are two options for formatting your message. The simpler one is to just fill username and content for example with this:
 {% raw %}
@@ -66,22 +66,22 @@ There are two options for formatting your message. The simpler one is to just fi
 {% endraw %}
 which would result in such message:
 
-![2018-12-12 09_34_33-general.png]({{site.baseurl}}images/posts/2018-12-12 09_34_33-general.png)
+![2018-12-12 09_34_33-general.png]({{site.baseurl}}/images/posts/2018-12-12 09_34_33-general.png)
 
 You can use the dropdown `Add ingredient` to see which fields are available for you and to add them to your output:
 
-![2018-12-07 12_23_39-Make an Applet - IFTTT.png]({{site.baseurl}}images/posts/2018-12-07 12_23_39-Make an Applet - IFTTT.png)
+![2018-12-07 12_23_39-Make an Applet - IFTTT.png]({{site.baseurl}}/images/posts/2018-12-07 12_23_39-Make an Applet - IFTTT.png)
 
 
 If you want, you can also create rich embed (you can take example from [here](https://birdie0.github.io/discord-webhooks-guide/discord_webhook.html) and adjust it to your needs). 
 
 Once you're done with the configuration, click `Create action`, rename your applet if needed and click `Finish`:
 
-![2018-12-07 12_24_29-Make an Applet - IFTTT.png]({{site.baseurl}}images/posts/2018-12-07 12_24_29-Make an Applet - IFTTT.png)
+![2018-12-07 12_24_29-Make an Applet - IFTTT.png]({{site.baseurl}}/images/posts/2018-12-07 12_24_29-Make an Applet - IFTTT.png)
 
 Now you just need to upvote something using your account. You might sometimes use `Check now` if the applet doesn't run ~~and you're impatient as me~~.
 
-![2018-12-07 12_25_29-If New upvoted post by _u_robdy, then Make a web request - IFTTT.png]({{site.baseurl}}images/posts/2018-12-07 12_25_29-If New upvoted post by _u_robdy, then Make a web request - IFTTT.png)
+![2018-12-07 12_25_29-If New upvoted post by _u_robdy, then Make a web request - IFTTT.png]({{site.baseurl}}/images/posts/2018-12-07 12_25_29-If New upvoted post by _u_robdy, then Make a web request - IFTTT.png)
 
 ### A little bit of coding
 
