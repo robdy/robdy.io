@@ -2,6 +2,7 @@
 layout: page
 title: About me
 permalink: /about/
+sidebar_link: true
 ---
 
 I'm Skype for Business specialist who also likes to learn `$newThings` in the meantime.
