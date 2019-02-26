@@ -2,29 +2,17 @@
 layout: default
 ---
 
-<article>
-<div class="post">
+<header>
   <h1 class="post-title">{{ page.title }}</h1>
-  <span class="post-date">{{ page.date | date_to_string }}</span>
-  {% include anchor_headings.html html=content anchorBody="#" anchorClass="header-anchor" %}
-</div>
+</header>
+<div class="content">
+  {% include post-meta.html post=page %}
 
-<div class="related">
-  <h2>Related Posts</h2>
-  <ul class="related-posts">
-    {% for post in site.related_posts limit:3 %}
-      <li>
-        <h3>
-          <a href="{{ site.baseurl }}{{ post.url }}">
-            {{ post.title }}
-            <small>{{ post.date | date_to_string }}</small>
-          </a>
-        </h3>
-      </li>
-    {% endfor %}
-  </ul>
-</div>
+  <div class="post-body">
+    {{ content }}
+    {% include post-tags.html post=page %}
+  </div>
 
-{% include disqus.html %}
-                            
-</article>
+  {% include comments.html %}
+  {% include related_posts.html %}
+</div>
