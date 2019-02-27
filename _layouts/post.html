@@ -9,7 +9,7 @@ layout: default
   {% include post-meta.html post=page %}
 
   <div class="post-body">
-    {{ content }}
+    {% include anchor_headings.html html=content anchorBody="#" anchorClass="header-anchor" %}
     {% include post-tags.html post=page %}
   </div>
 

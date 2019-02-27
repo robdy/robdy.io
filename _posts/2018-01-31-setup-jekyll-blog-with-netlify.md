@@ -1,6 +1,5 @@
 ---
 published: true
-layout: post
 title: Setup Jekyll blog with Netlify
 ---
 As I'm not (yet) very experienced with web developing this guide can be obvious. However, it's worth noted (at least for me) so I can check it if I have to go through the setup process again.

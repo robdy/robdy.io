@@ -1,6 +1,5 @@
 ---
 published: true
-layout: post
 title: Getting started with Discord bot
 ---
 If you want to write Discord bot, there are several options for getting started. I'll describe what I checked when I started looking at that.

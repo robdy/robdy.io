@@ -17,5 +17,6 @@ On this blog I include some random hints/instructions about the issues I have re
 
 * Built on [Jekyll](https://jekyllrb.com/)
 * Made initially with [jekyll-now](https://github.com/barryclark/jekyll-now)
-* [Hyde](https://github.com/poole/hyde) theme used
-* Hosted on [Netlify](https://netlify.com)
+* [Hydeout](https://github.com/fongandrew/hydeout) theme used
+* Built by [Netlify](https://netlify.com)
+* Hosted on [GitHub pages](https://pages.github.com)

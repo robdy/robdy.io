@@ -1,6 +1,5 @@
 ---
 published: true
-layout: post
 title: Searching in whole forest
 ---
 When you want to find a user in Active Directory you usually use:

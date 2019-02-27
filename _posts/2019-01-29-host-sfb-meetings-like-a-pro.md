@@ -1,9 +1,6 @@
 ---
 published: true
-layout: post
 title: Host Skype for Business meetings like a professional
-categories: blog
-comments: true
 ---
 
 In that post I'd like to share some of the best practices for organizing meetings. Please note that **I only focus on technical aspects** (configuration of Outlook and Skype for Business) and assume that you know the basics (like preparing the agenda, clarifying the purpose of the meeting, choosing appropriate content for the audience) I also assume that your Skype for Business is working correctly (you have enough bandwidth, stable connection).
