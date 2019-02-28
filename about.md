@@ -5,7 +5,7 @@ permalink: /about/
 sidebar_link: true
 ---
 
-I'm Skype for Business specialist who also likes to learn `$newThings` in the meantime.
+I'm Microsoft Teams and Skype for Business specialist who also likes to learn `$newThings` in the meantime.
 
 Current values of `$newThings` for me is `[Sails, JavaScript, Web Development, Jekyll]`. It might be subject to change frequently.
 
@@ -15,8 +15,6 @@ On this blog I include some random hints/instructions about the issues I have re
 
 ### Credits
 
-* Built on [Jekyll](https://jekyllrb.com/)
-* Made initially with [jekyll-now](https://github.com/barryclark/jekyll-now)
+* Built  by [Netlify](https://netlify.com) on [Jekyll](https://jekyllrb.com/)
 * [Hydeout](https://github.com/fongandrew/hydeout) theme used
-* Built by [Netlify](https://netlify.com)
 * Hosted on [GitHub pages](https://pages.github.com)
