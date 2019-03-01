@@ -1,6 +1,5 @@
 ---
 published: true
-layout: post
 title: Installing Outlook add-in for specific users
 ---
 Goal: to install Outlook add-in available only for specific users and to make it enable by default
