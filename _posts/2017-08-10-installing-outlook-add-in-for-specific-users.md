@@ -2,6 +2,11 @@
 published: true
 title: Installing Outlook add-in for specific users
 ---
+
+> **NOTE**: I was using Office 365 so the cmdlets below should work in Exchange Online. For on-premises installations, you might need to get the user IDs in a different way.
+>
+> If you're using Office 365, you might want to have a look at [Centralized Deployment](https://docs.microsoft.com/en-us/office/dev/add-ins/publish/centralized-deployment).
+
 Goal: to install Outlook add-in available only for specific users and to make it enable by default
 
 ### 1st attempt:
@@ -40,7 +45,12 @@ To enabled add-in for another user you need to add him/her to UserList:
 ``` powershell	
 $t = Get-App -OrganizationApp |Where-Object Displayname -eq "Add-in Name"
 $t.UserList = $t.UserList + "marcin@domain.com"
-$t |Set-App -UserList $t.UserList -OrganizationApp
+$t | Set-App -UserList $t.UserList -OrganizationApp
+```
+For Exchange on-premises, get `DistinguishedName` another way (credits to @Kevin Moore):
+```
+$userToAdd = (Get-ADUser YourADAccountHere).DistinguishedName
+$t.UserList = $t.UserList + $userToAdd
 ```
 If you receive an error ‘There are multiple recipients matching the identity’ you can use the following code:
 ``` powershell	
