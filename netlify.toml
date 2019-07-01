@@ -12,7 +12,7 @@
 # Production context: All deploys to the main
 # repository branch will inherit these settings.
 [context.production]
-  command = "jekyll build && chmod +x deploy.sh && ./deploy.sh"
+  command = "JEKYLL_ENV=production jekyll build && chmod +x deploy.sh && ./deploy.sh"
 
 
 # Deploy Preview context: All Deploy Previews
