@@ -1,6 +1,15 @@
 ---
-published: true
-title: Getting started with Discord bot
+templateKey: 'blog-post'
+title: 'Getting started with Discord bot'
+date: 2018-12-07T10:11:12.000Z
+featuredpost: false
+description: >-
+  If you want to write Discord bot, there are several options for getting started.
+  I'll describe what I checked when I started looking at that.
+tags:
+  - discord
+  - discordjs
+  - ifttt
 ---
 If you want to write Discord bot, there are several options for getting started. I'll describe what I checked when I started looking at that.
 

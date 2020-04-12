@@ -1,6 +1,14 @@
 ---
-published: true
-title: Setup Jekyll blog with Netlify
+templateKey: 'blog-post'
+title: 'Setup Jekyll blog with Netlify'
+date: 2018-01-31T10:11:12.000Z
+featuredpost: false
+description: >-
+  As I'm not (yet) very experienced with web developing this guide can be obvious.
+  However, it's worth noted (at least for me) so I can check it if I have to go through the setup process again.
+tags:
+  - jekyll
+  - netlify
 ---
 As I'm not (yet) very experienced with web developing this guide can be obvious. However, it's worth noted (at least for me) so I can check it if I have to go through the setup process again.
 

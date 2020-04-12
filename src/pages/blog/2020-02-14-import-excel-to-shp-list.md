@@ -1,6 +1,15 @@
 ---
-published: true
-title: How to import Excel file to existing SHP list
+templateKey: 'blog-post'
+title: 'How to import Excel file to existing SHP list'
+date: 2020-02-14T10:11:12.000Z
+featuredpost: false
+description: >-
+  We’re proud to announce that we’ll be offering a small batch of Jamaica Blue
+  Mountain coffee beans in our store next week.
+tags:
+  - powerautomate
+  - excel
+  - sharepoint
 ---
 SharePoint doesn't provide the out-of-the-box option to import data from Excel file to existing list. If you want to put some data from Excel to new list using `Import Spreadsheet` app, but it's not very flexible and sometimes problematic. For example, you have to use browser that supports ActiveX controls ([=Internet Explorer](https://www.techwalla.com/articles/what-browsers-support-activex)).
 

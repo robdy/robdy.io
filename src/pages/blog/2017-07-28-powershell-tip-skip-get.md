@@ -1,6 +1,12 @@
 ---
-published: true
-title: PowerShell tip - skip "Get"
+templateKey: 'blog-post'
+title: 'PowerShell tip - skip "Get"'
+date: 2017-07-28T10:11:12.000Z
+featuredpost: false
+description: >-
+  In PowerShell you can skip the verb “Get” (at least for most cmdlets – it wasn’t working for Get-Process).
+tags:
+  - powershell
 ---
 Interesting thing which I discovered today (BTW, SysAdmin day). In PowerShell you can skip the verb “Get” (at least for most cmdlets – it wasn’t working for Get-Process).
 
