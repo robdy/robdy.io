@@ -21,11 +21,11 @@ Goal: to install Outlook add-in available only for specific users and to make it
 
 If you open Exchange admin center > organization > add-ins and try to add it from there:
 
-![2017-08-10-16_24_04-add-ins-microsoft-exchange.png]({{site.baseurl}}/images/posts/2017-08-10-16_24_04-add-ins-microsoft-exchange.png)
+![2017-08-10-16_24_04-add-ins-microsoft-exchange.png](/img/posts/2017-08-10-16_24_04-add-ins-microsoft-exchange.png)
 
 you’ll not be able to set it provided only to specific user. You can only set its default state for enabled/disabled or make it available to nobody:
 
-![2017-08-10-16_29_20-edit-add-in-settings.png]({{site.baseurl}}/images/posts/2017-08-10-16_29_20-edit-add-in-settings.png)
+![2017-08-10-16_29_20-edit-add-in-settings.png](/img/posts/2017-08-10-16_29_20-edit-add-in-settings.png)
 
 <!--more-->
 
