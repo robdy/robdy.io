@@ -1,9 +1,0 @@
-before_install:
-  gem update --system
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
-  keep-history: true
-after_success:
-  - bash deploy.sh
