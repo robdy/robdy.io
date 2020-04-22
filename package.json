@@ -1,7 +1,7 @@
 {
-  "name": "robdy-github.io",
+  "name": "robdy-github-io",
   "description": "robdy's blog site",
-  "version": "0.2",
+  "version": "0.2.0",
   "author": "robdy",
   "dependencies": {
     "bulma": "^0.8.0",
