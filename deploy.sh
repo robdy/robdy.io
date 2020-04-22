@@ -7,7 +7,7 @@ TODAY=$(date +%Y%m%d)
 MESSAGE="$TODAY page build"
  
 
-cd _site
+cd public
 
 git init
 git config user.name "robdy"
