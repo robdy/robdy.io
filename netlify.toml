@@ -9,6 +9,7 @@
   base    = ""
   publish = "public"
   functions = "lambda"
+  environment = { NODE_ENV  = "production", NODE_VERSION = "13.7.0" }
 
 # Production context: All deploys to the main
 # repository branch will inherit these settings.
