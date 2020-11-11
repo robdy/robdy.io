@@ -1,7 +1,7 @@
 {
   "name": "robdy-github-io",
   "description": "robdy's blog site",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "robdy",
   "dependencies": {
     "bulma": "^0.8.0",
@@ -9,7 +9,6 @@
     "gatsby-image": "^2.0.23",
     "gatsby-plugin-netlify": "^2.0.6",
     "gatsby-plugin-netlify-cms": "^4.1.6",
-    "gatsby-plugin-purgecss": "^4.0.0",
     "gatsby-plugin-react-helmet": "^3.0.4",
     "gatsby-plugin-sass": "^2.0.7",
     "gatsby-plugin-sharp": "^2.2.9",
