@@ -41,6 +41,8 @@ Simple condition should be enough:
 
 ![](/img/2020-11-11-22_05_13-edit-your-flow-_-power-automate.png)
 
+The condition will skip all the items added more than 2 hours ago. Wait enough after [importing data](https://robdy.github.io/import-excel-to-shp-list/) and you're good to go.
+
 You'll be able to determine *skipped* flows by their status:
 
 ![](/img/2020-11-11-22_11_00-mail.png)
