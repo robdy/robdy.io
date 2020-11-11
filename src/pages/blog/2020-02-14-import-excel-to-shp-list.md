@@ -1,21 +1,24 @@
 ---
-templateKey: 'blog-post'
-title: 'How to import Excel file to existing SHP list'
+templateKey: blog-post
+title: How to import Excel file to existing SHP list
 date: 2020-02-14T10:11:12.000Z
+description: SharePoint doesn't provide the out-of-the-box option to import data
+  from Excel file to existing list. There is, however, an interesting workaround
+  which is based on PowerAutomate.
 featuredpost: false
-description: >-
-  SharePoint doesn't provide the out-of-the-box option to import data from Excel file to existing list.
-  There is, however, an interesting workaround which is based on PowerAutomate.
 tags:
   - powerautomate
   - excel
   - sharepoint
 ---
-SharePoint doesn't provide the out-of-the-box option to import data from Excel file to existing list. If you want to put some data from Excel to new list using `Import Spreadsheet` app, but it's not very flexible and sometimes problematic. For example, you have to use browser that supports ActiveX controls ([=Internet Explorer](https://www.techwalla.com/articles/what-browsers-support-activex)).
+SharePoint doesn't provide the out-of-the-box option to import data from Excel file to existing list. If you want to put some data from Excel to new list using `Import Spreadsheet` app, but it's not very flexible and sometimes problematic. For example, you have to use browser that supports ActiveX controls ([\=Internet Explorer](https://www.techwalla.com/articles/what-browsers-support-activex)).
 
 There is, however, an interesting workaround which is based on PowerAutomate (formerly called MS Flow).
 
+> NOTE: There's also [`Import Excel or CSV to List` addon](https://appsource.microsoft.com/en-us/product/office/WA104380432?tab=Overview) which you can use. I learned about it after I finished this article, but I'm leaving it here anyway as it might be useful in some cases.
+
 Let's say that we have an existing list which we'd like to use for our leave request system. It contains 3 fields:
+
 * title (we put user email here, string type)
 * quota (number type)
 * approver (we choose who will approve requests fot that user, field type is user/group)
@@ -23,8 +26,8 @@ Let's say that we have an existing list which we'd like to use for our leave req
 <!--more-->
 
 ## Preparing the spreadsheet
-If you want to import the spreadsheet, you need to remember that Excel connector for PowerAutomate only supports data from the table.
-If you're not sure if your data is in the table, click on any cell and you should see additional tab `Design` in the ribbon:
+
+If you want to import the spreadsheet, you need to remember that Excel connector for PowerAutomate only supports data from the table. If you're not sure if your data is in the table, click on any cell and you should see additional tab `Design` in the ribbon:
 
 ![new-tab-ribbon.png](/img/posts/import-excel-to-shp/new-tab-ribbon.png)
 
@@ -58,7 +61,9 @@ For some of the fields, values might not be chooseable. This usually happens for
 
 We can workaround this using the expression:
 
-    item()?['PropertyName']
+```
+item()?['PropertyName']
+```
 
 ![create-item-inside-loop.png](/img/posts/import-excel-to-shp/create-item-inside-loop.png)
 
