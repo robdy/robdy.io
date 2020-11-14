@@ -1,13 +1,12 @@
 ---
-templateKey: 'blog-post'
-title: 'Searching in whole forest'
+templateKey: blog-post
+title: Searching in whole forest
 date: 2017-12-19T10:11:12.000Z
+description: Here's how to search for users in multi-domain environment.
 featuredpost: false
-description: >-
-  Here's how to search for users in multi-domain environment.
 tags:
   - powershell
-  - activedirectory
+  - active directory
 ---
 When you want to find a user in Active Directory you usually use:
 
