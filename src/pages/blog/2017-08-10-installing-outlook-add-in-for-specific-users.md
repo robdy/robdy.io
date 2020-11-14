@@ -1,13 +1,13 @@
 ---
-templateKey: 'blog-post'
-title: 'Installing Outlook add-in for specific users'
+templateKey: blog-post
+title: Installing Outlook add-in for specific users
 date: 2017-08-10T10:11:12.000Z
+description: "Goal: to install Outlook add-in available only for specific users
+  and to make it enable by default"
 featuredpost: false
-description: >-
-  Goal: to install Outlook add-in available only for specific users and to make it enable by default
 tags:
-  - powershell 
-  - office365
+  - powershell
+  - microsoft 365
   - exchange
 ---
 
