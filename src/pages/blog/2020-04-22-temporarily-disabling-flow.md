@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: Temporarily disabling Flow
-date: 2020-04-22T19:32:18.424Z
+date: 2020-11-14T20:32:00.000Z
 description: There are some cases in which you'd like to supress a flow in Power
   Automate for certain period of time. Be careful - turning it off doesn't
   always work as expected!
@@ -17,7 +17,9 @@ After extensive testing, I was about to go live with it. However, to maintain th
 
 Would you do the same if you were me?
 
-If the answer is **yes**, you might be in trouble ;) that day I learnt that disabling flow doesn't make it not being triggered by the items added when it was turned off. It just makes it being triggered all at once when you turn the flow back on.
+If the answer is **yes**, you might be in trouble ;) that day I learnt that disabling flow doesn't make it not being triggered by the items added afterwards. It just makes it being triggered all at once when you turn the flow back on.
+
+> **NOTE**: What makes it even more difficult to troubleshoot, flows start in the same time so **there's no guarantee they'll be processed in order they were added**
 
 ## Let's confirm it's still the case
 
@@ -29,11 +31,13 @@ I added one item to confirm it's working. It was:
 
 ![](/img/2020-11-11-21_50_34-mail.png)
 
-Once it arrived, I turned it off and then added 3 entries into the list. 5 mins later, I turned the flow on and then this happened:
+Once it arrived, I turned the flow off and then added 3 entries into the list. 5 mins later, I turned the flow on and then this happened:
 
 ![](/img/2020-11-11-21_55_08-mail.png)
 
-> **NOTE**: it might be that if you wait more time, the flow won't be triggered. I'm currently testing it and I'll update the article with findings.
+You mighy wonder if the same happens if you turn on your flow with longer delay. **From my testing it does**. I checked for one item which was created more than 70 hours prior to re-enabling the flow and I received the notification:
+
+![](/img/2020-11-14-21_12_28-mail.png)
 
 ## How to handle it?
 
@@ -47,4 +51,4 @@ You'll be able to determine *skipped* flows by their status:
 
 ![](/img/2020-11-11-22_11_00-mail.png)
 
-Once you're done with importing, **you can safely delete it**.
+Once you're done with importing, **you can safely delete** the condition.
