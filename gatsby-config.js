@@ -3,6 +3,7 @@ module.exports = {
     title: 'robdy · personal site',
     description:
       'MS Teams and SfB specialist, developer in my free time',
+    siteUrl: `https://robdy.github.io`,
   },
   plugins: [
     'gatsby-plugin-react-helmet',
