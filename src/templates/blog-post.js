@@ -48,8 +48,7 @@ export const BlogPostTemplate = ({
             <div>
               <DiscussionEmbed shortname={process.env.GATSBY_DISQUS_NAME} config={
                 {
-                  identifier: slug,
-                  url: `${siteUrl} ${slug}`,
+                  url: `${siteUrl}${slug}`,
                 }
               } />
             </div>
