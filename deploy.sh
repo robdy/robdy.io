@@ -6,8 +6,8 @@ rev=$(git rev-parse --short HEAD)
 TODAY=$(date +%Y%m%d)
 MESSAGE="$TODAY page build"
  
-
-cd public
+cp -r public public-prod
+cd public-prod
 rm -rf admin
 
 git init
@@ -25,3 +25,6 @@ touch .
 git add -A .
 git commit -m "$MESSAGE"
 git push -q upstream HEAD:master
+
+cd ..
+rm -rf public-prod
