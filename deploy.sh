@@ -8,6 +8,7 @@ MESSAGE="$TODAY page build"
  
 
 cd public
+rm -rf admin
 
 git init
 git config user.name "robdy"
