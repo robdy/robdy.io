@@ -58,6 +58,17 @@ module.exports = {
             },
           },
           "gatsby-remark-external-links",
+          {
+            resolve: "gatsby-remark-table-of-contents",
+            options: {
+              exclude: "Table of Contents",
+              tight: false,
+              fromHeading: 1,
+              toHeading: 6,
+              className: "table-of-contents"
+            },
+          },
+          "gatsby-remark-autolink-headers",
         ],
       },
     },

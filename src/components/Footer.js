@@ -5,7 +5,7 @@ const Footer = class extends React.Component {
     return (
       <footer className="footer has-background-black has-text-white-ter">
         <div className="content has-text-centered">
-          robdy.github.io © {(new Date().getFullYear())}. <a href='/LICENSE.md'>MIT License.</a>
+          robdy.github.io © {(new Date().getFullYear())}. <a href='https://github.com/robdy/robdy.github.io/blob/src/LICENSE'>MIT License.</a>
         </div>
       </footer>
     )

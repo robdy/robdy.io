@@ -24,6 +24,11 @@ In that post I'd like to share some of the best practices for organizing meeting
 
 <!--more-->
 
+## Table of Contents
+```toc
+exclude: [Table of Contents, Checklist only]
+```
+
 ## Frequent issues
 
 * People join with unmuted microphone and they interrupt the audio before they even realize everyone can hear them
