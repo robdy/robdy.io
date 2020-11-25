@@ -8,7 +8,7 @@ description: >-
   I'll describe what I checked when I started looking at that.
 tags:
   - discord
-  - discordjs
+  - discord js
   - ifttt
 ---
 If you want to write Discord bot, there are several options for getting started. I'll describe what I checked when I started looking at that.

@@ -7,7 +7,7 @@ description: >-
   Here's how to search for users in multi-domain environment.
 tags:
   - powershell
-  - activedirectory
+  - active directory
 ---
 When you want to find a user in Active Directory you usually use:
 

@@ -7,7 +7,7 @@ description: SharePoint doesn't provide the out-of-the-box option to import data
   which is based on PowerAutomate.
 featuredpost: false
 tags:
-  - powerautomate
+  - power automate
   - excel
   - sharepoint
 ---

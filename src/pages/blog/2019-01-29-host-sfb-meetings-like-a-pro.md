@@ -7,7 +7,7 @@ description: >-
   In that post I'd like to share some of the best practices for organizing meetings.
   Please note that I only focus on technical aspects and assume that you know the basics,
 tags:
-  - skypeforbusiness
+  - skype for business
   - outlook
 ---
 
