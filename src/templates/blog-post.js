@@ -43,6 +43,15 @@ export const BlogPostTemplate = ({
                 </ul>
               </div>
             ) : null}
+            <div>
+              <script src="https://utteranc.es/client.js"
+                repo="robdy/blog-comments"
+                issue-term="pathname"
+                theme="preferred-color-scheme"
+                crossorigin="anonymous"
+                async>
+              </script>
+            </div>
           </div>
         </div>
       </div>
