@@ -6,6 +6,7 @@ import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
 import useSiteMetadata from '../components/SiteMetadata'
+import Comments from '../components/Comments'
 
 export const BlogPostTemplate = ({
   content,
@@ -43,15 +44,7 @@ export const BlogPostTemplate = ({
                 </ul>
               </div>
             ) : null}
-            <div>
-              <script src="https://utteranc.es/client.js"
-                repo="robdy/blog-comments"
-                issue-term="pathname"
-                theme="preferred-color-scheme"
-                crossorigin="anonymous"
-                async>
-              </script>
-            </div>
+            <Comments />
           </div>
         </div>
       </div>
