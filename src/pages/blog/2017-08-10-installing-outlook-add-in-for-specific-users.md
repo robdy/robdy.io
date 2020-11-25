@@ -7,7 +7,7 @@ description: >-
   Goal: to install Outlook add-in available only for specific users and to make it enable by default
 tags:
   - powershell 
-  - office365
+  - microsoft 365
   - exchange
 ---
 
