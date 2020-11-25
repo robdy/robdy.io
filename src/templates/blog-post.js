@@ -5,14 +5,13 @@ import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
-import { DiscussionEmbed } from "disqus-react"
 import useSiteMetadata from '../components/SiteMetadata'
+import Comments from '../components/Comments'
 
 export const BlogPostTemplate = ({
   content,
   contentComponent,
   description,
-  slug,
   tags,
   title,
   helmet,
@@ -45,13 +44,7 @@ export const BlogPostTemplate = ({
                 </ul>
               </div>
             ) : null}
-            <div>
-              <DiscussionEmbed shortname={process.env.GATSBY_DISQUS_NAME} config={
-                {
-                  url: `${siteUrl}${slug}`,
-                }
-              } />
-            </div>
+            <Comments />
           </div>
         </div>
       </div>
@@ -85,7 +78,6 @@ const BlogPost = ({ data }) => {
             />
           </Helmet>
         }
-        slug={post.fields.slug}
         tags={post.frontmatter.tags}
         title={post.frontmatter.title}
       />
@@ -112,9 +104,6 @@ export const pageQuery = graphql`
         description
         tags
       }
-      fields {
-          slug
-        }
     }
   }
 `
