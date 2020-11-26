@@ -5,13 +5,12 @@ date: 2019-01-29T10:11:12.000Z
 featuredpost: false
 description: >-
   In that post I'd like to share some of the best practices for organizing meetings.
-  Please note that I only focus on technical aspects and assume that you know the basics,
 tags:
   - skype for business
   - outlook
 ---
 
-In that post I'd like to share some of the best practices for organizing meetings. Please note that **I only focus on technical aspects** (configuration of Outlook and Skype for Business) and assume that you know the basics (like preparing the agenda, clarifying the purpose of the meeting, choosing appropriate content for the audience) I also assume that your Skype for Business is working correctly (you have enough bandwidth, stable connection).
+Please note that **I only focus on technical aspects** (configuration of Outlook and Skype for Business) and assume that you know the basics (like preparing the agenda, clarifying the purpose of the meeting, choosing appropriate content for the audience) I also assume that your Skype for Business is working correctly (you have enough bandwidth, stable connection).
 
 ## Checklist only
 
