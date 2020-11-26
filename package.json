@@ -4,7 +4,6 @@
   "version": "0.2.1",
   "author": "robdy",
   "dependencies": {
-    "bulma": "^0.8.0",
     "gatsby": "^2.13.31",
     "gatsby-image": "^2.0.23",
     "gatsby-plugin-netlify": "^2.0.6",
