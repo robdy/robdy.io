@@ -4,8 +4,7 @@ title: 'Setup Jekyll blog with Netlify'
 date: 2018-01-31T10:11:12.000Z
 featuredpost: false
 description: >-
-  As I'm not (yet) very experienced with web developing this guide can be obvious.
-  However, it's worth noted (at least for me) so I can check it if I have to go through the setup process again.
+  I'm explaining how to configured Jekyll-based blog to be hosted on Netlify.
 tags:
   - jekyll
   - netlify

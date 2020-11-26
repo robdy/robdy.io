@@ -3,15 +3,14 @@ templateKey: blog-post
 title: CsTeamsUpdateManagementPolicy cmdlets
 date: 2020-11-25T18:21:32.839Z
 description: New set of cmdlets has appeared in Skype for Business Online/Teams
-  PowerShell. It's related with upcoming rollout of Microsoft Teams Public
-  Preview. Cmdlets are Get/Set/New-CsTeamsUpdateManagementPolicy.
+  PowerShell. Cmdlets are Get/Set/New-CsTeamsUpdateManagementPolicy.
 featuredpost: true
 tags:
   - powershell
   - skype for business
   - teams
 ---
-New set of cmdlets has appeared in Skype for Business Online/Teams PowerShell. It's related with upcoming rollout of [Microsoft Teams Public Preview](https://docs.microsoft.com/en-us/MicrosoftTeams/public-preview-doc-updates).
+These three cmdlets are related with upcoming rollout of [Microsoft Teams Public Preview](https://docs.microsoft.com/en-us/MicrosoftTeams/public-preview-doc-updates).
 
 There are three new cmdlets:
 * Get-CsTeamsUpdateManagementPolicy
