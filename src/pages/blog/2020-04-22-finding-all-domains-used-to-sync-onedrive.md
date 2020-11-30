@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: Finding all domains used to sync OneDrive
-date: 2020-04-22T19:33:36.852Z
+date: 2020-11-30T20:33:00.000Z
 description: If you're going to restrict syncing OneDrive for Business libraries
   to specific domains only, you might want to first check, which domains are
   currently being used to synchronize data.
