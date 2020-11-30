@@ -15,6 +15,11 @@ tags:
 ---
 This is most useful if your environment consist of many different domains and/or forests. To get such data we'll be using audit log functionality in Microsoft 365 Compliance Center.
 
+## Table of Contents
+```toc
+# This code block gets replaced with the TOC
+```
+
 ## Prerequisites
 
 ### Auditing turned on
