@@ -1,0 +1,178 @@
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap");
+
+/* Variables */
+:root {
+  /* Colors */
+  --main-text-color: #333333;
+  /* Link colors */
+  --link-text-color: #888888;
+  --link-text-color-hover: #333333;
+  --link-underline-color: #D8BFD8;
+  --link-underline-color-hover: #5900B2;
+  /* Code colors */
+  --pre-bg-color: #333333;
+  --code-inline-bg-color: #CCCCCC;
+}
+
+/* Basics */
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  color: var(--main-text-color);;
+}
+
+.container {
+  max-width: 825px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.content {
+  font-size: 1.1rem;
+}
+
+/* Blog header */
+.header-container {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.taglist {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.taglist li {
+  font-size: 1rem;
+  float: left; 
+  padding-right: 10px;
+  border-radius: 0.7rem;
+  }
+
+.taglist li a {
+  text-decoration: none;
+  padding: 0.5rem;
+  background-color: #EEEEEE;
+  border-bottom: 0px;
+  font-weight: 400;
+}
+
+.description {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+/* Blog entry content */
+h2, h3, h4, h5, h6 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #CCCCCC;
+}
+
+li {
+  line-height: 1.5;
+}
+
+p {
+  margin-top: 1rem;
+  line-height: 1.5;
+}
+
+p img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+pre {
+  margin: 1rem 0.3rem;
+  overflow: auto;
+  background-color: var(--pre-bg-color);
+  padding: 1rem;
+  box-shadow: 2px 4px 25px rgba(0,0,0,.15);
+  border-radius: 0.25rem;
+  white-space: pre-wrap;
+}
+
+code {
+  background-color: var(--code-inline-bg-color);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.3rem;
+  margin: 0 0.1rem;
+}
+
+pre code {
+  color: #CCCCCC;
+  background-color: var(--pre-bg-color);
+  padding: 0;
+  border-radius: 0;
+  margin: 0;
+}
+
+a, a:hover, a:visited {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a, a:visited {
+  border-bottom: 3px solid var(--link-underline-color);
+  color: var(--link-text-color);
+}
+
+a:hover {
+  border-bottom: 3px solid var(--link-underline-color-hover);
+  color: var(--link-text-color-hover);
+}
+
+a.anchor {
+  border-bottom: 0px;
+}
+
+ul, ol {
+  padding: 0 1.5rem;
+  font-size: 0px;
+}
+
+ul li, ol li {
+  font-size: 1rem;
+  border: 3px solid green;
+}
+
+blockquote {
+  background-color: rgb(254, 255, 166);
+  padding: 1rem 1.5rem;
+  border: 1px solid rgb(255, 220, 25);
+  border-left: 0.3rem solid rgb(255, 220, 25);
+  margin: 1rem 0;
+}
+blockquote p {
+  margin-top: 0px;
+}
+
+/* Comments */
+.utterances {
+  max-width: 100%;
+}
+
+.comment-box {
+  margin: 2rem 0;
+}
