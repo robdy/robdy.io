@@ -7,7 +7,7 @@ description: After Microsoft announced they'll decomission Skype for Business
   module efficiently.
 featuredpost: false
 tags:
-  - skype for business online
+  - skype for business
   - teams
   - powershell
 ---
