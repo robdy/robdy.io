@@ -1,6 +1,6 @@
 ---
 templateKey: blog-post
-title: Skype connector decomission
+title: Skype for Business Online connector decomission
 date: 2020-12-18T10:23:46.009Z
 description: After Microsoft announced they'll decomission Skype for Business
   Online module, I'm sharing the instruction of how to replace it with new
