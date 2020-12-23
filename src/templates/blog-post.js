@@ -5,7 +5,6 @@ import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
-import useSiteMetadata from '../components/SiteMetadata'
 import Comments from '../components/Comments'
 
 export const BlogPostTemplate = ({
@@ -17,9 +16,6 @@ export const BlogPostTemplate = ({
   helmet,
 }) => {
   const PostContent = contentComponent || Content
-
-  const { siteUrl } = useSiteMetadata()
-
 
   return (
     <section className="section">

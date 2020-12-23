@@ -10,9 +10,8 @@
   --link-text-color-hover: #333333;
   --link-underline-color: #D8BFD8;
   --link-underline-color-hover: #5900B2;
-  /* Code colors */
-  --pre-bg-color: #333333;
-  --code-inline-bg-color: #CCCCCC;
+  /* Footer */
+  --footer-bg: #CCCCCC;
 }
 
 /* Basics */
@@ -38,8 +37,80 @@ html {
   padding: 0 2rem;
 }
 
+.flex {
+  display: flex;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar-left {
+  height: 100%;
+}
+
+.navbar-logo {
+  width: 40px;
+}
+
+.navbar-title {
+  align-self: center;
+  font-size: 1.6rem;
+  font-weight: 600;
+  padding: 0.8rem;
+}
+
+.navbar-links {
+  list-style-type: none;
+  padding: 1rem;
+  display: flex;
+}
+
+.navbar-item {
+  padding: 1rem;
+}
+
+a.navbar-link, a.navbar-link:hover, a.navbar-link:visited  {
+  border-bottom: 0px;
+}
+
+.navbar-icon {
+  width: 1em;
+  margin-right: 0.2em;
+}
+
 .content {
   font-size: 1.1rem;
+}
+
+/* Main page */
+.roll-post-link, .roll-post-link:hover, .roll-post-link:visited {
+  border: 0px;
+  font-weight: 300;
+  color: var(--main-text-color);
+}
+
+.roll-post-container {
+  padding: 1rem 1rem 2rem;
+  /* background-color: #eeeeee; */
+}
+
+.roll-post-container:not(:first-of-type) {
+  margin-top: 2rem;
+}
+
+.roll-post-container:hover {
+  background-color: #F8F8F8;
+}
+
+.roll-post-title {
+  font-size: 1.5rem;
+}
+
+article.roll-list-item p {
+  margin-top: 0px;
 }
 
 /* Blog header */
@@ -103,30 +174,190 @@ p img {
   max-width: 100%;
 }
 
-pre {
-  margin: 1rem 0.3rem;
+/* Prism */
+/* PrismJS 1.22.0
+https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+powershell */
+/**
+* prism.js tomorrow night eighties for JavaScript, CoffeeScript, CSS and HTML
+* Based on https://github.com/chriskempson/tomorrow-theme
+* @author Rose Pritchard
+*/
+
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #ccc;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 1em;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: 1em;
+  margin: .5em 0;
   overflow: auto;
-  background-color: var(--pre-bg-color);
-  padding: 1rem;
-  box-shadow: 2px 4px 25px rgba(0,0,0,.15);
-  border-radius: 0.25rem;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: #2d2d2d;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+}
+
+.token.comment,
+.token.block-comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #999;
+}
+
+.token.punctuation {
+  color: #ccc;
+}
+
+.token.tag,
+.token.attr-name,
+.token.namespace,
+.token.deleted {
+  color: #e2777a;
+}
+
+.token.function-name {
+  color: #6196cc;
+}
+
+.token.boolean,
+.token.number,
+.token.function {
+  color: #f08d49;
+}
+
+.token.property,
+.token.class-name,
+.token.constant,
+.token.symbol {
+  color: #f8c555;
+}
+
+.token.selector,
+.token.important,
+.token.atrule,
+.token.keyword,
+.token.builtin {
+  color: #cc99cd;
+}
+
+.token.string,
+.token.char,
+.token.attr-value,
+.token.regex,
+.token.variable {
+  color: #7ec699;
+}
+
+.token.operator,
+.token.entity,
+.token.url {
+  color: #67cdcc;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.inserted {
+  color: green;
+}
+
+pre[class*="language-"].line-numbers {
+	position: relative;
+	padding-left: 3.8em;
+	counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+	position: relative;
+	white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+	position: absolute;
+	pointer-events: none;
+	top: 0;
+	font-size: 100%;
+	left: -3.8em;
+	width: 3em; /* works for line-numbers below 1000 lines */
+	letter-spacing: -1px;
+	border-right: 1px solid #999;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+}
+
+.line-numbers-rows > span {
+  display: block;
+  counter-increment: linenumber;
+}
+
+.line-numbers-rows > span:before {
+  content: counter(linenumber);
+  color: #999;
+  display: block;
+  padding-right: 0.8em;
+  text-align: right;
+}
+
+/* End of PrismJS */
+
+/* PrismJS customization */
+code[class*="language-"] {
   white-space: pre-wrap;
 }
 
-code {
-  background-color: var(--code-inline-bg-color);
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.3rem;
-  margin: 0 0.1rem;
+pre {
+  box-shadow: 2px 4px 25px rgba(0,0,0,.15);
+  border-radius: 0.25rem;
 }
 
-pre code {
-  color: #CCCCCC;
-  background-color: var(--pre-bg-color);
-  padding: 0;
-  border-radius: 0;
-  margin: 0;
+.gatsby-highlight pre[class*="language-"].line-numbers {
+  padding-left: 3.3em;
 }
+/* End of PrismJS customization */
+
 
 a, a:hover, a:visited {
   text-decoration: none;
@@ -154,7 +385,6 @@ ul, ol {
 
 ul li, ol li {
   font-size: 1rem;
-  border: 3px solid green;
 }
 
 blockquote {
@@ -175,4 +405,37 @@ blockquote p {
 
 .comment-box {
   margin: 2rem 0;
+}
+
+/* Footer */
+.footer {
+  /* background-color: var(--footer-bg); */
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+  /* border-top: 1px solid; */
+}
+
+.footer-container {
+  justify-content: space-between;
+}
+
+.footer-text {
+  align-self: center;
+}
+
+.footer-link, .footer-link:hover, .footer-link:visited {
+  border-bottom: 0;
+}
+
+.footer-link .footer-icon {
+  opacity: 0.6;
+}
+
+.footer-link:hover .footer-icon {
+  opacity: 1;
+}
+
+.footer-icon {
+  height: 2rem;
+  margin: 0 0.6rem;
 }
