@@ -22,6 +22,7 @@
   box-sizing: inherit;
   margin: 0;
   padding: 0;
+  word-break: break-word;
 }
 
 html {
@@ -45,6 +46,7 @@ html {
 .navbar {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .navbar-left {
@@ -126,10 +128,10 @@ h1 {
 }
 
 .taglist {
-  list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
+  list-style-type: none;
 }
 
 .taglist li {
@@ -141,7 +143,9 @@ h1 {
 
 .taglist li a {
   text-decoration: none;
-  padding: 0.5rem;
+  padding: 0 0.5rem;
+  margin: 0.2rem 0;
+  line-height: 1.8em;
   background-color: #EEEEEE;
   border-bottom: 0px;
   font-weight: 400;
@@ -407,6 +411,18 @@ blockquote p {
   margin: 2rem 0;
 }
 
+/* Tag page */
+.tag-postlist {
+  list-style-type: none;
+  padding: 0;
+}
+
+
+.tag-postheader {
+  border-bottom: 0px;
+  margin: 0px;
+}
+
 /* Footer */
 .footer {
   /* background-color: var(--footer-bg); */
@@ -417,9 +433,11 @@ blockquote p {
 
 .footer-container {
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .footer-text {
+  margin-top: .8rem;
   align-self: center;
 }
 
@@ -438,4 +456,14 @@ blockquote p {
 .footer-icon {
   height: 2rem;
   margin: 0 0.6rem;
+}
+
+.footer-links {
+  margin-top: .8rem;
+}
+
+@media (max-width: 600px) {
+  .navbar, .footer-container {
+    justify-content: center;
+  }
 }

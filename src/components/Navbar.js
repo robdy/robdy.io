@@ -86,7 +86,7 @@ const Navbar = class extends React.Component {
         <Link className="navbar-link" to="/">
           <div className="flex navbar-left">
             <img src={server} alt="Server icon" className="navbar-logo"></img>
-            <div className="navbar-title">Robert Dyjas</div>
+            <div className="navbar-title">robdy</div>
           </div>
         </Link>
         <ul className="navbar-links">

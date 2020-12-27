@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, graphql, StaticQuery } from 'gatsby'
 import { kebabCase } from 'lodash'
-import PreviewCompatibleImage from './PreviewCompatibleImage'
+import PostTile from '../components/PostTile'
 
 // class BlogRoll extends React.Component {
 //   render() {
@@ -67,50 +67,7 @@ class BlogRoll extends React.Component {
       <div className="columns is-multiline">
         {posts &&
           posts.map(({ node: post }) => (
-            <div>
-              <Link
-                className="roll-post-link"
-                to={post.fields.slug}
-              >
-                <div className="roll-post-container" key={post.id}>
-                  <article
-                    className={`roll-list-item tile is-child box notification ${post.frontmatter.featuredpost ? 'is-featured' : ''
-                      }`}
-                  >
-                    <header>
-                      {/* {post.frontmatter.featuredimage ? (
-                    <div className="featured-thumbnail">
-                      <PreviewCompatibleImage
-                        imageInfo={{
-                          image: post.frontmatter.featuredimage,
-                          alt: `featured image thumbnail for post ${post.frontmatter.title}`,
-                        }}
-                      />
-                    </div>
-                  ) : null} */}
-                      <p className="roll-post-title">
-                        {post.frontmatter.title}
-                      </p>
-                    </header>
-                    {post.frontmatter.tags && post.frontmatter.tags.length ? (
-                      <div>
-                        <ul className="taglist">
-                          {post.frontmatter.tags.map(tag => (
-                            <li key={tag + `tag`}>
-                              <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ) : null}
-
-                    <p>
-                      {post.frontmatter.description}
-                    </p>
-                  </article>
-                </div>
-              </Link>
-            </div>
+            <PostTile postData={post} />
           ))}
       </div>
     )

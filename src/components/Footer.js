@@ -12,7 +12,7 @@ const Footer = class extends React.Component {
       <footer className="footer">
         <div className="container flex footer-container">
           <div className="footer-text">Robert Dyjas © 2017-{(new Date().getFullYear())}</div>
-          <div>
+          <div className="footer-links">
             <a className="footer-link" href="https://dyjas.cc" target="_blank" rel="nofollow noopener noreferrer">
               <img src={home} alt="Home icon" className="footer-icon"></img>
             </a>
