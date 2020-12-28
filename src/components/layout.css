@@ -1,15 +1,42 @@
 /* Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap");
 
+/* Proposed colorscheme */
+/* https://coolors.co/5603ad-8367c7-b3e9c7-c2f8cb-f0fff1 */
+ /* CSS HEX  */
+/*--flickr-pink: #f72585ff;
+--purple: #7209b7ff;
+--trypan-blue: #3a0ca3ff;
+--ultramarine-blue: #4361eeff;
+--vivid-sky-blue: #4cc9f0ff;
+*/
+
+/* https://coolors.co/5603ad-8367c7-b3e9c7-c2f8cb-f0fff1*/
+/* --purple: #5603adff;
+--blue-violet-crayola: #8367c7ff;
+--magic-mint: #b3e9c7ff;
+--tea-green: #c2f8cbff;
+--honeydew: #f0fff1ff; */
+
+
 /* Variables */
 :root {
+  /* Scheme */
+  /* https://coolors.co/5603ad-8367c7-b3e9c7-c2f8cb-f0fff1*/
+  --purple: #5603adff;
+  --blue-violet-crayola: #8367c7ff;
+  --magic-mint: #b3e9c7ff;
+  --tea-green: #c2f8cbff;
+  --honeydew: #f0fff1ff;
+  --go-green: #32ae60ff;
+
   /* Colors */
   --main-text-color: #333333;
   /* Link colors */
   --link-text-color: #888888;
   --link-text-color-hover: #333333;
-  --link-underline-color: #D8BFD8;
-  --link-underline-color-hover: #5900B2;
+  --link-underline-color: var(--blue-violet-crayola);
+  --link-underline-color-hover: var(--purple);
   /* Footer */
   --footer-bg: #CCCCCC;
 }
@@ -29,7 +56,8 @@ html {
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
-  color: var(--main-text-color);;
+  color: var(--main-text-color);
+  overflow-y: scroll;
 }
 
 .container {
@@ -41,6 +69,9 @@ html {
 .flex {
   display: flex;
 }
+
+::-moz-selection { background: var(--go-green); }
+::selection { background: var(--go-green);}
 
 /* Navbar */
 .navbar {
@@ -88,6 +119,32 @@ a.navbar-link, a.navbar-link:hover, a.navbar-link:visited  {
 }
 
 /* Main page */
+.bio {
+  padding: 2rem;
+  background-color: var(--tea-green);
+  border: 0.2rem solid var(--go-green);
+  box-shadow: 5px 5px 5px #CCCCCC;
+}
+
+.bio div::-moz-selection { background: var(--go-green); }
+.bio div::selection { background: var(--go-green);}
+
+.bio-picture {
+  width: 200px;
+  border-radius: 100px;
+  border: 2px solid var(--go-green);
+}
+
+.bio-text {
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+}
+
+.roll-tile-container {
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
 .roll-post-link, .roll-post-link:hover, .roll-post-link:visited {
   border: 0px;
   font-weight: 300;
@@ -104,7 +161,7 @@ a.navbar-link, a.navbar-link:hover, a.navbar-link:visited  {
 }
 
 .roll-post-container:hover {
-  background-color: #F8F8F8;
+  background-color: var(--honeydew);
 }
 
 .roll-post-title {
@@ -139,16 +196,20 @@ h1 {
   float: left; 
   padding-right: 10px;
   border-radius: 0.7rem;
-  }
+}
 
 .taglist li a {
   text-decoration: none;
   padding: 0 0.5rem;
   margin: 0.2rem 0;
   line-height: 1.8em;
-  background-color: #EEEEEE;
+  background-color: var(--tea-green);
   border-bottom: 0px;
   font-weight: 400;
+}
+
+.taglist li a:hover {
+  background-color:var(--magic-mint)
 }
 
 .description {
@@ -176,6 +237,14 @@ p img {
   display: block;
   margin: 0 auto;
   max-width: 100%;
+}
+
+em {
+  color: var(--purple);
+}
+
+strong {
+  color: var(--purple);
 }
 
 /* Prism */
@@ -385,6 +454,10 @@ a.anchor {
 ul, ol {
   padding: 0 1.5rem;
   font-size: 0px;
+}
+
+li p {
+  margin-top: 0px;
 }
 
 ul li, ol li {

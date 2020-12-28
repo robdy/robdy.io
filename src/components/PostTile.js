@@ -8,8 +8,7 @@ export default class PostTile extends React.Component {
     const { postData } = this.props
 
     return (
-      // <PostTile postData={post} />
-      <div>
+      <div className="roll-tile-container">
         <Link
           className="roll-post-link"
           to={postData.fields.slug}
@@ -54,4 +53,3 @@ export default class PostTile extends React.Component {
       </div>)
   }
 }
-
