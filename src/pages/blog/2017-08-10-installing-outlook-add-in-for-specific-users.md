@@ -56,7 +56,7 @@ $t.UserList = $t.UserList + "marcin@domain.com"
 $t | Set-App -UserList $t.UserList -OrganizationApp
 ```
 For Exchange on-premises, get `DistinguishedName` another way (credits to @Kevin Moore):
-```
+``` powershell
 $userToAdd = (Get-ADUser YourADAccountHere).DistinguishedName
 $t.UserList = $t.UserList + $userToAdd
 ```

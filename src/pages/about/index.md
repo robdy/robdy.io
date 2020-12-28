@@ -3,9 +3,15 @@ templateKey: 'about-page'
 path: /about
 title: About me
 ---
-I'm Microsoft Teams and Skype for Business specialist who also likes to learn `$newThings` in the meantime.
+My name is Robert Dyjas. I'm Microsoft Teams and Skype for Business specialist who also likes to learn `$newThings` in the meantime.
 
 Current values of `$newThings` for me is `[JavaScript, Web Development, CSS]`. It might be subject to change frequently.
+
+Since the beginning of my career I'm working with Microsoft products. I'm mainly focused on communication tools: Teams, Skype for Business and Exchange.
+
+### Projects
+
+I've been participating in various non-commercial projects in the past.
 
 ### Blog
 

@@ -78,6 +78,7 @@ html {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-top: 1rem;
 }
 
 .navbar-left {
@@ -97,7 +98,7 @@ html {
 
 .navbar-links {
   list-style-type: none;
-  padding: 1rem;
+  padding: 0.5rem;
   display: flex;
 }
 
@@ -140,6 +141,20 @@ a.navbar-link, a.navbar-link:hover, a.navbar-link:visited  {
   padding: 1rem 2rem;
 }
 
+.bio-links {
+  margin-top: 1.5rem;
+  list-style-type: none;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.bio-links > li {
+  padding: 0.5rem;
+  background-color: var(--tea-green);
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
 .roll-tile-container {
   margin-left: -1rem;
   margin-right: -1rem;
@@ -174,13 +189,13 @@ article.roll-list-item p {
 
 /* Blog header */
 .header-container {
-  margin-top: 3rem;
+  margin-top: 2rem;
   margin-bottom: 1rem;
 }
 
 h1 {
   font-size: 2.5rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -224,6 +239,11 @@ h2, h3, h4, h5, h6 {
   border-bottom: 1px solid #CCCCCC;
 }
 
+.page-header {
+  font-size: 2rem;
+  border-bottom: 1px solid #CCCCCC;
+}
+
 li {
   line-height: 1.5;
 }
@@ -239,13 +259,13 @@ p img {
   max-width: 100%;
 }
 
-em {
+/* em {
   color: var(--purple);
 }
 
 strong {
   color: var(--purple);
-}
+} */
 
 /* Prism */
 /* PrismJS 1.22.0
@@ -536,7 +556,8 @@ blockquote p {
 }
 
 @media (max-width: 600px) {
-  .navbar, .footer-container {
-    justify-content: center;
+  .navbar, .footer-container, .bio {
+    flex-direction: column;
+    align-items: center;
   }
 }
