@@ -7,7 +7,9 @@ description: Custom connectors are not yet supported for Power Platform DLP
 featuredpost: false
 tags:
   - power automate
+  - power platform
   - data loss prevention
+  - flow
 ---
 ## TL;DR
 
@@ -16,6 +18,18 @@ tags:
 * Blocking custom connectors doesn't prevent the existing flows from running. It prevents it from being edited
 * It doesn't matter whether the connector was added before or after DLP policies were configured
 * It matters when the flows were created (before or after the policy was applied)
+
+## Configuring custom environment
+
+To not interrupt existing flows, we'll first create the environment. We'll then apply DLP policies to it.
+
+Let's go to PowerPlatform Admin Center and click **New** under **Environments**:
+
+![Power Plaftorm Admin Center environment tab](/img/20201229-212641-000006.png)
+
+We'll choose to create **Production** environment, because why not:
+
+![New environment settings](/img/20201229-212953-000007.png)
 
 ## Creating custom connector
 
@@ -117,6 +131,14 @@ We need 4 flows to find out how the connectors are classfied:
 * Using custom connector only
 
 The first 3 connectors will be blocked if either one of the connectors is blocked or the connectors belong to two different groups (business/non-business). The last one will be blocked only if custom connector is classified as blocked.
+
+I'm not covering the exact steps here. Any flow will do as long as it contains action from mentioned connectors **+ custom connector** we created before.
+
+## Configuring DLP policies
+
+
+
+## Results
 
 If we set default group to **Blocked**, all the flows will stop working. However, the flow with only custom connector, won't show up as blocked on the list. The error will be visible if we want to edit the flow: IMAGE
 
