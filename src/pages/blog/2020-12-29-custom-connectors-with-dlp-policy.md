@@ -15,7 +15,7 @@ tags:
 
 * Custom connectors inherit detault group specified in DLP policy
 * Changes in policy don't reenable suspended flows, it has to be done manually
-* Blocking custom connectors doesn't prevent the existing flows from running. It prevents it from being edited
+* Blocking custom connectors might happen after some delay
 * It doesn't matter whether the connector was added before or after DLP policies were configured
 * It matters when the flows were created (before or after the policy was applied)
 
@@ -136,10 +136,52 @@ I'm not covering the exact steps here. Any flow will do as long as it contains a
 
 ## Configuring DLP policies
 
+In Power Platform Admin Center we choose [Data Policies](https://admin.powerplatform.microsoft.com/dlp) from the left menu. Under **New Policy** wizard we set the following classification:
 
+* Business - Office 365 Users
+* Blocked - Google Calendar
+* Non-business - all others. Make sure that RSS islisted under that category
 
-## Results
+Setting default group might not be obvious to find at first glance. See the picture and set it as **Non-business** for now:
 
-If we set default group to **Blocked**, all the flows will stop working. However, the flow with only custom connector, won't show up as blocked on the list. The error will be visible if we want to edit the flow: IMAGE
+![Setting default group in DLP policy](/img/20201230-223745-000011.png)
 
-What's interesting, we'll still be able to run flow in current state (it basically becomes non-editable): IMAGE
+Under *Scope* we choose **Add multiple environments**. In next step, we will be able to specify the list of environments to which the policy would be applied.
+
+From the list we tick the check mark next to environment name and click **Add to policy**:
+
+![Adding environment to DLP policy](/img/20201230-223113-000010.png)
+
+We review the settings to make sure that we're not applying the policy to our default environment (it'd affect all the flows) and create it.
+
+Now we have all set to do our tests.
+
+## Test results
+
+> **NOTE**: Please keep in mind that policies need some time to be fully applied. Sometimes they are applied with no delay. From time to time, flows might not be suspended immediately. Also note, that you must reenable the suspended flow - **they won't be enabled automatically** (confirmed 2 hours after disabling the policy).
+
+After setting default group to *Non-business*, the following results appeared:
+
+![Blocked and business flows are suspended](/img/20201230-152223-hwq8okdybb.png)
+
+Blocked connector flow is suspended, which shouldn't be a surprise. Business connector flow is suspended too which means the custom connector was classified as non-business. Business and non-business connectors cannot share data between each other.
+
+Then I temporarily excluded my environment from the policy, to make sure that all the policies are refreshed.
+
+After setting default group to *Business* and applying the policy again, the following results appeared:
+
+![Blocked and non-business flows are suspended](/img/20201230-180608-000008.png)
+
+Blocked connector flow is suspended again. Business connector flow is **not suspended** this time. It means that custom connector classification is business (again, classification of all connectors used in the same flow must match).
+
+Now we should have pretty solid idea that custom connectors are classified based on default group settings. Let's confirm that with final test.
+
+Last attempt is to apply the same policy, but specify default group to be *Blocked*:
+
+Once we do that, all the flows should stop working.
+
+![All flows are suspended](/img/20201230-221900-000009.png)
+
+We were right! Based on all the tests, we now know that custom connectors will be classified based on default group settings in our DLP policy.
+
+## Creating connectors under DLP policy
