@@ -199,6 +199,23 @@ h1 {
   margin-bottom: 1rem;
 }
 
+.post-title {
+  margin-bottom: 0.5rem;
+}
+
+.post-subheader {
+  margin-top: 0;
+  font-size: 1rem;
+}
+
+.post-subheader-link {
+  border-bottom: 0;
+}
+
+.taglist-container {
+  margin-top: 0.5rem;
+}
+
 .taglist {
   margin: 0;
   padding: 0;
@@ -559,5 +576,14 @@ blockquote p {
   .navbar, .footer-container, .bio {
     flex-direction: column;
     align-items: center;
+  }
+
+  .bio {
+    padding: 0.8rem;
+  }
+
+  .bio-text {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }

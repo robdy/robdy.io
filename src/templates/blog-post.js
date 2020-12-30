@@ -10,6 +10,7 @@ import Comments from '../components/Comments'
 export const BlogPostTemplate = ({
   content,
   contentComponent,
+  date,
   description,
   tags,
   title,
@@ -22,11 +23,12 @@ export const BlogPostTemplate = ({
       {helmet || ''}
       <div className="container content">
         <div className="header-container">
-          <h1>
+          <h1 className="post-title">
             {title}
           </h1>
+          <p className="post-subheader">By <Link className="post-subheader-link" to="/about">Robert Dyjas</Link> {date}</p>
           {tags && tags.length ? (
-            <div style={{ marginTop: `0.7rem` }}>
+            <div className="taglist-container">
               <ul className="taglist">
                 {tags.map(tag => (
                   <li key={tag + `tag`}>
@@ -48,6 +50,7 @@ export const BlogPostTemplate = ({
 BlogPostTemplate.propTypes = {
   content: PropTypes.node.isRequired,
   contentComponent: PropTypes.func,
+  date: PropTypes.instanceOf(Date),
   description: PropTypes.string,
   title: PropTypes.string,
   helmet: PropTypes.object,
@@ -56,11 +59,32 @@ BlogPostTemplate.propTypes = {
 const BlogPost = ({ data }) => {
   const { markdownRemark: post } = data
 
+  const units = {
+    year: 24 * 60 * 60 * 1000 * 365,
+    month: 24 * 60 * 60 * 1000 * 365 / 12,
+    week: 24 * 60 * 60 * 1000 * 7,
+    day: 24 * 60 * 60 * 1000,
+    hour: 60 * 60 * 1000,
+    minute: 60 * 1000,
+    second: 1000
+  }
+  const currentTimeStamp = new Date().getTime();
+  const elapsed = new Date(post.frontmatter.date) - currentTimeStamp
+  const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
+  const relativeDate = (() => {
+    for (let u in units) {
+      if ((Math.abs(elapsed) / units[u]) >= 1) {
+        return (rtf.format(Math.round(elapsed / units[u]), u));
+      }
+    }
+  })()
+
   return (
     <Layout>
       <BlogPostTemplate
         content={post.html}
         contentComponent={HTMLContent}
+        date={relativeDate}
         description={post.frontmatter.description}
         helmet={
           <Helmet titleTemplate="%s | Blog">
@@ -92,7 +116,7 @@ export const pageQuery = graphql`
       id
       html
       frontmatter {
-          date(formatString: "MMMM DD, YYYY")
+        date(formatString: "YYYY-MM-DD HH:mm")
         title
         description
         tags

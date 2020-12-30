@@ -1,7 +1,7 @@
 {
   "name": "robdy-github-io",
   "description": "robdy's blog site",
-  "version": "0.2.1",
+  "version": "0.3.1",
   "author": "robdy",
   "dependencies": {
     "gatsby": "^2.13.31",

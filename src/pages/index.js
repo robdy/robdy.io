@@ -11,7 +11,7 @@ export default class BlogIndexPage extends React.Component {
         <div className="container">
           <h1 className="page-header">Welcome to my blog!</h1>
           <div className="bio flex">
-            <div><img className="bio-picture" src='img/avatar-400.jpg' alt="Robert's profile picture" /></div>
+            <div><img className="bio-picture" src='img/avatar-200.jpg' alt="Robert's profile" loading="lazy" /></div>
             <div className="bio-text">
               Hi there!<br />
               My name is Robert. I'm more than happy to share some content with you via this blog.
