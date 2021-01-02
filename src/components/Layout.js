@@ -39,6 +39,9 @@ const TemplateWrapper = ({ children }) => {
         <meta name="msapplication-square310x310logo" content={`${siteUrl}${withPrefix('/')}img/mstile-310x310.png`} />
         <meta name="theme-color" content="#fff" />
 
+        <meta property="fb:app_id" content="1783959405089649" />
+        <meta property="fb:admins" content="100000984883502" />
+
         <meta property="og:type" content="business.business" />
         <meta property="og:title" content={title} />
         <meta property="og:url" content="/" />
