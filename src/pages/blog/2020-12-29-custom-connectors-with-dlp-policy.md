@@ -140,7 +140,7 @@ In Power Platform Admin Center we choose [Data Policies](https://admin.powerplat
 
 * Business - Office 365 Users
 * Blocked - Google Calendar
-* Non-business - all others. Make sure that RSS islisted under that category
+* Non-business - all others. Make sure that RSS is listed under that category
 
 Setting default group might not be obvious to find at first glance. See the picture and set it as **Non-business** for now:
 
