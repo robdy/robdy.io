@@ -1,9 +1,9 @@
 ---
 templateKey: blog-post
 title: Custom connectors with DLP policy
-date: 2020-12-29T19:41:15.218Z
+date: 2021-01-03T19:41:00.000Z
 description: Custom connectors are not yet supported for Power Platform DLP
-  policies. Let's check how they are processed.
+  policies. Let's check how they are processed and how we could secure them.
 featuredpost: false
 tags:
   - power automate
