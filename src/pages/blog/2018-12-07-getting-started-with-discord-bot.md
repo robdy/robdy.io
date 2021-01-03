@@ -43,12 +43,11 @@ In `URL` field you just have to paste your webhook URL. Do not forget to change 
 ![2018-12-07 12_21_29-Make an Applet - IFTTT.png](/img/posts/2018-12-07 12_21_29-Make an Applet - IFTTT.png)
 
 There are two options for formatting your message. The simpler one is to just fill username and content for example with this:
-{% raw %}
 
-```
+``` json
 { "username":"New post", "content":"{{Title}} by {{Author}}" }
 ```
-{% endraw %}
+
 which would result in such message:
 
 ![2018-12-12 09_34_33-general.png](/img/posts/2018-12-12 09_34_33-general.png)

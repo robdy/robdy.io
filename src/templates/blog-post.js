@@ -5,12 +5,12 @@ import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
-import useSiteMetadata from '../components/SiteMetadata'
 import Comments from '../components/Comments'
 
 export const BlogPostTemplate = ({
   content,
   contentComponent,
+  date,
   description,
   tags,
   title,
@@ -18,35 +18,30 @@ export const BlogPostTemplate = ({
 }) => {
   const PostContent = contentComponent || Content
 
-  const { siteUrl } = useSiteMetadata()
-
-
   return (
     <section className="section">
       {helmet || ''}
       <div className="container content">
-        <div className="columns">
-          <div className="column is-10 is-offset-1">
-            <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
-              {title}
-            </h1>
-            <p>{description}</p>
-            <PostContent content={content} />
-            {tags && tags.length ? (
-              <div style={{ marginTop: `4rem` }}>
-                <h4>Tags</h4>
-                <ul className="taglist">
-                  {tags.map(tag => (
-                    <li key={tag + `tag`}>
-                      <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
-            <Comments />
-          </div>
+        <div className="header-container">
+          <h1 className="post-title">
+            {title}
+          </h1>
+          <p className="post-subheader">By <Link className="post-subheader-link" to="/about">Robert Dyjas</Link> {date}</p>
+          {tags && tags.length ? (
+            <div className="taglist-container">
+              <ul className="taglist">
+                {tags.map(tag => (
+                  <li key={tag + `tag`}>
+                    <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </div>
+        <p className="description">{description}</p>
+        <PostContent content={content} />
+        <Comments />
       </div>
     </section>
   )
@@ -55,6 +50,7 @@ export const BlogPostTemplate = ({
 BlogPostTemplate.propTypes = {
   content: PropTypes.node.isRequired,
   contentComponent: PropTypes.func,
+  date: PropTypes.instanceOf(Date),
   description: PropTypes.string,
   title: PropTypes.string,
   helmet: PropTypes.object,
@@ -63,11 +59,32 @@ BlogPostTemplate.propTypes = {
 const BlogPost = ({ data }) => {
   const { markdownRemark: post } = data
 
+  const units = {
+    year: 24 * 60 * 60 * 1000 * 365,
+    month: 24 * 60 * 60 * 1000 * 365 / 12,
+    week: 24 * 60 * 60 * 1000 * 7,
+    day: 24 * 60 * 60 * 1000,
+    hour: 60 * 60 * 1000,
+    minute: 60 * 1000,
+    second: 1000
+  }
+  const currentTimeStamp = new Date().getTime();
+  const elapsed = new Date(post.frontmatter.date) - currentTimeStamp
+  const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
+  const relativeDate = (() => {
+    for (let u in units) {
+      if ((Math.abs(elapsed) / units[u]) >= 1) {
+        return (rtf.format(Math.round(elapsed / units[u]), u));
+      }
+    }
+  })()
+
   return (
     <Layout>
       <BlogPostTemplate
         content={post.html}
         contentComponent={HTMLContent}
+        date={relativeDate}
         description={post.frontmatter.description}
         helmet={
           <Helmet titleTemplate="%s | Blog">
@@ -99,7 +116,7 @@ export const pageQuery = graphql`
       id
       html
       frontmatter {
-          date(formatString: "MMMM DD, YYYY")
+        date(formatString: "YYYY-MM-DD HH:mm")
         title
         description
         tags

@@ -61,7 +61,7 @@ For some of the fields, values might not be chooseable. This usually happens for
 
 We can workaround this using the expression:
 
-```
+``` powershell
 item()?['PropertyName']
 ```
 

@@ -18,7 +18,7 @@ There are three new cmdlets:
 * New-CsTeamsUpdateManagementPolicy
 
 ## Default settings
-```
+``` json
 Identity            : Global
 Description         :
 AllowManagedUpdates : False

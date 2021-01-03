@@ -41,7 +41,7 @@ When you create the meeting, there are some useful options which could make your
 
 ### Response options
 
-On 'Meeting' ribbon in your Outlook you can specify whether you want to receive all the responses to your mailbox. For big meetings it's usually good to unmark the option and avoid reply flood (if you really need it, you can [create a rule in Outlook](https://support.office.com/en-us/article/use-inbox-rules-in-outlook-com-4b094371-a5d7-49bd-8b1b-4e4896a7cc5d){:target="_blank"} to redirect the replies to a folder).
+On 'Meeting' ribbon in your Outlook you can specify whether you want to receive all the responses to your mailbox. For big meetings it's usually good to unmark the option and avoid reply flood (if you really need it, you can [create a rule in Outlook](https://support.office.com/en-us/article/use-inbox-rules-in-outlook-com-4b094371-a5d7-49bd-8b1b-4e4896a7cc5d) to redirect the replies to a folder).
 
 ![2019-01-31 15_35_58-Untitled - Meeting.png](/img/posts/2019-01-31 15_35_58-Untitled - Meeting.png)
 
@@ -87,10 +87,10 @@ An **attendee** can only hear, chat and talk, nothing else.
   I recommend choosing `Mute all attendees` and `Block attendees' video`. Therefore, all the participants who join the meeting will be muted by default. They won't be able to speak until the audience is unmuted (see [participant actions](#participant-actions) to learn how to do this). 
   
   **Note**: people who joined via phone will still be able to unmute themselves.
-  {:.message}
+  
   IM (chat) is usually useful to confirm that people are able to hear you and can see the presentation.
   
-You can also check which setting is recommended for your scenario [on Microsoft KB article](https://support.office.com/en-us/article/change-participant-settings-for-skype-for-business-meetings-9175e297-de5f-43b2-8e0f-85cc05e24986){:target="_blank"}.
+You can also check which setting is recommended for your scenario [on Microsoft KB article](https://support.office.com/en-us/article/change-participant-settings-for-skype-for-business-meetings-9175e297-de5f-43b2-8e0f-85cc05e24986).
 
 ## During the meeting
 
@@ -103,7 +103,7 @@ If you want people to be able to download the presentation you can allow everyon
 ![2019-01-29 10_24_55-.png](/img/posts/2019-01-29 10_24_55-.png)
 
 **NOTE**: Be aware that people who can download the presentation, as well as all the presenters, will see the notes which you made to the slides!
-{:.message}
+
 
 ### Participant actions
 
@@ -119,7 +119,7 @@ Once you click it, new window will be opened with various options available:
   Using that option will mute everyone except you. Presenters will be able to unmute, but attendees won’t be until you go to the same place and click ‘Unmute audience’. Quite useful option.  
   
   **Note**: people who joined via phone will still be able to unmute themselves.
-{:.message}
+
 *	No meeting IM  
   Can be useful in some cases to avoid interruption from users during the presentation but in general I’d avoid that (IM/chat can be useful for people to report issues with the presentation/audio).
   
@@ -136,7 +136,6 @@ Once you click it, new window will be opened with various options available:
   Rarely used (usually if you forgot to invite someone you can just add them to the conference manually)
   
 ### Desktop sharing
-If any additional content (other than PowerPoint presentation) must be shared, it’s generally preferred to use desktop sharing instead application sharing (it uses newer technology which is [Video Based Screen Sharing](http://blog.schertz.name/2015/10/video-based-screen-sharing-in-skype-for-business/){:target="_blank"} and should work smoother). In addition, switching between windows is easier when you present your desktop than when you present specific application.
+If any additional content (other than PowerPoint presentation) must be shared, it’s generally preferred to use desktop sharing instead application sharing (it uses newer technology which is [Video Based Screen Sharing](http://blog.schertz.name/2015/10/video-based-screen-sharing-in-skype-for-business/) and should work smoother). In addition, switching between windows is easier when you present your desktop than when you present specific application.
 
   **Note**: if at least one of your participants joins using outdated client version, screensharing will anyway fallback to RDP (old technology) but usually there isn't much to avoid that.
-{:.message}
