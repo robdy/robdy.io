@@ -13,7 +13,9 @@ tags:
 ---
 **[Click here to skip to findings](#conclusion)**
 
+## Table of Contents
 ```toc
+exclude: [Table of Contents]
 ```
 
 ## Configuring custom environment
