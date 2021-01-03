@@ -11,13 +11,10 @@ tags:
   - data loss prevention
   - flow
 ---
-## TL;DR
+**[Click here to skip to findings](#conclusion)**
 
-* Custom connectors inherit detault group specified in DLP policy
-* Changes in policy don't reenable suspended flows, it has to be done manually
-* Blocking custom connectors might happen after some delay
-* It doesn't matter whether the connector was added before or after DLP policies were configured
-* It matters when the flows were created (before or after the policy was applied)
+```toc
+```
 
 ## Configuring custom environment
 
@@ -85,7 +82,7 @@ security: []
 tags: []
 ```
 
-In **General** scroll down and enter any host. We can use [httpbin.org](https://httpbin.org) as it'll return real data without any configuration:
+In **General** section scroll down and enter any host. We can use [httpbin.org](https://httpbin.org) as it'll return real data without any configuration:
 
 ![Custom connector configuration window](/img/2020-12-29-20_57_34.png)
 
@@ -105,7 +102,7 @@ To fix it, scroll up to **Request** and click **Import from sample**:
 
 ![Button to import from sample](/img/20201229-114003-ocjdti0ccj.png)
 
-Choose `GET` verb and enter `get` URL:
+Choose `GET` verb and enter the service URL `https://httpbin.org/get`:
 
 ![Importing request data from sample](/img/20201229-211203-000005.png)
 
@@ -132,7 +129,7 @@ We need 4 flows to find out how the connectors are classfied:
 
 The first 3 connectors will be blocked if either one of the connectors is blocked or the connectors belong to two different groups (business/non-business). The last one will be blocked only if custom connector is classified as blocked.
 
-I'm not covering the exact steps here. Any flow will do as long as it contains action from mentioned connectors **+ custom connector** we created before.
+I'm not covering the exact steps here. For testing purposes any flow will work as long as it contains action from mentioned connectors **+ custom connector** we created before.
 
 ## Configuring DLP policies
 
@@ -172,16 +169,37 @@ After setting default group to *Business* and applying the policy again, the fol
 
 ![Blocked and non-business flows are suspended](/img/20201230-180608-000008.png)
 
-Blocked connector flow is suspended again. Business connector flow is **not suspended** this time. It means that custom connector classification is business (again, classification of all connectors used in the same flow must match).
+Flow with blocked connector is suspended again. Business connector flow is **not suspended** this time. It means that custom connector classification is business (again, classification of all connectors used in the same flow must match).
 
-Now we should have pretty solid idea that custom connectors are classified based on default group settings. Let's confirm that with final test.
+Now we should have pretty solid idea that *custom connectors are classified based on default group setting*. Let's confirm that with final test.
 
 Last attempt is to apply the same policy, but specify default group to be *Blocked*:
 
-Once we do that, all the flows should stop working.
+Once we do that, all the flows should stop working. Here's what we see:
 
 ![All flows are suspended](/img/20201230-221900-000009.png)
 
-We were right! Based on all the tests, we now know that custom connectors will be classified based on default group settings in our DLP policy.
+🎉 We were right! 🎉 Based on all the tests, we now know that custom connectors will be classified based on default group settings in our DLP policy.
 
 ## Creating connectors under DLP policy
+
+Let's see how our connectors behave when we have DLP policy applied to our environment. Using Swagger editor, we create new connector:
+
+20201231-125544-uZ6OAGhwn6
+
+Even though our connector will be blocked by default, we don't receive any error while creating it. Let's now create the same flows as we had, but under DLP policy.
+
+After we add action from our custom connector to the flow, it immediately returns the error:
+
+20201231-130005-so3ab9nl2c
+
+In that case, there's no point creating the others, as it'd fail anyway.
+
+## Conclusion
+
+* Custom connectors inherit detault group specified in DLP policy
+* Changes in policy don't reenable suspended flows, it has to be done manually
+* Blocking custom connectors might happen after some delay
+* It doesn't matter whether the connector was added before or after DLP policies were configured
+* It matters when the flows were created (before or after the policy was applied)
+* If DLP policy is applied to your envoironment and you block custom connectors, you won't be able to save the flow with it
