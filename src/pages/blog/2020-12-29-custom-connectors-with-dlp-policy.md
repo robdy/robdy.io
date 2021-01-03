@@ -14,6 +14,7 @@ tags:
 **[Click here to skip to findings](#conclusion)**
 
 ## Table of Contents
+
 ```toc
 exclude: [Table of Contents]
 ```
@@ -187,13 +188,13 @@ Once we do that, all the flows should stop working. Here's what we see:
 
 Let's see how our connectors behave when we have DLP policy applied to our environment. Using Swagger editor, we create new connector:
 
-20201231-125544-uZ6OAGhwn6
+![Creating new connector via Swagger](/img/20201231-125544-uz6oaghwn6.png)
 
 Even though our connector will be blocked by default, we don't receive any error while creating it. Let's now create the same flows as we had, but under DLP policy.
 
 After we add action from our custom connector to the flow, it immediately returns the error:
 
-20201231-130005-so3ab9nl2c
+![Custom connectors returning error](/img/20201231-130005-so3ab9nl2c.png)
 
 In that case, there's no point creating the others, as it'd fail anyway.
 
