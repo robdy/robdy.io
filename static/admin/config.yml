@@ -7,6 +7,7 @@ backend:
     delete: 'Delete {{collection}} “{{slug}}”'
     uploadMedia: '[skip ci] Upload “{{path}}”'
     deleteMedia: '[skip ci] Delete “{{path}}”'
+  squash_merges: true
 
 media_folder: static/img
 public_folder: /img
