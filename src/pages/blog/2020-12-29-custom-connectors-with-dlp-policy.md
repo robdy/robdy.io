@@ -205,4 +205,4 @@ In that case, there's no point creating the others, as it'd fail anyway.
 * Blocking custom connectors might happen after some delay
 * It doesn't matter whether the connector was added before or after DLP policies were configured
 * It matters when the flows were created (before or after the policy was applied)
-* If DLP policy is applied to your envoironment and you block custom connectors, you won't be able to save the flow with it
+* If DLP policy is applied to your environment and you block custom connectors, you won't be able to save the flow with it
