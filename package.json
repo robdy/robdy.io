@@ -4,7 +4,7 @@
   "version": "0.3.1",
   "author": "robdy",
   "dependencies": {
-    "gatsby": "^2.13.31",
+    "gatsby": "^2.30.1",
     "gatsby-image": "^2.0.23",
     "gatsby-plugin-netlify": "^2.0.6",
     "gatsby-plugin-netlify-cms": "^4.1.6",
