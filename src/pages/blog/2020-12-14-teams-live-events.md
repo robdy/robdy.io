@@ -23,11 +23,7 @@ Open **Calendar** tab in your Teams client, verify if you see the arrow next to 
 
 The title you set will be displayed to your attendees. Avoid using phrases like *Presenter invite*, *Moderator invite for event*.
 
-
-
 ### Meeting options
-
-
 
 ### Roles
 
@@ -78,3 +74,7 @@ You won't find that role in Live Event configuration wizard. However, based on m
 ### Don't share producer and presenter role
 
 ### Avoid last minute changes
+
+TEST
+
+![](/img/20210107-163420-pwfhwnz5ud.png)
