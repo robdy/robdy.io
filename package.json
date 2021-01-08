@@ -4,11 +4,10 @@
   "version": "0.3.1",
   "author": "robdy",
   "dependencies": {
-    "@babel/compat-data": "^7.9.0",
     "gatsby": "^2.13.31",
     "gatsby-image": "^2.0.23",
     "gatsby-plugin-netlify": "^2.0.6",
-    "gatsby-plugin-netlify-cms": "^4.1.6",
+    "gatsby-plugin-netlify-cms": "^4.3.17",
     "gatsby-plugin-react-helmet": "^3.0.4",
     "gatsby-plugin-sass": "^2.0.7",
     "gatsby-plugin-sharp": "^2.2.9",
@@ -43,9 +42,9 @@
   "main": "n/a",
   "scripts": {
     "clean": "gatsby clean",
-    "start": "npm run develop",
-    "build": "npm run clean && gatsby build",
-    "develop": "npm run clean && gatsby develop -H 0.0.0.0",
+    "start": "yarn run develop",
+    "build": "yarn run clean && gatsby build",
+    "develop": "yarn run clean && gatsby develop -H 0.0.0.0",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"{gatsby-*.js,src/**/*.js}\"",
     "serve": "gatsby serve -H 0.0.0.0",
     "test": "echo \"Error: no test specified\" && exit 1"
