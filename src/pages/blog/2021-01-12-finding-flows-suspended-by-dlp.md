@@ -138,4 +138,4 @@ We'll be looking for flows with `State` = **Suspended**. Simple `Where-Object` w
 $suspendedFlows = $nonEmptyFlows | Where-Object {$_.internal.properties.state -eq "Suspended"}
 ```
 
-Now you have all the flows with their data saved into variable. Before reaching out to flow owners with the communication, make sure to read my previous article [Custom connectors with DLP policy in Power Automate](custom-connectors-with-dlp-policy/). You'll learn about the behavior of DLP for custom connectors and what happens when you disable/rollback the policy.
+Now you have all the flows with their data saved into variable. Before reaching out to flow owners with the communication, make sure to read my previous article [Custom connectors with DLP policy in Power Automate](/custom-connectors-with-dlp-policy/). You'll learn about the behavior of DLP for custom connectors and what happens when you disable/rollback the policy.
