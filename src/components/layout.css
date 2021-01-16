@@ -1,25 +1,8 @@
-/* Fonts */
+/*#region Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap");
+/*#endregion Fonts */
 
-/* Proposed colorscheme */
-/* https://coolors.co/5603ad-8367c7-b3e9c7-c2f8cb-f0fff1 */
- /* CSS HEX  */
-/*--flickr-pink: #f72585ff;
---purple: #7209b7ff;
---trypan-blue: #3a0ca3ff;
---ultramarine-blue: #4361eeff;
---vivid-sky-blue: #4cc9f0ff;
-*/
-
-/* https://coolors.co/5603ad-8367c7-b3e9c7-c2f8cb-f0fff1*/
-/* --purple: #5603adff;
---blue-violet-crayola: #8367c7ff;
---magic-mint: #b3e9c7ff;
---tea-green: #c2f8cbff;
---honeydew: #f0fff1ff; */
-
-
-/* Variables */
+/*#region Variables */
 :root {
   /* Scheme */
   /* https://coolors.co/5603ad-8367c7-b3e9c7-c2f8cb-f0fff1*/
@@ -41,7 +24,9 @@
   --footer-bg: #CCCCCC;
 }
 
-/* Basics */
+/*#endregion Variables */
+
+/*#region Basics */
 
 *,
 *::before,
@@ -72,8 +57,9 @@ html {
 
 ::-moz-selection { background: var(--go-green); }
 ::selection { background: var(--go-green);}
+/*#endregion Basics */
 
-/* Navbar */
+/*#region Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -118,8 +104,9 @@ a.navbar-link, a.navbar-link:hover, a.navbar-link:visited  {
 .content {
   font-size: 1.1rem;
 }
+/*#endregion Navbar */
 
-/* Main page */
+/*#region Main page */
 .bio {
   padding: 2rem;
   background-color: var(--tea-green);
@@ -186,8 +173,9 @@ a.navbar-link, a.navbar-link:hover, a.navbar-link:visited  {
 article.roll-list-item p {
   margin-top: 0px;
 }
+/*#endregion Main page */
 
-/* Blog header */
+/*#region Blog header */
 .header-container {
   margin-top: 2rem;
   margin-bottom: 1rem;
@@ -248,8 +236,9 @@ h1 {
   font-size: 1.4rem;
   margin-bottom: 1rem;
 }
+/*#endregion Blog header */
 
-/* Blog entry content */
+/*#region Blog entry content */
 h2, h3, h4, h5, h6 {
   margin-top: 2rem;
   margin-bottom: 1rem;
@@ -284,7 +273,47 @@ strong {
   color: var(--purple);
 } */
 
-/* Prism */
+
+a, a:hover, a:visited {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a, a:visited {
+  border-bottom: 3px solid var(--link-underline-color);
+  color: var(--link-text-color);
+}
+
+a:hover {
+  border-bottom: 3px solid var(--link-underline-color-hover);
+  color: var(--link-text-color-hover);
+}
+
+a.anchor {
+  border-bottom: 0px;
+}
+
+ul, ol {
+  padding: 0 1.5rem;
+}
+
+li p {
+  margin-top: 0px;
+}
+
+blockquote {
+  background-color: rgb(254, 255, 166);
+  padding: 1rem 1.5rem;
+  border: 1px solid rgb(255, 220, 25);
+  border-left: 0.3rem solid rgb(255, 220, 25);
+  margin: 1rem 0;
+}
+blockquote p {
+  margin-top: 0px;
+}
+/*#endregion Blog entry content */
+
+/*#region Prism */
 /* PrismJS 1.22.0
 https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+powershell */
 /**
@@ -451,9 +480,9 @@ pre[class*="language-"].line-numbers > code {
   text-align: right;
 }
 
-/* End of PrismJS */
+/*#endregion Prism */
 
-/* PrismJS customization */
+/*#region PrismJS customization */
 code[class*="language-"] {
   white-space: pre-wrap;
 }
@@ -466,53 +495,9 @@ pre {
 .gatsby-highlight pre[class*="language-"].line-numbers {
   padding-left: 3.3em;
 }
-/* End of PrismJS customization */
+/*#endregion PrismJS customization */
 
-
-a, a:hover, a:visited {
-  text-decoration: none;
-  font-weight: 600;
-}
-
-a, a:visited {
-  border-bottom: 3px solid var(--link-underline-color);
-  color: var(--link-text-color);
-}
-
-a:hover {
-  border-bottom: 3px solid var(--link-underline-color-hover);
-  color: var(--link-text-color-hover);
-}
-
-a.anchor {
-  border-bottom: 0px;
-}
-
-ul, ol {
-  padding: 0 1.5rem;
-  font-size: 0px;
-}
-
-li p {
-  margin-top: 0px;
-}
-
-ul li, ol li {
-  font-size: 1rem;
-}
-
-blockquote {
-  background-color: rgb(254, 255, 166);
-  padding: 1rem 1.5rem;
-  border: 1px solid rgb(255, 220, 25);
-  border-left: 0.3rem solid rgb(255, 220, 25);
-  margin: 1rem 0;
-}
-blockquote p {
-  margin-top: 0px;
-}
-
-/* Comments */
+/*#region Comments */
 .utterances {
   max-width: 100%;
 }
@@ -520,8 +505,9 @@ blockquote p {
 .comment-box {
   margin: 2rem 0;
 }
+/*#endregion Comments */
 
-/* Tag page */
+/*#region Tag page */
 .tag-postlist {
   list-style-type: none;
   padding: 0;
@@ -532,8 +518,9 @@ blockquote p {
   border-bottom: 0px;
   margin: 0px;
 }
+/*#endregion Tag page */
 
-/* Footer */
+/*#region Footer */
 .footer {
   /* background-color: var(--footer-bg); */
   padding: 1.5rem 0;
@@ -587,3 +574,4 @@ blockquote p {
     padding-right: 1rem;
   }
 }
+/*#endregion Footer */
