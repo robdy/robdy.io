@@ -26,7 +26,7 @@ This is most useful if your environment consist of many different domains and/or
 
 If you're not sure if it's already turned on, go to [Audit page in M365 Compliance Center](https://compliance.microsoft.com/auditlogsearch) and check if you have the option to start recording activity:
 
-![](/img/2020-11-17-21_25_11-.png)
+![](../../img/2020-11-17-21_25_11-.png)
 
 If the button is available and the search is greyed out, you need to turn the audit log on first.
 
@@ -42,25 +42,25 @@ If your account has *Global Admin* (in Microsoft 365) or *Organization Managemen
 
 In [legacy admin center](https://outlook.office365.com/ecp/):
 
-![](/img/2020-11-17-21_42_55-.png)
+![](../../img/2020-11-17-21_42_55-.png)
 
 Or [in the new one](https://admin.exchange.microsoft.com/#/adminRoles):
 
-![](/img/2020-11-17-21_43_36-window.png)
+![](../../img/2020-11-17-21_43_36-window.png)
 
 ## Getting data from GUI
 
 If you want to get the data once, you can go to [audit log](https://compliance.microsoft.com/auditlogsearch) and search for **Allowed computer to sync files** event:
 
-![](/img/2020-11-17-21_57_07-window.png)
+![](../../img/2020-11-17-21_57_07-window.png)
 
 From this level you you find machine's domain data by choosing **More information**:
 
-![](/img/2020-11-17-21_59_33-window.png)
+![](../../img/2020-11-17-21_59_33-window.png)
 
 And finding **MachineDomainInfo** there:
 
-![](/img/2020-11-17-22_03_27-window.png)
+![](../../img/2020-11-17-22_03_27-window.png)
 
 You can also export the results to `.csv` file. Unfortunately, it only exports basic details, without any option to include what we saw under **More information**.
 
