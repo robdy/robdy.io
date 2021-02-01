@@ -8,6 +8,8 @@ tags:
   - teams
   - live events
 ---
+![](/img/img_20200818_183047.jpg)
+
 ## Checklist
 
 * Have backup producer
