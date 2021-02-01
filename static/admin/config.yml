@@ -9,7 +9,7 @@ backend:
     deleteMedia: '[skip ci] Delete “{{path}}”'
   squash_merges: true
 
-media_folder: static/img
+media_folder: src/img
 public_folder: /img
 
 collections:
