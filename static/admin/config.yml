@@ -10,7 +10,7 @@ backend:
   squash_merges: true
 
 media_folder: src/img
-public_folder: /img
+public_folder: ../../img
 
 collections:
   - name: "blog"
