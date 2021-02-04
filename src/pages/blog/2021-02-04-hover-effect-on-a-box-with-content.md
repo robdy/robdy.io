@@ -7,6 +7,7 @@ description: Learn how to create hover effect on a box containing some content
 featuredpost: false
 tags:
   - power apps
+  - power platform
 ---
 What I'd like to create as the frontend of my Self-Service Tool is two boxes to choose what type of request user wants to create. For now I have created the boxes. Each of them has label and icon:
 
