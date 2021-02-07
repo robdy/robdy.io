@@ -5,7 +5,7 @@
   "author": "robdy",
   "dependencies": {
     "gatsby": "^2.32.2",
-    "gatsby-image": "^2.9.0",
+    "gatsby-image": "^2.11.0",
     "gatsby-plugin-netlify": "^2.9.0",
     "gatsby-plugin-react-helmet": "^3.2.5",
     "gatsby-plugin-sharp": "^2.12.2",
@@ -31,7 +31,7 @@
     "react-dom": "^17.0.1",
     "react-helmet": "^6.0.0",
     "uuid": "^8.3.2",
-    "webpack": "^5.15.0"
+    "webpack": "^4.46.0"
   },
   "keywords": [
     "gatsby"
