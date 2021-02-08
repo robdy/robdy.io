@@ -41,7 +41,9 @@ We'd also need to copy the value of `OnSelect` to all the elements, which makes 
 
 ## Creating rectangle on top
 
-The most straightforward solution is to create transparent ⬜ rectangle on top of the existing ones. We'll name it similarly to the existing ones, so we can easily find the pair of them. For example, I name the bottom one `RectPhoneBg` and the top one `RectPhoneFg`.
+The most straightforward solution is to create transparent ⬜ rectangle on top of the existing ones.
+
+We'll name it similarly to the existing ones, so we can easily find the pair of them. For example, I name the bottom one `RectPhoneBg` and the top one `RectPhoneFg`.
 
 Now let's edit some properties as below:
 
@@ -60,10 +62,12 @@ Let's make it transparent by setting `Fill` to
 RGBA(255, 255, 255, 0)
 ```
 
-The values of RGB don't matter as we set alpha to 0, which makes the element fully transparent. Now we want to create hover effect. We can use transparency so that the blue color from the background becomes a bit darker. For example create black element with alpha values of 0.2:
+The values of RGB don't matter as we set alpha to 0, which makes the element fully transparent. Now we want to create hover effect. 
+
+We can use transparency so that the blue color from the background becomes a bit darker. For example create black element with alpha values of 0.2:
 
 ```powershell
-RGBA(0,0,0,0.2)
+RGBA(0, 0, 0, 0.2)
 ```
 
 Now we have created hover effect for the whole element 💪
