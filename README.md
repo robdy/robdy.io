@@ -16,5 +16,7 @@ If you see any error/typo, feel free to open [an issue](https://github.com/robdy
 
 Blog is built using [Gatsby](https://www.gatsbyjs.com/). I'm using [Netlify](https://netlify.com) to create build previews and deploy the website to [GitHub Pages](https://pages.github.com).
 
+Content is being managed by [Netlify CMS](https://www.netlifycms.org/).
+
 ## 🏗️ Deploy configuration
-Push changes to `src` branch. It'll be deployed via script `deploy.sh` to `master` and then visible on https://robdy.github.io. Draft version is visible on Netlify.
+Push changes to `src` branch. It'll be deployed via script `deploy.sh` to `master` and then visible on [robdy.github.io](https://robdy.github.io). Draft version is visible on Netlify.
