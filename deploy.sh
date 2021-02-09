@@ -4,7 +4,7 @@ set -o errexit -o nounset
 
 rev=$(git rev-parse --short HEAD)
 TODAY=$(date +%Y%m%d)
-MESSAGE="$TODAY page build"
+MESSAGE="$TODAY $COMMIT_REF page build"
  
 cp -r public public-prod
 cd public-prod
