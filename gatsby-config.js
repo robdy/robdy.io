@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: 'robdy · personal site',
+    title: 'Robert Dyjas - blog',
     description:
-      'MS Teams and SfB specialist, developer in my free time',
+      'MS Teams and SfB expert. In my free time I write code',
     siteUrl: `https://robdy.github.io`,
   },
   plugins: [

@@ -6,7 +6,7 @@ description: There are some cases in which you'd like to supress a flow in Power
   Automate for certain period of time. Be careful - turning it off doesn't
   always work as expected!
 featuredpost: false
-featuredimage: /img/coffee-gear.png
+featuredimage:
 tags:
   - power automate
   - flow
