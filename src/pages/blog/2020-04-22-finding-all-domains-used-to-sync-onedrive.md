@@ -6,7 +6,7 @@ description: If you're going to restrict syncing OneDrive for Business libraries
   to specific domains only, you might want to first check, which domains are
   currently being used to synchronize data.
 featuredpost: false
-featuredimage: /img/coffee-gear.png
+featuredimage:
 tags:
   - onedrive
   - office 365
