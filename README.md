@@ -1,3 +1,5 @@
+![Blog's image](static/img/og-image.png)
+
 ## 👋 Welcome to my blog
 
 You're now checking the repository for my blog. If you want to read the blog, visit [robdy.github.io](https://robdy.github.io).
