@@ -93,19 +93,17 @@ The key is the `-Format` parameter for Get-Date. When used, the cmdlet outputs t
 ```powershell
 PS> (Get-Date).GetType()
 
-IsPublic IsSerial Name                                     BaseType
--------- -------- ----                                     --------
-True     True     DateTime                                 System.ValueType
+IsPublic IsSerial Name    BaseType
+-------- -------- ----    --------
+True     True     DateTimeSystem.ValueType
 
 
 PS> (Get-Date -Format $dateFormat).GetType()
 
-IsPublic IsSerial Name                                     BaseType
--------- -------- ----                                     --------
-True     True     String                                   System.Object
+IsPublic IsSerial Name    BaseType
+-------- -------- ----    --------
+True     True     String  System.Object
 ```
-
-![Console output for GetType function](../../img/20210213-203642-000020.png)
 
 String type doesn't have `AddDays` method. It's quite obvoius but let's confirm it using `Get-Member`:
 
