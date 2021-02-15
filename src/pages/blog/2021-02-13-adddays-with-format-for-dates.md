@@ -86,7 +86,7 @@ At line:1 char:1
     + FullyQualifiedErrorId : MethodNotFound
 ```
 
-Error message gives us pretty clear explanation why it fails, but where on Earth did we use `[System.String]`?
+Error message gives us pretty clear explanation why it fails, but where on earth did we use `[System.String]`?
 
 The key is the `-Format` parameter for Get-Date. When used, the cmdlet outputs the value as a string. We can confirm it by invoking `GetType()` function:
 
