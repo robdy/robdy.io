@@ -6,6 +6,7 @@ import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
 import Comments from '../components/Comments'
+import useSiteMetadata from '../components/SiteMetadata'
 
 export const BlogPostTemplate = ({
   content,
@@ -53,11 +54,14 @@ BlogPostTemplate.propTypes = {
   date: PropTypes.instanceOf(Date),
   description: PropTypes.string,
   title: PropTypes.string,
+  slug: PropTypes.string,
   helmet: PropTypes.object,
 }
 
 const BlogPost = ({ data }) => {
-  const { markdownRemark: post } = data
+  const { markdownRemark: post } = data;
+  const { siteUrl } = useSiteMetadata();
+
 
   const units = {
     year: 24 * 60 * 60 * 1000 * 365,
@@ -95,6 +99,7 @@ const BlogPost = ({ data }) => {
             />
             <meta property="og:description" content={`${post.frontmatter.description}`} />
             <meta property="og:title" content={`${post.frontmatter.title}`} />
+            <meta property="og:url" content={`${siteUrl}${post.fields.slug}`} />
           </Helmet>
         }
         tags={post.frontmatter.tags}
@@ -116,6 +121,9 @@ export const pageQuery = graphql`
   query BlogPostByID($id: String!) {
     markdownRemark(id: { eq: $id }) {
       id
+      fields {
+        slug
+      }
       html
       frontmatter {
         date(formatString: "YYYY-MM-DD HH:mm")
