@@ -130,11 +130,17 @@ Get-Date -Date $30DaysAgo -Format $dateFormat
 By having a quick look at the [docs of `Get-Date`](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-date?view=powershell-7.1#parameters) (emphasis mine):
 
 > -Date
+>
 > Type:	DateTime
+>
 > Aliases:	LastWriteTime
+>
 > Position:	**0**
+>
 > Default value:	None
+>
 > Accept pipeline input:	**True**
+>
 > Accept wildcard characters:	False
 
 We discover that we might skip `-Date` (due to numbered position) or we can use pipeline (as it accepts pipeline input). In that case our last line might be:
