@@ -19,9 +19,9 @@ $sfbSession = New-CsOnlineSession
 Import-PSSession $sfbSession
 ```
 
-> **NOTE**: If you still use Skype for Business Online module, remember that it's being decomissioned. I have [an article showing how to migrate to new module)[/skype-connector-decomission/].
+> **NOTE**: If you still use Skype for Business Online module, remember that it's being decomissioned. I have [an article showing how to migrate to new module](/skype-connector-decomission/).
 
-The cmdlet we'll be using is [`Get-CsOnlineTelephoneNumber`](https://docs.microsoft.com/en-us/powershell/module/skype/get-csonlinetelephonenumber?view=skype-ps
+The cmdlet we'll be using is [`Get-CsOnlineTelephoneNumber`](https://docs.microsoft.com/en-us/powershell/module/skype/get-csonlinetelephonenumber?view=skype-ps):
 
 ```powershell
 $allNumbers = Get-CsOnlineTelephoneNumber -IsNotAssigned -ResultSize 2147483647 -InventoryType Subscriber
@@ -30,7 +30,7 @@ $allNumbers = Get-CsOnlineTelephoneNumber -IsNotAssigned -ResultSize 2147483647 
 Parameters we use:
 
 * `-IsNotAssigned` - self explanatory
-* `-ResultSize 2147483647` - there's no support for *Unlimited* (which is widely used across Microsoft 365 modules), so we specify maximum value available (based on [the docs](https://docs.microsoft.com/en-us/powershell/module/skype/get-csonlinetelephonenumber?view=skype-ps#parameters))
+* `-ResultSize 2147483647` - there's no support for **Unlimited**, in contrary to other  Microsoft 365 cmdlets, so we specify maximum value (based on [the docs](https://docs.microsoft.com/en-us/powershell/module/skype/get-csonlinetelephonenumber?view=skype-ps#parameters))
 * `-InventoryType Subscriber` - based on the docs, it's used to display numbers, which can be assigned to users.
 
 Now we have our numbers saved into variable. We can process them, as we need. 
