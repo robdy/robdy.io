@@ -35,7 +35,7 @@ AllowAllAcsResources : True
 
 Parameters available for `Set-CsTeamsAcsFederationConfiguration` are as follows. The name is followed by accepted data type and my guess of its meaning:
 
-* **Identity** \<XdsIdentity> - I suppose the description of this will be: *The only valid input is Global - the tenant wide configuration.* similarly to other `Set-*Configuration` cmdlets
+* **Identity** \<XdsIdentity> - I suppose the description of this will be: *The only valid input is Global - the tenant wide configuration* similarly to other `Set-*Configuration` cmdlets
 * **AllowedAcsResources** \<PSListModifier[string]> - if specified, it'll provide list of allowed apps for ACS integration
 * **AllowAllAcsResources** \<bool> - By default set to `True`, which means all the resources will be allowed
 * **BlockedAcsResources** \<PSListModifier[string]> if specified, it'll provide list of blocked apps for ACS integration
