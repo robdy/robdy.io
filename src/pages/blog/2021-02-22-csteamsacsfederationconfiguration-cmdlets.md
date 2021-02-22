@@ -54,7 +54,7 @@ Usage of `PSListModifier` type means that to add/remove values from the list we'
 
 Other optional parameters:
 
-* -Force
-* -WhatIf
-* -Confirm
+* Force
+* WhatIf
+* Confirm
 * \<CommonParameters>
