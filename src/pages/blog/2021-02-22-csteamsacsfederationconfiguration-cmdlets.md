@@ -1,0 +1,67 @@
+---
+templateKey: blog-post
+title: CsTeamsAcsFederationConfiguration cmdlets
+date: 2021-02-21T19:29:00.000Z
+description: Two new cmdlets appeared in Skype for Business Online PowerShell
+  module. They are related with upcoming integration with Azure Communication
+  Services.
+featuredpost: false
+tags:
+  - powershell
+  - teams
+---
+CsTeamsAcsFederationConfiguration cmdlets
+
+## Description
+
+There's no existing documentation for these cmdlets so we only can guess, what it's supposed to be doing. My guess is that it's for controlling integration with [Azure Communication Services](https://azure.microsoft.com/en-us/services/communication-services/), currently in preview.
+
+### Azure Communication Services
+
+Integration of Teams with ACS will allow us to join apps created with ACS to Teams meetings. You'll have options to join IM-only or with calling functionalities (voice and video). It might provide a way to integrate different communication platforms with Teams meetings.
+
+## Default settings
+
+```powershell
+PS> Get-CsTeamsAcsFederationConfiguration
+
+
+Identity             : Global
+AllowedAcsResources  : {}
+BlockedAcsResources  : {}
+EnableAcsUsers       : True
+AllowAllAcsResources : True
+```
+
+## Available parameters
+
+Parameters available for `Set-CsTeamsAcsFederationConfiguration` are as follows: The name is followed by accepted data type and my guess of its meaning:
+
+**Identity** <XdsIdentity> - I suppose the description of this will be: *The only valid input is Global - the tenant wide configuration.* similarly to other `Set-*Configuration` cmdlets
+
+**AllowedAcsResources** <PSListModifier[string]> - if specified, it'll provide list of allowed apps for ACS integration
+
+**AllowAllAcsResources** <bool> - By default set to `True`, which means all the resources will be allowed
+
+**BlockedAcsResources** <PSListModifier[string]> if specified, it'll provide list of blocked apps for ACS integration
+
+**EnableAcsUsers** <bool> - any ideas for that one? 🤔
+
+**Tenant** <guid> - most likely *Internal Microsoft use only*
+
+Usage of `PSListModifier` type means that to add/remove values from the list we'll have to use the following syntax:
+
+```powershell
+# Add to the list of allowed resources
+-AllowedAcsResources @{Add="ResourceA","ResourceB","ResourceC"}
+# Remove from the list of allowed resources
+-AllowedAcsResources @{Remove="ResourceD"}
+# And so on
+```
+
+Other optional parameters:
+
+* -Force
+* -WhatIf
+* -Confirm
+* \<CommonParameters>
