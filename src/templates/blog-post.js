@@ -24,11 +24,7 @@ export const BlogPostTemplate = ({
       {helmet || ''}
       <div className="container content">
         <div className="header-container">
-          <h1 className="post-title">
-            {title}
-          </h1>
-          <p className="post-subheader">By <Link className="post-subheader-link" to="/about">Robert Dyjas</Link> {date}</p>
-          {tags && tags.length ? (
+                    {tags && tags.length ? (
             <div className="taglist-container">
               <ul className="taglist">
                 {tags.map(tag => (
@@ -39,6 +35,10 @@ export const BlogPostTemplate = ({
               </ul>
             </div>
           ) : null}
+          <h1 className="post-title">
+            {title}
+          </h1>
+          <p className="post-subheader">By <Link className="post-subheader-link" to="/about">Robert Dyjas</Link> {date}</p>
         </div>
         <p className="description">{description}</p>
         <PostContent content={content} />
