@@ -138,8 +138,6 @@ a.navbar-link, a.navbar-link:hover, a.navbar-link:visited  {
 .bio-links > li {
   padding: 0.5rem;
   background-color: var(--tea-green);
-  margin-left: 2rem;
-  margin-right: 2rem;
 }
 
 .roll-tile-container {
@@ -183,11 +181,13 @@ article.roll-list-item p {
 
 h1 {
   font-size: 2.5rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
 .post-title {
   margin-bottom: 0.5rem;
+  margin-top: 0;
 }
 
 .post-subheader {
