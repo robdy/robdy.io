@@ -95,13 +95,9 @@ There are additional two params, which are currently not easy to guess what they
 
 For `Get-CsTeamsMessagingPolicy` we got:
 
-* AllowSmartCompose
+`AllowSmartCompose` - it's a feature currently available for Outlook Web App, which gives us text prediction, suggesed replies [and more](https://support.microsoft.com/en-us/office/use-intelligent-technology-in-outlook-on-the-web-and-outlook-com-24b30683-8340-4b69-b8ac-4193ec528a70).
 
-It's a feature currently available for Outlook Web App, which gives us text prediction, suggesed replies [and more](https://support.microsoft.com/en-us/office/use-intelligent-technology-in-outlook-on-the-web-and-outlook-com-24b30683-8340-4b69-b8ac-4193ec528a70).
-
-* AllowFluidCollaborate
-
-It seems like Fluid framework is going to be implemented in Teams. It's currently in preview and I haven't played with that a lot, but you can [check it yourself](https://fluidpreview.office.net/).
+`AllowFluidCollaborate` - it seems like Fluid framework is going to be implemented in Teams. It's currently in preview and I haven't played with that a lot, but you can [check it yourself](https://fluidpreview.office.net/).
 
 ## Compliance recording
 
