@@ -20,7 +20,7 @@ Related with Azure Communication Service federation:
 
 Check my [blog post](https://robdy.github.io/csteamsacsfederationconfiguration-cmdlets/) for details.
 
-Sounds like something related to the ability to limit certain workloads (audio, video, screensharing etc.) for selected users:
+Next ones sound like something related to the ability to limit certain workloads (audio, video, screensharing etc.) for selected users:
 
 * Get-CsTeamsWorkLoadPolicy
 * Grant-CsTeamsWorkLoadPolicy
@@ -40,31 +40,28 @@ Teams templates-related cmdlets:
 * Remove-CsTeamTemplate
 * Update-CsTeamTemplate
 
-Learn more about Teams templates by checking [Get started with Teams templates in the admin center](https://docs.microsoft.com/en-us/MicrosoftTeams/get-started-with-teams-templates-in-the-admin-console).
+> **NOTE**: Learn more about Teams templates by checking [Get started with Teams templates in the admin center](https://docs.microsoft.com/en-us/MicrosoftTeams/get-started-with-teams-templates-in-the-admin-console).
 
-Cmdlets for package assignment policies (I honestly have no idea what vertical package is, do you?)
+Cmdlets for package assignment policies (I honestly have no idea what vertical package is, do you?):
 
 * New-CsTeamsVerticalPackagePolicy
 * Remove-CsTeamsVerticalPackagePolicy
 * Set-CsTeamsVerticalPackagePolicy
 
-And for assigning package policy via group:
-
-* Grant-CsGroupPolicyPackageAssignment
+`Grant-CsGroupPolicyPackageAssignment` will be for assigning package policy via group.
 
 And these two not documented yet:
 
-* Move-CsInternalHelper
+* **Move-CsInternalHelper** - probably something around moving data from one user. I'd guess it's internal MS cmdlet.
+* **Set-CsInternalOnlinePowerShellEndpoint** - might be related to connection settings.
 
-Probably something around moving data from one user. I'd guess it's internal MS cmdlet.
+## New params for cmdlets
 
-* Set-CsInternalOnlinePowerShellEndpoint
-
-Might be related to connection settings.
+In addition to cmdlets, we also have quite a few new params added for existing cmdlets. Let's break them down into categories.
 
 ## Dial-in conferencing
 
-Under `Get-CsOnlineDialinConferencingTenantConfiguration` ther's one new param: ThirdPartyNumberStatus. Does it mean that Microsoft is going to give us third party ACP option back?
+Under `Get-CsOnlineDialinConferencingTenantConfiguration` there's one new param: `ThirdPartyNumberStatus`. Does it mean that Microsoft is going to give us third party ACP option back? As a reminder, here's [End of life program announcement](https://docs.microsoft.com/en-us/skypeforbusiness/legal-and-regulatory/end-of-integration-with-3rd-party-providers).
 
 ## Applications
 
@@ -123,3 +120,7 @@ New parameters related with eCDN providers for Skype for Business Broadcast and 
 for both `Get-CsBroadcastMeetingConfiguration` and `Get-CsTeamsMeetingBroadcastConfiguration`
 
 Additionally, Teams Live Events are getting `SdnAzureSubscriptionId` parameter.
+
+## Summary
+
+Do you find that type of articles interested? If so, let me know by commenting below or via Twitter/LinkedIn (links at the bottom). If you have any guesses what the parameters/cmdlets might be for, let me know and I'll add them to the article (with proper credits, of course).
