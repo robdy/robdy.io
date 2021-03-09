@@ -7,9 +7,9 @@ description: Microsoft silently adds many new cmdlets and parameters. Below you
   Teams PowerShell module.
 featuredpost: false
 tags:
-  - "#teams"
-  - "#powershell"
-  - "#datamining"
+  - teams
+  - powershell
+  - datamining
 ---
 ## New cmdlets
 
