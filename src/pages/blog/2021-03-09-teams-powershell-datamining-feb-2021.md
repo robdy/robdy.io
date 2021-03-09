@@ -1,0 +1,125 @@
+---
+templateKey: blog-post
+title: Teams PowerShell datamining - Feb 2021
+date: 2021-03-09T19:41:00.995Z
+description: Microsoft silently adds many new cmdlets and parameters. Below you
+  can find my first attempt to summarize what was added in last three months to
+  Teams PowerShell module.
+featuredpost: false
+tags:
+  - "#teams"
+  - "#powershell"
+  - "#datamining"
+---
+## New cmdlets
+
+Related with Azure Communication Service federation: 
+
+* Get-CsTeamsAcsFederationConfiguration
+* Set-CsTeamsAcsFederationConfiguration
+
+Check my [blog post](https://robdy.github.io/csteamsacsfederationconfiguration-cmdlets/) for details.
+
+Sounds like something related to the ability to limit certain workloads (audio, video, screensharing etc.) for selected users:
+
+* Get-CsTeamsWorkLoadPolicy
+* Grant-CsTeamsWorkLoadPolicy
+* New-CsTeamsWorkLoadPolicy
+* Remove-CsTeamsWorkLoadPolicy
+* Set-CsTeamsWorkLoadPolicy
+
+Custom policy packages cmdlets (currently in [public preview](https://docs.microsoft.com/en-us/microsoftteams/manage-policy-packages#custom-policy-packages)):
+
+* New-CsCustomPolicyPackage
+* Remove-CsCustomPolicyPackage
+* Update-CsCustomPolicyPackage
+
+Teams templates-related cmdlets:
+
+* New-CsTeamTemplate
+* Remove-CsTeamTemplate
+* Update-CsTeamTemplate
+
+Learn more about Teams templates by checking [Get started with Teams templates in the admin center](https://docs.microsoft.com/en-us/MicrosoftTeams/get-started-with-teams-templates-in-the-admin-console).
+
+Cmdlets for package assignment policies (I honestly have no idea what vertical package is, do you?)
+
+* New-CsTeamsVerticalPackagePolicy
+* Remove-CsTeamsVerticalPackagePolicy
+* Set-CsTeamsVerticalPackagePolicy
+
+And for assigning package policy via group:
+
+* Grant-CsGroupPolicyPackageAssignment
+
+And these two not documented yet:
+
+* Move-CsInternalHelper
+
+Probably something around moving data from one user. I'd guess it's internal MS cmdlet.
+
+* Set-CsInternalOnlinePowerShellEndpoint
+
+Might be related to connection settings.
+
+## Dial-in conferencing
+
+Under `Get-CsOnlineDialinConferencingTenantConfiguration` ther's one new param: ThirdPartyNumberStatus. Does it mean that Microsoft is going to give us third party ACP option back?
+
+## Applications
+
+For `Get-CsTeamsAppSetupPolicy` we got `AppPresetMeetingList`. My guess - we'll be able to specify set of applications for meetings. Related with [Teams Calls & Meetings API in Graph rollout](https://techcommunity.microsoft.com/t5/microsoft-teams/the-new-microsoft-teams-calls-amp-meetings-api-in-graph-what/td-p/266938).
+
+## Feedback
+
+For `Get-CsTeamsFeedbackPolicy` we get the following params:
+
+* AllowScreenshotCollection
+* AllowEmailCollection
+* AllowLogCollection
+
+It indicates some new option to gather feedback are coming.
+
+## Meetings
+
+Under `Get-CsTeamsMeetingPolicy` we got the following new params:
+
+* AllowMeetingRegistration
+* WhoCanRegister
+
+The above are related to invite-only meetings, which were announced on Ignite. By the way, have you already checked [Microsoft Ignite 2021 Book of News](https://news.microsoft.com/ignite-march-2021-book-of-news/)?
+
+There are additional two params, which are currently not easy to guess what they do:
+
+* AllowTrackingInReport
+* AllowCarbonSummary
+
+## Messaging
+
+For `Get-CsTeamsMessagingPolicy` we got:
+
+* AllowSmartCompose
+
+It's a feature currently available for Outlook Web App, which gives us text prediction, suggesed replies [and more](https://support.microsoft.com/en-us/office/use-intelligent-technology-in-outlook-on-the-web-and-outlook-com-24b30683-8340-4b69-b8ac-4193ec528a70).
+
+* AllowFluidCollaborate
+
+It seems like Fluid framework is going to be implemented in Teams. It's currently in preview and I haven't played with that a lot, but you can [check it yourself](https://fluidpreview.office.net/).
+
+## Compliance recording
+
+We'll be able to disable audio notification about meeting being recorded (applies only to PSTN calls) by using:
+`DisableComplianceRecordingAudioNotificationForCalls` for `Set-CsTeamsComplianceRecordingPolicy`.
+
+## Skype Broadcast and Live Events
+
+New parameters related with eCDN providers for Skype for Business Broadcast and Live Events are available:
+
+* SdnProviderName
+* SdnLicenseId
+* SdnApiTemplateUrl
+* SdnApiToken
+
+for both `Get-CsBroadcastMeetingConfiguration` and `Get-CsTeamsMeetingBroadcastConfiguration`
+
+Additionally, Teams Live Events are getting `SdnAzureSubscriptionId` parameter.
