@@ -180,7 +180,7 @@ article.roll-list-item p {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
@@ -495,6 +495,13 @@ pre {
 .gatsby-highlight pre[class*="language-"].line-numbers {
   padding-left: 3.3em;
 }
+
+/* Fix long param/cmdlets names overflowing */
+code[class*="language-"],
+pre[class*="language-"] {
+  word-break: break-word;
+}
+
 /*#endregion PrismJS customization */
 
 /*#region Comments */
