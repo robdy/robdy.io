@@ -16,6 +16,7 @@ export const BlogPostTemplate = ({
   tags,
   title,
   helmet,
+  relativePath
 }) => {
   const PostContent = contentComponent || Content
 
@@ -35,6 +36,7 @@ export const BlogPostTemplate = ({
               </ul>
             </div>
           ) : null}
+          {`https://github.com/robdy/robdy.github.io/edit/src/src/pages/${relativePath}`}
           <h1 className="post-title">
             {title}
           </h1>
@@ -56,6 +58,7 @@ BlogPostTemplate.propTypes = {
   title: PropTypes.string,
   slug: PropTypes.string,
   helmet: PropTypes.object,
+  relativePath: PropTypes.string,
 }
 
 const BlogPost = ({ data }) => {
@@ -102,6 +105,7 @@ const BlogPost = ({ data }) => {
             <meta property="og:url" content={`${siteUrl}${post.fields.slug}`} />
           </Helmet>
         }
+        relativePath={post.parent.relativePath}
         tags={post.frontmatter.tags}
         title={post.frontmatter.title}
       />
@@ -121,6 +125,11 @@ export const pageQuery = graphql`
   query BlogPostByID($id: String!) {
     markdownRemark(id: { eq: $id }) {
       id
+      parent {
+        ... on File {
+          relativePath
+        }
+      }
       fields {
         slug
       }
