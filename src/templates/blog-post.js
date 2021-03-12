@@ -36,11 +36,12 @@ export const BlogPostTemplate = ({
               </ul>
             </div>
           ) : null}
-          {`https://github.com/robdy/robdy.github.io/edit/src/src/pages/${relativePath}`}
           <h1 className="post-title">
             {title}
           </h1>
-          <p className="post-subheader">By <Link className="post-subheader-link" to="/about">Robert Dyjas</Link> {date}</p>
+          <p className="post-subheader">By <Link className="post-subheader-link" to="/about">Robert Dyjas</Link> {date} &bull; <a href={`https://github.com/robdy/robdy.github.io/edit/src/src/pages/${relativePath}`} className="post-subheader-link" target="_blank" rel="nofollow noopener noreferrer">Edit this post</a>
+          </p>
+          
         </div>
         <p className="description">{description}</p>
         <PostContent content={content} />
