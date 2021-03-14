@@ -1,59 +1,59 @@
 module.exports = {
   siteMetadata: {
-    title: 'Robert Dyjas - blog',
-    description:
-      'MS Teams and SfB expert. In my free time I write code',
+    title: "Robert Dyjas - blog",
+    description: "MS Teams and SfB expert. In my free time I write code",
     siteUrl: `https://robdy.github.io`,
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
+    "gatsby-plugin-react-helmet",
     {
       // keep as first gatsby-source-filesystem plugin for gatsby image support
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
         path: `${__dirname}/static/img`,
-        name: 'uploads',
+        name: "uploads",
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
         path: `${__dirname}/src/pages`,
-        name: 'pages',
+        name: "pages",
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
         path: `${__dirname}/src/img`,
-        name: 'images',
+        name: "images",
       },
     },
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
     {
-      resolve: 'gatsby-transformer-remark',
+      resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
           {
-            resolve: 'gatsby-remark-relative-images',
+            resolve: "gatsby-remark-relative-images",
             options: {
               // name: 'uploads',
             },
           },
           {
-            resolve: 'gatsby-remark-images',
+            resolve: "gatsby-remark-images",
             options: {
               // It's important to specify the maxWidth (in pixels) of
               // the content container as this plugin uses this as the
               // base for generating different widths of each image.
-              maxWidth: 825,
+              maxWidth: 1920,
+              srcSetBreakpoints: [471, 942],
             },
           },
           {
-            resolve: 'gatsby-remark-copy-linked-files',
+            resolve: "gatsby-remark-copy-linked-files",
             options: {
-              destinationDir: 'static',
+              destinationDir: "static",
             },
           },
           "gatsby-remark-external-links",
@@ -64,7 +64,7 @@ module.exports = {
               tight: false,
               fromHeading: 1,
               toHeading: 6,
-              className: "table-of-contents"
+              className: "table-of-contents",
             },
           },
           "gatsby-remark-autolink-headers",
@@ -93,7 +93,7 @@ module.exports = {
               },
               escapeEntities: {},
             },
-          }
+          },
         ],
       },
     },
@@ -102,8 +102,8 @@ module.exports = {
       options: {
         // Exclude specific pages or groups of pages using glob parameters
         // See: https://github.com/isaacs/minimatch
-        exclude: [`/tags/*`]
-      }
+        exclude: [`/tags/*`],
+      },
     },
     {
       resolve: `gatsby-plugin-feed`,
@@ -123,15 +123,15 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.edges.map(edge => {
+              return allMarkdownRemark.edges.map((edge) => {
                 return Object.assign({}, edge.node.frontmatter, {
                   description: edge.node.frontmatter.description,
                   date: edge.node.frontmatter.date,
                   url: site.siteMetadata.siteUrl + edge.node.fields.slug,
                   guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
                   custom_elements: [{ "content:encoded": edge.node.html }],
-                })
-              })
+                });
+              });
             },
             query: `
               {
@@ -158,6 +158,7 @@ module.exports = {
           },
         ],
       },
-    },    'gatsby-plugin-netlify', // make sure to keep it last in the array
+    },
+    "gatsby-plugin-netlify", // make sure to keep it last in the array
   ],
-}
+};

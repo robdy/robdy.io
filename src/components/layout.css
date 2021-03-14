@@ -40,13 +40,14 @@
 html {
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
+  font-size: max(16px, 1.5vw);
   font-weight: 300;
   color: var(--main-text-color);
   overflow-y: scroll;
 }
 
 .container {
-  max-width: 825px;
+  max-width: 50rem;
   margin: 0 auto;
   padding: 0 2rem;
 }
@@ -72,7 +73,7 @@ html {
 }
 
 .navbar-logo {
-  width: 40px;
+  width: 3rem;
 }
 
 .navbar-title {
@@ -102,7 +103,7 @@ a.navbar-link, a.navbar-link:hover, a.navbar-link:visited  {
 }
 
 .content {
-  font-size: 1.1rem;
+  /* font-size: 1.1rem; */
 }
 /*#endregion Navbar */
 
@@ -118,9 +119,9 @@ a.navbar-link, a.navbar-link:hover, a.navbar-link:visited  {
 .bio div::selection { background: var(--go-green);}
 
 .bio-picture {
-  width: 200px;
-  border-radius: 100px;
-  border: 2px solid var(--go-green);
+    width: 12.5rem;
+    border-radius: 6.25rem;
+    border: 2px solid var(--go-green);
 }
 
 .bio-text {
