@@ -12,6 +12,8 @@ class TagRoute extends React.Component {
     const totalCount = this.props.data.allMarkdownRemark.totalCount
     const tagHeader = `${totalCount} post${totalCount === 1 ? '' : 's'
       } tagged with “${tag}”`
+    const tagDescription = this.props.data;
+    console.log(tagDescription)
 
     return (
       <Layout>
@@ -41,7 +43,7 @@ class TagRoute extends React.Component {
 export default TagRoute
 
 export const tagPageQuery = graphql`
-  query TagPage($tag: String) {
+  query TagPage($tag: String, $tagDataQuery: String) {
     site {
       siteMetadata {
         title
@@ -69,5 +71,18 @@ export const tagPageQuery = graphql`
         }
       }
     }
+    tagData: allMarkdownRemark(
+      filter: { fileAbsolutePath: {regex: $tagDataQuery}}
+    ) {
+      totalCount
+      edges {
+        node {
+          frontmatter {
+            title
+            description
+          }
+        }
+      }
+    }
   }
-`
+`;
