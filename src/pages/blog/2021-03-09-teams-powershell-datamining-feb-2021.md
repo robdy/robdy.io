@@ -75,7 +75,7 @@ For `Get-CsTeamsFeedbackPolicy` we get the following params:
 * AllowEmailCollection
 * AllowLogCollection
 
-It indicates some new option to gather feedback are coming. We can already see it in the Roadmap - [item 68880](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=68880). Message Center got its own entry **MC233962**.
+It indicates some new option to gather feedback are coming. We can already see it in the [Roadmap item 68880](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=68880). Message Center got its own entry: **MC233962**.
 
 ## Meetings
 
@@ -90,6 +90,8 @@ There are additional two params, which are currently not easy to guess what they
 
 * AllowTrackingInReport
 * AllowCarbonSummary
+
+The latter might be related with [Microsoft Sustainability Calculator](https://www.microsoft.com/en-us/sustainability/sustainability-guide/sustainability-calculator) which allows you to calculate your carbon footprint based on services you use.
 
 ## Messaging
 
