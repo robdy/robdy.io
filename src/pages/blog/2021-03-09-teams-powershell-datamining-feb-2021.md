@@ -75,7 +75,7 @@ For `Get-CsTeamsFeedbackPolicy` we get the following params:
 * AllowEmailCollection
 * AllowLogCollection
 
-It indicates some new option to gather feedback are coming.
+It indicates some new option to gather feedback are coming. We can already see it in the Roadmap - [item 68880](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=68880). Message Center got its own entry **MC233962**.
 
 ## Meetings
 
