@@ -117,6 +117,7 @@ const BlogPost = ({ data }) => {
             />
             <meta property="og:title" content={`${post.frontmatter.title}`} />
             <meta property="og:url" content={`${siteUrl}${post.fields.slug}`} />
+            <link rel="canonical" href={`${siteUrl}${post.fields.slug}`} />
           </Helmet>
         }
         relativePath={post.parent.relativePath}

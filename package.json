@@ -1,7 +1,7 @@
 {
-  "name": "robdy-github-io",
+  "name": "robdy-io",
   "description": "Robert Dyjas - blog",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "author": "Robert Dyjas",
   "dependencies": {
     "gatsby": "^3.1.1",
