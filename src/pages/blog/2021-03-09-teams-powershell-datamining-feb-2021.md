@@ -11,49 +11,50 @@ tags:
   - powershell
   - datamining
 ---
+
 ## New cmdlets
 
-Related with Azure Communication Service federation: 
+Related with Azure Communication Service federation:
 
-* Get-CsTeamsAcsFederationConfiguration
-* Set-CsTeamsAcsFederationConfiguration
+- Get-CsTeamsAcsFederationConfiguration
+- Set-CsTeamsAcsFederationConfiguration
 
-Check my [blog post](https://robdy.github.io/csteamsacsfederationconfiguration-cmdlets/) for details.
+Check my [blog post](https://robdy.io/csteamsacsfederationconfiguration-cmdlets/) for details.
 
 Next ones sound like something related to the ability to limit certain workloads (audio, video, screensharing etc.) for selected users:
 
-* Get-CsTeamsWorkLoadPolicy
-* Grant-CsTeamsWorkLoadPolicy
-* New-CsTeamsWorkLoadPolicy
-* Remove-CsTeamsWorkLoadPolicy
-* Set-CsTeamsWorkLoadPolicy
+- Get-CsTeamsWorkLoadPolicy
+- Grant-CsTeamsWorkLoadPolicy
+- New-CsTeamsWorkLoadPolicy
+- Remove-CsTeamsWorkLoadPolicy
+- Set-CsTeamsWorkLoadPolicy
 
 Custom policy packages cmdlets (currently in [public preview](https://docs.microsoft.com/en-us/microsoftteams/manage-policy-packages#custom-policy-packages)):
 
-* New-CsCustomPolicyPackage
-* Remove-CsCustomPolicyPackage
-* Update-CsCustomPolicyPackage
+- New-CsCustomPolicyPackage
+- Remove-CsCustomPolicyPackage
+- Update-CsCustomPolicyPackage
 
 Teams templates-related cmdlets:
 
-* New-CsTeamTemplate
-* Remove-CsTeamTemplate
-* Update-CsTeamTemplate
+- New-CsTeamTemplate
+- Remove-CsTeamTemplate
+- Update-CsTeamTemplate
 
 > **NOTE**: Learn more about Teams templates by checking [Get started with Teams templates in the admin center](https://docs.microsoft.com/en-us/MicrosoftTeams/get-started-with-teams-templates-in-the-admin-console).
 
 Cmdlets for package assignment policies (I honestly have no idea what vertical package is, do you?):
 
-* New-CsTeamsVerticalPackagePolicy
-* Remove-CsTeamsVerticalPackagePolicy
-* Set-CsTeamsVerticalPackagePolicy
+- New-CsTeamsVerticalPackagePolicy
+- Remove-CsTeamsVerticalPackagePolicy
+- Set-CsTeamsVerticalPackagePolicy
 
 `Grant-CsGroupPolicyPackageAssignment` will be for assigning package policy via group.
 
 And these two not documented yet:
 
-* **Move-CsInternalHelper** - probably something around moving data from one user. I'd guess it's internal MS cmdlet.
-* **Set-CsInternalOnlinePowerShellEndpoint** - might be related to connection settings.
+- **Move-CsInternalHelper** - probably something around moving data from one user. I'd guess it's internal MS cmdlet.
+- **Set-CsInternalOnlinePowerShellEndpoint** - might be related to connection settings.
 
 ## New params for cmdlets
 
@@ -71,9 +72,9 @@ For `Get-CsTeamsAppSetupPolicy` we got `AppPresetMeetingList`. My guess - we'll 
 
 For `Get-CsTeamsFeedbackPolicy` we get the following params:
 
-* AllowScreenshotCollection
-* AllowEmailCollection
-* AllowLogCollection
+- AllowScreenshotCollection
+- AllowEmailCollection
+- AllowLogCollection
 
 It indicates some new option to gather feedback are coming. We can already see it in the [Roadmap item 68880](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=68880). Message Center got its own entry: **MC233962**.
 
@@ -81,15 +82,15 @@ It indicates some new option to gather feedback are coming. We can already see i
 
 Under `Get-CsTeamsMeetingPolicy` we got the following new params:
 
-* AllowMeetingRegistration
-* WhoCanRegister
+- AllowMeetingRegistration
+- WhoCanRegister
 
 The above are related to invite-only meetings, which were announced on Ignite. By the way, have you already checked [Microsoft Ignite 2021 Book of News](https://news.microsoft.com/ignite-march-2021-book-of-news/)?
 
 There are additional two params, which are currently not easy to guess what they do:
 
-* AllowTrackingInReport
-* AllowCarbonSummary
+- AllowTrackingInReport
+- AllowCarbonSummary
 
 The latter might be related with [Microsoft Sustainability Calculator](https://www.microsoft.com/en-us/sustainability/sustainability-guide/sustainability-calculator) which allows you to calculate your carbon footprint based on services you use.
 
@@ -110,10 +111,10 @@ We'll be able to disable audio notification about meeting being recorded (applie
 
 New parameters related with eCDN providers for Skype for Business Broadcast and Live Events are available:
 
-* SdnProviderName
-* SdnLicenseId
-* SdnApiTemplateUrl
-* SdnApiToken
+- SdnProviderName
+- SdnLicenseId
+- SdnApiTemplateUrl
+- SdnApiToken
 
 for both `Get-CsBroadcastMeetingConfiguration` and `Get-CsTeamsMeetingBroadcastConfiguration`
 

@@ -19,7 +19,7 @@
 # Production context: All deploys to the main
 # repository branch will inherit these settings.
 [context.production]
-  command = "npm run build && chmod +x deploy.sh && ./deploy.sh"
+  command = "npm run build"
 
 
 # Deploy Preview context: All Deploy Previews

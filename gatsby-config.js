@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: "Robert Dyjas - blog",
     description: "MS Teams and SfB expert. In my free time I write code",
-    siteUrl: `https://robdy.github.io`,
+    siteUrl: `https://robdy.io`,
   },
   plugins: [
     "gatsby-plugin-react-helmet",
