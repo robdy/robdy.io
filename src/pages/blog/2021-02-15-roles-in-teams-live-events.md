@@ -23,6 +23,8 @@ By default, organizer has producer rights (unless they explicitly downgrade it).
 
 People who start/stop the meeting and manage what's visible to attendees. It's important to have at least two producers in case one of them is, for some reason (network issues, doorbell ringing), unable to operate the content. In general, try to avoid being both producer and presenter in the same time due to high system resources usage.
 
+> **TIP**: If you're a producer but you use Full HD or lower resolution screen, you can use **Ctrl** + **-** to decrease zoom. Otherwise, you might miss some parts of the producer tools.
+
 ## Presenters
 
 They can:
@@ -40,4 +42,28 @@ You won't find that role in Live Event configuration wizard. However, based on m
 * Reply publicly via moderator announcement
 * During Q&A session read the most voted questions to the main presenter
 
-\########### TO BE VERIFIED IF MODERATORS AND PRESENTERS CAN BE ADDED AD-HOC AND SEE Q&A #######
+The role we assign to that person in the wizard will be Presenter, but in fact, they are not going to present anything. They'll only work behind the scene.
+
+## Ad-hoc role assignment
+
+There are some cases when we need to add presenter/producer last-minute. For presenters, it's quite straightforward - you can go to 'People' tab and search for someone **from our organization**:
+
+![Adding presenters from People tab](../../img/20210402-134449-o6ewdowxfi.png "Adding presenters from People tab")
+
+> **NOTE**: There's currently no way to add external presenters from 'People' tab. You can only add people in your directory (including guests). For externals, you need to edit calendar invite from Teams client.
+
+All people invited from 'that tab join the meeting as presenters. If we want them to be added as producers, we need to edit the event in calendar. There might be slight delay with assigning that role.
+
+> **TIP**: If we have someone from external organization in the meeting, they can invite others from their organization using 'People' tab.
+
+In some cases, newly added producers might not be able to join the meeting crew, but instead they'll be added as attendees. You can enforce joining the meeting crew by using 'Ask to join':
+
+![Using Ask to join to add someone to meeting crew](../../img/20210402-135258-rwrgxt8nql.png "Using Ask to join to add someone to meeting crew")
+
+
+## Limitations
+
+## User experience
+##### ADD some screenshots 
+
+###### Explain content queue
