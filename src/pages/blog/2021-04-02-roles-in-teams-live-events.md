@@ -72,7 +72,7 @@ If we want them to be added as producers, we need to edit the event in calendar.
 
 > **TIP**: If we have someone from external organization in the meeting, they can invite others from their organization using *People* tab.
 
-In some cases, newly added producers might not be able to join the meeting crew, but instead they'll be added as attendees. You can enforce joining the meeting crew by using 'Ask to join':
+In some cases, newly added producers might not be able to join the meeting crew, but instead they'll be added as attendees. You can enforce joining the meeting crew by using *Ask to join*:
 
 ![Using Ask to join to add someone to meeting crew](../../img/20210402-135258-rwrgxt8nql.png "Using Ask to join to add someone to meeting crew")
 
