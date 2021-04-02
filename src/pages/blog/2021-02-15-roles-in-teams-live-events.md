@@ -1,10 +1,13 @@
 ---
 templateKey: blog-post
 title: Roles in Teams Live Events
-date: 2021-02-15T20:48:18.190Z
-description: This post extends what you can find in the documentation with the
+date: 2021-04-02T18:23:00.000Z
+description: This post extends official docs about Live Event roles with the
   tips I learned by organizing events myself.
 featuredpost: false
+tags:
+  - teams
+  - live event
 ---
 Full description of the available roles can be found [in the docs](https://support.microsoft.com/en-us/office/get-started-with-microsoft-teams-live-events-d077fec2-a058-483e-9ab5-1494afda578a#bkmk_roles). Here I'm highlighting most important informations and tips based on my experience.
 
@@ -23,7 +26,11 @@ By default, organizer has producer rights (unless they explicitly downgrade it).
 
 People who start/stop the meeting and manage what's visible to attendees. It's important to have at least two producers in case one of them is, for some reason (network issues, doorbell ringing), unable to operate the content. In general, try to avoid being both producer and presenter in the same time due to high system resources usage.
 
-> **TIP**: If you're a producer but you use Full HD or lower resolution screen, you can use **Ctrl** + **-** to decrease zoom. Otherwise, you might miss some parts of the producer tools.
+> **TIP**: If you're a producer but you use Full HD or lower resolution screen, you can use **Ctrl** + **\-** to decrease zoom. Otherwise, you might miss some parts of the producer tools.
+
+### Interface
+
+![Producer's interface](../../img/20210402-142114-000022.png "Producer's interface")
 
 ## Presenters
 
@@ -32,6 +39,10 @@ They can:
 * Present their desktop/application
 * Share voice and video (including dialing-in via PSTN conferencing feature, if available)
 * Manage Q&A section
+
+### Interface
+
+![Presenter's interface](../../img/20210402-141532-tsl2vu5pde.png "Presenter's interface")
 
 ## Moderator
 
@@ -60,10 +71,6 @@ In some cases, newly added producers might not be able to join the meeting crew,
 
 ![Using Ask to join to add someone to meeting crew](../../img/20210402-135258-rwrgxt8nql.png "Using Ask to join to add someone to meeting crew")
 
+## Summary
 
-## Limitations
-
-## User experience
-##### ADD some screenshots 
-
-###### Explain content queue
+Having proper people with proper responsibilities is key factor of life event's success. By proper role management, we can make sure that our events go smoothly and without interruptions.
