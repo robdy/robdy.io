@@ -16,21 +16,23 @@ Full description of the available roles can be found [in the docs](https://suppo
 The person who schedules Live Event. He/she is the only one who can:
 
 * Change meeting options (e.g. add Q&A, edit recording/captions settings)
-* Add more **producers** (presenters can be added ad-hoc)
-* Downgrade permissions from producer to presenter (scroll down to tips to see why it's important)
+* Add more **producers** (presenters [can be added ad-hoc](#ad-hoc-role-assignment))
+* Downgrade permissions from producer to presenter (for better performance, see producer's description)
 * Change Live Event permissions (e.g. change org-wide event to public event)
 
 By default, organizer has producer rights (unless they explicitly downgrade it).
 
 ## Producers
 
-People who start/stop the meeting and manage what's visible to attendees. It's important to have at least two producers in case one of them is, for some reason (network issues, doorbell ringing), unable to operate the content. In general, try to avoid being both producer and presenter in the same time due to high system resources usage.
+People who start/stop the meeting and manage what's visible to attendees. It's important to have **at least two producers** in case one of them is, for some reason (network issues, doorbell ringing), unable to operate the content.
 
-> **TIP**: If you're a producer but you use Full HD or lower resolution screen, you can use **Ctrl** + **\-** to decrease zoom. Otherwise, you might miss some parts of the producer tools.
+In general, **try to avoid being both producer and presenter** in the same time due to high system resources usage.
+
+> **TIP**: If you're a producer, but you use Full HD or lower resolution screen, you can use **Ctrl** + **\-** to decrease zoom. Otherwise, you might miss some parts of the producer tools.
 
 ### Interface
 
-![Producer's interface](../../img/20210402-142114-000022.png "Producer's interface")
+![Producer's interface](../../img/20210402-141532-tsl2vu5pde.png "Producer's interface")
 
 ## Presenters
 
@@ -42,7 +44,8 @@ They can:
 
 ### Interface
 
-![Presenter's interface](../../img/20210402-141532-tsl2vu5pde.png "Presenter's interface")
+![Presenter's interface](../../img/20210402-142114-000022.png "Presenter's interface")
+
 
 ## Moderator
 
@@ -63,7 +66,9 @@ There are some cases when we need to add presenter/producer last-minute. For pre
 
 > **NOTE**: There's currently no way to add external presenters from 'People' tab. You can only add people in your directory (including guests). For externals, you need to edit calendar invite from Teams client.
 
-All people invited from 'that tab join the meeting as presenters. If we want them to be added as producers, we need to edit the event in calendar. There might be slight delay with assigning that role.
+All people invited from that tab join the meeting as presenters.
+
+If we want them to be added as producers, we need to edit the event in calendar. There might be slight delay with assigning that role.
 
 > **TIP**: If we have someone from external organization in the meeting, they can invite others from their organization using 'People' tab.
 
