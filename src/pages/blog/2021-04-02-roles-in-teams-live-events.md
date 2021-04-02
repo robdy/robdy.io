@@ -60,17 +60,17 @@ The role we assign to that person in the wizard will be Presenter, but in fact, 
 
 ## Ad-hoc role assignment
 
-There are some cases when we need to add presenter/producer last-minute. For presenters, it's quite straightforward - you can go to 'People' tab and search for someone **from our organization**:
+There are some cases when we need to add presenter/producer last-minute. For presenters, it's quite straightforward - you can go to *People* tab and search for someone **from our organization**:
 
 ![Adding presenters from People tab](../../img/20210402-134449-o6ewdowxfi.png "Adding presenters from People tab")
 
-> **NOTE**: There's currently no way to add external presenters from 'People' tab. You can only add people in your directory (including guests). For externals, you need to edit calendar invite from Teams client.
+> **NOTE**: There's currently no way to add external presenters from *People* tab. You can only add people in your directory (including guests). For externals, you need to edit calendar invite from Teams client.
 
 All people invited from that tab join the meeting as presenters.
 
 If we want them to be added as producers, we need to edit the event in calendar. There might be slight delay with assigning that role.
 
-> **TIP**: If we have someone from external organization in the meeting, they can invite others from their organization using 'People' tab.
+> **TIP**: If we have someone from external organization in the meeting, they can invite others from their organization using *People* tab.
 
 In some cases, newly added producers might not be able to join the meeting crew, but instead they'll be added as attendees. You can enforce joining the meeting crew by using 'Ask to join':
 
