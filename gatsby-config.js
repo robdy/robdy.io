@@ -102,7 +102,7 @@ module.exports = {
       options: {
         // Exclude specific pages or groups of pages using glob parameters
         // See: https://github.com/isaacs/minimatch
-        exclude: [`/tags/*`],
+        exclude: [`/tags/*`, `/tags/`],
       },
     },
     {
