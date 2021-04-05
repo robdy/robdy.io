@@ -8,7 +8,7 @@ import Content, { HTMLContent } from "../components/Content";
 import Comments from "../components/Comments";
 import useSiteMetadata from "../components/SiteMetadata";
 
-export const BlogPostTemplate = ({
+const BlogPostTemplate = ({
   content,
   contentComponent,
   date,
@@ -19,6 +19,25 @@ export const BlogPostTemplate = ({
   relativePath,
 }) => {
   const PostContent = contentComponent || Content;
+  const units = {
+    year: 24 * 60 * 60 * 1000 * 365,
+    month: (24 * 60 * 60 * 1000 * 365) / 12,
+    week: 24 * 60 * 60 * 1000 * 7,
+    day: 24 * 60 * 60 * 1000,
+    hour: 60 * 60 * 1000,
+    minute: 60 * 1000,
+    second: 1000,
+  };
+  const currentTimeStamp = new Date().getTime();
+  const elapsed = new Date(date) - currentTimeStamp;
+  const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
+  const relativeDate = (() => {
+    for (let u in units) {
+      if (Math.abs(elapsed) / units[u] >= 1) {
+        return rtf.format(Math.round(elapsed / units[u]), u);
+      }
+    }
+  })();
 
   return (
     <section className="section">
@@ -42,7 +61,7 @@ export const BlogPostTemplate = ({
             <Link className="post-subheader-link" to="/about">
               Robert Dyjas
             </Link>{" "}
-            {date}
+            {relativeDate}
             &nbsp;&bull;&nbsp;
             <a
               href={`https://github.com/robdy/robdy.github.io/edit/src/src/pages/${relativePath}`}
@@ -77,32 +96,12 @@ const BlogPost = ({ data }) => {
   const { markdownRemark: post } = data;
   const { siteUrl } = useSiteMetadata();
 
-  const units = {
-    year: 24 * 60 * 60 * 1000 * 365,
-    month: (24 * 60 * 60 * 1000 * 365) / 12,
-    week: 24 * 60 * 60 * 1000 * 7,
-    day: 24 * 60 * 60 * 1000,
-    hour: 60 * 60 * 1000,
-    minute: 60 * 1000,
-    second: 1000,
-  };
-  const currentTimeStamp = new Date().getTime();
-  const elapsed = new Date(post.frontmatter.date) - currentTimeStamp;
-  const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
-  const relativeDate = (() => {
-    for (let u in units) {
-      if (Math.abs(elapsed) / units[u] >= 1) {
-        return rtf.format(Math.round(elapsed / units[u]), u);
-      }
-    }
-  })();
-
   return (
     <Layout>
       <BlogPostTemplate
         content={post.html}
         contentComponent={HTMLContent}
-        date={relativeDate}
+        date={new Date(post.frontmatter.date)}
         description={post.frontmatter.description}
         helmet={
           <Helmet titleTemplate="%s | Robert Dyjas">
@@ -117,6 +116,10 @@ const BlogPost = ({ data }) => {
             />
             <meta property="og:title" content={`${post.frontmatter.title}`} />
             <meta property="og:url" content={`${siteUrl}${post.fields.slug}`} />
+            <meta
+              property="article:published_time"
+              content={`${post.frontmatter.date}`}
+            />
             <link rel="canonical" href={`${siteUrl}${post.fields.slug}`} />
           </Helmet>
         }
@@ -150,7 +153,7 @@ export const pageQuery = graphql`
       }
       html
       frontmatter {
-        date(formatString: "YYYY-MM-DD HH:mm")
+        date
         title
         description
         tags
