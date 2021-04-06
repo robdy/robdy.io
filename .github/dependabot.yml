@@ -5,8 +5,3 @@ updates:
   schedule:
     interval: weekly
   open-pull-requests-limit: 10
-  ignore:
-  # Ignore webpack updates
-  - dependency-name: "webpack"
-    # Gatsby not yet compatible with webpack v5
-    versions: ["5.x"]
