@@ -18,7 +18,7 @@ class TagRoute extends React.Component {
       <Layout>
         <section className="section">
           <Helmet title={`${tag} | ${title}`}>
-            <meta name="robots" content="noindex" />
+            {/* <meta name="robots" content="noindex" /> */}
           </Helmet>
           <div className="container content">
             <div className="">
