@@ -30,9 +30,13 @@ By the way, have you heard that *Organizer* role will soon be assignable? Micros
 
 ## Updates
 
-`Get-CsTeamsUpdateManagementPolicy` has now `AllowPublicPreview`, by default set to `FollowOfficePreview`. It might mean that Microsoft is going to automatically set public preview release to everyone, who is set to [get targeted releases for Microsoft 365 Apps for Enterprise](https://searchwindowsserver.techtarget.com/answer/How-do-I-get-access-to-Office-365-preview-versions).
-It might explain, why the option to use public preview disappeared from user interface today:
+`Get-CsTeamsUpdateManagementPolicy` has now `AllowPublicPreview`, by default set to `FollowOfficePreview`.
+
+It might mean that Microsoft is going to automatically set public preview release to everyone, who is set to [get targeted releases for Microsoft 365 Apps for Enterprise](https://searchwindowsserver.techtarget.com/answer/How-do-I-get-access-to-Office-365-preview-versions).
+It might also explain, why the option to use public preview disappeared from user interface today:
 
 ![No public preview option under About in Teams client](../../img/20210406-093501-js7zbuktx4.png "No public preview option under About in Teams client")
 
-As for the previous ones, there's no corresponding param for `Set-CsTeamsUpdateManagementPolicy` cmdlet. You can read more about these params in [my article about CsTeamsUpdateManagementPolicy cmdlets](https://robdy.io/csteamsupdatemanagementpolicy-cmdlets/). As for now, [they're all undocumented in official repository](https://github.com/MicrosoftDocs/office-docs-powershell/issues/7186).
+As for the previous ones, there's no corresponding param for `Set-CsTeamsUpdateManagementPolicy` cmdlet.
+
+You can read more about these cmdlets in [my article about CsTeamsUpdateManagementPolicy cmdlets](https://robdy.io/csteamsupdatemanagementpolicy-cmdlets/). As for now, [they're all undocumented in official repository](https://github.com/MicrosoftDocs/office-docs-powershell/issues/7186).
