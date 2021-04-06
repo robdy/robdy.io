@@ -14,7 +14,7 @@ tags:
 
 `Get-CsTeamsMeetingBroadcastConfiguration` has now another property: `SdnRuntimeConfiguration`. There's no corresponding parameter for `Set-` cmdlet, so it's currently not clear what values will be accepted.
 
-Related with [SDN/eCDN for Live Events](https://docs.microsoft.com/en-us/microsoftteams/teams-live-events/set-up-for-teams-live-events#step-4-set-up-a-video-distribution-solution-for-live-events-in-teams)
+Related with [SDN/eCDN for Live Events](https://docs.microsoft.com/en-us/microsoftteams/teams-live-events/set-up-for-teams-live-events#step-4-set-up-a-video-distribution-solution-for-live-events-in-teams).
 
 ## Messaging
 
