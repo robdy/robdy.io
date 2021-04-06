@@ -134,7 +134,6 @@ const TemplateWrapper = ({ children }) => {
           content={`${siteUrl}${withPrefix("/")}img/og-image.png`}
         />
         <meta property="og:description" content={description} />
-        <link rel="canonical" href={siteUrl} />
       </Helmet>
       <Navbar />
       {children}
