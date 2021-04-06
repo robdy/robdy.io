@@ -312,6 +312,11 @@ blockquote {
 blockquote p {
   margin-top: 0px;
 }
+
+strong {
+  font-weight: bold;
+}
+
 /*#endregion Blog entry content */
 
 /*#region Prism */
