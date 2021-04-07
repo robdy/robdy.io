@@ -1,5 +1,6 @@
 import React from "react";
 import Helmet from "react-helmet";
+import { kebabCase } from "lodash";
 import { Link, graphql } from "gatsby";
 import Layout from "../components/Layout";
 import PostTile from "../components/PostTile";
@@ -13,12 +14,15 @@ class TagRoute extends React.Component {
     const tagHeader = `${totalCount} post${
       totalCount === 1 ? "" : "s"
     } tagged with “${tag}”`;
+    const tagPath = kebabCase(tag);
+    const siteUrl = this.props.data.site.siteMetadata.siteUrl;
 
     return (
       <Layout>
         <section className="section">
           <Helmet title={`${tag} | ${title}`}>
             {/* <meta name="robots" content="noindex" /> */}
+            <link rel="canonical" href={`${siteUrl}/tags/${tagPath}/`} />
           </Helmet>
           <div className="container content">
             <div className="">
@@ -42,6 +46,7 @@ export const tagPageQuery = graphql`
   query TagPage($tag: String) {
     site {
       siteMetadata {
+        siteUrl
         title
       }
     }
