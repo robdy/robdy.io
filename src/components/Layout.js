@@ -138,7 +138,7 @@ const TemplateWrapper = ({ children }) => {
           async
           defer
           data-domain="robdy.io"
-          src="https://plausible.io/js/plausible.js"
+          src="https://count.robdy.io/js/index.js"
         ></script>
       </Helmet>
       <Navbar />
