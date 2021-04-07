@@ -32,7 +32,7 @@ export default class BlogIndexPage extends React.Component {
               Microsoft 365, as well as notes from my journey to learn Node.js.
               <ul className="bio-links flex">
                 <li>
-                  <Link to="/about">
+                  <Link to="/about/">
                     <img
                       src={userTie}
                       alt="User icon"
