@@ -16,12 +16,12 @@ const Navbar = class extends React.Component {
         </Link>
         <ul className="navbar-links">
           <li className="navbar-item">
-            <Link className="navbar-link" to="/all">
+            <Link className="navbar-link" to="/all/">
               <img src={thList} alt="List icon" className="navbar-icon"></img> All posts
             </Link>
           </li>
           <li className="navbar-item">
-            <Link className="navbar-link" to="/about">
+            <Link className="navbar-link" to="/about/">
               <img src={userTie} alt="User icon" className="navbar-icon"></img>  About
             </Link>
           </li>
