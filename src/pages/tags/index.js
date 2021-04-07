@@ -8,7 +8,7 @@ const TagsPage = ({
   data: {
     allMarkdownRemark: { group },
     site: {
-      siteMetadata: { title },
+      siteMetadata: { title, siteUrl },
     },
   },
 }) => (
@@ -16,6 +16,7 @@ const TagsPage = ({
     <section className="section">
       <Helmet title={`Tags | ${title}`}>
         {/* <meta name="robots" content="noindex" /> */}
+        <link rel="canonical" href={`${siteUrl}/tags/`} />
       </Helmet>
       <div className="container content">
         <div className="columns">
@@ -47,6 +48,7 @@ export const tagPageQuery = graphql`
     site {
       siteMetadata {
         title
+        siteUrl
       }
     }
     allMarkdownRemark(limit: 1000) {
