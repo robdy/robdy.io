@@ -8,7 +8,7 @@ export default class BlogIndexPage extends React.Component {
     return (
       <Layout>
         <Helmet>
-          <link rel="canonical" href="https://robdy.io/all" />
+          <link rel="canonical" href="https://robdy.io/all/" />
         </Helmet>
         <div className="container">
           <h1 className="page-header">All posts</h1>
