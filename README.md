@@ -1,4 +1,4 @@
-![Blog's image](static/img/og-image.png)
+[![Blog's image](static/img/og-image.png)](https://robdy.io)
 
 ## 👋 Welcome to my blog
 
