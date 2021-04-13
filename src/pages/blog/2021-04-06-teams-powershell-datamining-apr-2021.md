@@ -37,6 +37,8 @@ It might also explain, why the option to use public preview disappeared from use
 
 ![No public preview option under About in Teams client](../../img/20210406-093501-js7zbuktx4.png "No public preview option under About in Teams client")
 
+> **UPDATE**: Public preview option is back in Teams client.
+
 As for the previous ones, there's no corresponding param for `Set-CsTeamsUpdateManagementPolicy` cmdlet.
 
 You can read more about these cmdlets in [my article about CsTeamsUpdateManagementPolicy cmdlets](https://robdy.io/csteamsupdatemanagementpolicy-cmdlets/). As for now, [they're all undocumented in official repository](https://github.com/MicrosoftDocs/office-docs-powershell/issues/7186).
