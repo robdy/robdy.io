@@ -291,7 +291,7 @@ GreetingsSettingAuthorizedUsers : {}
 You now have a working application - take a moment to do your happy dance 🎉. Once done, you can think about adding more functionalities:
 
 * Call queue members (so someone receives the calls)
-* Telephone number so clients can call it (remember to assign Virtual Phone System license, unless you already have [group-based licensing](https://adamtheautomator.com/group-based-licensing-office-365/) doing that for you)
+* Telephone number so clients can call it. Remember to assign Virtual Phone System license, unless you already have [group-based licensing](https://adamtheautomator.com/group-based-licensing-office-365/) doing that for you.
 * Out of hours and vacation workflows
 * Greeting
 * And many more
