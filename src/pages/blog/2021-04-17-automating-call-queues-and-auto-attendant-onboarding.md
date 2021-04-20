@@ -1,6 +1,6 @@
 ---
 templateKey: blog-post
-title: Automating Call Queues and Auto Attendant onboarding
+title: Automating Call Queue and Auto Attendant onboarding
 date: 2021-04-17T18:08:20.654Z
 description: One of the most complex activities for Teams admins is creating
   call queues and auto attendants. You don't create them every day, but when you
