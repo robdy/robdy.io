@@ -5,6 +5,7 @@ date: 2021-04-12T06:52:06.031Z
 description: Org-wide backgrounds for Teams appeared in Microsoft 365 Roadmap.
   Here's how to get them today with no additional license.
 featuredpost: false
+featuredimage: ../../img/20210412-092312-fmay6h1it3.png
 tags:
   - teams
   - powershell
