@@ -1,26 +1,82 @@
 ---
 templateKey: blog-post
 title: Signing script with new certificate
-date: 2021-04-15T08:21:31.832Z
-description: How to sign the scripts (or other files) in bulk while switching to
-  the new certificate.
+date: 2021-06-02T07:43:51.711Z
+description: How to sign the scripts in bulk while switching to the new certificate.
 featuredpost: false
+tags:
+  - powershell
+  - snippet
+  - certificate
 ---
 Intro
 
-## Getting the certificate
+## Prerequisites
+
+* Code signing certificate generated
+* Code signing certificate trusted
+* PowerShell 5.1 or higher
 
 ## Signing scripts with the new certificate
 
+We'll be using [`Set-AuthenticodeSignature`](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-authenticodesignature?view=powershell-7.1) cmdlet to sign the files.
+
+1. First, we go to the folder containing the files we're going to sign:
+
+   ```powershell
+   Set-Location 'C:\scripts\src\'
+   ```
+2. We got all the files we'd like to sign by using filtering. Note that we include only files with the correct signature. We don't want to sign all the files blindly.
+
+   ```powershell
+   # Get all the files which are properly signed
+   $signed = Get-ChildItem -filter *.ps1 -Recurse | 
+     Get-AuthenticodeSignature | Where-Object status -eq 'valid'
+   ```
+3. To sign files we need to select a certificate.
+
+   In my case, all the code signing certificates are in *Trusted Root Certification Authorities* store. I want to get the one with the latest expiration time.
+
+   ```powershell
+   $cert = Get-ChildItem Cert:\CurrentUser\Root -CodeSigningCert |
+     Sort-Object notafter -Descending | Select-Object -First 1
+   ```
+4. Last, but not least - sign the files.
+
+   ```powershell
+   Set-AuthenticodeSignature -FilePath $signed.path -Certificate $cert
+   ```
+
+   Note that we're providing an array of paths for `-FilePath`. We can do that only because the `-FilePath `param accepts an array of strings, according to [the cmdlet documentation](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-authenticodesignature?view=powershell-7.1).
+
+   In the screenshot below `[]` means an array of preceding objects so `String[]` means an array of String type objects:
+
+   ![FilePath parameter information in the docs](../../img/20210602-104024-rv4fy8oroj.png "FilePath parameter information in the docs")
+
+## The entire script
+
+Let's put it all together:
+
 ```powershell
-$signed = Get-ChildItem -filter *.ps1 -Recurse | Get-AuthenticodeSignature | Where-Object status -eq 'valid'
-Set-AuthenticodeSignature -FilePath $signed.path -Certificate (Get-ChildItem Cert:\CurrentUser\Root -CodeSigningCert | Sort-Object notafter -Descending | Select-Object -First 1)
+# Go to the folder containing the certificates
+Set-Location 'C:\scripts\src\'
+
+# Get all the files which are properly signed
+$signed = Get-ChildItem -filter *.ps1 -Recurse |
+  Get-AuthenticodeSignature | Where-Object status -eq 'valid'
+
+# Get the latest certificate
+$cert = Get-ChildItem Cert:\CurrentUser\Root -CodeSigningCert |
+ Sort-Object notafter -Descending | Select-Object -First 1
+
+# Sign the files
+Set-AuthenticodeSignature -FilePath $signed.path -Certificate $cert
 ```
 
-## Verifying the signature
+## More resources
 
-To include:
+If you'd like to learn more, check the articles below from [AdamTheAutomator.com](https://adamtheautomator.com):
 
-TimeStampServer - for 
-https://adamtheautomator.com/how-to-sign-powershell-script/
-https://adamtheautomator.com/new-selfsignedcertificate/
+[New-SelfSignedCertificate: Creating Certificates with PowerShell](https://adamtheautomator.com/new-selfsignedcertificate/) - you can learn how to generate the self-signed certificate. You can use the certificate for signing your scripts. Hint: search for `CodeSigningCert`.
+
+[How to Sign a PowerShell Script (And Run It)](https://adamtheautomator.com/how-to-sign-powershell-script/) - you will find out how to sign the scripts and then verify the signature. As a bonus, you'll learn about the timestamp server. If you use it, you won't need to sign the scripts when your certificate expires. That means you won't need my article again 
