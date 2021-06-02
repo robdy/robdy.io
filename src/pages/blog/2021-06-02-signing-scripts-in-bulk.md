@@ -9,9 +9,9 @@ tags:
   - snippet
   - certificate
 ---
-Have you ever wondered what you should do if the certificate you use for code signing is going to expire? Certainly, you don't want your code to have an invalid signature.
+Have you ever wondered what you should do when the certificate you use for code signing is going to expire? Certainly, you don't want your code to have an invalid signature. It might cause a bad surprise when you notice all your scripts stopped working suddenly.
 
-You got the new certificate. Now you can go through the files one by one and sign them. But how to set the signature for all files at once? Let's create the script!
+You've prepared and got the new certificate. Now you can go through the files one by one and sign them. But how to set the signature for all files at once? Let's create the script!
 
 ## Prerequisites
 
@@ -28,16 +28,19 @@ We'll be using [`Set-AuthenticodeSignature`](https://docs.microsoft.com/en-us/po
    ```powershell
    Set-Location 'C:\scripts\src\'
    ```
-2. We got all the files we'd like to sign by using filtering. Note that we include only files with the correct signature. We don't want to sign all the files blindly.
+2. We got all the files we'd like to sign.
+
+    The script below uses `-Filter` to get only PowerShell script. The results are then piped to `Where-Object` to only include files with the correct signature.
+
+    We don't want to sign all the files blindly. Most importantly, we don't want to sign scripts that have the incorrect signature to be re-signed and considered valid.
 
    ```powershell
-   # Get all the files which are properly signed
    $signed = Get-ChildItem -filter *.ps1 -Recurse | 
      Get-AuthenticodeSignature | Where-Object status -eq 'valid'
    ```
 3. To sign files we need to select a certificate.
 
-   In my case, all the code signing certificates are in *Trusted Root Certification Authorities* store. I want to get the one with the latest expiration time.
+   In my case, all the code signing certificates are in **Trusted Root Certification Authorities** store. I want to get the one with the latest expiration time.
 
    ```powershell
    $cert = Get-ChildItem Cert:\CurrentUser\Root -CodeSigningCert |
@@ -51,7 +54,7 @@ We'll be using [`Set-AuthenticodeSignature`](https://docs.microsoft.com/en-us/po
 
    Note that we're providing an array of paths for `-FilePath`. We can do that only because the `-FilePath `param accepts an array of strings, according to [the cmdlet documentation](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-authenticodesignature?view=powershell-7.1).
 
-   In the screenshot below `[]` means an array of preceding objects so `String[]` means an array of String type objects:
+   In the screenshot below (which comes from the `Set-AuthenticodeSignature` documentation) `[]` means an array of preceding objects so `String[]` means an array of String type objects:
 
    ![FilePath parameter information in the docs](../../img/20210602-104024-rv4fy8oroj.png "FilePath parameter information in the docs")
 
