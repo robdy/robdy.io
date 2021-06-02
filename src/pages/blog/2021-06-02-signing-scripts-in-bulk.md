@@ -81,4 +81,4 @@ If you'd like to learn more, check the articles below from [AdamTheAutomator.com
 
 [New-SelfSignedCertificate: Creating Certificates with PowerShell](https://adamtheautomator.com/new-selfsignedcertificate/) - you can learn how to generate the self-signed certificate. You can use the certificate for signing your scripts. Hint: search for `CodeSigningCert`.
 
-[How to Sign a PowerShell Script (And Run It)](https://adamtheautomator.com/how-to-sign-powershell-script/) - you will find out how to sign the scripts and then verify the signature. As a bonus, you'll learn about the timestamp server. If you use it, you won't need to sign the scripts when your certificate expires. That means you won't need my article again 
+[How to Sign a PowerShell Script (And Run It)](https://adamtheautomator.com/how-to-sign-powershell-script/) - you will find out how to sign the scripts and then verify the signature. As a bonus, you'll learn about the timestamp server. If you use it, you won't need to sign the scripts when your certificate expires. That means you won't need my article again 🤭.
