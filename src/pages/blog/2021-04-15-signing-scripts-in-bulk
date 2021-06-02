@@ -1,6 +1,6 @@
 ---
 templateKey: blog-post
-title: Signing script with new certificate
+title: Signing scripts in bulk
 date: 2021-06-02T07:43:51.711Z
 description: How to sign the scripts in bulk while switching to the new certificate.
 featuredpost: false
