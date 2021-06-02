@@ -9,7 +9,9 @@ tags:
   - snippet
   - certificate
 ---
-Intro
+Have you ever wondered what you should do if the certificate you use for code signing is going to expire? Certainly, you don't want your code to have an invalid signature.
+
+You got the new certificate. Now you can go through the files one by one and sign them. But how to set the signature for all files at once? Let's create the script!
 
 ## Prerequisites
 
