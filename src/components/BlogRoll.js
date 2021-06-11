@@ -7,13 +7,23 @@ class BlogRoll extends React.Component {
   render() {
     const { data } = this.props
     const { edges: posts } = data.allMarkdownRemark
+    const { edges: guestPosts } = data.allFeedAdamTheAutomator.edges
+    const localAndGuestPosts = posts.concat(guestPosts)
+    localAndGuestPosts.sort(
+      (firstItem, secondItem) =>
+        new Date(
+          secondItem.node?.frontmatter?.date || secondItem.node?.isoDate
+        ) -
+        new Date(firstItem.node?.frontmatter?.date || firstItem.node?.isoDate)
+    )
+    console.log(localAndGuestPosts)
 
     return (
       <div className="columns is-multiline">
-        {posts &&
-          posts.map(({ node: post }) => (
-            <PostTile postData={post} />
-          ))}
+        {localAndGuestPosts &&
+          localAndGuestPosts.map(({ node: post }) =>
+            post.fields.slug ? <PostTile postData={post} /> : null
+          )}
       </div>
     )
   }
@@ -42,12 +52,23 @@ export default () => (
                 slug
               }
               frontmatter {
+                date
                 title
                 templateKey
                 featuredpost
                 description
                 tags
               }
+            }
+          }
+        }
+        allFeedAdamTheAutomator {
+          edges {
+            node {
+              link
+              isoDate
+              title
+              id
             }
           }
         }
