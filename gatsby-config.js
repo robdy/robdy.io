@@ -108,7 +108,7 @@ module.exports = {
     {
       resolve: `gatsby-source-rss-feed`,
       options: {
-        url: `https://adamtheautomator.com/author/arman-castillote/feed`,
+        url: `https://adamtheautomator.com/author/robert-dyjas/feed`,
         name: `AdamTheAutomator`,
       },
     },

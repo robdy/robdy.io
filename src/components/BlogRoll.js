@@ -2,27 +2,31 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql, StaticQuery } from 'gatsby'
 import PostTile from '../components/PostTile'
+import GuestPostTile from '../components/GuestPostTile'
 
 class BlogRoll extends React.Component {
   render() {
     const { data } = this.props
-    const { edges: posts } = data.allMarkdownRemark
-    const { edges: guestPosts } = data.allFeedAdamTheAutomator.edges
-    const localAndGuestPosts = posts.concat(guestPosts)
-    localAndGuestPosts.sort(
-      (firstItem, secondItem) =>
+    const { edges: localPosts } = data.allMarkdownRemark
+    const { edges: guestPosts } = data.allFeedAdamTheAutomator
+    const posts = localPosts.concat(guestPosts)
+    posts.sort(
+      ({node: firstItem}, {node: secondItem}) =>
         new Date(
-          secondItem.node?.frontmatter?.date || secondItem.node?.isoDate
+          secondItem?.frontmatter?.date || secondItem?.isoDate
         ) -
-        new Date(firstItem.node?.frontmatter?.date || firstItem.node?.isoDate)
+        new Date(firstItem?.frontmatter?.date || firstItem?.isoDate)
     )
-    console.log(localAndGuestPosts)
 
     return (
       <div className="columns is-multiline">
-        {localAndGuestPosts &&
-          localAndGuestPosts.map(({ node: post }) =>
-            post.fields.slug ? <PostTile postData={post} /> : null
+        {posts &&
+          posts.map(({ node: post }) =>
+            post?.fields?.slug ? (
+              <PostTile postData={post} />
+            ) : (
+              <GuestPostTile postData={post} />
+            )
           )}
       </div>
     )
@@ -69,6 +73,7 @@ export default () => (
               isoDate
               title
               id
+              contentSnippet
             }
           }
         }
