@@ -1,5 +1,5 @@
 /*#region Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
 /*#endregion Fonts */
 
 /*#region Variables */
@@ -21,7 +21,7 @@
   --link-underline-color: var(--blue-violet-crayola);
   --link-underline-color-hover: var(--purple);
   /* Footer */
-  --footer-bg: #CCCCCC;
+  --footer-bg: #cccccc;
 }
 
 /*#endregion Variables */
@@ -39,7 +39,7 @@
 
 html {
   box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: max(16px, 1.5vw);
   font-weight: 300;
   color: var(--main-text-color);
@@ -56,8 +56,12 @@ html {
   display: flex;
 }
 
-::-moz-selection { background: var(--go-green); }
-::selection { background: var(--go-green);}
+::-moz-selection {
+  background: var(--go-green);
+}
+::selection {
+  background: var(--go-green);
+}
 /*#endregion Basics */
 
 /*#region Navbar */
@@ -93,7 +97,9 @@ html {
   padding: 1rem;
 }
 
-a.navbar-link, a.navbar-link:hover, a.navbar-link:visited  {
+a.navbar-link,
+a.navbar-link:hover,
+a.navbar-link:visited {
   border-bottom: 0px;
 }
 
@@ -112,16 +118,20 @@ a.navbar-link, a.navbar-link:hover, a.navbar-link:visited  {
   padding: 2rem;
   background-color: var(--tea-green);
   border: 0.2rem solid var(--go-green);
-  box-shadow: 5px 5px 5px #CCCCCC;
+  box-shadow: 5px 5px 5px #cccccc;
 }
 
-.bio div::-moz-selection { background: var(--go-green); }
-.bio div::selection { background: var(--go-green);}
+.bio div::-moz-selection {
+  background: var(--go-green);
+}
+.bio div::selection {
+  background: var(--go-green);
+}
 
 .bio-picture {
-    width: 12.5rem;
-    border-radius: 6.25rem;
-    border: 2px solid var(--go-green);
+  width: 12.5rem;
+  border-radius: 6.25rem;
+  border: 2px solid var(--go-green);
 }
 
 .bio-text {
@@ -146,7 +156,9 @@ a.navbar-link, a.navbar-link:hover, a.navbar-link:visited  {
   margin-right: -1rem;
 }
 
-.roll-post-link, .roll-post-link:hover, .roll-post-link:visited {
+.roll-post-link,
+.roll-post-link:hover,
+.roll-post-link:visited {
   border: 0px;
   font-weight: 300;
   color: var(--main-text-color);
@@ -172,6 +184,11 @@ a.navbar-link, a.navbar-link:hover, a.navbar-link:visited  {
 article.roll-list-item p {
   margin-top: 0px;
 }
+
+.guest-post-note::before {
+  content: '=> ';
+}
+
 /*#endregion Main page */
 
 /*#region Blog header */
@@ -213,13 +230,13 @@ h1 {
 
 .taglist li {
   font-size: 1rem;
-  float: left; 
+  float: left;
   padding-right: 10px;
   border-radius: 0.7rem;
 }
 
 .taglist li a::before {
-  content: "#"
+  content: '#';
 }
 
 .taglist li a {
@@ -240,15 +257,19 @@ h1 {
 /*#endregion Blog header */
 
 /*#region Blog entry content */
-h2, h3, h4, h5, h6 {
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-top: 2rem;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #CCCCCC;
+  border-bottom: 1px solid #cccccc;
 }
 
 .page-header {
   font-size: 2rem;
-  border-bottom: 1px solid #CCCCCC;
+  border-bottom: 1px solid #cccccc;
 }
 
 li {
@@ -274,13 +295,15 @@ strong {
   color: var(--purple);
 } */
 
-
-a, a:hover, a:visited {
+a,
+a:hover,
+a:visited {
   text-decoration: none;
   font-weight: 600;
 }
 
-a, a:visited {
+a,
+a:visited {
   border-bottom: 3px solid var(--link-underline-color);
   color: var(--link-text-color);
 }
@@ -294,7 +317,8 @@ a.anchor {
   border-bottom: 0px;
 }
 
-ul, ol {
+ul,
+ol {
   padding: 0 1.5rem;
 }
 
@@ -328,8 +352,8 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+cli
 * @author Rose Pritchard
 */
 
-code[class*="language-"],
-pre[class*="language-"] {
+code[class*='language-'],
+pre[class*='language-'] {
   color: #ccc;
   background: none;
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
@@ -349,25 +373,24 @@ pre[class*="language-"] {
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
-
 }
 
 /* Code blocks */
-pre[class*="language-"] {
+pre[class*='language-'] {
   padding: 1em;
-  margin: .5em 0;
+  margin: 0.5em 0;
   overflow: auto;
 }
 
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
   background: #2d2d2d;
 }
 
 /* Inline code */
-:not(pre) > code[class*="language-"] {
-  padding: .1em;
-  border-radius: .3em;
+:not(pre) > code[class*='language-'] {
+  padding: 0.1em;
+  border-radius: 0.3em;
   white-space: normal;
 }
 
@@ -445,32 +468,31 @@ pre[class*="language-"] {
   color: green;
 }
 
-pre[class*="language-"].line-numbers {
-	position: relative;
-	padding-left: 3.8em;
-	counter-reset: linenumber;
+pre[class*='language-'].line-numbers {
+  position: relative;
+  padding-left: 3.8em;
+  counter-reset: linenumber;
 }
 
-pre[class*="language-"].line-numbers > code {
-	position: relative;
-	white-space: inherit;
+pre[class*='language-'].line-numbers > code {
+  position: relative;
+  white-space: inherit;
 }
 
 .line-numbers .line-numbers-rows {
-	position: absolute;
-	pointer-events: none;
-	top: 0;
-	font-size: 100%;
-	left: -3.8em;
-	width: 3em; /* works for line-numbers below 1000 lines */
-	letter-spacing: -1px;
-	border-right: 1px solid #999;
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  font-size: 100%;
+  left: -3.8em;
+  width: 3em; /* works for line-numbers below 1000 lines */
+  letter-spacing: -1px;
+  border-right: 1px solid #999;
 
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .line-numbers-rows > span {
@@ -489,22 +511,22 @@ pre[class*="language-"].line-numbers > code {
 /*#endregion Prism */
 
 /*#region PrismJS customization */
-code[class*="language-"] {
+code[class*='language-'] {
   white-space: pre-wrap;
 }
 
 pre {
-  box-shadow: 2px 4px 25px rgba(0,0,0,.15);
+  box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
 }
 
-.gatsby-highlight pre[class*="language-"].line-numbers {
+.gatsby-highlight pre[class*='language-'].line-numbers {
   padding-left: 3.3em;
 }
 
 /* Fix long param/cmdlets names overflowing */
-code[class*="language-"],
-pre[class*="language-"] {
+code[class*='language-'],
+pre[class*='language-'] {
   word-break: break-word;
 }
 
@@ -526,7 +548,6 @@ pre[class*="language-"] {
   padding: 0;
 }
 
-
 .tag-postheader {
   border-bottom: 0px;
   margin: 0px;
@@ -547,11 +568,13 @@ pre[class*="language-"] {
 }
 
 .footer-text {
-  margin-top: .8rem;
+  margin-top: 0.8rem;
   align-self: center;
 }
 
-.footer-link, .footer-link:hover, .footer-link:visited {
+.footer-link,
+.footer-link:hover,
+.footer-link:visited {
   border-bottom: 0;
 }
 
@@ -569,11 +592,13 @@ pre[class*="language-"] {
 }
 
 .footer-links {
-  margin-top: .8rem;
+  margin-top: 0.8rem;
 }
 
 @media (max-width: 600px) {
-  .navbar, .footer-container, .bio {
+  .navbar,
+  .footer-container,
+  .bio {
     flex-direction: column;
     align-items: center;
   }

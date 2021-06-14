@@ -106,6 +106,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-rss-feed`,
+      options: {
+        url: `https://adamtheautomator.com/author/robert-dyjas/feed`,
+        name: `AdamTheAutomator`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-feed`,
       options: {
         query: `
