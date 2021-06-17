@@ -2,11 +2,21 @@
 templateKey: blog-post
 title: Export message from OWA
 date: 2021-06-10T15:26:57.588Z
-description: " Jjj"
+description: One of the Outlook features missing in Outlook Web App is exporting
+  the messages. Learn a simple trick on how you can save the email as a file,
+  without using Outlook.
 featuredpost: false
 tags:
   - outlook web app
 ---
+If you ever tried to use [Outlook Web App (OWA)](https://support.microsoft.com/en-us/office/getting-started-in-outlook-web-app-0062c7be-f8e3-486e-8b14-5c1f793ceefd) you might have noticed that it doesn't have an option to save the message to the local machine.
+
+Messages are frequently used as evidence and you might have a need to add them to external systems. The company you work for might, for example, use one of the IT service management solutions or ticketing systems.
+
+You don't have to open Outlook to save the message. Let's learn how to do it using web interface!
+
+## Exporting message from OWA
+
 To export the message from OWA, follow the steps below:
 
 1. In your web browser, go to [outlook.office.com/mail](https://outlook.office.com/mail/)
@@ -24,10 +34,40 @@ To export the message from OWA, follow the steps below:
 
    ![Browser prompt to save the file](../../img/20210615-223346-hnrri7rlfq.png)
 
-
-
 ## Limitations
+
+### File format
 
 Using Outlook Web App to save messages comes with some limitations. The most important one is that we're not able to choose the format of the message. For example, **we cannot save the email in `.msg` format**. The only format available is `.eml`.
 
-Saving multiple messages at once is not possible out of the box. As a workaround, we can send the message to ourselves.
+### Downloading multiple messages
+
+Saving multiple messages at once is not possible out of the box. As a workaround, we can send the message to ourselves. The message in our inbox will have **Download all** link, as you can see on the image below:
+
+![Download all link in OWA](../../img/20210617-210444-ulwkrgmtik.png)
+
+The link will initiate downloading a zip file:
+
+![Downloading file prompt](../../img/20210617-210733-dx1fay6gd2.png)
+
+We can then unzip the file and it'll give us all the attachments.
+
+### Saving multiple messages to OneDrive
+
+You might have noticed **Save all to OneDrive** link in the incoming message:
+
+![Save all to OneDrive link](../../img/20210617-211724-wlrscm8vdr.png)
+
+After you click the link, the attachments will be saved to the *Attachments* folder in your OneDrive. You'll see the link you clicked is replaced by the confirmation message (1) and the checkmarks in the file box (2):
+
+![Interface changes after saving the attachments](../../img/20210617-212207-e9ohuohh2x.png)
+
+If you synchronize the *Attachments* folder to your local machine, the files will appear there shortly.
+
+However, saving to OneDrive is not fully reliable. You might sometimes notice that the file couldn't be saved (1). The link to save files to OneDrive will be replaced by the message saying that some files errored while saving (2). In the case displayed below, it's very likely caused by a colon character (:) in the message subject:
+
+![Error indicators for saving attachments to OneDrive](../../img/20210617-212620-ucphckp8jn.png)
+
+## Conclusion
+
+Exporting messages from OWA is not available out of the box. A simple workaround with adding it as an attachment can help you if you don't have Outlook on hand. It can also be handy if you're like me and you try to avoid that desktop application whenever possible.
