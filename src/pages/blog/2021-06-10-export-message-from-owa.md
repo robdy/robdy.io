@@ -36,6 +36,8 @@ To export the message from OWA, follow the steps below:
 
 ## Limitations
 
+As almost every solution, that one comes with certain limitations. Below you can find the ones I discovered so far.
+
 ### File format
 
 Using Outlook Web App to save messages comes with some limitations. The most important one is that we're not able to choose the format of the message. For example, **we cannot save the email in `.msg` format**. The only format available is `.eml`.
@@ -64,7 +66,7 @@ After you click the link, the attachments will be saved to the *Attachments* fol
 
 If you synchronize the *Attachments* folder to your local machine, the files will appear there shortly.
 
-However, saving to OneDrive is not fully reliable. You might sometimes notice that the file couldn't be saved (1). The link to save files to OneDrive will be replaced by the message saying that some files errored while saving (2). In the case displayed below, it's very likely caused by a colon character (:) in the message subject:
+However, saving to OneDrive is not fully reliable. You might sometimes notice that the file couldn't be saved (1). The link to save files to OneDrive will be replaced by the message saying that some files errored while saving (2). In the case displayed below, it's very likely caused by the unsupported character in the message subject:
 
 ![Error indicators for saving attachments to OneDrive](../../img/20210617-212620-ucphckp8jn.png)
 
