@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: Export message from OWA
-date: 2021-06-10T15:26:57.588Z
+date: 2021-06-17T19:47:58.170Z
 description: One of the Outlook features missing in Outlook Web App is exporting
   the messages. Learn a simple trick on how you can save the email as a file,
   without using Outlook.
