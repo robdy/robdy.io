@@ -3,6 +3,8 @@ import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import PostTile from '../components/PostTile'
+import { TagsData } from '../components/TagsData'
+
 
 class TagRoute extends React.Component {
   render() {
@@ -12,8 +14,6 @@ class TagRoute extends React.Component {
     const totalCount = this.props.data.allMarkdownRemark.totalCount
     const tagHeader = `${totalCount} post${totalCount === 1 ? '' : 's'
       } tagged with “${tag}”`
-    const tagDescription = this.props.data;
-    console.log(tagDescription)
 
     return (
       <Layout>
@@ -23,6 +23,7 @@ class TagRoute extends React.Component {
             <div
               className=""
             >
+              <TagsData tag={this.props.pageContext.tag} />
               <h3 className="">{tagHeader}</h3>
               {posts &&
                 posts.map(({ node: post }) => (
@@ -43,7 +44,7 @@ class TagRoute extends React.Component {
 export default TagRoute
 
 export const tagPageQuery = graphql`
-  query TagPage($tag: String, $tagDataQuery: String) {
+  query TagPage($tag: String) {
     site {
       siteMetadata {
         title
@@ -67,19 +68,6 @@ export const tagPageQuery = graphql`
             featuredpost
             description
             tags
-          }
-        }
-      }
-    }
-    tagData: allMarkdownRemark(
-      filter: { fileAbsolutePath: {regex: $tagDataQuery}}
-    ) {
-      totalCount
-      edges {
-        node {
-          frontmatter {
-            title
-            description
           }
         }
       }
