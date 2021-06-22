@@ -67,7 +67,7 @@ exports.createPages = ({ actions, graphql }) => {
         context: {
           tag,
         },
-      })
+      });
     })
   })
 }
