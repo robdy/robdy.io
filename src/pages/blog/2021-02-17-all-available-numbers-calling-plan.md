@@ -2,8 +2,8 @@
 templateKey: blog-post
 title: Get all available user numbers in Calling Plans
 date: 2021-02-17T19:12:21.192Z
-description: From time to time we need to verify how many available numbers are
-  there in your directory. Here's how to do it.
+description: You can check how many numbers you have in your Teams Calling Plans.
+  PowerShell cmdlet to use is Get-CsOnlineTelephoneNumber
 featuredpost: false
 tags:
   - powershell

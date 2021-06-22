@@ -5,20 +5,25 @@ import Layout from '../components/Layout'
 import PostTile from '../components/PostTile'
 import { TagsData } from '../components/TagsData'
 
-
 class TagRoute extends React.Component {
   render() {
-    const posts = this.props.data.allMarkdownRemark.edges
-    const tag = this.props.pageContext.tag
-    const title = this.props.data.site.siteMetadata.title
-    const totalCount = this.props.data.allMarkdownRemark.totalCount
-    const tagHeader = `${totalCount} post${totalCount === 1 ? '' : 's'
-      } tagged with “${tag}”`
+    const posts = this.props.data.allMarkdownRemark.edges;
+    const tag = this.props.pageContext.tag;
+    const title = this.props.data.site.siteMetadata.title;
+    const totalCount = this.props.data.allMarkdownRemark.totalCount;
+    const tagHeader = `${totalCount} post${
+      totalCount === 1 ? "" : "s"
+    } tagged with “${tag}”`;
+    const tagPath = kebabCase(tag);
+    const siteUrl = this.props.data.site.siteMetadata.siteUrl;
 
     return (
       <Layout>
         <section className="section">
-          <Helmet title={`${tag} | ${title}`} />
+          <Helmet title={`${tag} | ${title}`}>
+            {/* <meta name="robots" content="noindex" /> */}
+            <link rel="canonical" href={`${siteUrl}/tags/${tagPath}/`} />
+          </Helmet>
           <div className="container content">
             <div
               className=""
@@ -26,9 +31,7 @@ class TagRoute extends React.Component {
               <TagsData tag={this.props.pageContext.tag} />
               <h3 className="">{tagHeader}</h3>
               {posts &&
-                posts.map(({ node: post }) => (
-                  <PostTile postData={post} />
-                ))}
+                posts.map(({ node: post }) => <PostTile postData={post} />)}
               <p>
                 <Link to="/tags/">Browse all tags</Link>
               </p>
@@ -36,17 +39,17 @@ class TagRoute extends React.Component {
           </div>
         </section>
       </Layout>
-    )
+    );
   }
 }
 
-
-export default TagRoute
+export default TagRoute;
 
 export const tagPageQuery = graphql`
   query TagPage($tag: String) {
     site {
       siteMetadata {
+        siteUrl
         title
       }
     }
