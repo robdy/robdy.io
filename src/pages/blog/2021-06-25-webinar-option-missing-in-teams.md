@@ -86,6 +86,8 @@ To check the values set in the Teams meeting policy, we need to use PowerShell. 
    ![Listing Teams meeting policies](../../img/20210625-224450-o1rgxgaubk.png)
 7. If any of the properties says `False` you might need to change it using `Set-CsTeamsMeetingPolicy`: 
 
+   > **NOTE**: Be careful. If you change global policy you're changing the settings for the entire organization!
+
    ```
    # Set policy name
    # Skip tag: for custom policies
@@ -106,7 +108,23 @@ Let's check our tenant settings based on [Control settings for Microsoft Lists](
 2. Follow the instructions to sign in with your account.
 
    ![Choosing SharePoint admin account](../../img/20210625-223716-5aoa2d9njf.png)
+3. Run the following cmdlet to see if Lists are disabled:
 
-https://docs.microsoft.com/en-us/sharepoint/control-lists
+   ```powershell
+   Get-SPOTenant | Select-Object -ExpandProperty DisablePersonalListCreation
+   ```
+4. If the result is `False` - you're good.
+5. If you don't see anything, that might mean that your SharePoint Online shell is outdated. Update it with:
+
+   ```powershell
+   Update-Module 'Microsoft.Online.SharePoint.PowerShell' 
+   ```
+6. If the value of `DisablePersonalListCreation` is `True` - your organization has Lists disabled. If you want to enable it, you can use the cmdlet shown below.
+
+   > **NOTE**: Be careful, as you're changing the settings for the entire organization!
+
+   ```powershell
+   Set-SPOTenant -DisablePersonalListCreation $true
+   ```
 
 ## Teams Live Event policy
