@@ -43,6 +43,16 @@ At the moment of writing, webinars are not available for [GCC tenants](https://d
 
 **Conclusion**: if you're not in US Government tenancy, webinars are already available for you.
 
+## License
+
+Based on [Introducing Webinars in Microsoft Teams](https://www.microsoft.com/en-us/microsoft-365/blog/2021/05/11/introducing-webinars-in-microsoft-teams-easy-professional-webinars-to-engage-customers/) the availability of webinars might be different based on the license you use:
+
+> These new capabilities will be available in **Microsoft 365 E3/E5**, **Microsoft 365 A3/A5**, and **Microsoft 365 Government G3/G5 plans**.
+>
+> Microsoft 365 Business Standard and Microsoft 365 Business Premium plans will include all the features above for up to 300 attendees. And for the rest of 2021, we are offering a promotional period where all Teams users can try the features with their existing subscription.
+
+
+
 ## Teams meeting policy
 
 Ok, we already checked that our organization should have webinars. Let's now check [Set up for webinars in Microsoft Teams](https://docs.microsoft.com/en-us/microsoftteams/set-up-webinars) article. We'd like to see if we met the prerequisites.
@@ -127,4 +137,10 @@ Let's check our tenant settings based on [Control settings for Microsoft Lists](
    Set-SPOTenant -DisablePersonalListCreation $true
    ```
 
+
+
 ## Teams Live Event policy
+
+Some of the requirements for webinars are undocumented. I mentioned that at the beginning of my article. Now it's time to learn more about it.
+
+You might have heard that webinars might be escalated to Live Events. This happens when you hit 1000 participants in the call. But would you expect, that disabling Live Events would turn off webinars, too?
