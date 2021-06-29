@@ -19,29 +19,15 @@ const BlogPostTemplate = ({
   relativePath,
 }) => {
   const PostContent = contentComponent || Content;
-  const units = {
-    year: 24 * 60 * 60 * 1000 * 365,
-    month: (24 * 60 * 60 * 1000 * 365) / 12,
-    week: 24 * 60 * 60 * 1000 * 7,
-    day: 24 * 60 * 60 * 1000,
-    hour: 60 * 60 * 1000,
-    minute: 60 * 1000,
-    second: 1000,
-  };
-  const currentTimeStamp = new Date().getTime();
-  const elapsed = new Date(date) - currentTimeStamp;
-  const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
-  const relativeDate = (() => {
-    for (let u in units) {
-      if (Math.abs(elapsed) / units[u] >= 1) {
-        return rtf.format(Math.round(elapsed / units[u]), u);
-      }
-    }
-  })();
+  const formattedDate = date.toLocaleDateString('en-us', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+  })
 
   return (
     <section className="section">
-      {helmet || ""}
+      {helmet || ''}
       <div className="container content">
         <div className="header-container">
           {tags && tags.length ? (
@@ -57,11 +43,11 @@ const BlogPostTemplate = ({
           ) : null}
           <h1 className="post-title">{title}</h1>
           <p className="post-subheader">
-            By{" "}
+            By{' '}
             <Link className="post-subheader-link" to="/about">
               Robert Dyjas
-            </Link>{" "}
-            {relativeDate}
+            </Link>{' on '}
+            {formattedDate}
             &nbsp;&bull;&nbsp;
             <a
               href={`https://github.com/robdy/robdy.github.io/edit/src/src/pages/${relativePath}`}
@@ -78,7 +64,7 @@ const BlogPostTemplate = ({
         <Comments />
       </div>
     </section>
-  );
+  )
 };
 
 BlogPostTemplate.propTypes = {
