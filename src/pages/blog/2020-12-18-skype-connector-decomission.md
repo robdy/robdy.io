@@ -45,7 +45,7 @@ Once you determine affected users and they know which machines they use for scri
 (Get-Module lynconlineconnector,skypeonlineconnector -ListAvailable).ModuleBase
 ```
 
-Once you have the folders located, move them to another location (I advise to not delete them until you confirmed the new module is working fine). Then we proceed to Microsoft Teams module installation. According to [Teams PowerShell Release Notes](https://docs.microsoft.com/en-gb/MicrosoftTeams/teams-powershell-release-notes) the newest GA version 1.1.6 already supports Skype for Business Online Connector integration. The following cmdlet can be used:
+Once you have the folders located, move them to another location (I advise to not delete them until you confirmed the new module is working fine). Then we proceed to Microsoft Teams module installation. According to [Teams PowerShell Release Notes](https://docs.microsoft.com/en-gb/MicrosoftTeams/teams-powershell-release-notes) version 1.1.6 and higher already supports Skype for Business Online Connector integration. The following cmdlet can be used:
 
 ```powershell
 # For everyone using the machine, requires admin rights
@@ -56,4 +56,6 @@ Install-Module microsoftteams -Scope CurrentUser
 
 > **NOTE**: If you use `-UserName` parameter for `New-CsOnlineSession`, make sure to update your scripts. This parameter [was deprecated](https://docs.microsoft.com/en-us/powershell/module/skype/new-csonlinesession?view=skype-ps#parameters) and it's no longer available in Teams PowerShell module.
 
-To verify installation was successful, connect using `New-CsOnlineSession` and verify the correct client id appears in sign-in logs. For best results, monitor your script in the following days, to make sure that there are no errors. Then remove the legacy modules from the machine.
+To verify installation was successful, connect using `Connect-Microsoft Teams` and verify the correct client id appears in sign-in logs. If you use Microsoft Teams module version lower than 2.0, connect using `New-CsOnlineSession`.
+
+For best results, monitor your script in the following days, to make sure that there are no errors. Then remove the legacy modules from the machine.
