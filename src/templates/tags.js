@@ -8,10 +8,10 @@ import { TagsData } from '../components/TagsData'
 
 class TagRoute extends React.Component {
   render() {
-    const posts = this.props.data.allMarkdownRemark.edges;
+    const posts = this.props.data.allMdx.edges;
     const tag = this.props.pageContext.tag;
     const title = this.props.data.site.siteMetadata.title;
-    const totalCount = this.props.data.allMarkdownRemark.totalCount;
+    const totalCount = this.props.data.allMdx.totalCount;
     const tagHeader = `${totalCount} post${
       totalCount === 1 ? "" : "s"
     } tagged with “${tag}”`;
@@ -54,7 +54,7 @@ export const tagPageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(
+    allMdx(
       limit: 1000
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { tags: { in: [$tag] } } }

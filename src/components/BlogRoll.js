@@ -7,7 +7,7 @@ import GuestPostTile from '../components/GuestPostTile'
 class BlogRoll extends React.Component {
   render() {
     const { data } = this.props
-    const { edges: localPosts } = data.allMarkdownRemark
+    const { edges: localPosts } = data.allMdx
     const { edges: guestPosts } = data.allFeedAdamTheAutomator
     const posts = localPosts.concat(guestPosts)
     posts.sort(
@@ -35,7 +35,7 @@ class BlogRoll extends React.Component {
 
 BlogRoll.propTypes = {
   data: PropTypes.shape({
-    allMarkdownRemark: PropTypes.shape({
+    allMdx: PropTypes.shape({
       edges: PropTypes.array,
     }),
   }),
@@ -45,7 +45,7 @@ export default () => (
   <StaticQuery
     query={graphql`
       query BlogRollQuery {
-        allMarkdownRemark(
+        allMdx(
           sort: { order: DESC, fields: [frontmatter___date] }
           filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
         ) {
