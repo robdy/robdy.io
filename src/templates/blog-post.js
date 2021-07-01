@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { kebabCase } from "lodash";
-import Helmet from "react-helmet";
-import { graphql, Link } from "gatsby";
-import Layout from "../components/Layout";
-import Content, { HTMLContent } from "../components/Content";
-import Comments from "../components/Comments";
-import useSiteMetadata from "../components/SiteMetadata";
+import React from 'react'
+import PropTypes from 'prop-types'
+import { kebabCase } from 'lodash'
+import Helmet from 'react-helmet'
+import { graphql, Link } from 'gatsby'
+import Layout from '../components/Layout'
+import Content, { HTMLContent } from '../components/Content'
+import Comments from '../components/Comments'
+import useSiteMetadata from '../components/SiteMetadata'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 
 const BlogPostTemplate = ({
@@ -20,12 +20,13 @@ const BlogPostTemplate = ({
   helmet,
   relativePath,
 }) => {
-  const PostContent = contentComponent || Content;
+  const PostContent = contentComponent || Content
   const formattedDate = date.toLocaleDateString('en-us', {
     month: 'short',
     day: '2-digit',
     year: 'numeric',
   })
+  const isoDate = date.toISOString()
 
   return (
     <section className="section">
@@ -50,7 +51,7 @@ const BlogPostTemplate = ({
               Robert Dyjas
             </Link>
             {' on '}
-            {formattedDate}
+            <time datetime={isoDate}>{formattedDate}</time>
             &nbsp;&bull;&nbsp;
             <a
               href={`https://github.com/robdy/robdy.github.io/edit/src/src/pages/${relativePath}`}
@@ -68,7 +69,7 @@ const BlogPostTemplate = ({
       </div>
     </section>
   )
-};
+}
 
 BlogPostTemplate.propTypes = {
   content: PropTypes.node.isRequired,
@@ -119,16 +120,16 @@ const BlogPost = ({ data }) => {
         title={post.frontmatter.title}
       />
     </Layout>
-  );
-};
+  )
+}
 
 BlogPost.propTypes = {
   data: PropTypes.shape({
     mdx: PropTypes.object,
   }),
-};
+}
 
-export default BlogPost;
+export default BlogPost
 
 export const pageQuery = graphql`
   query BlogPostByID($id: String!) {
@@ -151,4 +152,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`
