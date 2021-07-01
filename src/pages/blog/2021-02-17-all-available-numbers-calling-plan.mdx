@@ -12,7 +12,13 @@ tags:
 ---
 > **NOTE**: The article below doesn't apply to numbers provided via Direct Routing
 
-We'll use Teams PowerShell module. Connecting to Skype for Business Online is as usual:
+We'll use Teams PowerShell module. Since version 2.0 the cmdlet to use is:
+
+```powershell
+Connect-MicrosoftTeams
+```
+
+If you use earlier version you can still use the legacy way:
 
 ```
 $sfbSession = New-CsOnlineSession
