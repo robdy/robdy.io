@@ -7,10 +7,12 @@ import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
 import Comments from '../components/Comments'
 import useSiteMetadata from '../components/SiteMetadata'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 
 const BlogPostTemplate = ({
   content,
   contentComponent,
+  body,
   date,
   description,
   tags,
@@ -62,7 +64,7 @@ const BlogPostTemplate = ({
           </p>
         </div>
         <p className="description">{description}</p>
-        <PostContent content={content} />
+        <MDXRenderer>{body}</MDXRenderer>
         <Comments />
       </div>
     </section>
@@ -78,17 +80,19 @@ BlogPostTemplate.propTypes = {
   slug: PropTypes.string,
   helmet: PropTypes.object,
   relativePath: PropTypes.string,
-}
+  body: PropTypes.string,
+};
 
 const BlogPost = ({ data }) => {
-  const { markdownRemark: post } = data
-  const { siteUrl } = useSiteMetadata()
+  const { mdx: post } = data;
+  const { siteUrl } = useSiteMetadata();
 
   return (
     <Layout>
       <BlogPostTemplate
-        content={post.html}
+        content={post.body}
         contentComponent={HTMLContent}
+        body={post.body}
         date={new Date(post.frontmatter.date)}
         description={post.frontmatter.description}
         helmet={
@@ -121,7 +125,7 @@ const BlogPost = ({ data }) => {
 
 BlogPost.propTypes = {
   data: PropTypes.shape({
-    markdownRemark: PropTypes.object,
+    mdx: PropTypes.object,
   }),
 }
 
@@ -129,7 +133,7 @@ export default BlogPost
 
 export const pageQuery = graphql`
   query BlogPostByID($id: String!) {
-    markdownRemark(id: { eq: $id }) {
+    mdx(id: { eq: $id }) {
       id
       parent {
         ... on File {
@@ -139,7 +143,7 @@ export const pageQuery = graphql`
       fields {
         slug
       }
-      html
+      body
       frontmatter {
         date
         title
