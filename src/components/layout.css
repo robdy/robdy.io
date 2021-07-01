@@ -115,10 +115,7 @@ a.navbar-link:visited {
 
 /*#region Main page */
 .bio {
-  padding: 2rem;
   background-color: var(--tea-green);
-  border: 0.2rem solid var(--go-green);
-  box-shadow: 5px 5px 5px #cccccc;
 }
 
 .bio div::-moz-selection {
@@ -128,10 +125,13 @@ a.navbar-link:visited {
   background: var(--go-green);
 }
 
+.bio-picture-container {
+  align-items: center
+}
+
 .bio-picture {
   width: 12.5rem;
   border-radius: 6.25rem;
-  border: 2px solid var(--go-green);
 }
 
 .bio-text {
@@ -263,8 +263,6 @@ h4,
 h5,
 h6 {
   margin-top: 2rem;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid #cccccc;
 }
 
 /*#region Header anchors */

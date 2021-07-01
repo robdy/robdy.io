@@ -1,9 +1,9 @@
-import React from "react";
-import { Helmet } from "react-helmet";
-import { Link } from "gatsby";
-import Layout from "../components/Layout";
-import BlogRoll from "../components/BlogRoll";
-import userTie from "../img/user-tie-solid.svg";
+import React from 'react'
+import { Helmet } from 'react-helmet'
+import { Link } from 'gatsby'
+import Layout from '../components/Layout'
+import BlogRoll from '../components/BlogRoll'
+import userTie from '../img/user-tie-solid.svg'
 
 export default class BlogIndexPage extends React.Component {
   render() {
@@ -13,10 +13,10 @@ export default class BlogIndexPage extends React.Component {
           {/* Fix it so it's not hardcoded */}
           <link rel="canonical" href="https://robdy.io" />
         </Helmet>
-        <div className="container">
-          <h1 className="page-header">Welcome to my blog!</h1>
-          <div className="bio flex">
-            <div>
+
+        <div className="bio">
+          <div className="container flex">
+            <div className="bio-picture-container flex">
               <img
                 className="bio-picture"
                 src="img/avatar-200.jpg"
@@ -25,11 +25,15 @@ export default class BlogIndexPage extends React.Component {
               />
             </div>
             <div className="bio-text">
-              Hi there!
-              <br />
-              My name is Robert. I'm more than happy to share some content with
-              you via this blog. You might find content about PowerShell,
-              Microsoft 365, as well as notes from my journey to learn Node.js.
+              <p>Hi there! My name is Robert.</p>
+              <p>
+                I'm more than happy to share some content with you via this
+                blog.{' '}
+              </p>
+              <p>
+                You might find content about PowerShell, Microsoft 365, as well
+                as notes from my journey to learn Node.js.
+              </p>
               <ul className="bio-links flex">
                 <li>
                   <Link to="/about/">
@@ -37,7 +41,7 @@ export default class BlogIndexPage extends React.Component {
                       src={userTie}
                       alt="User icon"
                       className="navbar-icon"
-                    />{" "}
+                    />{' '}
                     About me
                   </Link>
                 </li>
@@ -54,6 +58,6 @@ export default class BlogIndexPage extends React.Component {
           </div>
         </section>
       </Layout>
-    );
+    )
   }
 }
