@@ -9,6 +9,7 @@ tags:
   - teams
   - webinar
   - powershell
+  - live event
 ---
 ## Requirements
 
@@ -49,9 +50,25 @@ Based on [Introducing Webinars in Microsoft Teams](https://www.microsoft.com/en-
 
 > These new capabilities will be available in **Microsoft 365 E3/E5**, **Microsoft 365 A3/A5**, and **Microsoft 365 Government G3/G5 plans**.
 >
-> Microsoft 365 Business Standard and Microsoft 365 Business Premium plans will include all the features above for up to 300 attendees. And for the rest of 2021, we are offering a promotional period where all Teams users can try the features with their existing subscription.
+> Microsoft 365 Business Standard and Microsoft 365 Business Premium plans will include all the features above for up to 300 attendees.
 
+And the last sentence from it is also interesting
 
+> And for the rest of 2021, we are offering a promotional period where all Teams users can try the features with their existing subscription.
+
+What does it exactly mean? There's a thread on Microsoft Tech Community that has the explanation: [Teams Webinar Feature availability in Business Plans](https://techcommunity.microsoft.com/t5/microsoft-teams/teams-webinar-feature-availability-in-business-plans/m-p/2453015/highlight/true#M94705). One of the replies quotes the reply from Microsoft Support (credits to [Andrés Gorzelany](https://twitter.com/AndresGorzelany/status/1413177431192707073/photo/1) for pointing this out):
+
+> We confirm that the webinar is included on the Business Standard and Business Premium licenses however **it does not have the fancy button** that you will see on the enterprise license.
+>
+> We acknowledge that there is a room for improvement especially on documentation and we also apologize for any confusion.
+
+So in reality, the only thing you miss is the button. You still have the registration capability.
+
+> **NOTE**: It's unclear whether in non-enterprise plans you still have the ability to escalate the webinar to a Live Event if it gets more than 1000 attendees.
+
+The options for registration should be visible on the meeting schedule window:
+
+![Registration option on meeting schedule window](../../img/20210710-102122-b1y7fuzfda.png)
 
 ## Teams meeting policy
 
@@ -137,10 +154,55 @@ Let's check our tenant settings based on [Control settings for Microsoft Lists](
    Set-SPOTenant -DisablePersonalListCreation $true
    ```
 
-
-
 ## Teams Live Event policy
 
 Some of the requirements for webinars are undocumented. I mentioned that at the beginning of my article. Now it's time to learn more about it.
 
-You might have heard that webinars might be escalated to Live Events. This happens when you hit 1000 participants in the call. But would you expect, that disabling Live Events would turn off webinars, too?
+You might have heard that webinars might be escalated to Live Events. This happens when you hit 1000 participants in the call. But would you expect, that disabling Live Events would hide the button to schedule webinars?
+
+If you're not capable to schedule Live Events, you won't see the button to schedule webinars. However, the registration capability will still be enabled from the meeting schedule window.
+
+The behavior is similar to what happens if we're on a non-enterprise license:
+
+![Registration option on meeting schedule window](../../img/20210710-102122-b1y7fuzfda.png)
+
+Let's check if our organization has the correct Live Event settings.
+
+1. We should already be connected to Microsoft Teams PowerShell. If not, let's reconnect by using:
+
+   ```powershell
+   Connect-MicrosoftTeams
+   ```
+2. Check which Teams meeting broadcast policy is assigned to your account. To do this, run:
+
+   ```powershell
+   Get-CsOnlineUser firstname.lastname@contoso.com |
+     Select-Object -ExpandProperty TeamsMeetingBroadcastPolicy
+   ```
+3. If you get empty output, it means the account has the global policy assigned. If you get any name, save it. You'll need it in a second.
+4. List the policies with their required properties. Run the following cmdlet:
+
+   ```powershell
+   Get-CsTeamsMeetingBroadcastPolicy |
+     Select-Object identity, AllowBroadcastScheduling
+   ```
+5. Check for either the global policy or the one with the name you noted. If **AllowBroadcastScheduling** is set to `True` your settings are correct:
+
+   ![Listing Teams meeting policies](../../img/20210625-224450-o1rgxgaubk.png)
+6. If **AllowBroadcastScheduling** says `False` you might need to change it using `Set-CsTeamsMeetingBroadcastPolicy`: 
+
+   > **NOTE**: Be careful. If you change global policy you're changing the settings for the entire organization!
+
+   ```
+   # Set policy name
+   # Skip tag: for custom policies
+   # For global policy use empty string ''
+   $policyName = 'PolicyNameGoesHere'
+   Set-CsTeamsMeetingBroadcastPolicy -Identity $policyName -AllowBroadcastScheduling $true
+   ```
+
+## Conclusion
+
+The lack of a button to schedule webinars might be caused by multiple factors. Even by checking Microsoft documentation, you might not be aware of all of the requirements.
+
+Things are getting more complicated if you're on a non-enterprise license. The experience you receive is different from what you see in the help articles.
