@@ -9,4 +9,72 @@ tags:
   - powershell
   - datamining
 ---
-aa
+## Cmdlets added temporarily
+
+The following cmdlets were added on the 17th of June and removed on the 16th of July:
+
+Get-CsTeamsAudioConferencingPolicy
+Grant-CsTeamsAudioConferencingPolicy
+New-CsTeamsAudioConferencingPolicy
+Remove-CsTeamsAudioConferencingPolicy
+Set-CsTeamsAudioConferencingPolicy
+
+All 5 cmdlets were introduced in 2.4.0-preview version and removed in 2.4.1-preview.
+
+## Removed cmdlets
+
+New-CsOnlineSession - replaced with Connect-MicrosoftTeams
+Set-CsGroupPolicyAssignment
+Get-CsInternalModuleVersion
+
+## Added cmdlets
+
+Get-LicenseReportForChangeNotificationSubscription
+Get-MultiGeoRegion
+Get-CsTeamsCallHoldPolicy
+Grant-CsTeamsCallHoldPolicy
+New-CsTeamsCallHoldPolicy
+Remove-CsTeamsCallHoldPolicy
+Set-CsTeamsCallHoldPolicy
+Get-LicenseReportForChangeNotificationSubscription
+Get-Operation
+Get-CsOnlineAudioFile
+Get-CsTeamsShiftsConnectionConnector
+Get-CsTeamsShiftsConnectionInstance
+Get-CsTeamsShiftsConnectionSyncResult
+Get-CsTeamsShiftsConnectionTeamMap
+Get-CsTeamsShiftsConnectionUser
+Get-CsTeamsShiftsConnectionWfmTeam
+New-CsTeamsShiftsConnectionInstance
+New-CsTeamsShiftsConnectionTeamMap
+Remove-CsOnlineAudioFile
+Remove-CsTeamsShiftsConnectionInstance
+Remove-CsTeamsShiftsConnectionTeamMap
+Set-CsTeamsShiftsConnectionInstance
+Test-CsTeamsShiftsConnectionValidate
+
+## Cmdlet params changes
+
+### Connect-MicrosofTeams
+
+Removed: AccessToken
+Added: MsAccessToken, AadAccessToken
+Added: AccessTokens
+Removed: MsAccessToken, AadAccessToken
+Removed: CertificateThumbprint, ApplicationId
+
+### Grant-CsGroupPolicyPackageAssignment
+
+Added: PolicyRankings, PolicyStringRankings
+
+### Move-CsInternalHelper
+
+Added: MajorVersion
+
+### New-CsCustomPolicyPackage
+
+Added: PolicyList, PolicyStringList
+ 
+
+
+
