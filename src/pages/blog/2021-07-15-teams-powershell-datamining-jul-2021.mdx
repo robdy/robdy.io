@@ -12,6 +12,8 @@ tags:
 ---
 ## Policies changes
 
+The changes appeared in the outputs of `Get-Teams*Policy` cmdlets. Some of them still don't have corresponding parameters for `Set-*` cmdlets, so they cannot be used in the environments.
+
 ### Messaging
 
 `AllowVideoMessages` - self-explanatory, but highly unexpected. Seems like we're getting video messages in chats. Wow!
@@ -28,15 +30,15 @@ That functionality seems to have been requested many years ago, based on UserVoi
 
 `AllowCartCaptionsScheduling` - no idea what is that one doing
 
-`ChannelRecordingDownload` - related with [Roadmap item 82053](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=82053) which gives the ability to have view-only recordings. Possible values are `Allow` and `Block`. 
+`ChannelRecordingDownload` - related to [Roadmap item 82053](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=82053) which gives the ability to have view-only recordings. Possible values are `Allow` and `Block`. 
 
 `CommaSeparator` - to separate... (insert your guess here) with comma. Perhaps related to the invite languages?
 
-`MeetingInviteLanguages` - requires one or more supported languages. For now supported languages are: ar-SA,az-Latn-AZ,bg-BG,ca-ES,cs-CZ,cy-GB,da-DK,de-DE,el-GR,en-GB,es-ES,es-MX,et-EE,eu-ES,fi-FI,fil-PH,fr-CA,fr-FR,gl-ES,he-IL,hi-IN,hr-HR,hu-HU,id-ID,is-IS,it-IT,ja-JP,ka-GE,kk-KZ,ko-KR,lt-LT,lv-LV,mk-MK,ms-MY,nb-NO,nl-NL,nn-NO,pl-PL,pt-BR,pt-PT,ro-RO,ru-RU,sk-SK,sl-SL,sq-AL,sr-Latn-RS,sv-SE,th-TH,tr-TR,uk-UA,vi-VN,zh-CN,zh-TW
+`MeetingInviteLanguages` - requires one or more supported languages. For now supported languages are: ar-SA, az-Latn-AZ, bg-BG, ca-ES, cs-CZ, cy-GB, da-DK, de-DE, el-GR, en-GB, es-ES, es-MX, et-EE, eu-ES, fi-FI, fil-PH, fr-CA, fr-FR, gl-ES, he-IL, hi-IN, hr-HR, hu-HU, id-ID, is-IS, it-IT, ja-JP, ka-GE, kk-KZ, ko-KR, lt-LT, lv-LV, mk-MK, ms-MY, nb-NO, nl-NL, nn-NO, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sk-SK, sl-SL, sq-AL, sr-Latn-RS, sv-SE, th-TH, tr-TR, uk-UA, vi-VN, zh-CN, zh-TW
 
 ### Calling
 
-`AllowCallRedirect` - seems to be related with call transfer. The supporting cmdlets are described below ([CsTeamsCallHoldPolicy cmdlets](#CsTeamsCallHoldPolicy-cmdlets) and [CsOnlineAudioFile cmdlets](#CsOnlineAudioFile-cmdlets).
+`AllowCallRedirect` - seems to be related to call transfer. The supporting cmdlets are described below ([CsTeamsCallHoldPolicy cmdlets](#CsTeamsCallHoldPolicy-cmdlets) and [CsOnlineAudioFile cmdlets](#CsOnlineAudioFile-cmdlets)).
 
 ### Mobility
 
@@ -56,11 +58,15 @@ All 5 cmdlets were introduced in 2.4.0-preview version and removed in 2.4.1-prev
 
 ## Removed cmdlets
 
+Three cmdlets were recently removed:
+
 * `New-CsOnlineSession` - replaced with `Connect-MicrosoftTeams`
 * `Set-CsGroupPolicyAssignment`
 * `Get-CsInternalModuleVersion`
 
 ## Added cmdlets
+
+Cmdlets from 6 different areas were added in the last few months.
 
 ### Get-LicenseReportForChangeNotificationSubscription
 
@@ -135,6 +141,8 @@ Cmdlets are:
 * `Test-CsTeamsShiftsConnectionValidate`
 
 ## Cmdlet params changes
+
+4 cmdlets 
 
 ### Connect-MicrosofTeams
 
