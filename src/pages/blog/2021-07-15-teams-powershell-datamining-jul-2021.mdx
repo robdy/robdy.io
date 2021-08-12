@@ -1,6 +1,6 @@
 ---
 templateKey: blog-post
-title: Teams PowerShell datamining - Jul 2021
+title: Teams PowerShell datamining - Aug 2021
 date: 2021-07-15T17:16:32.672Z
 description: aa
 featuredpost: false
@@ -29,16 +29,60 @@ Get-CsInternalModuleVersion
 
 ## Added cmdlets
 
-Get-LicenseReportForChangeNotificationSubscription
-Get-MultiGeoRegion
-Get-CsTeamsCallHoldPolicy
-Grant-CsTeamsCallHoldPolicy
-New-CsTeamsCallHoldPolicy
-Remove-CsTeamsCallHoldPolicy
-Set-CsTeamsCallHoldPolicy
-Get-LicenseReportForChangeNotificationSubscription
-Get-Operation
-Get-CsOnlineAudioFile
+### Get-LicenseReportForChangeNotificationSubscription
+
+The cmdlet tells whether the user is capable to export their messages via [change notification subscription](https://docs.microsoft.com/en-us/graph/teams-licenses).
+
+### Get-MultiGeoRegion
+
+It allows you to check where user/group data from Teams is stored.
+
+Examples of use:
+
+```powershell
+# User
+$userId = (Get-CsOnlineUser 'rob@domain.com').ObjectId
+Get-MultiGeoRegion -EntityId $userId -EntityType user
+
+# Group
+$groupId = (Get-Teams -DisplayName 'teamName').GroupId
+Get-MultiGeoRegion -EntityId $groupId -EntityType group
+```
+
+The cmdlet returns a single object with one property: `Region`. The property contains the region three-letter abbreviation. 
+
+### CsTeamsCallHoldPolicy cmdlets
+
+The cmdlets which were added are:
+
+* Get-CsTeamsCallHoldPolicy
+* Grant-CsTeamsCallHoldPolicy
+* New-CsTeamsCallHoldPolicy
+* Remove-CsTeamsCallHoldPolicy
+* Set-CsTeamsCallHoldPolicy
+
+The documentation for them is not yet available. It's already prepared and waiting to be merged under [\#7817](https://github.com/MicrosoftDocs/office-docs-powershell/pull/7817/).
+
+The cmdlets rely on *-CsOnlineAudioFile cmdlets, described below.
+
+Call hold policy allows using the custom audio file to be played during the hold. If you want to learn more about music on hold, check [Music on hold during Teams call transfer](https://erik365.blog/2021/07/02/music-on-hold-during-teams-call-transfer/amp/) from Erik's blog.
+
+### CsOnlineAudioFile cmdlets
+
+Cmdlets added:
+
+* Get-CsOnlineAudioFile
+* Remove-CsOnlineAudioFile
+
+These cmdlets are to view and remove audio files. You can add audio files using [`New-CsOnlineAudioFile` cmdlet](https://docs.microsoft.com/en-us/powershell/module/skype/new-csonlineaudiofile?view=skype-ps) from Skype for Business Online module.
+
+Audio files were previously used only in Auto Attendant/Call Queue. Now the support for music on hold for consult transfer is coming (see \[Roadmap item 82957](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=82957)) and custom audio files will have new way of use.
+
+### Get-Operation
+
+The cmdlet takes two parameters: `GroupId` and `OperationId`.  It's currently unclear what it does.
+
+
 Get-CsTeamsShiftsConnectionConnector
 Get-CsTeamsShiftsConnectionInstance
 Get-CsTeamsShiftsConnectionSyncResult
@@ -47,7 +91,6 @@ Get-CsTeamsShiftsConnectionUser
 Get-CsTeamsShiftsConnectionWfmTeam
 New-CsTeamsShiftsConnectionInstance
 New-CsTeamsShiftsConnectionTeamMap
-Remove-CsOnlineAudioFile
 Remove-CsTeamsShiftsConnectionInstance
 Remove-CsTeamsShiftsConnectionTeamMap
 Set-CsTeamsShiftsConnectionInstance
@@ -74,7 +117,3 @@ Added: MajorVersion
 ### New-CsCustomPolicyPackage
 
 Added: PolicyList, PolicyStringList
- 
-
-
-
