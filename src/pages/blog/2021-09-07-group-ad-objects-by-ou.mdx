@@ -1,0 +1,63 @@
+---
+templateKey: blog-post
+title: Group AD objects by OU
+date: 2021-09-07T06:30:51.562Z
+description: How to group Active Directory objects by Organizational Unit (OU)
+  using PowerShell.
+featuredpost: false
+tags:
+  - powershell
+  - active directory
+  - snippet
+---
+INTRO GOES HERE
+
+## Getting objects
+
+First, let's grab all the objects we'd like to group. Some example cmdlets we can use:
+
+```powershell
+# Gets all the computers
+$objects = Get-AdComputer -Filter *
+
+# Gets all the users
+$objects = Get-AdUser -Filter *
+```
+
+## Finding the OU
+
+Now we need to find the value of the organizational unit for each object in the array.
+
+### Distinguished name
+
+We can first check if there's any property we could use out-of-the-box.
+
+```powershell
+$objects[0].OU
+$objects[0].OrganizationalUnit
+# Return nothing
+```
+
+Apparently, such property doesn't exist. However, we could use `DistinguishedName` property.
+
+The format of `DistinguishedName` property is similar to the below:
+
+```
+CN=ObjectName,OU=Unit1A,OU=Unit1,DC=domain,DC=com
+```
+
+The values represent:
+
+* `CN=ObjectName` is the name of the particular object
+* `OU=Unit` is for OU structure, starting from the bottom. Top-level OUs are listed last
+* `DC=domain,DC=com` is for Active Directory domain name
+
+### Removing CN part
+
+Based on the values from `DistinguishedName` the easiest way to find the OU would be to strip the first part `CN=xxxxx,` and group by that value. We could use [calculated property](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_calculated_properties?view=powershell-7.1) to achieve this.
+
+Let's try to replace the first part with [a regular expression](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_regular_expressions?view=powershell-7.1):
+
+```powershell
+$objects | Select-Object @{n="OU";e={$_.DistinguishedName -replace "CN=.*,",""}
+```
