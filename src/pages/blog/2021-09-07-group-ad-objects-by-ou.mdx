@@ -75,4 +75,22 @@ Why is that? Let's start from the very beginning. [PowerShell is based on .NET](
 
 In this implementation, regex quantifiers are greedy by default. In contrary to lazy quantifiers, the greedy ones try to match as many characters as possible.
 
-In our example, `CN=` is matched based on the character matching. Next, the `*` quantifier matches as many other characters as it can, provided they are followed by `,`.
+In our example, `CN=` is matched based on the character matching. Next, the `*` quantifier matches as many other characters as it can, provided they are followed by `,`. 
+
+So, how to match minimal number of characters? You can probably guess - we need to change the quantifier to be lazy by adding `?` character! We want our * quantifier to be lazy. We don't need to apply the same mechanism for characters we use. It'd not have any effect anyway.
+
+> If you want to learn more about quantifiers check [Quantifiers in Regular Expressions](https://docs.microsoft.com/en-us/dotnet/standard/base-types/quantifiers-in-regular-expressions) article provided by Microsoft.
+
+Our code will now be:
+
+```powershell
+$objects | Select-Object @{n="OU";e={$_.DistinguishedName -replace "CN=.*?,",""}}
+```
+
+And the output will be:
+
+```powershell
+
+```
+
+## Grouping objects
