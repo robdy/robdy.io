@@ -59,5 +59,16 @@ Based on the values from `DistinguishedName` the easiest way to find the OU woul
 Let's try to replace the first part with [a regular expression](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_regular_expressions?view=powershell-7.1):
 
 ```powershell
-$objects | Select-Object @{n="OU";e={$_.DistinguishedName -replace "CN=.*,",""}
+$objects | Select-Object @{n="OU";e={$_.DistinguishedName -replace "CN=.*,",""}}
 ```
+
+The output will be a very long list of something like:
+
+```powershell
+DC=internal
+DC=internal
+DC=internal
+# and so on
+```
+
+Why is that? PowerShell regex quantifiers are greedy by default (SOURCE).
