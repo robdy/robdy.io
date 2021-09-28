@@ -71,4 +71,8 @@ DC=internal
 # and so on
 ```
 
-Why is that? PowerShell regex quantifiers are greedy by default (SOURCE).
+Why is that? Let's start from the very beginning. [PowerShell is based on .NET](https://www.oreilly.com/library/view/professional-windows-powershell/9780471946939/9780471946939_windows_powershell_and_the_.net_framewor.html). Therefore, regular expressions [uses the .NET implementation](https://www.johndcook.com/blog/powershell_perl_regex/).
+
+In this implementation, regex quantifiers are greedy by default. In contrary to lazy quantifiers, the greedy ones try to match as many characters as possible.
+
+In our example, `CN=` is matched based on the character matching. Next, the `*` quantifier matches as many other characters as it can, provided they are followed by `,`.
