@@ -366,10 +366,10 @@ li p {
 }
 
 blockquote {
-  background-color: hsl(61, 100%, 83%);
+  background-color: hsl(0, 0%, 97%);
   padding: 1rem 1.5rem;
-  border: 1px solid hsl(51, 100%, 55%);
-  border-left: 0.3rem solid hsl(51, 100%, 55%);
+  border: 1px solid hsl(0, 0%, 60%);
+  border-left: 0.3rem solid hsl(0, 0%, 60%);
   margin: 1rem 0;
 }
 blockquote p {
@@ -381,13 +381,33 @@ strong {
 }
 
 /*#region Blocks */
-blockquote.block-Note {
+svg.block-icon {
+  display: inline;
+  margin-right: 0.5em;
+  width: 1em;
 }
 
-blockquote.block-Error {
-  background-color: hsl(5, 100%, 83%);
-  border-color: hsl(355, 100%, 55%);
-  border-left-color: hsl(355, 100%, 55%);
+blockquote.block-Note {
+  background-color: hsl(142, 55%, 80%);
+  border-color: hsl(142, 55%, 40%);
+}
+
+svg.block-icon-Note {
+  color: hsl(142, 55%, 40%);
+}
+
+blockquote.block-Warning {
+  background-color: hsl(355, 85%, 95%);
+  border-color: hsl(355, 85%, 55%);
+  border-left-color: hsl(355, 85%, 55%);
+}
+
+svg.block-icon-Warning {
+  color: hsl(355, 100%, 55%);
+}
+
+p.block-title {
+  font-variant: small-caps;
 }
 
 /*#endregion Blocks */

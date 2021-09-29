@@ -18,11 +18,11 @@ aaa **bbb**
 
 </Note>
 
-<Error>
+<Warning>
 
 aaa **bbb**
 
-</Error>
+</Warning>
 
 ## Requirements
 
@@ -74,15 +74,11 @@ And the last sentence from it is also interesting
 
 What does it exactly mean? There's a thread on Microsoft Tech Community that has the explanation: [Teams Webinar Feature availability in Business Plans](https://techcommunity.microsoft.com/t5/microsoft-teams/teams-webinar-feature-availability-in-business-plans/m-p/2453015/highlight/true#M94705). One of the replies quotes the reply from Microsoft Support (credits to [Andrés Gorzelany](https://twitter.com/AndresGorzelany/status/1413177431192707073/photo/1) for pointing this out):
 
-<Note>
-
-We confirm that the webinar is included on the Business Standard and Business
-Premium licenses however **it does not have the fancy button** that you will
-see on the enterprise license. We acknowledge that there is a room for
-improvement especially on documentation and we also apologize for any
-confusion.
-
-</Note>
+> We confirm that the webinar is included on the Business Standard and Business
+> Premium licenses however **it does not have the fancy button** that you will
+> see on the enterprise license. We acknowledge that there is a room for
+> improvement especially on documentation and we also apologize for any
+> confusion.
 
 So in reality, the only thing you miss is the button. You still have the registration capability.
 
@@ -144,12 +140,12 @@ To check the values set in the Teams meeting policy, we need to use PowerShell. 
 
 7. If any of the properties says `False` you might need to change it using `Set-CsTeamsMeetingPolicy`:
 
-   <Note>
+   <Warning>
 
-   **NOTE**: Be careful. If you change global policy you're changing the
+   Be careful. If you change global policy you're changing the
    settings for the entire organization!
 
-   </Note>
+   </Warning>
 
    ```
    # Set policy name
@@ -188,12 +184,12 @@ Let's check our tenant settings based on [Control settings for Microsoft Lists](
 
 6. If the value of `DisablePersonalListCreation` is `True` - your organization has Lists disabled. If you want to enable it, you can use the cmdlet shown below.
 
-   <Note>
+   <Warning>
 
-   **NOTE**: Be careful, as you're changing the settings for the entire
+   Be careful, as you're changing the settings for the entire
    organization!
 
-   </Note>
+   </Warning>
 
    ```powershell
    Set-SPOTenant -DisablePersonalListCreation $true
@@ -240,12 +236,12 @@ Let's check if our organization has the correct Live Event settings.
 
 6. If **AllowBroadcastScheduling** says `False` you might need to change it using `Set-CsTeamsMeetingBroadcastPolicy`:
 
-   <Note>
+   <Warning>
 
-   **NOTE**: Be careful. If you change global policy you're changing the
+   Be careful. If you change global policy you're changing the
    settings for the entire organization!
 
-   </Note>
+   </Warning>
 
    ```
    # Set policy name
