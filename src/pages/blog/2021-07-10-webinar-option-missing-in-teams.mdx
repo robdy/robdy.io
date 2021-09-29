@@ -12,6 +12,18 @@ tags:
   - live event
 ---
 
+<Note>
+
+aaa **bbb**
+
+</Note>
+
+<Error>
+
+aaa **bbb**
+
+</Error>
+
 ## Requirements
 
 To go through the steps below, you'll need a few tools and the required level of access:
@@ -49,35 +61,36 @@ At the moment of writing, webinars are not available for [GCC tenants](https://d
 
 Based on [Introducing Webinars in Microsoft Teams](https://www.microsoft.com/en-us/microsoft-365/blog/2021/05/11/introducing-webinars-in-microsoft-teams-easy-professional-webinars-to-engage-customers/) the availability of webinars might be different based on the license you use:
 
-<Note>
-  These new capabilities will be available in **Microsoft 365 E3/E5**,
-  **Microsoft 365 A3/A5**, and **Microsoft 365 Government G3/G5 plans**.
-
-Microsoft 365 Business Standard and Microsoft 365 Business Premium plans will
-include all the features above for up to 300 attendees.
-
-</Note>
+> These new capabilities will be available in **Microsoft 365 E3/E5**,
+> **Microsoft 365 A3/A5**, and **Microsoft 365 Government G3/G5 plans**.
+>
+> Microsoft 365 Business Standard and Microsoft 365 Business Premium plans will
+> include all the features above for up to 300 attendees.
 
 And the last sentence from it is also interesting
 
-<Note>
-  And for the rest of 2021, we are offering a promotional period where all Teams
-  users can try the features with their existing subscription.
-</Note>
+> And for the rest of 2021, we are offering a promotional period where all Teams
+> users can try the features with their existing subscription.
 
 What does it exactly mean? There's a thread on Microsoft Tech Community that has the explanation: [Teams Webinar Feature availability in Business Plans](https://techcommunity.microsoft.com/t5/microsoft-teams/teams-webinar-feature-availability-in-business-plans/m-p/2453015/highlight/true#M94705). One of the replies quotes the reply from Microsoft Support (credits to [Andrés Gorzelany](https://twitter.com/AndresGorzelany/status/1413177431192707073/photo/1) for pointing this out):
 
 <Note>
-  We confirm that the webinar is included on the Business Standard and Business
-  Premium licenses however **it does not have the fancy button** that you will
-  see on the enterprise license. We acknowledge that there is a room for
-  improvement especially on documentation and we also apologize for any
-  confusion.
+
+We confirm that the webinar is included on the Business Standard and Business
+Premium licenses however **it does not have the fancy button** that you will
+see on the enterprise license. We acknowledge that there is a room for
+improvement especially on documentation and we also apologize for any
+confusion.
+
 </Note>
 
 So in reality, the only thing you miss is the button. You still have the registration capability.
 
-> **NOTE**: It's unclear whether in non-enterprise plans you still have the ability to escalate the webinar to a Live Event if it gets more than 1000 attendees.
+<Note>
+
+It's unclear whether in non-enterprise plans you still have the ability to escalate the webinar to a Live Event if it gets more than 1000 attendees.
+
+</Note>
 
 The options for registration should be visible on the meeting schedule window:
 
@@ -132,8 +145,10 @@ To check the values set in the Teams meeting policy, we need to use PowerShell. 
 7. If any of the properties says `False` you might need to change it using `Set-CsTeamsMeetingPolicy`:
 
    <Note>
-     **NOTE**: Be careful. If you change global policy you're changing the
-     settings for the entire organization!
+
+   **NOTE**: Be careful. If you change global policy you're changing the
+   settings for the entire organization!
+
    </Note>
 
    ```
@@ -174,8 +189,10 @@ Let's check our tenant settings based on [Control settings for Microsoft Lists](
 6. If the value of `DisablePersonalListCreation` is `True` - your organization has Lists disabled. If you want to enable it, you can use the cmdlet shown below.
 
    <Note>
-     **NOTE**: Be careful, as you're changing the settings for the entire
-     organization!
+
+   **NOTE**: Be careful, as you're changing the settings for the entire
+   organization!
+
    </Note>
 
    ```powershell
@@ -224,8 +241,10 @@ Let's check if our organization has the correct Live Event settings.
 6. If **AllowBroadcastScheduling** says `False` you might need to change it using `Set-CsTeamsMeetingBroadcastPolicy`:
 
    <Note>
-     **NOTE**: Be careful. If you change global policy you're changing the
-     settings for the entire organization!
+
+   **NOTE**: Be careful. If you change global policy you're changing the
+   settings for the entire organization!
+
    </Note>
 
    ```

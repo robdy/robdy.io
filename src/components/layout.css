@@ -366,10 +366,10 @@ li p {
 }
 
 blockquote {
-  background-color: rgb(254, 255, 166);
+  background-color: hsl(61, 100%, 83%);
   padding: 1rem 1.5rem;
-  border: 1px solid rgb(255, 220, 25);
-  border-left: 0.3rem solid rgb(255, 220, 25);
+  border: 1px solid hsl(51, 100%, 55%);
+  border-left: 0.3rem solid hsl(51, 100%, 55%);
   margin: 1rem 0;
 }
 blockquote p {
@@ -379,6 +379,18 @@ blockquote p {
 strong {
   font-weight: bold;
 }
+
+/*#region Blocks */
+blockquote.block-Note {
+}
+
+blockquote.block-Error {
+  background-color: hsl(5, 100%, 83%);
+  border-color: hsl(355, 100%, 55%);
+  border-left-color: hsl(355, 100%, 55%);
+}
+
+/*#endregion Blocks */
 
 /*#endregion Blog entry content */
 
