@@ -368,7 +368,7 @@ li p {
 blockquote {
   background-color: hsl(0, 0%, 97%);
   padding: 1rem 1.5rem;
-  border: 1px solid hsl(0, 0%, 60%);
+  border: 0px;
   border-left: 0.3rem solid hsl(0, 0%, 60%);
   margin: 1rem 0;
 }
@@ -388,11 +388,11 @@ svg.block-icon {
 }
 
 blockquote.block-Note {
-  background-color: hsl(142, 55%, 80%);
+  background-color: hsl(142, 55%, 95%);
   border-color: hsl(142, 55%, 40%);
 }
 
-svg.block-icon-Note {
+.block-icon-Note {
   color: hsl(142, 55%, 40%);
 }
 
@@ -402,7 +402,7 @@ blockquote.block-Warning {
   border-left-color: hsl(355, 85%, 55%);
 }
 
-svg.block-icon-Warning {
+.block-icon-Warning {
   color: hsl(355, 100%, 55%);
 }
 
