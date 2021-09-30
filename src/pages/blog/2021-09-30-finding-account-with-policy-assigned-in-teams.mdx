@@ -1,0 +1,10 @@
+---
+templateKey: blog-post
+title: Finding account with policy assigned in Teams
+date: 2021-09-30T07:59:26.337Z
+description: Learn how to find out all the accounts with certain Teams policy assigned.
+featuredpost: false
+---
+```powershell
+Get-CsOnlineUser -Filter "TeamsUpdateManagementPolicy -eq 'AllowPreview'"
+```
