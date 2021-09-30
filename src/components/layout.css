@@ -381,10 +381,15 @@ strong {
 }
 
 /*#region Blocks */
-svg.block-icon {
-  display: inline;
-  margin-right: 0.5em;
-  width: 1em;
+p.block-title {
+  display: flex;
+  align-items: center;
+  line-height: 2em;
+  font-variant: small-caps;
+}
+
+.block-icon {
+  margin-right: 0.2em;
 }
 
 blockquote.block-Note {
@@ -406,8 +411,13 @@ blockquote.block-Warning {
   color: hsl(355, 100%, 55%);
 }
 
-p.block-title {
-  font-variant: small-caps;
+blockquote.block-Idea {
+  background-color: hsl(222, 55%, 95%);
+  border-color: hsl(222, 55%, 40%);
+}
+
+.block-icon-Idea {
+  color: hsl(222, 55%, 40%);
 }
 
 /*#endregion Blocks */
