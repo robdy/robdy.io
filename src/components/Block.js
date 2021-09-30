@@ -9,7 +9,7 @@ const Block = (props) => {
     Warning: (
       <FaExclamationTriangle className="block-icon block-icon-Warning" />
     ),
-    Idea: <FaLightbulb className="block-icon block-icon-Idea" />,
+    Idea: <FaLightbulb className="block-icon block-icon-Tip" />,
   }
 
   return (
@@ -24,4 +24,4 @@ const Block = (props) => {
 
 export const NoteBlock = (props) => <Block type="Note" {...props} />
 export const WarningBlock = (props) => <Block type="Warning" {...props} />
-export const IdeaBlock = (props) => <Block type="Idea" {...props} />
+export const Tip = (props) => <Block type="Tip" {...props} />

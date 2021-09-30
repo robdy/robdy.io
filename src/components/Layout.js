@@ -6,7 +6,7 @@ import './layout.css'
 import useSiteMetadata from './SiteMetadata'
 import { withPrefix } from 'gatsby'
 import { MDXProvider } from '@mdx-js/react'
-import { NoteBlock, WarningBlock, IdeaBlock } from './Block'
+import { NoteBlock, WarningBlock, TipBlock } from './Block'
 
 const TemplateWrapper = ({ children }) => {
   const { title, description, siteUrl } = useSiteMetadata()
@@ -148,7 +148,7 @@ const TemplateWrapper = ({ children }) => {
         components={{
           Note: NoteBlock,
           Warning: WarningBlock,
-          Idea: IdeaBlock,
+          Tip: TipBlock,
         }}
       >
         {children}

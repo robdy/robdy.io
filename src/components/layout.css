@@ -411,12 +411,12 @@ blockquote.block-Warning {
   color: hsl(355, 100%, 55%);
 }
 
-blockquote.block-Idea {
+blockquote.block-Tip {
   background-color: hsl(222, 55%, 95%);
   border-color: hsl(222, 55%, 40%);
 }
 
-.block-icon-Idea {
+.block-icon-Tip {
   color: hsl(222, 55%, 40%);
 }
 
