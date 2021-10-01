@@ -10,7 +10,7 @@ tags:
   - active directory
   - snippet
 ---
-INTRO GOES HERE
+Grouping objects by Organizational Unit might be helpful for preparing reports or stats for our directory. Let's learn how we can do it using PowerShell
 
 ## Getting objects
 
@@ -71,11 +71,11 @@ DC=internal
 # and so on
 ```
 
-Why is that? Let's start from the very beginning. [PowerShell is based on .NET](https://www.oreilly.com/library/view/professional-windows-powershell/9780471946939/9780471946939_windows_powershell_and_the_.net_framewor.html). Therefore, regular expressions [uses the .NET implementation](https://www.johndcook.com/blog/powershell_perl_regex/).
+Why is that? Let's start from the very beginning. [PowerShell is based on .NET](https://www.oreilly.com/library/view/professional-windows-powershell/9780471946939/9780471946939_windows_powershell_and_the_.net_framewor.html). Therefore, regular expressions [use the .NET implementation](https://www.johndcook.com/blog/powershell_perl_regex/).
 
 In this implementation, regex quantifiers are greedy by default. In contrary to lazy quantifiers, the greedy ones try to match as many characters as possible.
 
-In our example, `CN=` is matched based on the character matching. Next, the `*` quantifier matches as many other characters as it can, provided they are followed by `,`. 
+In our example, `CN=` is matched based on character matching. Next, the `*` quantifier matches as many other characters as it can, provided they are followed by `,`. 
 
 So, how to match minimal number of characters? You can probably guess - we need to change the quantifier to be lazy by adding `?` character! We want our * quantifier to be lazy. We don't need to apply the same mechanism for characters we use. It'd not have any effect anyway.
 
@@ -90,7 +90,35 @@ $objects | Select-Object @{n="OU";e={$_.DistinguishedName -replace "CN=.*?,",""}
 And the output will be:
 
 ```powershell
-
+OU=Unit1A,OU=Unit1,DC=domain,DC=com
+OU=Unit1B,OU=Unit1,DC=domain,DC=com
+OU=Unit2A,OU=Unit2,DC=domain,DC=com
+OU=Unit1B,OU=Unit1,DC=domain,DC=com
+# and so on
 ```
 
 ## Grouping objects
+
+Now we only need to group (and possibly sort) the OU names we got from the previous step. Let's save the output to a variable and use Group-Object and Sort-Object:
+
+```powershell
+# Saving output from previous step
+$ous = $objects | Select-Object @{n="OU";e={$_.DistinguishedName -replace "CN=.*?,",""}}
+# Groupping
+$groupped = $ous | Group-Object OU -NoElement
+# And sorting
+$groupped | Sort-Object Count -Descending
+```
+
+The output will be:
+
+```powershell
+Count Name
+----- ----
+  100 OU=Unit1B,OU=Unit1,DC=domain,DC=com
+   21 OU=Unit1A,OU=Unit1,DC=domain,DC=com
+   15 OU=Unit2A,OU=Unit2,DC=domain,DC=com
+# and so on
+```
+
+Now we have stats and we can export or work on them further
