@@ -366,10 +366,10 @@ li p {
 }
 
 blockquote {
-  background-color: rgb(254, 255, 166);
+  background-color: hsl(0, 0%, 97%);
   padding: 1rem 1.5rem;
-  border: 1px solid rgb(255, 220, 25);
-  border-left: 0.3rem solid rgb(255, 220, 25);
+  border: 0px;
+  border-left: 0.3rem solid hsl(0, 0%, 60%);
   margin: 1rem 0;
 }
 blockquote p {
@@ -379,6 +379,48 @@ blockquote p {
 strong {
   font-weight: bold;
 }
+
+/*#region Blocks */
+p.block-title {
+  display: flex;
+  align-items: center;
+  line-height: 2em;
+  font-variant: small-caps;
+}
+
+.block-icon {
+  margin-right: 0.2em;
+}
+
+blockquote.block-Note {
+  background-color: hsl(142, 55%, 95%);
+  border-color: hsl(142, 55%, 40%);
+}
+
+.block-icon-Note {
+  color: hsl(142, 55%, 40%);
+}
+
+blockquote.block-Warning {
+  background-color: hsl(355, 85%, 95%);
+  border-color: hsl(355, 85%, 55%);
+  border-left-color: hsl(355, 85%, 55%);
+}
+
+.block-icon-Warning {
+  color: hsl(355, 100%, 55%);
+}
+
+blockquote.block-Tip {
+  background-color: hsl(222, 55%, 95%);
+  border-color: hsl(222, 55%, 40%);
+}
+
+.block-icon-Tip {
+  color: hsl(222, 55%, 40%);
+}
+
+/*#endregion Blocks */
 
 /*#endregion Blog entry content */
 

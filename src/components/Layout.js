@@ -5,6 +5,8 @@ import Navbar from '../components/Navbar'
 import './layout.css'
 import useSiteMetadata from './SiteMetadata'
 import { withPrefix } from 'gatsby'
+import { MDXProvider } from '@mdx-js/react'
+import { NoteBlock, WarningBlock, TipBlock } from './Block'
 
 const TemplateWrapper = ({ children }) => {
   const { title, description, siteUrl } = useSiteMetadata()
@@ -142,7 +144,15 @@ const TemplateWrapper = ({ children }) => {
         ></script>
       </Helmet>
       <Navbar />
-      {children}
+      <MDXProvider
+        components={{
+          Note: NoteBlock,
+          Warning: WarningBlock,
+          Tip: TipBlock,
+        }}
+      >
+        {children}
+      </MDXProvider>
       <Footer />
     </div>
   )
