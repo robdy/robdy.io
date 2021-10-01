@@ -79,7 +79,11 @@ In our example, `CN=` is matched based on character matching. Next, the `*` quan
 
 So, how to match minimal number of characters? You can probably guess - we need to change the quantifier to be lazy by adding `?` character! We want our * quantifier to be lazy. We don't need to apply the same mechanism for characters we use. It'd not have any effect anyway.
 
-> If you want to learn more about quantifiers check [Quantifiers in Regular Expressions](https://docs.microsoft.com/en-us/dotnet/standard/base-types/quantifiers-in-regular-expressions) article provided by Microsoft.
+<Tip>
+
+  If you want to learn more about quantifiers check [Quantifiers in Regular Expressions](https://docs.microsoft.com/en-us/dotnet/standard/base-types/quantifiers-in-regular-expressions) article provided by Microsoft.
+
+</Tip>
 
 Our code will now be:
 
