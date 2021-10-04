@@ -73,11 +73,13 @@ DC=internal
 
 Why is that? Let's start from the very beginning. [PowerShell is based on .NET](https://www.oreilly.com/library/view/professional-windows-powershell/9780471946939/9780471946939_windows_powershell_and_the_.net_framewor.html). Therefore, regular expressions [use the .NET implementation](https://www.johndcook.com/blog/powershell_perl_regex/).
 
-In this implementation, regex quantifiers are greedy by default. In contrary to lazy quantifiers, the greedy ones try to match as many characters as possible.
+In this implementation, regex quantifiers are greedy by default. In contrary to lazy quantifiers, the greedy ones try to match as many characters as possible. See the image below for comparison
+
+![Greedy and lazy quantifier comparison](../../img/greedylazyquantifier.png "Greedy and lazy quantifier comparison")
 
 In our example, `CN=` is matched based on character matching. Next, the `*` quantifier matches as many other characters as it can, provided they are followed by `,`. 
 
-So, how to match minimal number of characters? You can probably guess - we need to change the quantifier to be lazy by adding `?` character! We want our * quantifier to be lazy. We don't need to apply the same mechanism for characters we use. It'd not have any effect anyway.
+So, how to match a minimal number of characters? You can probably guess - we need to change the quantifier to be lazy by adding a `?` character! We want our `*` quantifier to be lazy. We don't need to apply the same mechanism for the characters we use. It'd not have any effect anyway.
 
 <Tip>
 
