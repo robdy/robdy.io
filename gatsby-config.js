@@ -56,7 +56,6 @@ module.exports = {
               destinationDir: 'static',
             },
           },
-          'gatsby-remark-external-links',
           {
             resolve: 'gatsby-remark-table-of-contents',
             options: {
