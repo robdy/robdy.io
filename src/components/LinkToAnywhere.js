@@ -33,7 +33,7 @@ export const LinkToAnywhere = (props) => {
 
   // External links
   return (
-    <a href={props.href} rel={props.rel} target={props.target}>
+    <a href={props.href} rel="nofollow noopener noreferrer" target="_blank">
       {props.children}
     </a>
   )
