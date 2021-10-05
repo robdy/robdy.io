@@ -18,7 +18,6 @@
     "gatsby-plugin-sitemap": "^4.10.0",
     "gatsby-remark-autolink-headers": "^4.11.0",
     "gatsby-remark-copy-linked-files": "^4.11.0",
-    "gatsby-remark-external-links": "^0.0.4",
     "gatsby-remark-images": "^5.11.0",
     "gatsby-remark-prismjs": "^5.11.0",
     "gatsby-remark-relative-images": "^2.0.2",
