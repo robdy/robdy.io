@@ -4,7 +4,6 @@ import useSiteMetadata from './SiteMetadata'
 
 export const LinkToAnywhere = (props) => {
   const { siteUrl } = useSiteMetadata()
-  console.log({ props })
 
   // Internal links
   if (
