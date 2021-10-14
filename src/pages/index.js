@@ -31,8 +31,9 @@ export default class BlogIndexPage extends React.Component {
                 blog.{' '}
               </p>
               <p>
-                You might find content about PowerShell, Microsoft 365, as well
-                as notes from my journey to learn Node.js.
+                You might find content about <strong>PowerShell</strong>,{` `}
+                <strong>Microsoft 365</strong>, as well as notes from my journey
+                to learn <strong>web development</strong>.
               </p>
               <ul className="bio-links flex">
                 <li>

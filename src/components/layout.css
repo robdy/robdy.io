@@ -47,7 +47,7 @@ html {
 }
 
 .container {
-  max-width: 50rem;
+  max-width: 40rem;
   margin: 0 auto;
   padding: 0 2rem;
 }
@@ -126,7 +126,7 @@ a.navbar-link:visited {
 }
 
 .bio-picture-container {
-  align-items: center
+  align-items: center;
 }
 
 .bio-picture {

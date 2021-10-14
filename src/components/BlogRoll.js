@@ -11,10 +11,8 @@ class BlogRoll extends React.Component {
     const { edges: guestPosts } = data.allFeedAdamTheAutomator
     const posts = localPosts.concat(guestPosts)
     posts.sort(
-      ({node: firstItem}, {node: secondItem}) =>
-        new Date(
-          secondItem?.frontmatter?.date || secondItem?.isoDate
-        ) -
+      ({ node: firstItem }, { node: secondItem }) =>
+        new Date(secondItem?.frontmatter?.date || secondItem?.isoDate) -
         new Date(firstItem?.frontmatter?.date || firstItem?.isoDate)
     )
 
