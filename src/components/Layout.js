@@ -5,6 +5,9 @@ import Navbar from '../components/Navbar'
 import './layout.css'
 import useSiteMetadata from './SiteMetadata'
 import { withPrefix } from 'gatsby'
+import { MDXProvider } from '@mdx-js/react'
+import { NoteBlock, WarningBlock, TipBlock } from './Block'
+import { LinkToAnywhere } from './LinkToAnywhere'
 
 const TemplateWrapper = ({ children }) => {
   const { title, description, siteUrl } = useSiteMetadata()
@@ -141,7 +144,17 @@ const TemplateWrapper = ({ children }) => {
           src="https://plausible.io/js/plausible.js"
         ></script>
       </Helmet>
-      {children}
+      <Navbar />
+      <MDXProvider
+        components={{
+          Note: NoteBlock,
+          Warning: WarningBlock,
+          Tip: TipBlock,
+          a: LinkToAnywhere,
+        }}
+      >
+        {children}
+      </MDXProvider>
       <Footer />
     </div>
   )
