@@ -20,6 +20,8 @@
   --link-text-color-hover: hsl(0, 0%, 20%);
   --link-underline-color: var(--blue-violet-crayola);
   --link-underline-color-hover: var(--purple);
+  /* Tags */
+  --tag-border-color: hsl(120, 100%, 80%);
   /* Footer */
   --footer-bg: #cccccc;
 }
@@ -179,6 +181,7 @@ a.navbar-link:visited {
 
 .roll-post-title {
   font-size: 1.5rem;
+  margin-bottom: 0.6rem;
 }
 
 article.roll-list-item p {
@@ -219,35 +222,37 @@ h1 {
 
 .taglist-container {
   margin-top: 0.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .taglist {
   margin: 0;
+  margin-top: 0.5rem;
   padding: 0;
   overflow: hidden;
   list-style-type: none;
 }
 
-.taglist li {
-  font-size: 1rem;
+.taglist a li {
+  font-size: 0.8rem;
   float: left;
   padding-right: 10px;
-  border-radius: 0.7rem;
+  border-radius: 0.1rem;
+  border: 1px solid var(--tag-border-color);
+  padding: 0 0.4rem;
+  margin-right: 0.2rem;
 }
 
-.taglist li a::before {
-  content: '#';
-}
-
-.taglist li a {
+.taglist a {
   text-decoration: none;
   line-height: 1.8em;
   border-bottom: 0px;
   font-weight: 400;
 }
 
-.taglist li a:hover {
+.taglist a:hover {
   text-decoration: underline;
+  font-weight: 400;
 }
 
 .description {

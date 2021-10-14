@@ -28,18 +28,18 @@ export default class PostTile extends React.Component {
                   ) : null} */}
                 <p className="roll-post-title">{postData.frontmatter.title}</p>
               </header>
+              <p>{postData.frontmatter.description}</p>
               {postData.frontmatter.tags && postData.frontmatter.tags.length ? (
                 <div>
                   <ul className="taglist">
                     {postData.frontmatter.tags.map((tag) => (
-                      <li key={tag + `tag`}>
-                        <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
-                      </li>
+                      <Link to={`/tags/${kebabCase(tag)}/`}>
+                        <li key={tag + `tag`}>{tag}</li>
+                      </Link>
                     ))}
                   </ul>
                 </div>
               ) : null}
-              <p>{postData.frontmatter.description}</p>
             </article>
           </div>
         </Link>
