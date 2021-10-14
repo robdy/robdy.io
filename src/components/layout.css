@@ -14,7 +14,7 @@
   --go-green: #32ae60ff;
 
   /* Colors */
-  --main-text-color: #333333;
+  --main-text-color: hsl(0, 0%, 20%);
   /* Link colors */
   --link-text-color: hsl(0, 0%, 40%);
   --link-text-color-hover: hsl(0, 0%, 20%);
@@ -151,6 +151,15 @@ a.navbar-link:visited {
 .bio-links > li {
   padding: 0.5rem;
   background-color: var(--tea-green);
+}
+
+.newest-posts-header {
+  font-variant: all-small-caps;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: hsl(0, 0%, 50%);
+  font-weight: 600;
+  font-size: 1.3rem;
 }
 
 .roll-tile-container {

@@ -53,7 +53,7 @@ export default class BlogIndexPage extends React.Component {
         <section className="section">
           <div className="container">
             <div className="content">
-              <h2>Newest entries</h2>
+              <h2 className="newest-posts-header">Newest entries</h2>
               <BlogRoll />
             </div>
           </div>
