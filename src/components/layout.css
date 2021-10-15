@@ -22,6 +22,7 @@
   --link-underline-color-hover: var(--purple);
   /* Tags */
   --tag-border-color: hsl(120, 100%, 80%);
+  --tag-background-color: hsl(120, 100%, 80%);
   /* Footer */
   --footer-bg: #cccccc;
 }
@@ -262,6 +263,11 @@ h1 {
 .taglist a:hover {
   text-decoration: underline;
   font-weight: 400;
+}
+
+.taglist a:hover li {
+  background: var(--tag-background-color);
+  transition: all 0.5s ease-out;
 }
 
 .description {
