@@ -54,7 +54,7 @@ export default class BlogIndexPage extends React.Component {
           <div className="container">
             <div className="content">
               <h2 className="newest-posts-header">Newest entries</h2>
-              <BlogRoll />
+              <BlogRoll maxPosts={5} />
             </div>
           </div>
         </section>
