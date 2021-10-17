@@ -3,6 +3,12 @@ import React from 'react'
 export default class GuestPostTile extends React.Component {
   render() {
     const { postData } = this.props
+    const postDate = new Date(postData.isoDate)
+    const postDateOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }
 
     return (
       <div className="roll-tile-container">
@@ -29,6 +35,9 @@ export default class GuestPostTile extends React.Component {
                   ) : null} */}
                 <p className="roll-post-title">{postData.title}</p>
               </header>
+              <p className={`roll-post-date`}>
+                {postDate.toLocaleDateString('en-GB', postDateOptions)}
+              </p>
               <p className={`guest-post-note`}>
                 Written for{' '}
                 <a
