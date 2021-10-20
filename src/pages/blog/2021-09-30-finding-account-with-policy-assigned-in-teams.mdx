@@ -9,10 +9,6 @@ tags:
   - powershell
   - snippet
 ---
-
-
-
-
 The longer you administer Microsoft Teams, the more policies you might need to create and assign to your users. At some point, you might not necessarily remember which policies were assigned to which users. Let's analyze the options for reporting that via PowerShell.
 
 ## Finding policies assigned to a user
@@ -55,7 +51,9 @@ Get-CsConferencingPolicy -Identity 'BposSAllModality'
 
 ## Finding users with a certain policy assigned
 
-In some cases, we're not interested in policies assigned to the user, but we rather need to find all people with a certain policy assigned. We could use `-Filter` parameter for that purpose.
+In some cases, we're not interested in policies assigned to the user, but we rather need to find all people with a certain policy assigned. Typical scenario is when we want to delete the policy. We cannot do that until there's no account with that policy assigned.
+
+So, how to find the account with our to-be-deleted policy still assigned? We could use `-Filter` parameter for that purpose.
 
 ```powershell
 # String syntax
@@ -78,6 +76,10 @@ query: "TeamsUpdateManagementPolicy -eq " position: "29""
 </Warning>
 
 ## Finding all users with a custom policy assigned
+
+As an extension of the previous example, we might want to list all the accounts which have non-global policy assigned. Let's try to extend our script!
+
+### Non-working solution
 
 For filtering, only `-eq` and `-ne` operators are supported. This is purely based on my findings, as there's no mention of that in the docs.
 
@@ -102,8 +104,6 @@ position: "29""
 
 And if we try to use a non-equality operator we'd receive a different error:
 
-
-
 ```powershell
 # Any of these
 Get-CsOnlineUser -Filter "TeamsUpdateManagementPolicy -ne ''"
@@ -115,7 +115,23 @@ Exception setting "Filter": "Policy "Global" is not a user policy.
 You can assign only a user policy to a specific user."
 ```
 
-### Working solution
+### Working, but slow solution
+
+In contrary to the previous example, we can use all operators after we pull all the users into a variable and pipe into `Where-Object`:
+
+```powershell
+$allUsers = Get-CsOnlineUser -ResultSize Unlimited
+# Group by policy
+$allUsers | Group-Object TeamsUpdateManagementPolicy
+# Display users with non-default policy
+$allUsers | Where-Object {
+  $null -ne $_.TeamsUpdateManagementPolicy } |
+  Select-Object userprincipalname
+```
+
+The biggest drawback is that pulling all the user data takes a lot of time and depend on the size of our environment, so it's not the optimal solution.
+
+### Working and optimal solution
 
 While only equality operators are available, we could construct a query that contains queries for all the policies merged with `-or` operator.
 
@@ -146,3 +162,22 @@ $policyType = 'TeamsUpdateManagementPolicy'
     "$policyType -eq '$_'"
   } ) -join " -or "
 ```
+
+In the script, we use `&` call operator to run the cmdlet. This is because we need to calculate the cmdlet based on the variable:
+
+```powershell
+& "Get-Cs$policyType"
+```
+
+Later on, we use pipeline variable `$_` to access the value of current item from a loop:
+
+```powershell
+# If current item in a loop is Policy1, the value of
+"$policyType -eq '$_'"
+# Will be the following string
+$policyType -eq 'Policy1'
+```
+
+## Conclusion
+
+Using `Get-CsOnlineUser` we can find out a lot of information about the Teams policies assigned in our environment. If we dig into filtering, we will be able to optimize our queries and more easily fetch the data we need.
