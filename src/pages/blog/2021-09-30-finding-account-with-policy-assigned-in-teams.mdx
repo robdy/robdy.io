@@ -1,10 +1,148 @@
 ---
 templateKey: blog-post
-title: Finding account with policy assigned in Teams
+title: Teams policies assigned to user
 date: 2021-09-30T07:59:26.337Z
-description: Learn how to find out all the accounts with certain Teams policy assigned.
+description: Learn how to analyze and report Teams policies assigned to user accounts.
 featuredpost: false
+tags:
+  - teams
+  - powershell
+  - snippet
 ---
+
+
+
+
+The longer you administer Microsoft Teams, the more policies you might need to create and assign to your users. At some point, you might not necessarily remember which policies were assigned to which users. Let's analyze the options for reporting that via PowerShell.
+
+## Finding policies assigned to a user
+
+The cmdlet which contains all the information we need is [`Get-CsOnlineUser`](https://docs.microsoft.com/en-us/powershell/module/skype/get-csonlineuser?view=skype-ps). Based on the properties ending with `Policy`, we'll be able to find what policy is assigned to the user:
+
 ```powershell
+Get-CsOnlineUser -Identity robert@domain.com |
+  Select-Object userprincipalname,*policy
+```
+
+The output should be similar to the below:
+
+```powershell
+UserPrincipalName                      : robert@domain.com
+OnlineDialinConferencingPolicy         :
+ExchangeArchivingPolicy                : Uninitialized
+VoicePolicy                            :
+CallerIdPolicy                         :
+MobilityPolicy                         : MobilityEnableOutsideVoice
+ConferencingPolicy                     : BposSAllModality
+# and so on...
+```
+
+An empty value means that the global policy is assigned. If you see any name on the right, that means the non-default policy is assigned.
+
+<Tip>
+
+If you want to check details of any policy, use the following pattern:
+
+```powershell
+Get-CS<PolicyNameGoesHere> -Identity '<PolicyNameOrGlobal>'
+# For example - named policy
+Get-CsConferencingPolicy -Identity 'BposSAllModality'
+# and global policy
+ Get-CsOnlineDialinConferencingPolicy -Identity 'Global'
+```
+
+</Tip>
+
+## Finding users with a certain policy assigned
+
+In some cases, we're not interested in policies assigned to the user, but we rather need to find all people with a certain policy assigned. We could use `-Filter` parameter for that purpose.
+
+```powershell
+# String syntax
 Get-CsOnlineUser -Filter "TeamsUpdateManagementPolicy -eq 'AllowPreview'"
+# ScriptBlock syntax
+Get-CsOnlineUser -Filter {TeamsUpdateManagementPolicy -eq 'AllowPreview'}
+```
+
+<Warning>
+
+Be careful about what type of quotes you use with string syntax. For filtering, you need to use two different types. If we use the same type, the inner quote would end the outer one and we'd see the syntax error:
+
+```powershell
+PS> Get-CsOnlineUser -Filter "TeamsUpdateManagementPolicy -eq "AllowPreview""
+Get-CsOnlineUser: Cannot bind parameter 'Filter' to the target.
+Exception setting "Filter": "Syntax error: "syntax error"
+query: "TeamsUpdateManagementPolicy -eq " position: "29""
+```
+
+</Warning>
+
+## Finding all users with a custom policy assigned
+
+For filtering, only `-eq` and `-ne` operators are supported. This is purely based on my findings, as there's no mention of that in the docs.
+
+The above means we cannot use any of the following:
+
+```powershell
+# Not working
+Get-CsOnlineUser -Filter "TeamsUpdateManagementPolicy -like '*'"
+Get-CsOnlineUser -Filter "TeamsUpdateManagementPolicy -match '*'"
+Get-CsOnlineUser -Filter {TeamsUpdateManagementPolicy -in @('EnablePublicPreview')}
+# Not working
+```
+
+All of these would result in an error like that:
+
+```powershell
+Get-CsOnlineUser: Cannot bind parameter 'Filter' to the target.
+Exception setting "Filter": "Query not supported for operator:
+"-in" query: "TeamsUpdateManagementPolicy -in @('EnablePublicPreview')"
+position: "29""
+```
+
+And if we try to use a non-equality operator we'd receive a different error:
+
+
+
+```powershell
+# Any of these
+Get-CsOnlineUser -Filter "TeamsUpdateManagementPolicy -ne ''"
+Get-CsOnlineUser -Filter "TeamsUpdateManagementPolicy -ne 'Global'"
+
+# Would result in
+Get-CsOnlineUser: Cannot bind parameter 'Filter' to the target.
+Exception setting "Filter": "Policy "Global" is not a user policy.
+You can assign only a user policy to a specific user."
+```
+
+### Working solution
+
+While only equality operators are available, we could construct a query that contains queries for all the policies merged with `-or` operator.
+
+The workflow would be:
+
+1. Get all the policies using a dedicated cmdlet
+2. Remove global policy from an array
+3. For each policy in the array, construct query using `-eq` operator
+4. Join all the queries using `-or` operator surrounded with spaces
+
+Translating into PowerShell:
+
+```powershell
+$filterQuery = (Get-CsTeamsUpdateManagementPolicy | Where-Object Identity -ne "Global"
+| Select-Object -Expand identity | Foreach-Object {
+  "TeamsUpdateManagementPolicy -eq '$_'"
+} ) -join " -or "
+Get-CsOnlineUser -Filter $filterQuery |
+  Select-Object UserPrincipalName
+```
+
+We can also construct a universal query where we specify the policy type first and then use if for the query construction:
+
+```powershell
+$policyType = 'TeamsUpdateManagementPolicy'
+(& "Get-Cs$policyType" | Where-Object Identity -ne "Global"
+  | Select-Object -Expand identity | Foreach-Object {
+    "$policyType -eq '$_'"
+  } ) -join " -or "
 ```
