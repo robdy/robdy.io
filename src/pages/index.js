@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet'
 import { Link } from 'gatsby'
 import Layout from '../components/Layout'
 import BlogRoll from '../components/BlogRoll'
-import userTie from '../img/user-tie-solid.svg'
 
 export default class BlogIndexPage extends React.Component {
   render() {
@@ -37,14 +36,9 @@ export default class BlogIndexPage extends React.Component {
               </p>
               <ul className="bio-links flex">
                 <li>
-                  <Link to="/about/">
-                    <img
-                      src={userTie}
-                      alt="User icon"
-                      className="navbar-icon"
-                    />{' '}
-                    About me
-                  </Link>
+                  <div className={`button`}>
+                    <Link to="/about/">About me</Link>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -53,7 +47,7 @@ export default class BlogIndexPage extends React.Component {
         <section className="section">
           <div className="container">
             <div className="content">
-              <h2 className="newest-posts-header">Newest entries</h2>
+              <h2 className="newest-posts-header">Newest posts</h2>
               <BlogRoll maxPosts={5} />
             </div>
           </div>

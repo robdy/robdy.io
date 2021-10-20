@@ -22,6 +22,7 @@
   --link-text-color-hover: hsl(0, 0%, 20%);
   --link-underline-color: var(--blue-violet-crayola);
   --link-underline-color-hover: var(--purple);
+  --back-text-color: hsl(0, 0%, 60%);
   /* Tags */
   --tag-border-color: hsl(120, 100%, 80%);
   --tag-background-color: hsl(120, 100%, 80%);
@@ -68,55 +69,6 @@ html {
   background: var(--go-green);
 }
 /*#endregion Basics */
-
-/*#region Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-}
-
-.navbar-left {
-  height: 100%;
-}
-
-.navbar-logo {
-  width: 3rem;
-}
-
-.navbar-title {
-  align-self: center;
-  font-size: 1.6rem;
-  font-weight: 600;
-  padding: 0.8rem;
-}
-
-.navbar-links {
-  list-style-type: none;
-  padding: 0.5rem;
-  display: flex;
-}
-
-.navbar-item {
-  padding: 1rem;
-}
-
-a.navbar-link,
-a.navbar-link:hover,
-a.navbar-link:visited {
-  border-bottom: 0px;
-}
-
-.navbar-icon {
-  width: 1em;
-  margin-right: 0.2em;
-}
-
-.content {
-  /* font-size: 1.1rem; */
-}
-/*#endregion Navbar */
 
 /*#region Main page */
 .bio {
@@ -209,6 +161,32 @@ a.navbar-link:visited {
   margin-bottom: 0.8rem;
 }
 
+.button {
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.all-posts-button {
+  margin-top: 2rem;
+}
+
+.button a {
+  background-color: var(--go-green);
+  padding: 0.5rem 1rem;
+}
+
+.button a,
+.button a:hover,
+.button a:visited {
+  border-bottom: 0;
+  color: var(--honeydew);
+}
+
+.button a:hover {
+  filter: brightness(90%);
+}
+
 article.roll-list-item p {
   margin-top: 0px;
 }
@@ -229,6 +207,14 @@ h1 {
   font-size: 2rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.back-text {
+  padding-left: 0;
+  color: var(--back-text-color);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
 }
 
 .post-title {
@@ -369,9 +355,11 @@ strong {
 
 a,
 a:hover,
-a:visited {
+a:visited,
+.back-text {
   text-decoration: none;
   font-weight: 600;
+  cursor: pointer;
 }
 
 a,

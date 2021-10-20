@@ -2,6 +2,7 @@ import React from 'react'
 import Layout from '../../components/Layout'
 import ExternalLink from '../../components/ExternalLink'
 import { Helmet } from 'react-helmet'
+import Navbar from '../../components/Navbar'
 
 const AboutPage = () => (
   <Layout>
@@ -10,6 +11,7 @@ const AboutPage = () => (
       <link rel="canonical" href="https://robdy.io/about" />
     </Helmet>
     <div className="container">
+      <Navbar />
       <h1>About me</h1>
       <p>
         My name is Robert Dyjas. I'm Microsoft Teams and Skype for Business
@@ -31,45 +33,25 @@ const AboutPage = () => (
       <ul>
         <li>
           Built and hosted by{' '}
-          <ExternalLink
-            href="https://netlify.com"
-           >
-            Netlify
-          </ExternalLink>
+          <ExternalLink href="https://netlify.com">Netlify</ExternalLink>
         </li>
         <li>
           Created using{' '}
-          <ExternalLink
-            href="https://gatsbyjs.org/"
-          >
-            Gatsby
-          </ExternalLink>
+          <ExternalLink href="https://gatsbyjs.org/">Gatsby</ExternalLink>
         </li>
         <li>
           Logo icon made by{' '}
-          <ExternalLink
-            href="http://www.freepik.com/"
-           >
-            Freepik
-          </ExternalLink>{' '}
+          <ExternalLink href="http://www.freepik.com/">Freepik</ExternalLink>{' '}
           from{' '}
-          <ExternalLink
-            href="https://www.flaticon.com/"
-           >
-            Flaticon
-          </ExternalLink>
+          <ExternalLink href="https://www.flaticon.com/">Flaticon</ExternalLink>
         </li>
         <li>
           Navbar and footer icons from{' '}
-          <ExternalLink
-            href="https://fontawesome.com"
-           >
+          <ExternalLink href="https://fontawesome.com">
             FontAwesome
           </ExternalLink>{' '}
           (
-          <ExternalLink
-            href="https://fontawesome.com/license"
-           >
+          <ExternalLink href="https://fontawesome.com/license">
             see license details
           </ExternalLink>
           )

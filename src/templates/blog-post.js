@@ -8,6 +8,7 @@ import Content, { HTMLContent } from '../components/Content'
 import Comments from '../components/Comments'
 import useSiteMetadata from '../components/SiteMetadata'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
+import Navbar from '../components/Navbar'
 
 const BlogPostTemplate = ({
   content,
@@ -33,6 +34,7 @@ const BlogPostTemplate = ({
       {helmet || ''}
       <div className="container content">
         <div className="header-container">
+          <Navbar />
           <h1 className="post-title">{title}</h1>
           <p className="post-subheader">
             By{' '}

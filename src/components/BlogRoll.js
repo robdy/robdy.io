@@ -27,7 +27,11 @@ function BlogRoll(props) {
             <GuestPostTile postData={post} />
           )
         )}
-      {maxPosts ? <Link to="/all">READ MORE</Link> : null}
+      {maxPosts ? (
+        <div className={`button all-posts-button`}>
+          <Link to="/all">Read all posts</Link>
+        </div>
+      ) : null}
     </div>
   )
 }

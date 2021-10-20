@@ -1,7 +1,8 @@
-import React from "react";
-import { Helmet } from "react-helmet";
-import Layout from "../../components/Layout";
-import BlogRoll from "../../components/BlogRoll";
+import React from 'react'
+import { Helmet } from 'react-helmet'
+import Layout from '../../components/Layout'
+import BlogRoll from '../../components/BlogRoll'
+import Navbar from '../../components/Navbar'
 
 export default class BlogIndexPage extends React.Component {
   render() {
@@ -11,6 +12,7 @@ export default class BlogIndexPage extends React.Component {
           <link rel="canonical" href="https://robdy.io/all/" />
         </Helmet>
         <div className="container">
+          <Navbar />
           <h1 className="page-header">All posts</h1>
         </div>
         <section className="section">
@@ -21,6 +23,6 @@ export default class BlogIndexPage extends React.Component {
           </div>
         </section>
       </Layout>
-    );
+    )
   }
 }

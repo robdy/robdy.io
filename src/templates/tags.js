@@ -5,18 +5,19 @@ import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import PostTile from '../components/PostTile'
 import { TagsData } from '../components/TagsData'
+import Navbar from '../components/Navbar'
 
 class TagRoute extends React.Component {
   render() {
-    const posts = this.props.data.allMdx.edges;
-    const tag = this.props.pageContext.tag;
-    const title = this.props.data.site.siteMetadata.title;
-    const totalCount = this.props.data.allMdx.totalCount;
+    const posts = this.props.data.allMdx.edges
+    const tag = this.props.pageContext.tag
+    const title = this.props.data.site.siteMetadata.title
+    const totalCount = this.props.data.allMdx.totalCount
     const tagHeader = `${totalCount} post${
-      totalCount === 1 ? "" : "s"
-    } tagged with “${tag}”`;
-    const tagPath = kebabCase(tag);
-    const siteUrl = this.props.data.site.siteMetadata.siteUrl;
+      totalCount === 1 ? '' : 's'
+    } tagged with “${tag}”`
+    const tagPath = kebabCase(tag)
+    const siteUrl = this.props.data.site.siteMetadata.siteUrl
 
     return (
       <Layout>
@@ -26,9 +27,8 @@ class TagRoute extends React.Component {
             <link rel="canonical" href={`${siteUrl}/tags/${tagPath}/`} />
           </Helmet>
           <div className="container content">
-            <div
-              className=""
-            >
+            <Navbar />
+            <div className="">
               <TagsData tag={this.props.pageContext.tag} />
               <h3 className="">{tagHeader}</h3>
               {posts &&
@@ -40,11 +40,11 @@ class TagRoute extends React.Component {
           </div>
         </section>
       </Layout>
-    );
+    )
   }
 }
 
-export default TagRoute;
+export default TagRoute
 
 export const tagPageQuery = graphql`
   query TagPage($tag: String) {
@@ -67,6 +67,7 @@ export const tagPageQuery = graphql`
             slug
           }
           frontmatter {
+            date
             title
             templateKey
             featuredpost
@@ -77,4 +78,4 @@ export const tagPageQuery = graphql`
       }
     }
   }
-`;
+`

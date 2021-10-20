@@ -1,14 +1,12 @@
 import React from 'react'
-import { Link } from 'gatsby'
-import server from '../img/server-icon.svg'
-import thList from '../img/th-list-solid.svg'
-import userTie from '../img/user-tie-solid.svg'
+import { navigate } from 'gatsby-link'
 
-const Navbar = class extends React.Component {
-  render() {
-    return null
-  }
-}
-
+const Navbar = () => (
+  <div className="container back-text">
+    <p className="" onClick={() => navigate(-1)}>
+      ← Back
+    </p>
+  </div>
+)
 
 export default Navbar

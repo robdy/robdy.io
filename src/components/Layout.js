@@ -144,7 +144,6 @@ const TemplateWrapper = ({ children }) => {
           src="https://plausible.io/js/plausible.js"
         ></script>
       </Helmet>
-      <Navbar />
       <MDXProvider
         components={{
           Note: NoteBlock,
