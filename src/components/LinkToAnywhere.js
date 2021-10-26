@@ -9,7 +9,8 @@ export const LinkToAnywhere = (props) => {
   if (
     // Handling links with hardcoded domain name
     (props.href.startsWith(siteUrl) && process.env.NODE_ENV === 'production') ||
-    props.href.startsWith('/')
+    props.href.startsWith('/') ||
+    (props.href.startsWith('#') && props.children?.props?.mdxType !== 'svg')
   ) {
     return (
       <Link to={props.href} aria-label={`${props.children} link`}>
@@ -18,8 +19,9 @@ export const LinkToAnywhere = (props) => {
     )
   }
 
+  console.log()
   // Paragraph links
-  if (props.href.startsWith('#')) {
+  if (props.href.startsWith('#') && props.children?.props?.mdxType === 'svg') {
     return (
       <Link
         className="anchor before"
