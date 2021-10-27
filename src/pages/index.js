@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet'
 import { Link } from 'gatsby'
 import Layout from '../components/Layout'
 import BlogRoll from '../components/BlogRoll'
+import rss from '../img/rss-solid.svg'
 
 export default class BlogIndexPage extends React.Component {
   render() {
@@ -47,7 +48,12 @@ export default class BlogIndexPage extends React.Component {
         <section className="section">
           <div className="container">
             <div className="content">
-              <h2 className="newest-posts-header">Newest posts</h2>
+              <div className="flex newest-posts-container">
+                <h2 className="newest-posts-header">Newest posts</h2>
+                <a href="rss.xml" className="rss-link" rel="nofollow noopener noreferrer" target="_blank">
+                  <img src={rss} className="rss-icon" alt="RSS icon" />
+                </a>
+              </div>
               <BlogRoll maxPosts={5} />
             </div>
           </div>

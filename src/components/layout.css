@@ -22,12 +22,14 @@
   --link-text-color-hover: hsl(0, 0%, 20%);
   --link-underline-color: var(--blue-violet-crayola);
   --link-underline-color-hover: var(--purple);
-  --back-text-color: hsl(0, 0%, 60%);
+  --post-nav-color: hsl(0, 0%, 60%);
   /* Tags */
   --tag-border-color: hsl(120, 100%, 80%);
   --tag-background-color: hsl(120, 100%, 80%);
   /* Footer */
   --footer-bg: #cccccc;
+  /* Misc */
+  --header-top-margin: 2rem;
 }
 
 /*#endregion Variables */
@@ -108,13 +110,25 @@ html {
   background-color: var(--tea-green);
 }
 
+.newest-posts-container {
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
 .newest-posts-header {
   text-transform: uppercase;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
   color: hsl(0, 0%, 50%);
   font-weight: 600;
   font-size: 1.3rem;
+}
+
+.rss-link, .rss-link:hover, .rss-link:visited {
+  border-bottom: 0;
+}
+
+.rss-icon {
+  height: 1rem;
+  margin-top: var(--header-top-margin);
 }
 
 .roll-tile-container {
@@ -200,7 +214,6 @@ article.roll-list-item p {
 
 /*#region Blog header */
 .header-container {
-  margin-top: 2rem;
   margin-bottom: 1rem;
 }
 
@@ -210,12 +223,42 @@ h1 {
   margin-bottom: 1rem;
 }
 
-.back-text {
-  padding-left: 0;
-  color: var(--back-text-color);
+.post-nav {
   margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   text-transform: uppercase;
+  justify-content: center;
+}
+
+.post-nav p {
+  margin-top: 0;
+}
+
+.post-nav a,
+.post-nav a:hover,
+.post-nav a:visited {
+  border-bottom: 0;
+}
+
+.navbar-links {
+  display: flex;
+  list-style-type: none;
+  padding: 0.5rem;
+}
+
+.navbar-links li {
+  margin-left: 2rem;
+}
+
+.navbar-links li a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-icon {
+  height: 1rem;
+  margin-right: 0.5em;
 }
 
 .post-title {
@@ -284,7 +327,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin-top: 2rem;
+  margin-top: var(--header-top-margin);
 }
 
 /*#region Header anchors */
@@ -356,11 +399,9 @@ strong {
 
 a,
 a:hover,
-a:visited,
-.back-text {
+a:visited {
   text-decoration: none;
   font-weight: 600;
-  cursor: pointer;
 }
 
 a,
@@ -376,6 +417,11 @@ a:hover {
 
 a.anchor {
   border-bottom: 0px;
+}
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
 }
 
 ul,
