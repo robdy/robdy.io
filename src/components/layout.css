@@ -122,13 +122,16 @@ html {
   font-size: 1.3rem;
 }
 
-.rss-link, .rss-link:hover, .rss-link:visited {
+.rss-link,
+.rss-link:hover,
+.rss-link:visited {
   border-bottom: 0;
 }
 
 .rss-icon {
   height: 1rem;
   margin-top: var(--header-top-margin);
+  filter: opacity(0.5);
 }
 
 .roll-tile-container {
