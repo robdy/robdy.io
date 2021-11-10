@@ -1,0 +1,339 @@
+---
+templateKey: blog-post
+title: Teams PowerShell datamining - Nov 2021
+date: 2021-11-10T07:50:15.167Z
+description: AAA
+featuredpost: false
+---
+## New cmdlets
+
+17.08 (removed 29.08, added back 31.08):
+Get-CsTeamsAudioConferencingPolicy
+Get-CsTeamsUnassignedNumberTreatment
+Grant-CsTeamsAudioConferencingPolicy
+New-CsTeamsAudioConferencingPolicy
+New-CsTeamsUnassignedNumberTreatment
+Remove-CsTeamsAudioConferencingPolicy
+Remove-CsTeamsUnassignedNumberTreatment
+Set-CsTeamsAudioConferencingPolicy
+Set-CsTeamsUnassignedNumberTreatment
+
+23.09:
+Clear-CsOnlineTelephoneNumberOrder
+Complete-CsOnlineTelephoneNumberOrder
+Get-CsOnlineTelephoneNumberCountry
+Get-CsOnlineTelephoneNumberOrder
+Get-CsOnlineTelephoneNumberType
+Get-CsTeamsEnhancedEncryptionPolicy
+
+## Removed cmdlets
+
+17.08 (added back 29.08, removed 31.08. added 23.09)
+Get-CsTeamsShiftsConnectionConnector
+Get-CsTeamsShiftsConnectionInstance
+Get-CsTeamsShiftsConnectionSyncResult
+Get-CsTeamsShiftsConnectionTeamMap
+Get-CsTeamsShiftsConnectionUser
+Get-CsTeamsShiftsConnectionWfmTeam
+New-CsTeamsShiftsConnectionInstance
+New-CsTeamsShiftsConnectionTeamMap
+Remove-CsTeamsShiftsConnectionInstance
+Remove-CsTeamsShiftsConnectionTeamMap
+Set-CsTeamsShiftsConnectionInstance
+Test-CsTeamsShiftsConnectionValidate
+Add-TeamChannelUser
+Add-TeamsAppInstallation
+Get-LicenseReportForChangeNotificationSubscription
+Get-TeamChannelUser
+Get-TeamsAppInstallation
+Get-TeamTargetingHierarchyStatus
+Remove-TeamChannelUser
+Remove-TeamsAppInstallation
+Remove-TeamTargetingHierarchy
+Set-TeamTargetingHierarchy
+Update-TeamsAppInstallation
+
+23.09
+Get-CsTenantBlockedNumberExceptionPattern
+New-CsTenantBlockedNumberExceptionPattern
+Remove-CsTenantBlockedNumberExceptionPattern
+Set-CsTenantBlockedNumberExceptionPattern
+
+## Removed params
+
+29.08 (added back 31.08):
+		"Cmdlet": "Set-CsTeamsCallingPolicy",
+		"Param": "AllowCallRedirect",
+
+		"Cmdlet": "New-CsTeamsCallingPolicy",
+		"Param": "AllowCallRedirect",
+
+23.09
+	{
+		"Category": "Param",
+		"Cmdlet": "Clear-CsOnlineTelephoneNumberReservation",
+		"Param": "AsJob",
+		"Event": "Remove",
+		"Timestamp": "2021-09-23 09:44:08"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "Clear-CsOnlineTelephoneNumberReservation",
+		"Param": "DomainController",
+		"Event": "Remove",
+		"Timestamp": "2021-09-23 09:44:08"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "Clear-CsOnlineTelephoneNumberReservation",
+		"Param": "Tenant",
+		"Event": "Remove",
+		"Timestamp": "2021-09-23 09:44:08"
+	},
+
+23.09 - Mass removal of Tenant, DomainController, AsJob, Credential, RunspaceId, PSComputerName, PSShowComputerName
+
+		"Category": "Param",
+		"Cmdlet": "Get-CsEffectiveTenantDialPlan",
+		"Param": "Credential",
+		"Event": "Remove",
+		"Timestamp": "2021-09-23 09:44:08"
+
+		"Category": "Param",
+		"Cmdlet": "Get-CsMeetingRoom",
+		"Param": "Credential",
+		"Event": "Remove",
+		"Timestamp": "2021-09-23 09:44:08"
+
+		"Category": "Param",
+		"Cmdlet": "Get-CsOnlineApplicationInstance",
+		"Param": "Identities",
+		"Event": "Remove",
+		"Timestamp": "2021-09-23 09:44:08"
+
+
+
+
+
+## New params
+
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsCallingPolicy",
+		"Param": "AllowSIPDevicesCalling",
+		"Event": "Add",
+
+		"Category": "Param",
+		"Cmdlet": "New-CsTeamsMeetingPolicy",
+		"Param": "AllowCartCaptionsScheduling",
+		"Event": "Add",
+		"Timestamp": "2021-09-23 09:44:09"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "New-CsTeamsMeetingPolicy",
+		"Param": "AllowTasksFromTranscript",
+		"Event": "Add",
+		"Timestamp": "2021-09-23 09:44:09"
+	{
+		"Category": "Param",
+		"Cmdlet": "Set-CsTeamsMeetingPolicy",
+		"Param": "AllowCartCaptionsScheduling",
+		"Event": "Add",
+		"Timestamp": "2021-09-23 09:44:10"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "Set-CsTeamsMeetingPolicy",
+		"Param": "AllowTasksFromTranscript",
+		"Event": "Add",
+		"Timestamp": "2021-09-23 09:44:10"
+	},
+		"Category": "Param",
+		"Cmdlet": "New-CsTeamsAppSetupPolicy",
+		"Param": "PinnedMessageBarApps",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:11"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "New-CsExternalAccessPolicy",
+		"Param": "EnableTeamsConsumerInbound",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:11"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "Get-CsOnlineApplicationInstance",
+		"Param": "Identities",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:10"
+	},
+
+	{
+		"Category": "Param",
+		"Cmdlet": "New-CsTeamsCallingPolicy",
+		"Param": "AllowSIPDevicesCalling",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:11"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "New-CsTeamsCallParkPolicy",
+		"Param": "ParkTimeoutSeconds",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:11"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "New-CsTeamsCallParkPolicy",
+		"Param": "PickupRangeStart",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:11"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "New-CsTeamsCallParkPolicy",
+		"Param": "PickupRangeEnd",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:11"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "Set-CsTeamsMessagingPolicy",
+		"Param": "AllowUserDeleteChat",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:12"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "Set-CsTeamsMeetingPolicy",
+		"Param": "AllowAnonymousUsersToJoinMeeting",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:12"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "Set-CsTeamsMeetingPolicy",
+		"Param": "NewMeetingRecordingExpirationDays",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:12"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "Set-CsTeamsGuestMessagingConfiguration",
+		"Param": "AllowUserDeleteChat",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:12"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "Set-CsTeamsCallParkPolicy",
+		"Param": "PickupRangeStart",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:12"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "Set-CsTeamsCallParkPolicy",
+		"Param": "PickupRangeEnd",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:12"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "Set-CsTeamsCallParkPolicy",
+		"Param": "ParkTimeoutSeconds",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:12"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "Set-CsTeamsCallingPolicy",
+		"Param": "AllowSIPDevicesCalling",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:12"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "Set-CsTeamsAppSetupPolicy",
+		"Param": "PinnedMessageBarApps",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:12"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "Set-CsExternalAccessPolicy",
+		"Param": "EnableTeamsConsumerInbound",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:11"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "New-CsTeamsMessagingPolicy",
+		"Param": "AllowUserDeleteChat",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:11"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "New-CsTeamsMeetingPolicy",
+		"Param": "AllowAnonymousUsersToJoinMeeting",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:11"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "New-CsTeamsMeetingPolicy",
+		"Param": "NewMeetingRecordingExpirationDays",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:11"
+	},
+
+
+
+
+
+## New policies properties
+
+25.09:
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTenantFederationConfiguration",
+		"Param": "AllowTeamsConsumerInbound",
+		"Event": "Add",
+		"Timestamp": "2021-09-25 02:33:13"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsMeetingPolicy",
+		"Param": "NewMeetingRecordingExpirationDays",
+		"Event": "Add",
+		"Timestamp": "2021-09-25 02:32:57"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsExternalAccessPolicy",
+		"Param": "EnableTeamsConsumerInbound",
+		"Event": "Add",
+		"Timestamp": "2021-09-25 02:32:26"
+	},
