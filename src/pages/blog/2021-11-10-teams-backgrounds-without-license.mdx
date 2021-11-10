@@ -42,7 +42,7 @@ First option is group policy! Knowing where all these custom backgrounds are upl
 
 First, create a folder on network share. Make sure that it's accessible to everyone (it should have at least *Read* permissions):
 
-![Permissions on network folder](../../img/20210412-092312-fmay6h1it3.png "Permissions on network folder")
+![Permissions on network folder](../../img/20210412-092312-fmay6h1it3-1-.png "Permissions on network folder")
 
 Now let's create group policy. As with all changes, **it's good to roll them out gradually**. We can use [Security Group Filters](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-firewall/assign-security-group-filters-to-the-gpo).
 
@@ -50,11 +50,11 @@ Our GPO will be applied to users, not to machines. We need to add our files unde
 
 We can either add files one-by-one (if we want very granular control):
 
-![Settings of single file in group policy](../../img/20210412-100328-xdsvvj2gnk.png "Settings of single file in group policy")
+![Settings of single file in group policy](../../img/20210412-100328-xdsvvj2gnk-1-.png "Settings of single file in group policy")
 
 Or with wildcard (credits to [Copy Files or Folders to All Computers via GPO](http://woshub.com/copy-files-on-all-computers-group-policy/)):
 
-![Settings of wildcard entry in group policy](../../img/20210412-120332-3heprhjzby.png "Settings of wildcard entry in group policy")
+![Settings of wildcard entry in group policy](../../img/20210412-120332-3heprhjzby-1-.png "Settings of wildcard entry in group policy")
 
 In both cases the action chosen can either be **Create** or **Update**. Do not use **Replace** so that it doesn't replace the files every time GPO is processed. You can read more about that behaviour at [Group Policy Preferences – Replace Existing File](https://www.adamfowlerit.com/2016/07/group-policy-preferences-replace-existing-file/).
 
