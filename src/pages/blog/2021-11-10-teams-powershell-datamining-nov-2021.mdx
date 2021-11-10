@@ -28,7 +28,7 @@ Get-CsTeamsEnhancedEncryptionPolicy
 
 ## Removed cmdlets
 
-17.08 (added back 29.08, removed 31.08. added 23.09)
+17.08 (added back 29.08, removed 31.08. added 23.09, removed 10.01, added 26.10)
 Get-CsTeamsShiftsConnectionConnector
 Get-CsTeamsShiftsConnectionInstance
 Get-CsTeamsShiftsConnectionSyncResult
@@ -309,13 +309,38 @@ Set-CsTenantBlockedNumberExceptionPattern
 		"Timestamp": "2021-10-01 06:39:11"
 	},
 
+	{
+		"Category": "Param",
+		"Cmdlet": "Set-CsTenantFederationConfiguration",
+		"Param": "AllowTeamsConsumerInbound",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-01 06:39:12"
+	},
 
 
+	{
+		"Category": "Param",
+		"Cmdlet": "Set-CsTeamsEmergencyCallingPolicy",
+		"Param": "EnhancedEmergencyServiceDisclaimer",
+		"Module": "2.6.1",
+		"Event": "Add",
+		"Timestamp": "2021-10-26 02:31:33"
+	},
+	{
+		"Category": "Param",
+		"Cmdlet": "New-CsTeamsEmergencyCallingPolicy",
+		"Param": "EnhancedEmergencyServiceDisclaimer",
+		"Module": "2.6.1",
+		"Event": "Add",
+		"Timestamp": "2021-10-26 02:31:33"
+	},
 
 
 ## New policies properties
 
 25.09:
+
 	{
 		"Category": "Policy",
 		"Cmdlet": "Get-CsTenantFederationConfiguration",
@@ -336,4 +361,354 @@ Set-CsTenantBlockedNumberExceptionPattern
 		"Param": "EnableTeamsConsumerInbound",
 		"Event": "Add",
 		"Timestamp": "2021-09-25 02:32:26"
+	},
+
+
+
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsMeetingPolicy",
+		"Param": "AllowNetworkConfigurationSettingsLookup",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-19 02:35:05"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsCallingPolicy",
+		"Param": "AllowNetworkConfigurationSettingsLookup",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-19 02:34:53"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsPresencePolicy",
+		"Param": "Element",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-08 02:34:50"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsPresencePolicy",
+		"Param": "TypedIdentity",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-08 02:34:50"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsPresencePolicy",
+		"Param": "Identity",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-08 02:34:50"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsPresencePolicy",
+		"Param": "Anchor",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-08 02:34:50"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsPresencePolicy",
+		"Param": "ScopeClass",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-08 02:34:50"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsPresencePolicy",
+		"Param": "Key",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-08 02:34:50"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsPresencePolicy",
+		"Param": "DataSource",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-08 02:34:50"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsPresencePolicy",
+		"Param": "Description",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-08 02:34:50"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsPresencePolicy",
+		"Param": "MaxCategorySubscription",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-08 02:34:50"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsPresencePolicy",
+		"Param": "MaxPromptedSubscriber",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-08 02:34:50"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsPresencePolicy",
+		"Param": "XsAnyAttributes",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-08 02:34:50"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsPresencePolicy",
+		"Param": "XsAnyElements",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-08 02:34:50"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsMessagingPolicy",
+		"Param": "AllowUserDeleteChat",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-07 02:35:30"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsMeetingPolicy",
+		"Param": "MeetingRecordingExpirationDays",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-07 02:35:29"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsMeetingPolicy",
+		"Param": "AllowAnonymousUsersToJoinMeeting",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-07 02:35:29"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsGuestMessagingConfiguration",
+		"Param": "AllowUserDeleteChat",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-07 02:35:25"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsEmergencyCallingPolicy",
+		"Param": "EnhancedEmergencyServiceDisclaimer",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-07 02:35:20"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
+		"Param": "Element",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-06 02:32:45"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
+		"Param": "TypedIdentity",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-06 02:32:45"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
+		"Param": "Identity",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-06 02:32:45"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
+		"Param": "Anchor",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-06 02:32:45"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
+		"Param": "ScopeClass",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-06 02:32:45"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
+		"Param": "Key",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-06 02:32:45"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
+		"Param": "DataSource",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-06 02:32:45"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
+		"Param": "Description",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-06 02:32:45"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
+		"Param": "CallingEndtoEndEncryptionEnabledType",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-06 02:32:45"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
+		"Param": "XsAnyAttributes",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-06 02:32:45"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
+		"Param": "XsAnyElements",
+		"Module": "2.6.0",
+		"Event": "Add",
+		"Timestamp": "2021-10-06 02:32:45"
+	},
+
+## Removed policies properties
+
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
+		"Param": "Element",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-01 06:39:40"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
+		"Param": "TypedIdentity",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-01 06:39:40"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
+		"Param": "Identity",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-01 06:39:40"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
+		"Param": "Anchor",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-01 06:39:40"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
+		"Param": "ScopeClass",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-01 06:39:40"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
+		"Param": "Key",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-01 06:39:40"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
+		"Param": "DataSource",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-01 06:39:40"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
+		"Param": "AllowAllAcsResources",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-01 06:39:40"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
+		"Param": "EnableAcsUsers",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-01 06:39:40"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
+		"Param": "BlockedAcsResources",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-01 06:39:40"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
+		"Param": "AllowedAcsResources",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-01 06:39:40"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
+		"Param": "XsAnyAttributes",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-01 06:39:40"
+	},
+	{
+		"Category": "Policy",
+		"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
+		"Param": "XsAnyElements",
+		"Module": "2.6.0",
+		"Event": "Remove",
+		"Timestamp": "2021-10-01 06:39:40"
 	},
