@@ -11,13 +11,17 @@ tags:
   - group policy
   - intune
 ---
-> ![]()
->
-> **NOTE**: The solution described above is not 100% the same as what Microsoft will be providing, as it only applied to domain-joined Windows devices.
-> Microsoft recently added [Microsoft Teams: Org wide backgrounds (Preview)](https://www.microsoft.com/en-us/microsoft-365/roadmap?&searchterms=80193&filters=&searchterms=80193) as Roadmap item 80193. The description says (emphasis mine):
->
+<Note>
+
+The solution described above is not 100% the same as what Microsoft will be providing, as it only applied to domain-joined Windows devices.
+
+</Note>
+
+Microsoft recently added [Microsoft Teams: Org wide backgrounds (Preview)](https://www.microsoft.com/en-us/microsoft-365/roadmap?&searchterms=80193&filters=&searchterms=80193) as Roadmap item 80193. The description says (emphasis mine):
+
 > Organization-wide backgrounds will now be available in preview. **This feature will require an Advanced Communications license** when it becomes generally available.
-> It's also published as [Message Center entry MC249777](https://admin.microsoft.com/AdminPortal/Home?ref=MessageCenter/:/messages/MC249777).
+
+It's also published as [Message Center entry MC249777](https://admin.microsoft.com/AdminPortal/Home?ref=MessageCenter/:/messages/MC249777).
 
 We're finally getting an option to deploy custom Teams backgrounds to the entire organization. It is very handy idea, which might help people to celebrate and increase visibility of some special events within the organization.
 
@@ -40,25 +44,41 @@ For any of the options described below, you need to first prepare the background
 
 First option is group policy! Knowing where all these custom backgrounds are uploaded in the machines, we can create a policy to put specific files in that folder.
 
-First, create a folder on network share. Make sure that it's accessible to everyone (it should have at least *Read* permissions):
+First, create a folder on a network share. Make sure that it's accessible to everyone (it should have at least *Read* permissions):
 
 ![Permissions on network folder](../../img/20210412-092312-fmay6h1it3-1-.png "Permissions on network folder")
 
-Now let's create group policy. As with all changes, **it's good to roll them out gradually**. We can use [Security Group Filters](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-firewall/assign-security-group-filters-to-the-gpo).
+Now let's create a group policy object. As with all changes, **it's good to roll them out gradually**. We can use [Security Group Filters](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-firewall/assign-security-group-filters-to-the-gpo).
 
 Our GPO will be applied to users, not to machines. We need to add our files under: *User Configuration => Preferences => Windows Settings => Files*.
 
 We can either add files one-by-one (if we want very granular control):
 
-![Settings of single file in group policy](../../img/20210412-100328-xdsvvj2gnk-1-.png "Settings of single file in group policy")
+![Settings of a single file in group policy](../../img/20210412-100328-xdsvvj2gnk-1-.png "Settings of a single file in group policy")
 
-Or with wildcard (credits to [Copy Files or Folders to All Computers via GPO](http://woshub.com/copy-files-on-all-computers-group-policy/)):
+Or with a wildcard (credits to [Copy Files or Folders to All Computers via GPO](http://woshub.com/copy-files-on-all-computers-group-policy/)):
 
 ![Settings of wildcard entry in group policy](../../img/20210412-120332-3heprhjzby-1-.png "Settings of wildcard entry in group policy")
 
-In both cases the action chosen can either be **Create** or **Update**. Do not use **Replace** so that it doesn't replace the files every time GPO is processed. You can read more about that behaviour at [Group Policy Preferences – Replace Existing File](https://www.adamfowlerit.com/2016/07/group-policy-preferences-replace-existing-file/).
+In both cases, the action chosen can either be **Create** or **Update**. Do not use **Replace** so that it doesn't replace the files every time GPO is processed. You can read more about that behavior at [Group Policy Preferences – Replace Existing File](https://www.adamfowlerit.com/2016/07/group-policy-preferences-replace-existing-file/).
 
 ## Startup script
+
+The more flexible solution than a GPO is a startup script. The main advantage of it is that the script can either [be set via GPO](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/dn789196(v=ws.11)) or with Intune.
+
+Keep in mind that scripts run via Intune [run only once unless they're changed](https://docs.microsoft.com/en-us/mem/intune/apps/intune-management-extension):
+
+> Once the script executes, it doesn't execute again unless there's a change in the script or policy.
+
+If you're going to specify the list of backgrounds in the script, that's not a problem. In that case, the script is going to re-run every time you add a new file to the list (as the content of the script is changed).
+
+However, if you use an external resource to determine the list of files to be downloaded, you might need a way to trigger the script after the new background is added.
+
+Here's the list of useful community resources for running the script at logon:
+
+* [Simplify Logon scripts in Intune without Scheduled tasks](https://www.lieben.nu/liebensraum/2019/06/simplify-logon-scripts-in-intune-without-schedules/)
+* [Intune map network drives and execute PowerShell script on each user logon ](https://tech.nicolonsky.ch/intune-execute-powershell-script-on-each-user-logon/)
+* [Logon scripts in Intune](https://larsstaal.com/2019/05/07/logon-scripts-in-intune/)
 
 ## Limitations
 
