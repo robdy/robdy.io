@@ -17,7 +17,7 @@ The solution described above is not 100% the same as what Microsoft will be prov
 
 </Note>
 
-Microsoft recently added [Microsoft Teams: Org wide backgrounds (Preview)](https://www.microsoft.com/en-us/microsoft-365/roadmap?&searchterms=80193&filters=&searchterms=80193) as Roadmap item 80193. The description says (emphasis mine):
+In the beginning of 2020 Microsoft added [Microsoft Teams: Org wide backgrounds (Preview)](https://www.microsoft.com/en-us/microsoft-365/roadmap?&searchterms=80193&filters=&searchterms=80193) as Roadmap item 80193. The description says (emphasis mine):
 
 > Organization-wide backgrounds will now be available in preview. **This feature will require an Advanced Communications license** when it becomes generally available.
 
@@ -79,6 +79,40 @@ Here's the list of useful community resources for running the script at logon:
 * [Simplify Logon scripts in Intune without Scheduled tasks](https://www.lieben.nu/liebensraum/2019/06/simplify-logon-scripts-in-intune-without-schedules/)
 * [Intune map network drives and execute PowerShell script on each user logon ](https://tech.nicolonsky.ch/intune-execute-powershell-script-on-each-user-logon/)
 * [Logon scripts in Intune](https://larsstaal.com/2019/05/07/logon-scripts-in-intune/)
+
+To the script itself - I've written a simple one to demonstrate the workflow. The steps are:
+
+1. Specify the list of images to be pulled
+1. For each image check if it already exists
+1. If the image is not yet downloaded, pull it from the link
+
+Here's a part of the script:
+
+```powershell
+$imageList = @(
+	'https://h2.gifposter.com/bingImages/Dargavs_EN-US4957085337_1920x1080.jpg',
+	'https://h2.gifposter.com/bingImages/BulgariaDevilBridge_EN-US4705163344_1920x1080.jpg'
+)
+
+$uploadsFolderPath = "$($env:APPDATA)\Microsoft\Teams\Backgrounds\Uploads\"
+
+try {
+	foreach ($image in $imageList) {
+		<# For troubleshooting
+		$image = $imageList[0]
+		#>
+		$fileName = $image.Split('/')[-1]
+		$filePath = Join-Path $uploadsFolderPath $fileName
+		if (-not (Test-Path $filePath)) {
+			# Download the image
+			Invoke-RestMethod -Method Get -Uri $image -OutFile $filePath
+		}
+	}
+} catch {
+	$e = $_
+	Write-Error $e
+}
+```
 
 ## Limitations
 
