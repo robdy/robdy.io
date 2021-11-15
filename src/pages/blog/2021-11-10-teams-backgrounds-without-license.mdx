@@ -98,9 +98,6 @@ $uploadsFolderPath = "$($env:APPDATA)\Microsoft\Teams\Backgrounds\Uploads\"
 
 try {
 	foreach ($image in $imageList) {
-		<# For troubleshooting
-		$image = $imageList[0]
-		#>
 		$fileName = $image.Split('/')[-1]
 		$filePath = Join-Path $uploadsFolderPath $fileName
 		if (-not (Test-Path $filePath)) {
@@ -113,6 +110,8 @@ try {
 	Write-Error $e
 }
 ```
+
+And you can find the full and most up-to-date version on GitHub: [PushTeamsBackground.ps1](https://github.com/robdy/powershell-tools/blob/master/scripts/PushTeamsBackgrounds.ps1?ts=2)
 
 ## Limitations
 
@@ -130,7 +129,7 @@ Startup script also have some limitations:
 
 * Requires domain controller connectivity if applied via GPO
 * Requires Intune license if applied via Intune
-*
+* Applying via Intune might cause some headache if you're not specifying the images within a script
 
 ## Cleaning up
 
