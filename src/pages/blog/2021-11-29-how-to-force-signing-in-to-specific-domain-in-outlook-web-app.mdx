@@ -1,0 +1,44 @@
+---
+templateKey: blog-post
+title: How to force signing in to specific domain in Outlook Web App
+date: 2021-11-29T12:06:59.267Z
+description: If you use multiple domains for Outlook Web App, this trick can
+  save you some time during the authentication process.
+featuredpost: false
+tags:
+  - outlook web app
+---
+If you use Outlook Web App, you probably know the steps to sign in to your account.
+
+To sign in to your account, you need to go to the [outlook.office365.com](https://outlook.office365.com/owa/), enter your email address, get redirected to specific sign-in page and then enter your credentials.
+
+The entire process takes several seconds, but what if we had an option to simplify it? For example, how to skip first steps and get redirected strictly to company sign-in page.
+
+## Sign-in link for specific domain
+
+The link for specific domain needs [query string](https://en.wikipedia.org/wiki/Query_string) specifying the domain. For example, for `microsoft.com` domain it would be: 
+
+```
+https://outlook.office365.com/owa/?realm=microsoft.com
+```
+
+## Simplified process
+
+Once you use the link, you'll either get branded sign-in page (use [link for microsoft.com](https://outlook.office365.com/owa/?realm=microsoft.com) as an example) or will be redirected to AD FS website, if the domain is federated (use link for [amazon.com](https://outlook.office365.com/owa/?realm=amazon.com) as an example)
+
+See the images below for comparison.
+
+For microsoft.com you get:
+
+![Microsoft.com branded sign-in page](../../img/20211129-143437-avojno9nqc.png "Microsoft.com branded sign-in page")
+
+And for Amazon you get:
+
+![Amazon.com AD FS sign-in page](../../img/20211129-143452-lambvl5il6.png "Amazon.com AD FS sign-in page")
+
+## Limitations
+
+There are some specific cases you'd need to consider for using the company-specific link:
+
+* The link doesn't work if you're already signed-in
+* You don't get any benefit is the domain is managed (not federated) and the sign-in page is not branded
