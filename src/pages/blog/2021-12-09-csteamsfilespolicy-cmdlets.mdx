@@ -20,24 +20,17 @@ script file, or operable program*, the default parameters for newly-introduced p
 
 ## Syntax
 
-Help data for the cmdlets show the following syntax (line breaks added for visibility):
+Help data for the cmdlets show the following syntax:
 
 ```powershell
-Get-CsTeamsFilesPolicy [-LocalStore] [-Identity <Object>]
-  [-Filter <Object>] [<CommonParameters>]
+Get-CsTeamsFilesPolicy [-LocalStore] [-Identity <Object>] [-Filter <Object>] [<CommonParameters>]
 
 
-New-CsTeamsFilesPolicy [-SPChannelFilesTab <Object>]
-  [-NativeFileEntryPoints <Object>] [-Identity <Object>]      
-  [-InMemory] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
+New-CsTeamsFilesPolicy [-SPChannelFilesTab <Object>] [-NativeFileEntryPoints <Object>] [-Identity <Object>] [-InMemory] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
 
+Set-CsTeamsFilesPolicy [-SPChannelFilesTab <Object>] [-NativeFileEntryPoints <Object>] [-Identity <Object>] [-Force] [-Instance <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
 
-Set-CsTeamsFilesPolicy [-SPChannelFilesTab <Object>] [-NativeFileEntryPoints <Object>]
-  [-Identity <Object>] [-Force] [-Instance <Object>] [-WhatIf] [-Confirm]
-  [<CommonParameters>]
-
-Remove-CsTeamsFilesPolicy [-Identity <Object>] [-Force]
-  [-WhatIf] [-Confirm] [<CommonParameters>]
+Remove-CsTeamsFilesPolicy [-Identity <Object>] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## Available parameters
@@ -48,12 +41,11 @@ Except common parameters, the following ones are available for `New-`/`Set-` cmd
 * **NativeFileEntryPoints** \<Object\>
 * **InMemory** \[\<SwitchParameter\>\] - can be used to not save the object in the organization data, but to store it only in memory
 
-Example of `InMemory` parameter usage would be along these lines (line breaks added for visibility:
+Example of `InMemory` parameter usage would be along these lines:
 
 ```powershell
 # Instead of writing
-$policy = New-CsTeamsFilesPolicy -Identity 'Test policy' `
-  -SPChannelFilesTab $something -NativeFileEntryPoints $somethingElse
+$policy = New-CsTeamsFilesPolicy -Identity 'Test policy' -SPChannelFilesTab $something -NativeFileEntryPoints $somethingElse
 
 # You can write
 $policy = New-CsTeamsFilesPolicy -InMemory
