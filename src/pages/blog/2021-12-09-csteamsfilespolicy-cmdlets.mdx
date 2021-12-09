@@ -1,0 +1,65 @@
+---
+templateKey: blog-post
+title: CsTeamsFilesPolicy cmdlets
+date: 2021-12-09T14:27:35.216Z
+description: "New cmdlets appeared in Teams PowerShell: Get-CsTeamsFilesPolicy,
+  New-CsTeamsFilesPolicy, Set-CsTeamsFilesPolicy and Remove-CsTeamsFilesPolicy.
+  "
+featuredpost: false
+tags:
+  - teams
+  - powershell
+  - datamining
+---
+## Description
+
+## Default settings
+
+As `Get-CsTeamsFilesPolicy` currently returns error saying *The term is not recognized as the name of a cmdlet, function, 
+script file, or operable program*, the default parameters for newly-introduced policy are unknown.
+
+## Syntax
+
+Help data for the cmdlets show the following syntax (line breaks added for visibility):
+
+```powershell
+Get-CsTeamsFilesPolicy [-LocalStore] [-Identity <Object>]
+  [-Filter <Object>] [<CommonParameters>]
+
+
+New-CsTeamsFilesPolicy [-SPChannelFilesTab <Object>]
+  [-NativeFileEntryPoints <Object>] [-Identity <Object>]      
+  [-InMemory] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+
+Set-CsTeamsFilesPolicy [-SPChannelFilesTab <Object>] [-NativeFileEntryPoints <Object>]
+  [-Identity <Object>] [-Force] [-Instance <Object>] [-WhatIf] [-Confirm]
+  [<CommonParameters>]
+
+Remove-CsTeamsFilesPolicy [-Identity <Object>] [-Force]
+  [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+## Available parameters
+
+Except common parameters, the following ones are available for `New-`/`Set-` cmdlets:
+
+* **SPChannelFilesTab** \<Object\>
+* **NativeFileEntryPoints** \<Object\>
+* **InMemory** \[\<SwitchParameter\>\] - can be used to not save the object in the organization data, but to store it only in memory
+
+Example of `InMemory` parameter usage would be along these lines (line breaks added for visibility:
+
+```powershell
+# Instead of writing
+$policy = New-CsTeamsFilesPolicy -Identity 'Test policy' `
+  -SPChannelFilesTab $something -NativeFileEntryPoints $somethingElse
+
+# You can write
+$policy = New-CsTeamsFilesPolicy -InMemory
+$policy.SPChannelFilesTab =  $something
+$policy.NativeFileEntryPoints =  $somethingElse
+Set-CsTeamsFilesPolicy -Identity 'Test policy' -Instance $policy
+```
+
+## Summary
