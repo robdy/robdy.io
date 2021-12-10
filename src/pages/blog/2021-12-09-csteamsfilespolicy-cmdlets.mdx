@@ -2,23 +2,21 @@
 templateKey: blog-post
 title: CsTeamsFilesPolicy cmdlets
 date: 2021-12-09T14:27:35.216Z
-description: "New cmdlets appeared in Teams PowerShell: Get-CsTeamsFilesPolicy,
-  New-CsTeamsFilesPolicy, Set-CsTeamsFilesPolicy and Remove-CsTeamsFilesPolicy.
-  "
+description: "New cmdlets appeared in Teams PowerShell: Get-, New-, Set-,
+  Remove- and Grant-CsTeamsFilesPolicy."
 featuredpost: false
 tags:
   - teams
   - powershell
   - datamining
 ---
-## Description
-
 Set of mysterious cmdlets were added to Microsoft Teams PowerShell module:
 
 * Get-CsTeamsFilesPolicy
 * New-CsTeamsFilesPolicy
 * Remove-CsTeamsFilesPolicy
 * Set-CsTeamsFilesPolicy
+* Grant-CsTeamsFilesPolicy
 
 All four cmdlets were added to `2.6.2-preview` version of the module they remain even on stable `3.0.0` version.
 
@@ -34,12 +32,13 @@ Help data for the cmdlets show the following syntax:
 ```powershell
 Get-CsTeamsFilesPolicy [-LocalStore] [-Identity <Object>] [-Filter <Object>] [<CommonParameters>]
 
-
 New-CsTeamsFilesPolicy [-SPChannelFilesTab <Object>] [-NativeFileEntryPoints <Object>] [-Identity <Object>] [-InMemory] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
 
 Remove-CsTeamsFilesPolicy [-Identity <Object>] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
 
 Set-CsTeamsFilesPolicy [-SPChannelFilesTab <Object>] [-NativeFileEntryPoints <Object>] [-Identity <Object>] [-Force] [-Instance <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Grant-CsTeamsFilesPolicy [-PassThru] [-PolicyName <Object>] [-Identity <Object>] [-Global] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## Available parameters
