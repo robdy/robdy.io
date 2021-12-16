@@ -32,12 +32,21 @@ const AboutPage = () => (
       <h2>Credits</h2>
       <ul>
         <li>
-          Built and hosted by{' '}
+          Built and hosted by {' '}
           <ExternalLink href="https://netlify.com">Netlify</ExternalLink>
         </li>
         <li>
           Created using{' '}
           <ExternalLink href="https://gatsbyjs.org/">Gatsby</ExternalLink>
+        </li>
+        <li>
+          Redesigned by{' '}
+          <ExternalLink href="https://twitter.com/vponamariov">@vponamariov</ExternalLink>.{' '}
+          Check{' '}
+          <ExternalLink href="https://twitter.com/vponamariov/status/1404721299071639554">
+            this tweet
+          </ExternalLink>{' '}
+          for details
         </li>
         <li>
           Logo icon made by{' '}
