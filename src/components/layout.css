@@ -132,6 +132,12 @@ html {
   height: 1rem;
   margin-top: var(--header-top-margin);
   filter: opacity(0.5);
+  -webkit-filter: opacity(0.5);
+}
+
+.rss-icon:hover, .rss-icon:visited {
+  filter: opacity(0.3);
+  -webkit-filter: opacity(0.3);
 }
 
 .roll-tile-container {
@@ -750,7 +756,7 @@ pre[class*='language-'] {
 @media (max-width: 600px) {
   .navbar,
   .footer-container,
-  .bio {
+  .bio .flex {
     flex-direction: column;
     align-items: center;
   }
