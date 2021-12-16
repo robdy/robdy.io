@@ -1,7 +1,7 @@
-import React from 'react'
-import { FaInfoCircle } from '@react-icons/all-files/fa/FaInfoCircle'
-import { FaExclamationTriangle } from '@react-icons/all-files/fa/FaExclamationTriangle'
-import { FaLightbulb } from '@react-icons/all-files/fa/FaLightbulb'
+import React from "react";
+import { FaInfoCircle } from "@react-icons/all-files/fa/FaInfoCircle";
+import { FaExclamationTriangle } from "@react-icons/all-files/fa/FaExclamationTriangle";
+import { FaLightbulb } from "@react-icons/all-files/fa/FaLightbulb";
 
 const Block = (props) => {
   const typeIcon = {
@@ -10,7 +10,7 @@ const Block = (props) => {
       <FaExclamationTriangle className="block-icon block-icon-Warning" />
     ),
     Tip: <FaLightbulb className="block-icon block-icon-Tip" />,
-  }
+  };
 
   return (
     <blockquote className={`block-${props.type}`}>
@@ -19,9 +19,9 @@ const Block = (props) => {
       </p>
       <p {...props} />
     </blockquote>
-  )
-}
+  );
+};
 
-export const NoteBlock = (props) => <Block type="Note" {...props} />
-export const WarningBlock = (props) => <Block type="Warning" {...props} />
-export const TipBlock = (props) => <Block type="Tip" {...props} />
+export const NoteBlock = (props) => <Block type="Note" {...props} />;
+export const WarningBlock = (props) => <Block type="Warning" {...props} />;
+export const TipBlock = (props) => <Block type="Tip" {...props} />;

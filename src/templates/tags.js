@@ -1,10 +1,10 @@
-import React from 'react'
-import Helmet from 'react-helmet'
-import { kebabCase } from 'lodash'
-import { Link, graphql } from 'gatsby'
-import Layout from '../components/Layout'
-import PostTile from '../components/PostTile'
-import { TagsData } from '../components/TagsData'
+import React from "react";
+import Helmet from "react-helmet";
+import { kebabCase } from "lodash";
+import { Link, graphql } from "gatsby";
+import Layout from "../components/Layout";
+import PostTile from "../components/PostTile";
+import { TagsData } from "../components/TagsData";
 
 class TagRoute extends React.Component {
   render() {
@@ -26,9 +26,7 @@ class TagRoute extends React.Component {
             <link rel="canonical" href={`${siteUrl}/tags/${tagPath}/`} />
           </Helmet>
           <div className="container content">
-            <div
-              className=""
-            >
+            <div className="">
               <TagsData tag={this.props.pageContext.tag} />
               <h3 className="">{tagHeader}</h3>
               {posts &&

@@ -1,7 +1,7 @@
-import React from 'react'
-import Layout from '../../components/Layout'
-import ExternalLink from '../../components/ExternalLink'
-import { Helmet } from 'react-helmet'
+import React from "react";
+import Layout from "../../components/Layout";
+import ExternalLink from "../../components/ExternalLink";
+import { Helmet } from "react-helmet";
 
 const AboutPage = () => (
   <Layout>
@@ -13,11 +13,11 @@ const AboutPage = () => (
       <h1>About me</h1>
       <p>
         My name is Robert Dyjas. I'm Microsoft Teams and Skype for Business
-        specialist who also likes to learn{' '}
+        specialist who also likes to learn{" "}
         <code class="language-text">$newThings</code> in the meantime.
       </p>
       <p>
-        Current values of $newThings for me is{' '}
+        Current values of $newThings for me is{" "}
         <code class="language-text">[JavaScript, Web Development, CSS]</code>.
         It might be subject to change frequently.
       </p>
@@ -30,46 +30,26 @@ const AboutPage = () => (
       <h2>Credits</h2>
       <ul>
         <li>
-          Built and hosted by{' '}
-          <ExternalLink
-            href="https://netlify.com"
-           >
-            Netlify
-          </ExternalLink>
+          Built and hosted by{" "}
+          <ExternalLink href="https://netlify.com">Netlify</ExternalLink>
         </li>
         <li>
-          Created using{' '}
-          <ExternalLink
-            href="https://gatsbyjs.org/"
-          >
-            Gatsby
-          </ExternalLink>
+          Created using{" "}
+          <ExternalLink href="https://gatsbyjs.org/">Gatsby</ExternalLink>
         </li>
         <li>
-          Logo icon made by{' '}
-          <ExternalLink
-            href="http://www.freepik.com/"
-           >
-            Freepik
-          </ExternalLink>{' '}
-          from{' '}
-          <ExternalLink
-            href="https://www.flaticon.com/"
-           >
-            Flaticon
-          </ExternalLink>
+          Logo icon made by{" "}
+          <ExternalLink href="http://www.freepik.com/">Freepik</ExternalLink>{" "}
+          from{" "}
+          <ExternalLink href="https://www.flaticon.com/">Flaticon</ExternalLink>
         </li>
         <li>
-          Navbar and footer icons from{' '}
-          <ExternalLink
-            href="https://fontawesome.com"
-           >
+          Navbar and footer icons from{" "}
+          <ExternalLink href="https://fontawesome.com">
             FontAwesome
-          </ExternalLink>{' '}
+          </ExternalLink>{" "}
           (
-          <ExternalLink
-            href="https://fontawesome.com/license"
-           >
+          <ExternalLink href="https://fontawesome.com/license">
             see license details
           </ExternalLink>
           )
@@ -77,6 +57,6 @@ const AboutPage = () => (
       </ul>
     </div>
   </Layout>
-)
+);
 
-export default AboutPage
+export default AboutPage;

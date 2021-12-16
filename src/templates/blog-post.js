@@ -1,13 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { kebabCase } from 'lodash'
-import Helmet from 'react-helmet'
-import { graphql, Link } from 'gatsby'
-import Layout from '../components/Layout'
-import Content, { HTMLContent } from '../components/Content'
-import Comments from '../components/Comments'
-import useSiteMetadata from '../components/SiteMetadata'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
+import React from "react";
+import PropTypes from "prop-types";
+import { kebabCase } from "lodash";
+import Helmet from "react-helmet";
+import { graphql, Link } from "gatsby";
+import Layout from "../components/Layout";
+import Content, { HTMLContent } from "../components/Content";
+import Comments from "../components/Comments";
+import useSiteMetadata from "../components/SiteMetadata";
+import { MDXRenderer } from "gatsby-plugin-mdx";
 
 const BlogPostTemplate = ({
   content,
@@ -20,17 +20,17 @@ const BlogPostTemplate = ({
   helmet,
   relativePath,
 }) => {
-  const PostContent = contentComponent || Content
-  const formattedDate = date.toLocaleDateString('en-us', {
-    month: 'short',
-    day: '2-digit',
-    year: 'numeric',
-  })
-  const isoDate = date.toISOString()
+  const PostContent = contentComponent || Content;
+  const formattedDate = date.toLocaleDateString("en-us", {
+    month: "short",
+    day: "2-digit",
+    year: "numeric",
+  });
+  const isoDate = date.toISOString();
 
   return (
     <section className="section">
-      {helmet || ''}
+      {helmet || ""}
       <div className="container content">
         <div className="header-container">
           {tags && tags.length ? (
@@ -46,11 +46,11 @@ const BlogPostTemplate = ({
           ) : null}
           <h1 className="post-title">{title}</h1>
           <p className="post-subheader">
-            By{' '}
+            By{" "}
             <Link className="post-subheader-link" to="/about">
               Robert Dyjas
             </Link>
-            {' on '}
+            {" on "}
             <time datetime={isoDate}>{formattedDate}</time>
             &nbsp;&bull;&nbsp;
             <a
@@ -68,8 +68,8 @@ const BlogPostTemplate = ({
         <Comments />
       </div>
     </section>
-  )
-}
+  );
+};
 
 BlogPostTemplate.propTypes = {
   content: PropTypes.node.isRequired,
@@ -120,16 +120,16 @@ const BlogPost = ({ data }) => {
         title={post.frontmatter.title}
       />
     </Layout>
-  )
-}
+  );
+};
 
 BlogPost.propTypes = {
   data: PropTypes.shape({
     mdx: PropTypes.object,
   }),
-}
+};
 
-export default BlogPost
+export default BlogPost;
 
 export const pageQuery = graphql`
   query BlogPostByID($id: String!) {
@@ -152,4 +152,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

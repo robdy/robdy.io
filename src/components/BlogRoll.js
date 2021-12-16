@@ -1,22 +1,20 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { graphql, StaticQuery } from 'gatsby'
-import PostTile from '../components/PostTile'
-import GuestPostTile from '../components/GuestPostTile'
+import React from "react";
+import PropTypes from "prop-types";
+import { graphql, StaticQuery } from "gatsby";
+import PostTile from "../components/PostTile";
+import GuestPostTile from "../components/GuestPostTile";
 
 class BlogRoll extends React.Component {
   render() {
-    const { data } = this.props
-    const { edges: localPosts } = data.allMdx
-    const { edges: guestPosts } = data.allFeedAdamTheAutomator
-    const posts = localPosts.concat(guestPosts)
+    const { data } = this.props;
+    const { edges: localPosts } = data.allMdx;
+    const { edges: guestPosts } = data.allFeedAdamTheAutomator;
+    const posts = localPosts.concat(guestPosts);
     posts.sort(
-      ({node: firstItem}, {node: secondItem}) =>
-        new Date(
-          secondItem?.frontmatter?.date || secondItem?.isoDate
-        ) -
+      ({ node: firstItem }, { node: secondItem }) =>
+        new Date(secondItem?.frontmatter?.date || secondItem?.isoDate) -
         new Date(firstItem?.frontmatter?.date || firstItem?.isoDate)
-    )
+    );
 
     return (
       <div className="columns is-multiline">
@@ -29,7 +27,7 @@ class BlogRoll extends React.Component {
             )
           )}
       </div>
-    )
+    );
   }
 }
 
@@ -39,7 +37,7 @@ BlogRoll.propTypes = {
       edges: PropTypes.array,
     }),
   }),
-}
+};
 
 export default () => (
   <StaticQuery
@@ -81,4 +79,4 @@ export default () => (
     `}
     render={(data, count) => <BlogRoll data={data} count={count} />}
   />
-)
+);

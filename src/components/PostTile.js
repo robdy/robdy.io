@@ -1,10 +1,10 @@
-import React from 'react'
-import { Link } from 'gatsby'
-import { kebabCase } from 'lodash'
+import React from "react";
+import { Link } from "gatsby";
+import { kebabCase } from "lodash";
 
 export default class PostTile extends React.Component {
   render() {
-    const { postData } = this.props
+    const { postData } = this.props;
 
     return (
       <div className="roll-tile-container">
@@ -12,7 +12,7 @@ export default class PostTile extends React.Component {
           <div className="roll-post-container" key={postData.id}>
             <article
               className={`roll-list-item tile is-child box notification ${
-                postData.frontmatter.featuredpost ? 'is-featured' : ''
+                postData.frontmatter.featuredpost ? "is-featured" : ""
               }`}
             >
               <header>
@@ -44,6 +44,6 @@ export default class PostTile extends React.Component {
           </div>
         </Link>
       </div>
-    )
+    );
   }
 }

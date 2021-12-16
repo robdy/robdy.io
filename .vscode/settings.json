@@ -1,0 +1,14 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": false,
+	"editor.formatOnPaste": true,
+	"prettier.configPath": "prettierrc.json",
+	"javascript.format.enable": false,
+	"typescript.format.enable": false,
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"editor.detectIndentation": false,
+	"editor.insertSpaces": false,
+	"prettier.enableDebugLogs": true,
+}

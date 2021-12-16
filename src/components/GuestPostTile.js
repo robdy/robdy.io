@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 
 export default class GuestPostTile extends React.Component {
   render() {
-    const { postData } = this.props
+    const { postData } = this.props;
 
     return (
       <div className="roll-tile-container">
@@ -30,7 +30,7 @@ export default class GuestPostTile extends React.Component {
                 <p className="roll-post-title">{postData.title}</p>
               </header>
               <p className={`guest-post-note`}>
-                Written for{' '}
+                Written for{" "}
                 <a
                   href="https://adamtheautomator.com/author/robert-dyjas"
                   target="_blank"
@@ -44,6 +44,6 @@ export default class GuestPostTile extends React.Component {
           </div>
         </a>
       </div>
-    )
+    );
   }
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 function ExternalLink(props) {
   return (
@@ -7,7 +7,7 @@ function ExternalLink(props) {
         {props.children}
       </a>
     </React.Fragment>
-  )
+  );
 }
 
-export default ExternalLink
+export default ExternalLink;
