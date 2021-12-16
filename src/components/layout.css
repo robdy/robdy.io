@@ -273,6 +273,8 @@ h1 {
 .post-title {
   margin-bottom: 0.5rem;
   margin-top: 0;
+	font-weight: 600;
+  color: var(--roll-title-color);
 }
 
 .post-subheader {
