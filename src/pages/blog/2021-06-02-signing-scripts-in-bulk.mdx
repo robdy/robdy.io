@@ -36,7 +36,7 @@ We'll be using [`Set-AuthenticodeSignature`](https://docs.microsoft.com/en-us/po
 
    ```powershell
    $signed = Get-ChildItem -filter *.ps1 -Recurse | 
-     Get-AuthenticodeSignature | Where-Object status -eq 'valid'
+   	Get-AuthenticodeSignature | Where-Object status -eq 'valid'
    ```
 3. To sign files we need to select a certificate.
 
@@ -44,7 +44,7 @@ We'll be using [`Set-AuthenticodeSignature`](https://docs.microsoft.com/en-us/po
 
    ```powershell
    $cert = Get-ChildItem Cert:\CurrentUser\Root -CodeSigningCert |
-     Sort-Object notafter -Descending | Select-Object -First 1
+   	Sort-Object notafter -Descending | Select-Object -First 1
    ```
 4. Last, but not least - sign the files.
 
