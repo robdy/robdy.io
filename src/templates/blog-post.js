@@ -8,6 +8,7 @@ import Content, { HTMLContent } from '../components/Content'
 import Comments from '../components/Comments'
 import useSiteMetadata from '../components/SiteMetadata'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
+import Navbar from '../components/Navbar'
 
 const BlogPostTemplate = ({
   content,
@@ -33,17 +34,7 @@ const BlogPostTemplate = ({
       {helmet || ''}
       <div className="container content">
         <div className="header-container">
-          {tags && tags.length ? (
-            <div className="taglist-container">
-              <ul className="taglist">
-                {tags.map((tag) => (
-                  <li key={tag + `tag`}>
-                    <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
+          <Navbar />
           <h1 className="post-title">{title}</h1>
           <p className="post-subheader">
             By{' '}
@@ -62,6 +53,17 @@ const BlogPostTemplate = ({
               Edit this post
             </a>
           </p>
+          {tags && tags.length ? (
+            <div className="taglist-container">
+              <ul className="taglist">
+                {tags.map((tag) => (
+                  <Link to={`/tags/${kebabCase(tag)}/`}>
+                    <li key={tag + `tag`}>{tag}</li>
+                  </Link>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </div>
         <p className="description">{description}</p>
         <MDXRenderer>{body}</MDXRenderer>
@@ -81,11 +83,11 @@ BlogPostTemplate.propTypes = {
   helmet: PropTypes.object,
   relativePath: PropTypes.string,
   body: PropTypes.string,
-};
+}
 
 const BlogPost = ({ data }) => {
-  const { mdx: post } = data;
-  const { siteUrl } = useSiteMetadata();
+  const { mdx: post } = data
+  const { siteUrl } = useSiteMetadata()
 
   return (
     <Layout>

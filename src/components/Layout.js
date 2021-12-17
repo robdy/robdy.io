@@ -1,7 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
 import './layout.css'
 import useSiteMetadata from './SiteMetadata'
 import { withPrefix } from 'gatsby'
@@ -144,7 +143,6 @@ const TemplateWrapper = ({ children }) => {
           src="https://plausible.io/js/plausible.js"
         ></script>
       </Helmet>
-      <Navbar />
       <MDXProvider
         components={{
           Note: NoteBlock,

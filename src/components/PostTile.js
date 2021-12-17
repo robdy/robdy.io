@@ -5,6 +5,8 @@ import { kebabCase } from 'lodash'
 export default class PostTile extends React.Component {
   render() {
     const { postData } = this.props
+    const postDate = new Date(postData.frontmatter.date)
+    const postDateOptions = { year: 'numeric', month: 'long', day: 'numeric' }
 
     return (
       <div className="roll-tile-container">
@@ -22,24 +24,29 @@ export default class PostTile extends React.Component {
                         imageInfo={{
                           image: postData.frontmatter.featuredimage,
                           alt: `featured image thumbnail for post ${postData.frontmatter.title}`,
+                          />
                         }}
-                      />
                     </div>
                   ) : null} */}
                 <p className="roll-post-title">{postData.frontmatter.title}</p>
               </header>
+              <p className={`roll-post-date`}>
+                {postDate.toLocaleDateString('en-GB', postDateOptions)}
+              </p>
+              <p className={`roll-post-description`}>
+                {postData.frontmatter.description}
+              </p>
               {postData.frontmatter.tags && postData.frontmatter.tags.length ? (
                 <div>
                   <ul className="taglist">
                     {postData.frontmatter.tags.map((tag) => (
-                      <li key={tag + `tag`}>
-                        <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
-                      </li>
+                      <Link to={`/tags/${kebabCase(tag)}/`}>
+                        <li key={tag + `tag`}>{tag}</li>
+                      </Link>
                     ))}
                   </ul>
                 </div>
               ) : null}
-              <p>{postData.frontmatter.description}</p>
             </article>
           </div>
         </Link>
