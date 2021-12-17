@@ -15,7 +15,7 @@ const TagsPage = ({
   <Layout>
     <section className="section">
       <Helmet title={`Tags | ${title}`}>
-        {/* <meta name="robots" content="noindex" /> */}
+        <meta name="robots" content="noindex" />
         <link rel="canonical" href={`${siteUrl}/tags/`} />
       </Helmet>
       <div className="container content">

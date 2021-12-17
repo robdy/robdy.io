@@ -22,7 +22,7 @@ class TagRoute extends React.Component {
       <Layout>
         <section className="section">
           <Helmet title={`${tag} | ${title}`}>
-            {/* <meta name="robots" content="noindex" /> */}
+            <meta name="robots" content="noindex" />
             <link rel="canonical" href={`${siteUrl}/tags/${tagPath}/`} />
           </Helmet>
           <div className="container content">
