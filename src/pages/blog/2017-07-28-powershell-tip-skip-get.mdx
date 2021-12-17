@@ -37,7 +37,9 @@ ExcelColumnName # random cmdlet from ImportExcel module
 
 The only cmdlet I cannot run is 
 
-    process
+```powershell
+process
+```
 
 But it's due to conflict with `begin process end`.
 
@@ -59,29 +61,33 @@ As stated in [About Command Precedence](https://docs.microsoft.com/en-us/powersh
 
 Checking one by one (based on `Get-Service`):
 
-    # Checking for alias
-    PS C:\> Get-Alias service
-    Get-Alias : This command cannot find a matching alias because an alias
-    with the name 'service' does not exist.
+``` powershell
+# Checking for alias
+PS C:\> Get-Alias service
+Get-Alias : This command cannot find a matching alias because an alias
+with the name 'service' does not exist.
 
-    # Checking for function
-    PS C:\> Get-Command -Name service -CommandType Function
-    Get-Command : The term 'service' is not recognized as the name of a cmdlet,
-    function, script file, or operable program. Check the spelling of the name,
-    or if a path was included, verify that the path is correct and try again.
-    
-    # Checking for cmdlet
-    PS C:\> Get-Command -Name service -CommandType Cmdlet
-    Get-Command : The term 'service' is not recognized as the name of a cmdlet, 
-    function, script file, or operable program. Check the spelling of the name,
-    or if a path was included, verify that the path is correct and try again.
+# Checking for function
+PS C:\> Get-Command -Name service -CommandType Function
+Get-Command : The term 'service' is not recognized as the name of a cmdlet,
+function, script file, or operable program. Check the spelling of the name,
+or if a path was included, verify that the path is correct and try again.
+
+# Checking for cmdlet
+PS C:\> Get-Command -Name service -CommandType Cmdlet
+Get-Command : The term 'service' is not recognized as the name of a cmdlet, 
+function, script file, or operable program. Check the spelling of the name,
+or if a path was included, verify that the path is correct and try again.
+```
 
 Next in cmd (for native Windows commands):
 
-    C:\>service
-    'service' is not recognized as an internal or external command,
-    operable program or batch file.
-    
+```powershell
+C:\>service
+'service' is not recognized as an internal or external command,
+operable program or batch file.
+```
+
 ### What next?
 
 What gave me the answer was searching in [Stack Overflow](https://stackoverflow.com). First interesting thing I found was [this answer](https://stackoverflow.com/a/44476385/9902555):
