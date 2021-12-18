@@ -675,6 +675,13 @@ code[class*='language-'] {
   white-space: pre-wrap;
 }
 
+code[class*='language-'],
+pre[class*='language-'] {
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+}
+
 pre {
   box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;

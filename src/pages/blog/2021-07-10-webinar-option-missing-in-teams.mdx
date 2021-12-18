@@ -111,7 +111,7 @@ To check the values set in the Teams meeting policy, we need to use PowerShell. 
 
    ```powershell
    Get-CsOnlineUser firstname.lastname@contoso.com |
-     Select-Object -ExpandProperty TeamsMeetingPolicy
+   	Select-Object -ExpandProperty TeamsMeetingPolicy
    ```
 
 4. If you get empty output, it means the account has the global policy assigned. If you get any name, save it. You'll need it in a second.
@@ -119,7 +119,7 @@ To check the values set in the Teams meeting policy, we need to use PowerShell. 
 
    ```powershell
    Get-CsTeamsMeetingPolicy |
-     Select-Object identity, AllowMeetingRegistration, AllowPrivateMeetingScheduling
+   	Select-Object identity, AllowMeetingRegistration, AllowPrivateMeetingScheduling
    ```
 
 6. Check for either the global policy or the one with the name you noted. If both properties have `True` your settings are correct:
@@ -207,7 +207,7 @@ Let's check if our organization has the correct Live Event settings.
 
    ```powershell
    Get-CsOnlineUser firstname.lastname@contoso.com |
-     Select-Object -ExpandProperty TeamsMeetingBroadcastPolicy
+   	Select-Object -ExpandProperty TeamsMeetingBroadcastPolicy
    ```
 
 3. If you get empty output, it means the account has the global policy assigned. If you get any name, save it. You'll need it in a second.
@@ -215,7 +215,7 @@ Let's check if our organization has the correct Live Event settings.
 
    ```powershell
    Get-CsTeamsMeetingBroadcastPolicy |
-     Select-Object identity, AllowBroadcastScheduling
+   	Select-Object identity, AllowBroadcastScheduling
    ```
 
 5. Check for either the global policy or the one with the name you noted. If **AllowBroadcastScheduling** is set to `True` your settings are correct:

@@ -17,7 +17,7 @@ The cmdlet which contains all the information we need is [`Get-CsOnlineUser`](ht
 
 ```powershell
 Get-CsOnlineUser -Identity robert@domain.com |
-  Select-Object userprincipalname,*policy
+	Select-Object userprincipalname,*policy
 ```
 
 The output should be similar to the below:
@@ -125,8 +125,8 @@ $allUsers = Get-CsOnlineUser -ResultSize Unlimited
 $allUsers | Group-Object TeamsUpdateManagementPolicy
 # Display users with non-default policy
 $allUsers | Where-Object {
-  $null -ne $_.TeamsUpdateManagementPolicy } |
-  Select-Object userprincipalname
+	$null -ne $_.TeamsUpdateManagementPolicy } |
+	Select-Object userprincipalname
 ```
 
 The biggest drawback is that pulling all the user data takes a lot of time and depend on the size of our environment, so it's not the optimal solution.
@@ -147,10 +147,10 @@ Translating into PowerShell:
 ```powershell
 $filterQuery = (Get-CsTeamsUpdateManagementPolicy | Where-Object Identity -ne "Global"
 | Select-Object -Expand identity | Foreach-Object {
-  "TeamsUpdateManagementPolicy -eq '$_'"
+	"TeamsUpdateManagementPolicy -eq '$_'"
 } ) -join " -or "
 Get-CsOnlineUser -Filter $filterQuery |
-  Select-Object UserPrincipalName
+	Select-Object UserPrincipalName
 ```
 
 We can also construct a universal query where we specify the policy type first and then use if for the query construction:
@@ -158,9 +158,9 @@ We can also construct a universal query where we specify the policy type first a
 ```powershell
 $policyType = 'TeamsUpdateManagementPolicy'
 (& "Get-Cs$policyType" | Where-Object Identity -ne "Global"
-  | Select-Object -Expand identity | Foreach-Object {
-    "$policyType -eq '$_'"
-  } ) -join " -or "
+	| Select-Object -Expand identity | Foreach-Object {
+		"$policyType -eq '$_'"
+	} ) -join " -or "
 ```
 
 In the script, we use `&` call operator to run the cmdlet. This is because we need to calculate the cmdlet based on the variable:

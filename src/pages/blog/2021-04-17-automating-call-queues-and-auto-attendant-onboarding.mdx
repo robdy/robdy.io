@@ -57,28 +57,28 @@ Before working on the auto attendant, you can create a call queue. In that confi
 ```powershell
 # Create resource account of call queue type
 $cqRaParams = @{
-  UserPrincipalName = "RA_CQ_$cqName@$resourceAccountDomain"
-  # ID taken from cmdlet documentation
-  ApplicationId = '11cd3e2e-fccb-42ad-ad00-878b93575e07'
-  DisplayName = "RA_CQ_$cqName"
+	UserPrincipalName = "RA_CQ_$cqName@$resourceAccountDomain"
+	# ID taken from cmdlet documentation
+	ApplicationId = '11cd3e2e-fccb-42ad-ad00-878b93575e07'
+	DisplayName = "RA_CQ_$cqName"
 }
 $newCqRa = New-CsOnlineApplicationInstance @cqRaParams
 
 # Create call queue
 $newCqParams = @{
-  Name = "CQ_$($cqName)"
-  UseDefaultMusicOnHold = $true
+	Name = "CQ_$($cqName)"
+	UseDefaultMusicOnHold = $true
 }
 $newCq = New-CsCallQueue @newCqParams
 
 # Associate resource account with call queue
 $newCqAppInstanceParams = @{
-  # Requires array of strings
-  # Use array sub-expression operator
-  Identities = @($newCqRa.ObjectId)
-  ConfigurationId = $newCq.Identity
-  ConfigurationType = 'CallQueue'
-  ErrorAction = 'Stop'
+	# Requires array of strings
+	# Use array sub-expression operator
+	Identities = @($newCqRa.ObjectId)
+	ConfigurationId = $newCq.Identity
+	ConfigurationType = 'CallQueue'
+	ErrorAction = 'Stop'
 }
 $associationRes = New-CsOnlineApplicationInstanceAssociation @newCqAppInstanceParams
 ```
@@ -93,10 +93,10 @@ Setting a resource account is very similar to the one you created for a call que
 
 ```powershell
 $newAaRaParams = @{
-  UserPrincipalName = "RA_AA_$($cqName)@$resourceAccountDomain"
-  # ID taken from cmdlet documentation
-  ApplicationId = 'ce933385-9390-45d1-9512-c8d228074e07'
-  DisplayName = "RA_AA_$($cqName)"
+	UserPrincipalName = "RA_AA_$($cqName)@$resourceAccountDomain"
+	# ID taken from cmdlet documentation
+	ApplicationId = 'ce933385-9390-45d1-9512-c8d228074e07'
+	DisplayName = "RA_AA_$($cqName)"
 }
 $newAaRa = New-CsOnlineApplicationInstance @newAaRaParams
 ```
@@ -130,53 +130,53 @@ $aaTimezone = 'GMT Standard Time'
 
 # Callable entity
 $callableEntityParams = @{
-  # Point to resource account, not call queue
-  Identity = $newCqRa.ObjectId
-  Type = 'ApplicationEndpoint'
+	# Point to resource account, not call queue
+	Identity = $newCqRa.ObjectId
+	Type = 'ApplicationEndpoint'
 }
 $targetCqEntity = New-CsAutoAttendantCallableEntity @callableEntityParams
 
 # Menu option
 $menuOptionParams = @{
-  Action = 'TransferCallToTarget'
-  DtmfResponse = 'Automatic'
-  CallTarget = $targetCqEntity
+	Action = 'TransferCallToTarget'
+	DtmfResponse = 'Automatic'
+	CallTarget = $targetCqEntity
 }
 $menuOptionZero = New-CsAutoAttendantMenuOption @menuOptionParams
 
 # Finally, the menu
 $menuParams = @{
-  Name = "$aaName Default Menu"
-  # Accepts list, so use array sub-expression operator
-  MenuOptions = @($menuOptionZero)
+	Name = "$aaName Default Menu"
+	# Accepts list, so use array sub-expression operator
+	MenuOptions = @($menuOptionZero)
 }
 $menu = New-CsAutoAttendantMenu @menuParams
 
 # And the call flow
 $defaultCallFlowParams = @{
-  Name = "$aaName Default Call Flow"
-  Menu = $menu
+	Name = "$aaName Default Call Flow"
+	Menu = $menu
 }
 $defaultCallFlow = New-CsAutoAttendantCallFlow @defaultCallFlowParams
 
 # You have all the objects
 # Now, you can create an auto attendant
 $autoAttendantParams = @{
-  Name = "AA_$cqName"
-  LanguageId = $aaLanguage
-  TimeZoneId = $aaTimezone
-  DefaultCallFlow = $defaultCallFlow
-  ErrorAction = 'Stop'
+	Name = "AA_$cqName"
+	LanguageId = $aaLanguage
+	TimeZoneId = $aaTimezone
+	DefaultCallFlow = $defaultCallFlow
+	ErrorAction = 'Stop'
 }
 $newAA = New-CsAutoAttendant @autoAttendantParams
 
 # Last but not least, the association
 $aaAssociationParams = @{
-  # As the previous association, array expected
-  Identities = @($newAARA.ObjectId)
-  ConfigurationId = $newAA.Identity
-  ConfigurationType = 'AutoAttendant'
-  ErrorAction = 'Stop'
+	# As the previous association, array expected
+	Identities = @($newAARA.ObjectId)
+	ConfigurationId = $newAA.Identity
+	ConfigurationType = 'AutoAttendant'
+	ErrorAction = 'Stop'
 }
 $associationRes = New-CsOnlineApplicationInstanceAssociation @aaAssociationParams
 ```
