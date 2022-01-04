@@ -140,65 +140,63 @@ No matching commands include a parameter named 'PSShowComputerName'.  Check the 
 As in the screenshot below:
 ![PowerShell cmdlet checking for AsJob parameter in the module](../../img/20220103-163748-mgz536tpm6.png)
 
-
-```
-
-	"Category": "Param",
-	"Cmdlet": "Get-CsOnlineApplicationInstance",
-	"Param": "Identities",
-	"Event": "Remove",
-	"Timestamp": "2021-09-23 09:44:08"
-```
-
 ## New params
 
-```
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsCallingPolicy",
-	"Param": "AllowSIPDevicesCalling",
-	"Event": "Add",
+Several new parameters were added.
 
-	"Category": "Param",
-	"Cmdlet": "New-CsTeamsMeetingPolicy",
-	"Param": "AllowCartCaptionsScheduling",
-	"Event": "Add",
-	"Timestamp": "2021-09-23 09:44:09"
-},
-{
-	"Category": "Param",
-	"Cmdlet": "New-CsTeamsMeetingPolicy",
-	"Param": "AllowTasksFromTranscript",
-	"Event": "Add",
-	"Timestamp": "2021-09-23 09:44:09"
-{
-	"Category": "Param",
-	"Cmdlet": "Set-CsTeamsMeetingPolicy",
-	"Param": "AllowCartCaptionsScheduling",
-	"Event": "Add",
-	"Timestamp": "2021-09-23 09:44:10"
-},
-{
-	"Category": "Param",
-	"Cmdlet": "Set-CsTeamsMeetingPolicy",
-	"Param": "AllowTasksFromTranscript",
-	"Event": "Add",
-	"Timestamp": "2021-09-23 09:44:10"
-},
-	"Category": "Param",
-	"Cmdlet": "New-CsTeamsAppSetupPolicy",
-	"Param": "PinnedMessageBarApps",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:11"
-},
-{
-	"Category": "Param",
-	"Cmdlet": "New-CsExternalAccessPolicy",
-	"Param": "EnableTeamsConsumerInbound",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:11"
-},
+### Calling policy
+
+The following params were added for calling policy:
+
+* *AllowSIPDevicesCalling* - determines whether the user is allowed to use SIP device for calling on behalf of Teams client (from [the docs](https://docs.microsoft.com/en-us/powershell/module/skype/set-csteamscallingpolicy?view=skype-ps))
+
+
+* *AllowNetworkConfigurationSettingsLookup* - defaults to `false`. No mention in the docs as for now
+
+These parameters are available for *Get-* and *Set-/New-* cmdlets.
+
+
+### Meeting policy
+
+The following params were added for meeting policy:
+
+* *AllowCartCaptionsScheduling* - this has been mentioned in [August edition of datamining](teams-powershell-datamining-aug-2021/). Now it's covered in [the docs](https://docs.microsoft.com/en-us/powershell/module/skype/set-csteamsmeetingpolicy?view=skype-ps) and it's clear that `CART` is Communicatons Access Real-Time Translation.
+
+* *AllowTasksFromTranscript* - not mentioned in the docs yet.
+
+  Any attempt to run it with PowerShell returns *You are not permitted to invoke Set-CsTeamsMeetingPolicy with the following parameters: AllowTasksFromTranscript*.
+
+  My guess is that we're going to get some kind of intelligence to create tasks based on what was said during the meeting. It'd be similar to what Outlook Web App does based on mail content.
+
+These parameters are available for *Get-* and *Set-/New-* cmdlets.
+
+
+### App setup policy
+
+App setup policy cmdlets got new parameter: *PinnedMessageBarApps*.
+
+Guess - we're going to set which apps are pinned in message bar. Sounds more like composing window than the chat top bar.
+
+### External access policy
+
+*EnableTeamsConsumerInbound* has been added to *New-CsExternalAccessPolicy* and *Set-CsExternalAccessPolicy* cmdlets. It's also being returned by *Get-CsExternalAccessPolicy*.
+
+### Federation configuration
+
+Similarly to external access policy (which is by-user), federation configuration is also updated with Teams consumer-related parameter - *AllowTeamsConsumerInbound*.
+
+Relevant cmdlets are *Set-CsTenantFederationConfiguration* and *Get-CsTenantFederationConfiguration*.
+
+<Note>
+
+*AllowTeamsConsumer* parameter was already available when I started watching the changes.
+
+</Note>
+
+Notice the difference - while for policies the parameters start with *Enable*, in configuration they start with *Allow*.
+
+```
+
 {
 	"Category": "Param",
 	"Cmdlet": "Get-CsOnlineApplicationInstance",
@@ -208,14 +206,7 @@ As in the screenshot below:
 	"Timestamp": "2021-10-01 06:39:10"
 },
 
-{
-	"Category": "Param",
-	"Cmdlet": "New-CsTeamsCallingPolicy",
-	"Param": "AllowSIPDevicesCalling",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:11"
-},
+
 {
 	"Category": "Param",
 	"Cmdlet": "New-CsTeamsCallParkPolicy",
@@ -296,14 +287,7 @@ As in the screenshot below:
 	"Event": "Add",
 	"Timestamp": "2021-10-01 06:39:12"
 },
-{
-	"Category": "Param",
-	"Cmdlet": "Set-CsTeamsCallingPolicy",
-	"Param": "AllowSIPDevicesCalling",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:12"
-},
+
 {
 	"Category": "Param",
 	"Cmdlet": "Set-CsTeamsAppSetupPolicy",
@@ -312,14 +296,7 @@ As in the screenshot below:
 	"Event": "Add",
 	"Timestamp": "2021-10-01 06:39:12"
 },
-{
-	"Category": "Param",
-	"Cmdlet": "Set-CsExternalAccessPolicy",
-	"Param": "EnableTeamsConsumerInbound",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:11"
-},
+
 {
 	"Category": "Param",
 	"Cmdlet": "New-CsTeamsMessagingPolicy",
@@ -343,18 +320,7 @@ As in the screenshot below:
 	"Module": "2.6.0",
 	"Event": "Add",
 	"Timestamp": "2021-10-01 06:39:11"
-},
-
-{
-	"Category": "Param",
-	"Cmdlet": "Set-CsTenantFederationConfiguration",
-	"Param": "AllowTeamsConsumerInbound",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:12"
-},
-
-
+}
 {
 	"Category": "Param",
 	"Cmdlet": "Set-CsTeamsEmergencyCallingPolicy",
@@ -380,24 +346,10 @@ As in the screenshot below:
 ```
 {
 	"Category": "Policy",
-	"Cmdlet": "Get-CsTenantFederationConfiguration",
-	"Param": "AllowTeamsConsumerInbound",
-	"Event": "Add",
-	"Timestamp": "2021-09-25 02:33:13"
-},
-{
-	"Category": "Policy",
 	"Cmdlet": "Get-CsTeamsMeetingPolicy",
 	"Param": "NewMeetingRecordingExpirationDays",
 	"Event": "Add",
 	"Timestamp": "2021-09-25 02:32:57"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsExternalAccessPolicy",
-	"Param": "EnableTeamsConsumerInbound",
-	"Event": "Add",
-	"Timestamp": "2021-09-25 02:32:26"
 },
 
 
