@@ -9,7 +9,6 @@ tags:
   - powershell
   - datamining
 ---
-![]()
 
 ## New cmdlets
 
@@ -137,6 +136,7 @@ If you omit `-ErrorAction SilentlyContinue` you should receive the error message
 ```powershell
 No matching commands include a parameter named 'PSShowComputerName'.  Check the spelling of the parameter name, and then try again.
 ```
+
 As in the screenshot below:
 ![PowerShell cmdlet checking for AsJob parameter in the module](../../img/20220103-163748-mgz536tpm6.png)
 
@@ -168,8 +168,19 @@ The following params were added for meeting policy:
 
   My guess is that we're going to get some kind of intelligence to create tasks based on what was said during the meeting. It'd be similar to what Outlook Web App does based on mail content.
 
-These parameters are available for *Get-* and *Set-/New-* cmdlets.
+* *AllowAnonymousUsersToJoinMeeting* - related with [MC297030](https://m365log.com/teams/anonymous-join-policy-2/) Message Center entry
 
+* *NewMeetingRecordingExpirationDays* - related with [auto-expiration of meeting recordings](https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=82057&searchterms=84580&filters=Microsoft%20Teams&searchterms=84580).
+
+  <Note>
+
+	[Message Center entry](https://m365log.com/onedrive/teams-meeting-recordings-auto-expiration-in-onedrive-and-sharepoint/) previously mentioned *MeetingRecordingExpirationDays* but now the parameter has *New* prefix added.
+
+	The legacy parameter was removed in October (with `2.6.0` and `2.6.2` versions).
+
+	</Note>
+
+These parameters are available for *Get-* and *Set-/New-* cmdlets.
 
 ### App setup policy
 
@@ -195,98 +206,39 @@ Relevant cmdlets are *Set-CsTenantFederationConfiguration* and *Get-CsTenantFede
 
 Notice the difference - while for policies the parameters start with *Enable*, in configuration they start with *Allow*.
 
+### Call park policy
+
+Call park policy cmdlets got new parameters:
+
+* *ParkTimeoutSeconds*
+* *PickupRangeStart*
+* *PickupRangeEnd*
+
+Previously, we were able only to specify whether we allow call park for users. Now we can specify timeout and the range of numbers used in parking.
+
+### Online application instance
+
+*Get-CsOnlineApplicationInstance* got the parameter *Identities*. It currently has both *Identity* and *Identities* as parameters.
+
+### Messaging policy
+
+One new parameter introduced: *AllowUserDeleteChat*. The default value of this parameter is *true*.
+
+Upon checking on my test tenancies, I don't see any option to delete chats entirely. There's also no mention about that in [the Roadmap](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=Microsoft%20Teams&searchterms=chat).
+
+There's no documentation about that feature yet.
+
+What is interesting, you can already set the value of that parameter in policies and there's no error returned:
+
+![Setting AllowUserDeleteChat via PowerShell](../../img/20220105-082446-0AmMrCFXHr.png)
+
+### Guest messaging configuration
+
+*AllowUserDeleteChat* has been introduced to *Set-CsTeamsGuestMessagingConfiguration* cmdlet, too. It's default value is also *true*.
+
+Using that cmdlet we could configure the ability to delete chats (if my guess is correct) for all guests.
+
 ```
-
-{
-	"Category": "Param",
-	"Cmdlet": "Get-CsOnlineApplicationInstance",
-	"Param": "Identities",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:10"
-},
-
-
-{
-	"Category": "Param",
-	"Cmdlet": "New-CsTeamsCallParkPolicy",
-	"Param": "ParkTimeoutSeconds",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:11"
-},
-{
-	"Category": "Param",
-	"Cmdlet": "New-CsTeamsCallParkPolicy",
-	"Param": "PickupRangeStart",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:11"
-},
-{
-	"Category": "Param",
-	"Cmdlet": "New-CsTeamsCallParkPolicy",
-	"Param": "PickupRangeEnd",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:11"
-},
-{
-	"Category": "Param",
-	"Cmdlet": "Set-CsTeamsMessagingPolicy",
-	"Param": "AllowUserDeleteChat",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:12"
-},
-{
-	"Category": "Param",
-	"Cmdlet": "Set-CsTeamsMeetingPolicy",
-	"Param": "AllowAnonymousUsersToJoinMeeting",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:12"
-},
-{
-	"Category": "Param",
-	"Cmdlet": "Set-CsTeamsMeetingPolicy",
-	"Param": "NewMeetingRecordingExpirationDays",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:12"
-},
-{
-	"Category": "Param",
-	"Cmdlet": "Set-CsTeamsGuestMessagingConfiguration",
-	"Param": "AllowUserDeleteChat",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:12"
-},
-{
-	"Category": "Param",
-	"Cmdlet": "Set-CsTeamsCallParkPolicy",
-	"Param": "PickupRangeStart",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:12"
-},
-{
-	"Category": "Param",
-	"Cmdlet": "Set-CsTeamsCallParkPolicy",
-	"Param": "PickupRangeEnd",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:12"
-},
-{
-	"Category": "Param",
-	"Cmdlet": "Set-CsTeamsCallParkPolicy",
-	"Param": "ParkTimeoutSeconds",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:12"
-},
 
 {
 	"Category": "Param",
@@ -296,31 +248,6 @@ Notice the difference - while for policies the parameters start with *Enable*, i
 	"Event": "Add",
 	"Timestamp": "2021-10-01 06:39:12"
 },
-
-{
-	"Category": "Param",
-	"Cmdlet": "New-CsTeamsMessagingPolicy",
-	"Param": "AllowUserDeleteChat",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:11"
-},
-{
-	"Category": "Param",
-	"Cmdlet": "New-CsTeamsMeetingPolicy",
-	"Param": "AllowAnonymousUsersToJoinMeeting",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:11"
-},
-{
-	"Category": "Param",
-	"Cmdlet": "New-CsTeamsMeetingPolicy",
-	"Param": "NewMeetingRecordingExpirationDays",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:11"
-}
 {
 	"Category": "Param",
 	"Cmdlet": "Set-CsTeamsEmergencyCallingPolicy",
@@ -344,15 +271,6 @@ Notice the difference - while for policies the parameters start with *Enable*, i
 25.09:
 
 ```
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsMeetingPolicy",
-	"Param": "NewMeetingRecordingExpirationDays",
-	"Event": "Add",
-	"Timestamp": "2021-09-25 02:32:57"
-},
-
-
 
 {
 	"Category": "Policy",
@@ -465,38 +383,6 @@ Notice the difference - while for policies the parameters start with *Enable*, i
 	"Module": "2.6.0",
 	"Event": "Remove",
 	"Timestamp": "2021-10-08 02:34:50"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsMessagingPolicy",
-	"Param": "AllowUserDeleteChat",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-07 02:35:30"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsMeetingPolicy",
-	"Param": "MeetingRecordingExpirationDays",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-07 02:35:29"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsMeetingPolicy",
-	"Param": "AllowAnonymousUsersToJoinMeeting",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-07 02:35:29"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsGuestMessagingConfiguration",
-	"Param": "AllowUserDeleteChat",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-07 02:35:25"
 },
 {
 	"Category": "Policy",
