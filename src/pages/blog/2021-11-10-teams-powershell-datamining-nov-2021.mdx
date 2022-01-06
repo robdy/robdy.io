@@ -2,7 +2,8 @@
 templateKey: blog-post
 title: Teams PowerShell datamining - Jan 2022
 date: 2021-11-10T07:50:15.167Z
-description: New updates introduced in second half of 2021 introduces (TBA)
+description: New updates introduced in second half of 2021
+  introduces changes to Teams Consumer federation and more.
 featuredpost: false
 tags:
   - teams
@@ -10,34 +11,50 @@ tags:
   - datamining
 ---
 
+In this article you'll learn about changes introduced to Teams PowerShell module in the second half of 2021.
+
+## Table of Contents
+```toc
+exclude: [Table of Contents]
+```
+
 ## New cmdlets
+
+Several cmdlets in multiple areas were introduced.
 
 ### Audio conferencing policies
 
-Audio conferencing policy cmdlets were mentioned to be added temporarily in [recent datamining article](/teams-powershell-datamining-aug-2021/#cmdlets-added-temporarily). They are now back and they weren't remove from GA (General Availability) release `3.0.0`.
+Audio conferencing policy cmdlets were mentioned to be added temporarily in [recent datamining article](/teams-powershell-datamining-aug-2021/#cmdlets-added-temporarily). They are now back and they weren't removed from GA (General Availability) release `3.0.0`.
 
 As the cmdlets are present in GA release, we could consider them released. However, no documentation is available.
 
 Audio conferencing policy cmdlets are:
 
-* Get-CsTeamsAudioConferencingPolicy
-* Grant-CsTeamsAudioConferencingPolicy
-* New-CsTeamsAudioConferencingPolicy
-* Remove-CsTeamsAudioConferencingPolicy
-* Set-CsTeamsAudioConferencingPolicy
+* *Get-CsTeamsAudioConferencingPolicy*
+* *Grant-CsTeamsAudioConferencingPolicy*
+* *New-CsTeamsAudioConferencingPolicy*
+* *Remove-CsTeamsAudioConferencingPolicy*
+* *Set-CsTeamsAudioConferencingPolicy*
+
+Based on the parameters of *Set-CsTeamsAudioConferencingPolicy* we're going to get the following options to set:
+
+* *AllowTollFreeDialin* <Object\>
+* *MeetingInvitePhoneNumbers* <Object\>
+
+Based on these parameters, we can guess what that policy could do. We'll get the option to allow/disallow toll-free numbers for specific users. We'll be able to specify numbers to be included in meeting invite. Currently, we need to do this individually on people's accounts.
 
 ### Unassigned number treatment
 
-As the name implies, these cmdlets allows to specify how to treat unassigned numbers. The cmdlets give us ability to specify the target and pattern.
+As the name implies, these cmdlets allow to specify how to treat unassigned numbers. The cmdlets give us ability to specify the target and pattern.
 
-As for the audio conferencing policy, the unassigned number cmdlets are present in the GA release `3.0.0.`. And similarly, no documentation is available yet.
+As for the audio conferencing policy, the unassigned number cmdlets are present in the GA release `3.0.0`. And similarly, no documentation is available yet.
 
 Cmdlets related to unassigned number treatment are:
 
-* Get-CsTeamsUnassignedNumberTreatment
-* New-CsTeamsUnassignedNumberTreatment
-* Remove-CsTeamsUnassignedNumberTreatment
-* Set-CsTeamsUnassignedNumberTreatment
+* *Get-CsTeamsUnassignedNumberTreatment*
+* *New-CsTeamsUnassignedNumberTreatment*
+* *Remove-CsTeamsUnassignedNumberTreatment*
+* *Set-CsTeamsUnassignedNumberTreatment*
 
 ### Telephone number order
 
@@ -49,7 +66,7 @@ Five cmdlets related to telephone number ordering were added:
 * [Get-CsOnlineTelephoneNumberCountry](https://docs.microsoft.com/en-us/powershell/module/teams/get-csonlinetelephonenumbercountry?view=teams-ps)
 * [Get-CsOnlineTelephoneNumberType](https://docs.microsoft.com/en-us/powershell/module/teams/get-csonlinetelephonenumbertype?view=teams-ps)
 
-Documentation for these cmdlets is already available. In fact, it was available [a month before these cmdlets appeared in public version](https://github.com/MicrosoftDocs/office-docs-powershell/pull/8239) of the module.
+Documentation for these cmdlets is already available. In fact, it was available [one month before these cmdlets appeared in public version](https://github.com/MicrosoftDocs/office-docs-powershell/pull/8239) of the module.
 
 ### Encryption policy
 
@@ -61,37 +78,46 @@ Documentation for these cmdlets is already available. In fact, it was available 
 * [Grant-CsTeamsEnhancedEncryptionPolicy](https://docs.microsoft.com/en-us/powershell/module/teams/grant-csteamsenhancedencryptionpolicy?view=teams-ps)
 * [Remove-CsTeamsEnhancedEncryptionPolicy](https://docs.microsoft.com/en-us/powershell/module/teams/remove-csteamsenhancedencryptionpolicy?view=teams-ps)
 
+### ACS federation configuration
+
+For [Azure Communication Services](https://docs.microsoft.com/en-us/azure/communication-services/overview) we're getting cmdlets. They will let us limit which resources are allowed or disallowed.
+
+The cmdlets are:
+
+* [*Get-CsTeamsAcsFederationConfiguration*](https://docs.microsoft.com/en-us/powershell/module/teams/get-csteamsacsfederationconfiguration?view=teams-ps)
+* [*Set-CsTeamsAcsFederationConfiguration*](https://docs.microsoft.com/en-us/powershell/module/teams/set-csteamsacsfederationconfiguration?view=teams-ps)
+
+ACS federation functionality is currently in Limited Preview. However, the cmdlets' documentation is already available.
+
 ## Removed cmdlets
 
 ### Temporarily removed
 
 Some of the cmdlets are still yet to be included in GA release. Therefore, they are being added back and forth between GA and preview:
 
-17.08 (added back 29.08, removed 31.08. added 23.09, removed 10.01, added 26.10)
-
-* Get-CsTeamsShiftsConnectionConnector
-* Get-CsTeamsShiftsConnectionInstance
-* Get-CsTeamsShiftsConnectionSyncResult
-* Get-CsTeamsShiftsConnectionTeamMap
-* Get-CsTeamsShiftsConnectionUser
-* Get-CsTeamsShiftsConnectionWfmTeam
-* New-CsTeamsShiftsConnectionInstance
-* New-CsTeamsShiftsConnectionTeamMap
-* Remove-CsTeamsShiftsConnectionInstance
-* Remove-CsTeamsShiftsConnectionTeamMap
-* Set-CsTeamsShiftsConnectionInstance
-* Test-CsTeamsShiftsConnectionValidate
-* Add-TeamChannelUser
-* Add-TeamsAppInstallation
-* Get-LicenseReportForChangeNotificationSubscription
-* Get-TeamChannelUser
-* Get-TeamsAppInstallation
-* Get-TeamTargetingHierarchyStatus
-* Remove-TeamChannelUser
-* Remove-TeamsAppInstallation
-* Remove-TeamTargetingHierarchy
-* Set-TeamTargetingHierarchy
-* Update-TeamsAppInstallation
+* *Get-CsTeamsShiftsConnectionConnector*
+* *Get-CsTeamsShiftsConnectionInstance*
+* *Get-CsTeamsShiftsConnectionSyncResult*
+* *Get-CsTeamsShiftsConnectionTeamMap*
+* *Get-CsTeamsShiftsConnectionUser*
+* *Get-CsTeamsShiftsConnectionWfmTeam*
+* *New-CsTeamsShiftsConnectionInstance*
+* *New-CsTeamsShiftsConnectionTeamMap*
+* *Remove-CsTeamsShiftsConnectionInstance*
+* *Remove-CsTeamsShiftsConnectionTeamMap*
+* *Set-CsTeamsShiftsConnectionInstance*
+* *Test-CsTeamsShiftsConnectionValidate*
+* *Add-TeamChannelUser*
+* *Add-TeamsAppInstallation*
+* *Get-LicenseReportForChangeNotificationSubscription*
+* *Get-TeamChannelUser*
+* *Get-TeamsAppInstallation*
+* *Get-TeamTargetingHierarchyStatus*
+* *Remove-TeamChannelUser*
+* *Remove-TeamsAppInstallation*
+* *Remove-TeamTargetingHierarchy*
+* *Set-TeamTargetingHierarchy*
+* *Update-TeamsAppInstallation*
 
 ### Blocked number exception pattern
 
@@ -102,43 +128,9 @@ Blocked number exception pattern cmdlets [have been removed in 2.6.0 module vers
 * Remove-CsTenantBlockedNumberExceptionPattern
 * Set-CsTenantBlockedNumberExceptionPattern
 
-## Removed params
+### Presence policy
 
-### AllowCallRedirect
-
-*AllowCallRedirect* has been temporarily removed from *Set-CsTeamsCallingPolicy*. It's been added after few days. Interestingly, this param has no mention [in the docs for *Set-CsTeamsCallingPolicy*](https://docs.microsoft.com/en-us/powershell/module/skype/set-csteamscallingpolicy?view=skype-ps).
-
-### Refactored cmdlets
-
-In September, there was a mass removal of some of the parameters, which might indicate code cleanup. The parameters removed are:
-
-* Tenant
-* DomainController
-* AsJob
-* Credential
-* RunspaceId
-* PSComputerName
-* PSShowComputerName
-
-Now, these parameters are not available anymore. The only remaining parameter is *Credential*, which is used for *Connect-MicrosoftTeams*
-
-Short script to check if any of the params exists:
-
-```powershell
-"Tenant", "DomainController", "AsJob", "Credential", "RunspaceId", "PSComputerName", "PSShowComputerName" | ForEach-Object {
-	$PSItem
-	Get-Command -Module microsoftteams -ParameterName $PSItem -ErrorAction SilentlyContinue
-}
-``` 
-
-If you omit `-ErrorAction SilentlyContinue` you should receive the error message:
-
-```powershell
-No matching commands include a parameter named 'PSShowComputerName'.  Check the spelling of the parameter name, and then try again.
-```
-
-As in the screenshot below:
-![PowerShell cmdlet checking for AsJob parameter in the module](../../img/20220103-163748-mgz536tpm6.png)
+*Get-CsPresencePolicy* has been removed. Most likely as a part of Skype for Business Online cleanup.
 
 ## New params
 
@@ -151,7 +143,7 @@ The following params were added for calling policy:
 * *AllowSIPDevicesCalling* - determines whether the user is allowed to use SIP device for calling on behalf of Teams client (from [the docs](https://docs.microsoft.com/en-us/powershell/module/skype/set-csteamscallingpolicy?view=skype-ps))
 
 
-* *AllowNetworkConfigurationSettingsLookup* - defaults to `false`. No mention in the docs as for now
+* *AllowNetworkConfigurationSettingsLookup* - defaults to `false`. No mention in the docs as for now. Similar parameter exists in meeting policy (see below). It might mean that feature is coming for calls and meetings.
 
 These parameters are available for *Get-* and *Set-/New-* cmdlets.
 
@@ -179,6 +171,8 @@ The following params were added for meeting policy:
 	The legacy parameter was removed in October (with `2.6.0` and `2.6.2` versions).
 
 	</Note>
+
+* *AllowNetworkConfigurationSettingsLookup* - defaults to `false`. No mention in the docs as for now. Similar parameter exists in calling policy (described above). It might mean that feature is coming for calls and meetings.
 
 These parameters are available for *Get-* and *Set-/New-* cmdlets.
 
@@ -238,355 +232,55 @@ What is interesting, you can already set the value of that parameter in policies
 
 Using that cmdlet we could configure the ability to delete chats (if my guess is correct) for all guests.
 
+### Emergency calling policy
+
+*EnhancedEmergencyServiceDisclaimer* has been added to an emergency calling policy cmdlets.
+
+There's no mention of that parameter in [the docs of *Set-CsTeamsEmergencyCallingPolicy*](https://docs.microsoft.com/en-us/powershell/module/skype/set-csenhancedemergencyservicedisclaimer?view=skype-ps). However, similar cmdlet [Set-CsEnhancedEmergencyServiceDisclaimer*](https://docs.microsoft.com/en-us/powershell/module/skype/set-csenhancedemergencyservicedisclaimer?view=skype-ps) exists for Skype for Business.
+
+The purpose of E911 disclaimer is to provide a message that will be played whenever someone calls emergency services from Teams. We could warn users about the consequences of using outdated emergency location.
+
+Based on the roadmap we can guess that it's related with [Dynamic Emergency Calling for Work From Home]https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=82956). There are [similar entries for VDI](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=dynamic%2Cemergency%2Ccalling), too.
+
+### Enhanced encryption policy
+
+Enhanced encryption policy is responsible for [end-to-end encryption (E2EE)](https://techcommunity.microsoft.com/t5/microsoft-teams-blog/use-end-to-end-encryption-for-one-to-one-microsoft-teams-calls/ba-p/2867066) - now [in General Availability](https://techcommunity.microsoft.com/t5/microsoft-teams-blog/end-to-end-encryption-for-one-to-one-microsoft-teams-calls-now/ba-p/3037697).
+
+## Removed params
+
+### AllowCallRedirect
+
+*AllowCallRedirect* has been temporarily removed from *Set-CsTeamsCallingPolicy*. It's been added after few days. Interestingly, this param has no mention [in the docs for *Set-CsTeamsCallingPolicy*](https://docs.microsoft.com/en-us/powershell/module/skype/set-csteamscallingpolicy?view=skype-ps).
+
+### Refactored cmdlets
+
+In September, there was a mass removal of some of the parameters, which might indicate code cleanup. The parameters removed are:
+
+* Tenant
+* DomainController
+* AsJob
+* Credential
+* RunspaceId
+* PSComputerName
+* PSShowComputerName
+
+Now, these parameters are not available anymore. The only remaining parameter is *Credential*, which is used for *Connect-MicrosoftTeams*
+
+Short script to check if any of the params exists:
+
+```powershell
+"Tenant", "DomainController", "AsJob", "Credential", "RunspaceId", "PSComputerName", "PSShowComputerName" | ForEach-Object {
+	$PSItem
+	Get-Command -Module microsoftteams -ParameterName $PSItem -ErrorAction SilentlyContinue
+}
+``` 
+
+If you omit `-ErrorAction SilentlyContinue` you should receive the error message:
+
+```powershell
+No matching commands include a parameter named 'PSShowComputerName'.  Check the spelling of the parameter name, and then try again.
 ```
 
-{
-	"Category": "Param",
-	"Cmdlet": "Set-CsTeamsAppSetupPolicy",
-	"Param": "PinnedMessageBarApps",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-01 06:39:12"
-},
-{
-	"Category": "Param",
-	"Cmdlet": "Set-CsTeamsEmergencyCallingPolicy",
-	"Param": "EnhancedEmergencyServiceDisclaimer",
-	"Module": "2.6.1",
-	"Event": "Add",
-	"Timestamp": "2021-10-26 02:31:33"
-},
-{
-	"Category": "Param",
-	"Cmdlet": "New-CsTeamsEmergencyCallingPolicy",
-	"Param": "EnhancedEmergencyServiceDisclaimer",
-	"Module": "2.6.1",
-	"Event": "Add",
-	"Timestamp": "2021-10-26 02:31:33"
-},
-```
+As in the screenshot below:
+![PowerShell cmdlet checking for AsJob parameter in the module](../../img/20220103-163748-mgz536tpm6.png)
 
-## New policies properties
-
-25.09:
-
-```
-
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsMeetingPolicy",
-	"Param": "AllowNetworkConfigurationSettingsLookup",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-19 02:35:05"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsCallingPolicy",
-	"Param": "AllowNetworkConfigurationSettingsLookup",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-19 02:34:53"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsPresencePolicy",
-	"Param": "Element",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-08 02:34:50"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsPresencePolicy",
-	"Param": "TypedIdentity",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-08 02:34:50"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsPresencePolicy",
-	"Param": "Identity",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-08 02:34:50"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsPresencePolicy",
-	"Param": "Anchor",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-08 02:34:50"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsPresencePolicy",
-	"Param": "ScopeClass",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-08 02:34:50"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsPresencePolicy",
-	"Param": "Key",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-08 02:34:50"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsPresencePolicy",
-	"Param": "DataSource",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-08 02:34:50"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsPresencePolicy",
-	"Param": "Description",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-08 02:34:50"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsPresencePolicy",
-	"Param": "MaxCategorySubscription",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-08 02:34:50"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsPresencePolicy",
-	"Param": "MaxPromptedSubscriber",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-08 02:34:50"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsPresencePolicy",
-	"Param": "XsAnyAttributes",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-08 02:34:50"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsPresencePolicy",
-	"Param": "XsAnyElements",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-08 02:34:50"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsEmergencyCallingPolicy",
-	"Param": "EnhancedEmergencyServiceDisclaimer",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-07 02:35:20"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
-	"Param": "Element",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-06 02:32:45"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
-	"Param": "TypedIdentity",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-06 02:32:45"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
-	"Param": "Identity",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-06 02:32:45"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
-	"Param": "Anchor",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-06 02:32:45"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
-	"Param": "ScopeClass",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-06 02:32:45"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
-	"Param": "Key",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-06 02:32:45"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
-	"Param": "DataSource",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-06 02:32:45"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
-	"Param": "Description",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-06 02:32:45"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
-	"Param": "CallingEndtoEndEncryptionEnabledType",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-06 02:32:45"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
-	"Param": "XsAnyAttributes",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-06 02:32:45"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsEnhancedEncryptionPolicy",
-	"Param": "XsAnyElements",
-	"Module": "2.6.0",
-	"Event": "Add",
-	"Timestamp": "2021-10-06 02:32:45"
-},
-```
-
-## Removed policies properties
-
-```
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
-	"Param": "Element",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-01 06:39:40"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
-	"Param": "TypedIdentity",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-01 06:39:40"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
-	"Param": "Identity",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-01 06:39:40"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
-	"Param": "Anchor",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-01 06:39:40"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
-	"Param": "ScopeClass",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-01 06:39:40"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
-	"Param": "Key",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-01 06:39:40"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
-	"Param": "DataSource",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-01 06:39:40"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
-	"Param": "AllowAllAcsResources",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-01 06:39:40"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
-	"Param": "EnableAcsUsers",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-01 06:39:40"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
-	"Param": "BlockedAcsResources",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-01 06:39:40"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
-	"Param": "AllowedAcsResources",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-01 06:39:40"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
-	"Param": "XsAnyAttributes",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-01 06:39:40"
-},
-{
-	"Category": "Policy",
-	"Cmdlet": "Get-CsTeamsAcsFederationConfiguration",
-	"Param": "XsAnyElements",
-	"Module": "2.6.0",
-	"Event": "Remove",
-	"Timestamp": "2021-10-01 06:39:40"
-},
-```
