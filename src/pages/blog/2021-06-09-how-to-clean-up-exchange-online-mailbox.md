@@ -10,7 +10,7 @@ featuredpost: false
 * Exchange Online (Outlook.com and Exchange Server to be checked)
 * Access via [Outlook Web Access (OWA)](https://support.microsoft.com/en-us/office/how-to-sign-in-to-outlook-on-the-web-763fab4d-0138-4814-b450-37fc286bcb79)
 
-For the purpose of this demonstration, we'll use Exchange Online mailbox.
+For this demonstration, we'll use Exchange Online mailbox.
 
 ## Emptying folders from OWA
 
@@ -22,7 +22,54 @@ Outlook Web Access provides an interface to remove all the emails folder by fold
 
    ![Going to all Outlook settings from OWA](../../img/20210610-205015-qwwzobd93t.png)
 
+4. In **Settings** window, choose **General** (3) and then **Storage** (4):
+
+   <Tip>
+
+   Direct link to storage settings is [https://outlook.office.com/mail/options/general/storage](https://outlook.office.com/mail/options/general/storage).
+
+   </Tip>
+
+   ![Navigating to storage settings](../../img/20220108-151545-F4ky5vJaNT.png)
+
+5. In the right pane, find the name of the folder we'd like to clean and choose **Empty** link (5). We'll see the dropdown to choose a time range for cleanup:
+
+   <Note>
+
+   The list displays only the folder name. If we have multiple folders with the same name, let's be careful! We can also rename the folder before cleaning up.
+
+   </Note>
+
+   ![Choosing time range](../../img/20220108-152448-odT7bXGLhN.png)
+
+6. Last, but not least - confirm:
+
+   ![Confirmation dialog](../../img/20220108-152920-VE8EjdIZcw.png)
+
+7. The screenshot below shows that we submitted the cleanup request correctly. While the folder cleanup is being processed, we can repeat the process for other folders.
+
+   ![Emptying request being processed](../../img/20220108-152651-xLNCV1KK4K.png)
+
 ### Removing items from the shared mailbox
+
+The method described above shows the step to empty folders in the personal mailbox. What if we want to do the same for a shared mailbox?
+
+First of all, we need to have *Full Access* permissions over the mailbox. Then we need to open it from OWA. We need to click on our profile picture and then choose **Open another mailbox**:
+
+![Opening shared mailbox from OWA](../../img/20220108-154514-9FYZ55085q.png)
+
+In the shared mailbox tab, we need to repeat the process described in [Emptying folders from OWA](#emptying-folders-from-owa)
+
+<Tip>
+
+You can use a direct link to go to the storage section in a shared mailbox. The link would be:
+
+```powershell
+# Replace email@domain.com with the shared mailbox address
+https://outlook.office.com/mail/email@domain.com/options/general/storage
+```
+
+</Tip>
 
 ### Limitations
 
