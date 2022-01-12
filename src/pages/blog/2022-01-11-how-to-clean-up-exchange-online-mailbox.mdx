@@ -1,0 +1,169 @@
+---
+templateKey: blog-post
+title: How to clean up Exchange Online mailbox
+date: 2022-01-11T12:50:17.256Z
+description: This blog post described multiple ways to clean up a mailbox in Exchange Online.
+featuredpost: false
+---
+## Prerequisites
+
+* Exchange Online (Outlook.com and Exchange Server to be checked)
+* Access via [Outlook Web Access (OWA)](https://support.microsoft.com/en-us/office/how-to-sign-in-to-outlook-on-the-web-763fab4d-0138-4814-b450-37fc286bcb79)
+* Mailbox archive enabled -  follow [Enable archive mailboxes in the compliance center](https://docs.microsoft.com/en-us/microsoft-365/compliance/enable-archive-mailboxes?view=o365-worldwide) if you don't have it
+
+   <Note>
+
+   Archive is not required, if we plan to delete emails. It's necessary if we want to move emails to archive.
+
+   </Note>
+
+   <Warning>
+
+   Enabling archive with default settings will move all emails (and other items) **older than 2 years** to archive. Keep that in mind. 
+
+   </Warning>
+
+For this demonstration, we'll use Exchange Online mailbox.
+
+## Emptying folders from OWA
+
+Outlook Web Access provides an interface to remove all the emails folder by folder. The steps to use it are demonstrated below:
+
+1. Open the web browser and go to <https://outlook.office.com/mail>.
+2. Sign in using our Microsoft 365 account
+3. Once we're signed in go to the **gear icon** (1) and click **View all Outlook settings** (2):
+
+   ![Going to all Outlook settings from OWA](../../img/20210610-205015-qwwzobd93t.png)
+
+4. In **Settings** window, choose **General** (3) and then **Storage** (4):
+
+   <Tip>
+
+   Direct link to storage settings is [https://outlook.office.com/mail/options/general/storage](https://outlook.office.com/mail/options/general/storage).
+
+   </Tip>
+
+   ![Navigating to storage settings](../../img/20220108-151545-F4ky5vJaNT.png)
+
+5. In the right pane, find the name of the folder we'd like to clean and choose **Empty** link (5). We'll see the dropdown to choose a time range for cleanup:
+
+   <Note>
+
+   The list displays only the folder name. If we have multiple folders with the same name, let's be careful! We can also rename the folder before cleaning up.
+
+   </Note>
+
+   ![Choosing time range](../../img/20220108-152448-odT7bXGLhN.png)
+
+6. Last, but not least - confirm:
+
+   ![Confirmation dialog](../../img/20220108-152920-VE8EjdIZcw.png)
+
+7. The screenshot below shows that we submitted the cleanup request correctly. While the folder cleanup is being processed, we can repeat the process for other folders.
+
+   ![Emptying request being processed](../../img/20220108-152651-xLNCV1KK4K.png)
+
+### Removing items from the shared mailbox
+
+The method described above shows the step to empty folders in the personal mailbox. What if we want to do the same for a shared mailbox?
+
+First of all, we need to have *Full Access* permissions over the mailbox. Then we need to open it from OWA. We need to click on our profile picture and then choose **Open another mailbox**:
+
+![Opening shared mailbox from OWA](../../img/20220108-154514-9FYZ55085q.png)
+
+In the shared mailbox tab, we need to repeat the process described in [Emptying folders from OWA](#emptying-folders-from-owa)
+
+<Tip>
+
+You can use a direct link to go to the storage section in a shared mailbox. The link would be:
+
+```powershell
+# Replace email@domain.com with the shared mailbox address
+https://outlook.office.com/mail/email@domain.com/options/general/storage
+```
+
+</Tip>
+
+### Limitations
+
+Using *Empty folder* functionality comes with some limitations:
+
+* Cannot be trigerred automatically
+* We cannot choose between removing or archiving the content
+
+## Cleaning up the folder using a retention policy
+
+Using retention policy we can force Exchange service to do cleanup on our behalf. We'll also 
+
+In the following steps, we'll be applying personal [retention tag](https://docs.microsoft.com/en-us/exchange/security-and-compliance/messaging-records-management/retention-tags-and-policies#retention-tags) to a folder.
+
+### Applying archive policy to a folder using Outlook on the web
+
+To apply archive policy to a folder using Outlook on the web, let's follow these steps:
+
+1. Open [Outlook on the web](https://outlook.office.com/mail/)
+2. Right-click the folder we'd like to archive (1)
+3. Go to **Assign policy** (2) and choose the desired archive policy (3)
+
+The screenshot below demonstrates the steps:
+
+![Applying archive policy to a folder in Outlook on the web](../../img/20220111-194922-LKx1AS3nGM.png)
+
+### Applying archive policy to a folder using Outlook
+
+To apply archive policy to a folder using Outlook, let's follow these steps:
+
+1. Open Outlook and find the folder on the folder pan
+2. Right-click the folder (1) and choose **Properties** (2)
+
+   ![Opening folder properties with Outlook](../../img/20220111-200423-ciS96SdNhY.png)
+
+3. In the newly-opened window, choose **Policy** (3)
+4. Under **Online Archive** select the policy from the dropdown (4)
+5. Confirm with **OK** (5)
+
+   ![Choosing archive policy with Outlook](../../img/20220111-200712-S4HjBmwret.png)
+
+### Applying retention policy to a folder
+
+When we want to delete emails instead of archiving them, we're using a retention policy. The process of applying them is quite similar to archive policy.
+
+In Outlook on the web we'll use settings under **Retention labels**:
+
+![Selecting retention tags with Outlook on the web](../../img/20220112-215253-L9hHporofg.png)
+
+In Outlook we'll choose the setting under **Folder policy**:
+
+![Selecting retention tags with Outlook](../../img/20220112-215805-AwZIyMbXy9.png)
+
+There's a slight difference between archive and retention policies. As described in [Retention tags and policies article](https://docs.microsoft.com/en-us/exchange/security-and-compliance/messaging-records-management/retention-tags-and-policies):
+
+> Users can apply archive policies to default folders, user-created folders or subfolders, and individual items. Users can apply a retention policy to user-created folders or subfolders and individual items (including subfolders and items in a default folder), **but not to default folders**.
+
+What does it mean? Personal tags cannot be applied to folder like *Inbox*, *Sent items*, etc. That means we can only rely on policies created by administrators.
+
+If we try to change policy for any default folder, we'd not see personal tags:
+
+![Personal tags not available for default folder](../../img/20220112-220421-1gdKhCXW0j.png)
+
+### Applying a policy to all folders
+
+
+
+<Note>
+
+
+
+</Note>
+
+### Checking the effects of the policy
+
+### Creating custom retention tag
+
+### Adding retention tag to retention policy
+
+## Cleaning up the folder using AutoArchive
+
+## Cleaning up the folder using sweep rules
+
+## Comparison
