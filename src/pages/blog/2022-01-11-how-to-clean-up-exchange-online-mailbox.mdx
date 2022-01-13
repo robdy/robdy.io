@@ -13,7 +13,7 @@ featuredpost: false
 
    <Note>
 
-   Archive is not required, if we plan to delete emails. It's necessary if we want to move emails to archive.
+   The archive is not required, if we plan to delete emails. It's necessary if we want to move emails to the archive.
 
    </Note>
 
@@ -88,7 +88,7 @@ https://outlook.office.com/mail/email@domain.com/options/general/storage
 
 Using *Empty folder* functionality comes with some limitations:
 
-* Cannot be trigerred automatically
+* Cannot be triggered automatically
 * We cannot choose between removing or archiving the content
 
 ## Cleaning up the folder using a retention policy
@@ -162,8 +162,45 @@ If we try to change policy for any default folder, we'd not see personal tags:
 
 ### Adding retention tag to retention policy
 
+### Limitations
+
 ## Cleaning up the folder using AutoArchive
 
+AutoArchive is a feature similar to archiving policy. The main difference is the destination of the archive.
+
+For archiving policy, we specify rules about items being moved to the Online Archive. For AutoArchive, we save files locally. Local files mean that the machine owner needs to take care of the backup. The data is no longer protected by Exchange mechanisms.
+
+### Setting up AutoArchive
+
+1. In Outlook, go to **File** and **Options**
+2. In **Options** window, go to **Advanced** (1) and find **AutoArchive Settings**:
+
+  ![Accessing AutoArchive settings in Outlook](../../img/20220113-205830-UJnVs7Wgk7.png)
+
+3. In **AutoArchive** window, set the options and confirm by **OK**:
+
+  ![AutoArchive options in Outlook](../../img/20220113-210250-7zggCAWkLb.png)
+
+That's all. AutoArchive is now enabled. Every 14 days (or whatever period we set) we'll be prompted to confirm cleanup operation:
+
+### ADD THE PROMPT SCREENSHOT (MEGANB PROFILE)
+
+### Limitations
+
+Using AutoArchive comes with some limitations:
+
+* Items can only be archived to local file
+* Only available in Outlook
+* Cannot be enabled if online archive is enabled
+
+<Tip>
+
+Based on my checking, AutoArchive settings won't be visible if that feature is not available for **primary mailbox** in Outlook profile. In such case, we'd need to [Create a new profile](https://support.microsoft.com/en-us/office/create-an-outlook-profile-f544c1ba-3352-4b3b-be0b-8d42a540459d).
+
+</Tip>
+
 ## Cleaning up the folder using sweep rules
+
+### Limitations
 
 ## Comparison
