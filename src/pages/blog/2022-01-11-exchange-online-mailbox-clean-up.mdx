@@ -140,7 +140,7 @@ There's a slight difference between archive and retention policies. As described
 
 > Users can apply archive policies to default folders, user-created folders or subfolders, and individual items. Users can apply a retention policy to user-created folders or subfolders and individual items (including subfolders and items in a default folder), **but not to default folders**.
 
-What does it mean? Personal tags cannot be applied to folder like *Inbox*, *Sent items*, etc. That means we can only rely on policies created by administrators.
+What does it mean? Personal tags cannot be applied to a folder like *Inbox*, *Sent items*, etc. That means we can only rely on policies created by administrators.
 
 If we try to change policy for any default folder, we'd not see personal tags:
 
@@ -148,6 +148,31 @@ If we try to change policy for any default folder, we'd not see personal tags:
 
 ### Applying a policy to all folders
 
+When applying the policy to a folder, we might have noticed the default option: **Use parent folder policy**:
+
+![Default policies settings](../../img/20220114-083852-RQeVgTQRBu.png)
+
+All folders inherit from their parents by default. We could use that to apply the policy to more than one folder at a time.
+
+But wait, what is the parent folder for a top-level folder (*Inbox*, *Sent items*, etc.)? For those, the parent folder is the one called the *root* folder.
+
+We can change the settings of the root folder by right-clicking our mailbox name/email address in Outlook. In Outlook on the web, we need to right-click the *Folders* label:
+
+![Root folder in Outlook on the web and Outlook](../../img/20220114-085209-Pa3zj3OD3P.png)
+
+If we apply the policy to root folder, it'd be applied to all folder which are set to inherit from parent.
+
+<Note>
+
+Remember about the rule regarding personal tags. Root folder is default folder. Therefore only admin-defined retention policies can be applied.
+
+There's one specific thing about root folder. From what I checked, personal archive tags cannot be applied to root folder.
+
+### CHECK WHAT TAGS CAN BE APPLIED
+
+</Note>
+
+In Outlook on the web
 
 
 <Note>
@@ -177,11 +202,11 @@ For archiving policy, we specify rules about items being moved to the Online Arc
 
   ![Accessing AutoArchive settings in Outlook](../../img/20220113-205830-UJnVs7Wgk7.png)
 
-3. In **AutoArchive** window, set the options and confirm by **OK**:
+3. In the **AutoArchive** window, set the options and confirm by **OK**:
 
   ![AutoArchive options in Outlook](../../img/20220113-210250-7zggCAWkLb.png)
 
-That's all. AutoArchive is now enabled. Every 14 days (or whatever period we set) we'll be prompted to confirm cleanup operation:
+That's all. AutoArchive is now enabled. Every 14 days (or whatever period we set) we'll be prompted to confirm the cleanup operation:
 
 ### ADD THE PROMPT SCREENSHOT (MEGANB PROFILE)
 
@@ -189,18 +214,53 @@ That's all. AutoArchive is now enabled. Every 14 days (or whatever period we set
 
 Using AutoArchive comes with some limitations:
 
-* Items can only be archived to local file
+* Items can only be archived to a local file
 * Only available in Outlook
-* Cannot be enabled if online archive is enabled
+* Cannot be enabled if the online archive is enabled
 
 <Tip>
 
-Based on my checking, AutoArchive settings won't be visible if that feature is not available for **primary mailbox** in Outlook profile. In such case, we'd need to [Create a new profile](https://support.microsoft.com/en-us/office/create-an-outlook-profile-f544c1ba-3352-4b3b-be0b-8d42a540459d).
+Based on my checking, AutoArchive settings won't be visible if that feature is not available for **primary mailbox** in Outlook profile. In such a case, we'd need to [Create a new profile](https://support.microsoft.com/en-us/office/create-an-outlook-profile-f544c1ba-3352-4b3b-be0b-8d42a540459d).
 
 </Tip>
 
 ## Cleaning up the folder using sweep rules
 
+*Sweep rules* are another way to clean up emails. This mechanism is a bit different from the others described above.
+
+We apply sweep rules to messages in *Inbox* or the other folders created by the mailbox owner. This rule cannot be applied to folders like *Sent Items*, *Deleted Items*, *Archive*, etc.
+
+To configure sweep rules, we need to use Outlook on the web. Let's follow the steps:
+
+1. Open [Outlook on the web](https://outlook.office.com/mail)
+2. Find a message from the sender we'd like to sweep
+
+  <Tip>
+
+  If we currently don't have any message from the sender available in Inbox, we can move it temporarily.
+
+  </Tip>
+
+3. In the top bar, click the **Sweep** button (1):
+
+  ![Sweep button in Outlook on the web](../../img/20220114-082214-0YJwLDSSTJ.png)
+
+4. In the dialog box, choose a suitable option. For example, this is the rule I use for most of the newsletters. Confirm with **OK** (2):
+
+  ![Sweep rules configuration dialog](../../img/20220114-082831-bHZVIqJOal.png)
+
+5. To view or manage your sweep rules, go to Outlook options -> **Mail** -> **Sweep** (or use [direct link](https://outlook.office.com/mail/options/mail/sweep)):
+
+  ![Sweep rules management window](../../img/20220114-083214-hOXLw4z58O.png)
+
+Notice that the management interface is very limited. You cannot even edit the existing rule. If you want to change something, you need to delete the rule and recreate it.
+
 ### Limitations
+
+* Only available in Outlook on the web
+* Must be configured per-sender
+* No filtering by any other field than sender address
+
+## Cleaning up the folder using inbox rules
 
 ## Comparison
