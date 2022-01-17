@@ -1,16 +1,19 @@
 ---
 templateKey: blog-post
-title: How to clean up Exchange Online mailbox
+title: 6 ways to clean up Outlook mailbox
 date: 2022-01-17T12:50:17.256Z
-description: This blog post described multiple ways to clean up a mailbox in
-  Exchange Online.
+description: This blog post described 6 ways to clean up Outlook mailbox in Exchange Online.
 featuredpost: false
+tags:
+  - outlook
+  - exchange
+  - end user
 ---
 ## Prerequisites
 
 * Exchange Online (Outlook.com and Exchange Server support some of the features)
 * Access via [Outlook Web Access (OWA)](https://support.microsoft.com/en-us/office/how-to-sign-in-to-outlook-on-the-web-763fab4d-0138-4814-b450-37fc286bcb79)
-* Mailbox archive enabled -  follow [Enable archive mailboxes in the compliance center](https://docs.microsoft.com/en-us/microsoft-365/compliance/enable-archive-mailboxes?view=o365-worldwide) if you don't have it
+* Mailbox archive enabled. Follow [Enable archive mailboxes in the compliance center](https://docs.microsoft.com/en-us/microsoft-365/compliance/enable-archive-mailboxes?view=o365-worldwide) if you don't have it
 
    <Note>
 
@@ -20,7 +23,7 @@ featuredpost: false
 
    <Warning>
 
-   Enabling archive with default settings will move all emails (and other items) **older than 2 years** to archive. Keep that in mind. 
+   Archive policy defaults to 2 years. Enabling archive will move all emails (and other items) **older than 2 years** to archive. Keep that in mind.
 
    </Warning>
 
@@ -138,7 +141,7 @@ Notice that the management interface is very limited. You cannot even edit the e
 
 ## Cleaning up the mailbox using archive and retention tags
 
-Using retention policy with archive and retention tags we can force Exchange service to do cleanup on our behalf.
+We can force Exchange service to do cleanup on our behalf. We'll do it using retention policy with archive and retention tags.
 
 <Note>
 
@@ -193,7 +196,7 @@ There's a slight difference between archive and retention policies. As described
 
 > Users can apply archive policies to default folders, user-created folders or subfolders, and individual items. Users can apply a retention policy to user-created folders or subfolders and individual items (including subfolders and items in a default folder), **but not to default folders**.
 
-What does it mean? Personal tags cannot be applied to a folder like *Inbox*, *Sent items*, etc. That means we can only rely on policies created by administrators.
+What does it mean? We cannot apply personal tags to a folder like *Inbox*, *Sent items*, etc.. That means we can only rely on policies created by administrators.
 
 If we try to change policy for any default folder, we'd not see personal tags:
 
@@ -201,7 +204,7 @@ If we try to change policy for any default folder, we'd not see personal tags:
 
 ### Applying a policy to all folders
 
-When applying the policy to a folder, we might have noticed the default option: **Use parent folder policy**:
+When applying the policy to a folder, we might have noticed the default option. It is to **Use parent folder policy**:
 
 ![Default policies settings](../../img/20220114-083852-RQeVgTQRBu.png)
 
@@ -209,7 +212,7 @@ All folders inherit from their parents by default. We could use that to apply th
 
 But wait, what is the parent folder for a top-level folder (*Inbox*, *Sent items*, etc.)? For those, the parent folder is the one called the *root* folder.
 
-We can change the settings of the root folder by right-clicking our mailbox name/email address in Outlook. In Outlook on the web, we need to right-click the *Folders* label:
+We can change the settings of the root folder. We do it by right-clicking our mailbox name/email address in Outlook. In Outlook on the web, we need to right-click the *Folders* label:
 
 ![Root folder in Outlook on the web and Outlook](../../img/20220114-085209-Pa3zj3OD3P.png)
 
@@ -217,7 +220,7 @@ If we apply the policy to the root folder, it'd be applied to all folders which 
 
 <Note>
 
-Remember about the rule regarding personal tags. The root folder is a default folder. Therefore only admin-defined retention policies can be applied.
+Remember about the rule about personal tags. The root folder is a default folder. Thus only admin-defined retention policies can be applied.
 
 There's one specific thing about the root folder. From what I checked, personal archive tags cannot be applied to the root folder.
 
@@ -276,7 +279,7 @@ Using AutoArchive comes with some limitations:
 
 <Tip>
 
-Based on my checking, AutoArchive settings won't be visible if that feature is not available for **primary mailbox** in Outlook profile. In such a case, we'd need to [Create a new profile](https://support.microsoft.com/en-us/office/create-an-outlook-profile-f544c1ba-3352-4b3b-be0b-8d42a540459d).
+AutoArchive settings won't be visible if that feature is not available for **primary mailbox** in Outlook. In such a case, we'd need to [Create a new profile](https://support.microsoft.com/en-us/office/create-an-outlook-profile-f544c1ba-3352-4b3b-be0b-8d42a540459d).
 
 </Tip>
 
@@ -307,9 +310,12 @@ We could consider *Clean Up Old Items* as an add-on to AutoArchive. It has simil
 
 ## Managing incoming emails using inbox rules
 
-Another option for cleaning up our mailbox is **inbox rules**. We could utilize this mechanism to move emails to a specific folder based on their subject, body, data, or many more.
+Another option for cleaning up our mailbox is **inbox rules**. We could utilize this mechanism to move emails to a specific folder. We can do so based on their subject, body, data, or many more.
 
-Creating and managing inbox rules is a complex topic. It's also a bit out of scope for our article. Fortunately, Microsoft provides quite comprehensive articles about [managing inbox rules in Outlook](https://support.microsoft.com/en-us/office/manage-email-messages-by-using-rules-c24f5dea-9465-4df4-ad17-a50704d66c59) and [Inbox rules in Outlook Web App](https://support.microsoft.com/en-us/office/manage-email-messages-by-using-rules-c24f5dea-9465-4df4-ad17-a50704d66c59).
+Creating and managing inbox rules is a complex topic. It's also a bit out of scope for our article. Fortunately, Microsoft covers that topic. You can read their articles:
+
+* [Manage email messages by using rules (in Outlook)](https://support.microsoft.com/en-us/office/manage-email-messages-by-using-rules-c24f5dea-9465-4df4-ad17-a50704d66c59) 
+* [Inbox rules in Outlook Web App](https://support.microsoft.com/en-us/office/manage-email-messages-by-using-rules-c24f5dea-9465-4df4-ad17-a50704d66c59).
 
 ### Limitations
 
@@ -358,4 +364,6 @@ There are certain ways specific to the platform. Outlook on the web provides *em
 
 ## Conclusion
 
-We can keep our mailbox clean and tidy, if we know the tools to do it right. Using *Ctrl+A* followed by *Delete* key can work. However, why not to use some automation when we can?
+We can keep our mailbox clean and tidy, if we know the tools to do it right.
+
+Using *Ctrl+A* followed by *Delete* key can work. But why not to use some automation when we can?
