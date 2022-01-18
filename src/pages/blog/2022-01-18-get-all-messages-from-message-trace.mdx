@@ -2,20 +2,99 @@
 templateKey: blog-post
 title: Get all messages from message trace
 date: 2022-01-18T11:13:18.089Z
-description: Let's construct together a wrapper for Get-MessageTrace cmdlet.
+description: Let's construct a wrapper for Get-MessageTrace cmdlet.
 featuredpost: false
 tags:
   - exchange online
   - powershell
   - snippet
 ---
+Sometimes we need to pull a lot of emails from message trace in Exchange Online. We might want to grab some stats. We might want to analyze only specific emails.
+
+For example, I did some analysis of the delay introduced by [Microsoft 365 Safe Attachments](https://docs.microsoft.com/en-us/microsoft-365/security/office-365-security/safe-attachments?view=o365-worldwide). I wanted to check only emails bigger than 1MB. To get such data I had to pull all the emails and then use `Where-Object`.
+
+The cmdlet we're going to use for this demonstration is [`Get-MesssageTrace`](https://docs.microsoft.com/en-us/powershell/module/exchange/get-messagetrace?view=exchange-ps).
+
+## Prerequisites
+
+Only two things we need for this exercise are:
+
+* Exchange Online organization with admin account (PERMISSIONS TO BE VERIFIED)
+* Exchange Online module for PowerShell installed ([V1](https://docs.microsoft.com/en-us/powershell/exchange/v1-module-mfa-connect-to-exo-powershell?view=exchange-ps) or [V2](https://docs.microsoft.com/en-us/powershell/exchange/exchange-online-powershell?view=exchange-ps), see the note below)
+
+<Note>
+
+  The version of the Exchange module you can use depends on your PowerShell and OS version. The content in this article works for either version.
+
+</Note>
+
+In this article, I'm using V2 of Exchange Online PowerShell. There might be some slight differences between the module versions. They are related to how we connect.
+
+## TODO Check if module autoconnects
+
 ## The issue
+
+Documentation for `Get-MessageTrace` states about the limitations:
+
+> By default, this cmdlet returns a maximum of 1000 results, and will timeout on very large queries. If your query returns too many results, consider splitting it up using smaller StartDate and EndDate intervals.
+
+In addition, we need to implement paging as the maximum value for the `PageSize` parameter is 5000.
 
 ## Constructing the loop
 
+Ok, let's start and wrap the cmdlet into a loop. But first, let's define some parameters we'll use later:
+
+```powershell
+# We want to get emails until today
+$endDate = (Get-Date).Date
+# And as many of them as possible = 10 days
+# 10 days is maximum supported by the cmdlet
+$startDate = ($endDate).AddDays(-10)
+# Let's specify maximum page size
+$pageSize = 5000
+# And let's initialize a variable
+$allMessages = @()
+```
+
+As we don't know how many times to run the cmdlet, we'll use `do ... until` loop:
+
+```powershell
+# We'll use splatting for readability
+# And also because it's cool
+$gmtParams = @{
+  StartDate = $startDate
+  EndDate = $endDate
+  PageSize = $pageSize
+  Page = 1
+}
+do {
+  $currentMessages = Get-MessageTrace @gmtParams
+  $gmtParams.Page++
+  $allMessages += $currentMessages
+  # Let's add a short break so we're not throttled
+  Start-Sleep -Seconds 1
+} until { $null -eq $currentMessages -or $gmtParams.Page -gt 5000 } 
+```
+
 ## Lowering memory usage
 
+When we save a lot of messages to `$allMessages`, we'll notice high memory usage. Let's try to prevent that.
+
+Our remediation will be to save the data to disk.
+
+```powershell
+# Let's define a file path
+$outFilePath = "C:\temp\ATPscan-$(Get-Date -Format "yyMMdd").csv"
+
+# Now we need to replace
+$allMessages += $currentMessages
+# With
+$currentMessages | Export-Csv -Path $outFile -Append
+```
+
 ## Supporting more than 5M items
+
+Now 
 
 ## Compiling script together
 ```powershell
