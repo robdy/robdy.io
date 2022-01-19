@@ -52,6 +52,8 @@ $endDate = (Get-Date).Date
 $startDate = ($endDate).AddDays(-10)
 # Let's specify maximum page size
 $pageSize = 5000
+# And max number of pages if we want to modify
+$maxPage = 1000
 # And let's initialize a variable
 $allMessages = @()
 ```
@@ -73,7 +75,9 @@ do {
   $allMessages += $currentMessages
   # Let's add a short break so we're not throttled
   Start-Sleep -Seconds 1
-} until { $null -eq $currentMessages -or $gmtParams.Page -gt 5000 } 
+# The loop should end when there's no more messages
+# or when we reach last page
+} until { $null -eq $currentMessages -or $gmtParams.Page -gt $maxPage } 
 ```
 
 ## Lowering memory usage
@@ -84,20 +88,119 @@ Our remediation will be to save the data to disk.
 
 ```powershell
 # Let's define a file path
-$outFilePath = "C:\temp\ATPscan-$(Get-Date -Format "yyMMdd").csv"
+$outFilePath = "C:\temp\messageTrace-$(Get-Date -Format "yyMMdd").csv"
 
 # Now we need to replace
 $allMessages += $currentMessages
 # With
-$currentMessages | Export-Csv -Path $outFile -Append
+$currentMessages | Export-Csv -Path $outFilePath -Append
 ```
 
 ## Supporting more than 5M items
 
-Now 
+The last adjustment to the script - let's make it universal! The [docs for `Get-MesssageTrace`](https://docs.microsoft.com/en-us/powershell/module/exchange/get-messagetrace?view=exchange-ps) says:
+
+* Maximum page size is 5000
+* There might be 1000 pages
+
+If we multiply these numbers, we'll receive five million emails. That's the number we can get by iterating through 1000 pages.
+
+What if we know that our organization sends more emails? Let's expand the script to support that scenario!
+
+We'll add another loop. Its purpose would be to start another trace with another end date. Our results start from the most recent emails. That is why we're modifying the end date.
+
+The loop would be:
+
+```powershell
+do {
+  # We need to move that part to outer loop
+  $gmtParams = @{
+    StartDate = $startDate
+    EndDate = $endDate
+    PageSize = $pageSize
+    Page = 1
+  }
+
+  do {
+    # Code from previous steps applies
+    # But we need to grab the timestamp for last occurence
+    if ($gmtParams.Page -gt $maxPage -and $null -ne $currentMessages) {
+      $gmtParams.EndDate = $currentMessages.Received | Sort-Object | Select-Object -First 1
+    }
+  } until ( $null -eq $currentMessages -or $gmtParams.Page -gt $maxPage )
+
+} until ( $null -eq $currentMessages )
+```
+
+## Logging
 
 ## Compiling script together
+
+Now we completed all the steps. Let's compile the script.
+
+
 ```powershell
+# First or all, we need to connect to Exchange PowerShell
+# Replace that with whatever method you use for connecting
+Connect-ExchangeOnline
+
+# We want to get emails until today
+$endDate = (Get-Date).Date
+# And as many of them as possible = 10 days
+# 10 days is maximum supported by the cmdlet
+$startDate = ($endDate).AddDays(-10)
+# Let's specify maximum page size
+$pageSize = 5000
+# And max number of pages if we want to modify
+$maxPage = 1000
+# And let's initialize a variable
+$allMessages = @()
+# And let's define where the results are saves
+$outFilePath = "C:\temp\messageTrace-$(Get-Date -Format "yyMMdd").csv"
+
+do {
+  # We'll use splatting for readability
+  # And also because it's cool
+  $gmtParams = @{
+    StartDate = $startDate
+    EndDate = $endDate
+    PageSize = $pageSize
+    Page = 1
+  }
+
+  do {
+    # Logging
+    Write-Verbose "Processing page $($gmtParams.Page)"
+    $currentMessages = Get-MessageTrace @gmtParams
+    $gmtParams.Page++
+    $currentMessages | Export-Csv -Path $outFilePath -Append
+    
+    # We need to grab the timestamp for last occurence
+    if ($gmtParams.Page -gt $maxPage -and $null -ne $currentMessages) {
+      $gmtParams.EndDate = $currentMessages.Received | Sort-Object | Select-Object -First 1
+    }
+
+    # Let's add a short break so we're not throttled
+    Start-Sleep -Seconds 1
+
+  # The loop should end when there's no more messages
+  # or when we reach last page
+  } until ( $null -eq $currentMessages -or $gmtParams.Page -gt $maxPage )
+# The outer loop should end when there's no more messages
+} until ( $null -eq $currentMessages )
+```
+
+## Testing
+
+
+
+
+
+
+
+
+
+
 $creds = (Get-Credential)
 Connect-ExchangeOnline -Credential $creds
 
