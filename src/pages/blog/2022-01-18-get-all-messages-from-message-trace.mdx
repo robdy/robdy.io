@@ -103,7 +103,7 @@ The last adjustment to the script - let's make it universal! The [docs for `Get-
 * Maximum page size is 5000
 * There might be 1000 pages
 
-If we multiply these numbers, we'll receive five million emails. That's the number we can get by iterating through 1000 pages.
+If we multiply these numbers, we'll receive five milions of emails. That's the number we can get by iterating through 1000 pages.
 
 What if we know that our organization sends more emails? Let's expand the script to support that scenario!
 
@@ -113,13 +113,8 @@ The loop would be:
 
 ```powershell
 do {
-  # We need to move that part to outer loop
-  $gmtParams = @{
-    StartDate = $startDate
-    EndDate = $endDate
-    PageSize = $pageSize
-    Page = 1
-  }
+  # We need to reset the page number
+  $gmtParams.Page = 1
 
   do {
     # Code from previous steps applies
@@ -134,6 +129,38 @@ do {
 
 ## Logging
 
+We can also add logging to better control what happens within our script. We'll use [`Write-Host`](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/write-host?view=powershell-7.2) for that purpose.
+
+<Tip>
+
+The reason why we're not using `Write-Verbose`. It'd interfere with the verbose messages sent by `Get-MessageTrace`:
+
+![Verbose messages interfering with Get-MessageTrace logging](../../img/20220120-144529-IkZrM64z9y.png)
+
+</Tip>
+
+The logging lines will be:
+
+```
+# In the outer loop
+Write-Host "Starting message trace until $($gmtParams.EndDate)"
+
+# In the inner loop
+Write-Host "Processing page $($gmtParams.Page)"
+```
+
+We can also reduce the number of messages and log every X pages:
+
+```powershell
+# At the top of the script
+$logEveryXPages = 5
+
+# Wrap inner loop with the if statement
+if ($gmtParams.Page % $logEveryXPages -eq 0) {
+  Write-Host "Processing page $($gmtParams.Page)"
+}
+```
+
 ## Compiling script together
 
 Now we completed all the steps. Let's compile the script.
@@ -144,37 +171,57 @@ Now we completed all the steps. Let's compile the script.
 # Replace that with whatever method you use for connecting
 Connect-ExchangeOnline
 
+#############
+#region Customizable settings
+#############
 # We want to get emails until today
 $endDate = (Get-Date).Date
 # And as many of them as possible = 10 days
 # 10 days is maximum supported by the cmdlet
 $startDate = ($endDate).AddDays(-10)
+
 # Let's specify maximum page size
 $pageSize = 5000
 # And max number of pages if we want to modify
 $maxPage = 1000
-# And let's initialize a variable
-$allMessages = @()
+
+# We want to log every X pages
+# Set it to 1 to log every page
+$logEveryXPages = 5
+
 # And let's define where the results are saves
 $outFilePath = "C:\temp\messageTrace-$(Get-Date -Format "yyMMdd").csv"
 
+#############
+#endregion Customizable settings
+#############
+
+# Let's initialize a variable
+$allMessages = @()
+
+# We'll use splatting for readability
+# And also because it's cool
+$gmtParams = @{
+  StartDate = $startDate
+  EndDate = $endDate
+  PageSize = $pageSize
+  Page = 1
+}
+
 do {
-  # We'll use splatting for readability
-  # And also because it's cool
-  $gmtParams = @{
-    StartDate = $startDate
-    EndDate = $endDate
-    PageSize = $pageSize
-    Page = 1
-  }
+  $gmtParams.Page = 1
+
+  Write-Host "Starting message trace until $($gmtParams.EndDate)"
 
   do {
     # Logging
-    Write-Verbose "Processing page $($gmtParams.Page)"
+    if ($gmtParams.Page % $logEveryXPages -eq 0) {
+      Write-Host "Processing page $($gmtParams.Page)"
+    }
+    
     $currentMessages = Get-MessageTrace @gmtParams
     $gmtParams.Page++
     $currentMessages | Export-Csv -Path $outFilePath -Append
-    
     # We need to grab the timestamp for last occurence
     if ($gmtParams.Page -gt $maxPage -and $null -ne $currentMessages) {
       $gmtParams.EndDate = $currentMessages.Received | Sort-Object | Select-Object -First 1
@@ -192,33 +239,34 @@ do {
 
 ## Testing
 
+To make a quick test, let's set the page values to something small.
 
-
-
-
-
-
-
-
-
-$creds = (Get-Credential)
-Connect-ExchangeOnline -Credential $creds
-
-$Outfile = "C:\temp\ATPscan-$(Get-Date -Format "yyMMdd").csv"
-
-# $MessageList = $null  
-# $currentMessages = $null
-$Page = 1
-
-do {
-  $currentMessages = $null
-  if ($page % 25 -eq 0) { Connect-ExchangeOnline -Credential $creds }	
-  Write-Host "Collecting Message Trace - Page $Page..."  
-  $currentMessages = Get-MessageTrace -StartDate "2022-01-07" -EndDate "2022-01-17" -PageSize 5000 -Page $Page -Status Delivered #| Where {$_.Size -gt 1MB}
-  $page++  
-  $currentMessages | Export-Csv -Path $outFile -Append
-  # $MessageList += $currentMessages  
-  Start-Sleep -Seconds 1
-}  
-until ($CurrMessages -eq $null)
+```powershell
+# Choose any time span to have more than 20 messages
+$startDate = ($endDate).AddDays(-1)
+$pageSize = 2 
+$maxPage = 10
+$logEveryXPages = 5
 ```
+
+Now, we need to copy all under
+
+```powershell
+#############
+#endregion Customizable settings
+#############
+```
+
+and paste into PowerShell.
+
+The result should look similar to the image below:
+
+![Script logging](../../img/20220120-145002-KTYgAs6qKr.png)
+
+And the output file should appear. Let's check the folder we specified:
+
+![Output file appeared](../../img/20220120-145247-UPjkFNNvJg.png)
+
+## Conclusion
+
+`Get-MessageTrace` doesn't support getting more than 5 millions of elements. We written a wrapper for that. Now we can get as many messages as we want.
