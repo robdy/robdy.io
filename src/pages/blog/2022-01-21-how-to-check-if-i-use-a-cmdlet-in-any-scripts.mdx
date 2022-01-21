@@ -1,0 +1,30 @@
+---
+templateKey: blog-post
+title: How to check if I use a cmdlet in any scripts
+date: 2022-01-21T11:06:35.695Z
+description: Learn how to find certain PowerShell cmdlets in all the scripts in the folder.
+featuredpost: false
+tags:
+  - powershell
+  - snippet
+---
+This blog post was inspired by Microsoft Message Center announcement MC316139. It says about changes in number assignment via PowerShell.
+
+The announcement points 3 cmdlets to be fully retired. It also mentioned one cmdlet to be deprecated only for number assignment.
+
+## How to find where we use the cmdlets?
+
+
+
+## Full script
+
+```powershell
+$cmdletsToBeChecked = @"
+Set-CsUser
+Set-CsOnlineVoiceUser
+Set-CsOnlineApplicationInstance
+Set-CsOnlineVoiceApplicationInstance
+"@ -split "`n"
+
+Get-ChildItem . -File -Recurse -Filter "*.ps1" | Select-String -Pattern ($cmdletsToBeChecked -join "|")
+```
