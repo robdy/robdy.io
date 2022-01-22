@@ -1,7 +1,7 @@
 ---
 templateKey: blog-post
 title: Get all messages from message trace
-date: 2022-01-18T11:13:18.089Z
+date: 2022-01-22T11:13:18.089Z
 description: Let's construct a wrapper for Get-MessageTrace cmdlet.
 featuredpost: false
 tags:
@@ -19,7 +19,7 @@ The cmdlet we're going to use for this demonstration is [`Get-MesssageTrace`](ht
 
 Only two things we need for this exercise are:
 
-* Exchange Online organization with admin account (PERMISSIONS TO BE VERIFIED)
+* Exchange Online organization with admin account (learn, [how to check required permissions](https://docs.microsoft.com/en-us/powershell/exchange/find-exchange-cmdlet-permissions))
 * Exchange Online module for PowerShell installed ([V1](https://docs.microsoft.com/en-us/powershell/exchange/v1-module-mfa-connect-to-exo-powershell?view=exchange-ps) or [V2](https://docs.microsoft.com/en-us/powershell/exchange/exchange-online-powershell?view=exchange-ps), see the note below)
 
 <Note>
@@ -29,8 +29,6 @@ Only two things we need for this exercise are:
 </Note>
 
 In this article, I'm using V2 of Exchange Online PowerShell. There might be some slight differences between the module versions. They are related to how we connect.
-
-## TODO Check if module autoconnects
 
 ## The issue
 
@@ -103,7 +101,7 @@ The last adjustment to the script - let's make it universal! The [docs for `Get-
 * Maximum page size is 5000
 * There might be 1000 pages
 
-If we multiply these numbers, we'll receive five milions of emails. That's the number we can get by iterating through 1000 pages.
+If we multiply these numbers, we'll receive five million emails. That's the number we can get by iterating through 1000 pages.
 
 What if we know that our organization sends more emails? Let's expand the script to support that scenario!
 
@@ -269,4 +267,4 @@ And the output file should appear. Let's check the folder we specified:
 
 ## Conclusion
 
-`Get-MessageTrace` doesn't support getting more than 5 millions of elements. We written a wrapper for that. Now we can get as many messages as we want.
+`Get-MessageTrace` doesn't support getting more than 5 million elements. We wrote a wrapper for that. Now we can get as many messages as we want.
