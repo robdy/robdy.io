@@ -8,6 +8,8 @@ tags:
   - powershell
   - snippet
 ---
+In this article we'll build a script. It will search for a cmdlet inside our script folder. 
+
 This blog post was inspired by the Microsoft Message Center announcement MC316139. It says about changes in the number assignment process via PowerShell.
 
 The announcement points out three cmdlets to be fully retired. It also mentioned one cmdlet to be deprecated only for number assignment functionality.
@@ -63,15 +65,45 @@ $cmdletsToBeChecked[0]
 
 ## Getting all script files
 
-Now let's 
+Now let's find all script files. We'll search the selected folder and its subfolders.
 
+The cmdlet we use is [`Get-ChildItem`](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-childitem).
+
+We'll make use of some parameters:
+
+* *File* to not output folders
+* *Recurse* to go down the entire folder tree
+* *Filter* to get only `.ps1` files
+
+```powershell
+# Save folder path to a variable
+$scriptFolderPath = 'C:\temp'
+
+# Iterate through the folder
+Get-ChildItem -LiteralPath $scriptFolderPath -File -Recurse -Filter "*.ps1"
+```
 ## Searching the files
 
+Last, but not least - let's search the files. We'll use [`Select-String`](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/select-string) cmdlet.
 
+We pipe the folder from the previous step. `Select-String` will check all of them. The cmdlet will search for a pattern we provide via the `Pattern` parameter.
+
+The pattern value is treated as a regular expression. We're not going to dig into regex in this article. If you want to expand your knowledge on that topic, check [about_Regular_Expressions](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_regular_expressions).
+
+For the purpose of this exercise we need to know the regex alternation. We'll separate the cmdlets with `|`. We'll get a match if any of them is found.
+
+We have the cmdlets already saved to a variable. We need to convert them to a string separated with regex alternation. Luckily we have a [`-join` operator](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_join):
+
+```powershell
+<# Result from previos step #> | Select-String -Pattern ($cmdletsToBeChecked -join "|")
+```
 
 ## Full script
 
+Ok, we know all the steps. Let's compile them together:
+
 ```powershell
+$scriptFolderPath = 'C:\temp'
 $cmdletsToBeChecked = @"
 Set-CsUser
 Set-CsOnlineVoiceUser
@@ -79,5 +111,27 @@ Set-CsOnlineApplicationInstance
 Set-CsOnlineVoiceApplicationInstance
 "@ -split "`n"
 
-Get-ChildItem . -File -Recurse -Filter "*.ps1" | Select-String -Pattern ($cmdletsToBeChecked -join "|")
+# Line break added for visibility
+Get-ChildItem $scriptFolderPath -File -Recurse -Filter "*.ps1" | 
+  Select-String -Pattern ($cmdletsToBeChecked -join "|")
 ```
+
+## Limitations
+
+There are some edge cases for this script. It won't work unless we're using the full name of the cmdlet.
+
+Example of what won't be detected:
+
+```powershell
+$verb = 'Get'
+$noun = 'CsUser'
+ & "$verb-$noun"
+```
+
+## Conclusion
+
+When we learn that a cmdlet (or four of them) is being retired, we need to take care of it. Proper discovery is crucial - we need to know what to replace.
+
+In this article we've build a script to do proper discovery. We learned about useful cmdlets, splitting array and using regular expression.
+
+Now we're ready to run the script and do our discovery!
