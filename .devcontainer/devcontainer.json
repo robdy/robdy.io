@@ -17,7 +17,8 @@
 	"extensions": [
 		"dbaeumer.vscode-eslint",
 		"znck.grammarly",
-		"wakatime.vscode-wakatime"
+		"wakatime.vscode-wakatime",
+		"formulahendry.auto-close-tag"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

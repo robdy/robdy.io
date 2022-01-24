@@ -1,1 +1,6 @@
-{}
+{
+	"files.associations": {
+		"*.mdx": "markdown"
+	},
+	"workbench.tree.indent": 12
+}
