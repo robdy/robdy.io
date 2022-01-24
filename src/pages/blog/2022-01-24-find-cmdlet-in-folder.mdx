@@ -95,7 +95,7 @@ For the purpose of this exercise we need to know the regex alternation. We'll se
 We have the cmdlets already saved to a variable. We need to convert them to a string separated with regex alternation. Luckily we have a [`-join` operator](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_join):
 
 ```powershell
-<# Result from previos step #> | Select-String -Pattern ($cmdletsToBeChecked -join "|")
+<# Result from previous step #> | Select-String -Pattern ($cmdletsToBeChecked -join "|")
 ```
 
 ## Full script
