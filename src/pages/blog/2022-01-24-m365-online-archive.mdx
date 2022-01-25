@@ -1,6 +1,6 @@
 ---
 templateKey: blog-post
-title: m365 online archive
+title: Microsoft 365 Online Archive
 date: 2022-01-27T16:03:07.992Z
 description: This article describes Online Archive in Microsoft 365 and its features.
 featuredpost: false
@@ -48,6 +48,36 @@ The local archive can still be useful in some cases. For example, some of our fo
 </Tip>
 
 ## What is the size of an Online Archive?
+
+The size of the Online Archive mailbox depends on the license.
+
+You can find the most accurate list in Microsoft documentation. Refer to [*Mailbox storage limits* section of Exchange Online service description](https://docs.microsoft.com/en-us/office365/servicedescriptions/exchange-online-service-description/exchange-online-limits#mailbox-storage-limits).
+
+At the moment of writing, 50GB of archive storage is available for:
+
+* Microsoft 365 Business Basic
+* Microsoft 365 Business Standard
+* Office 365 Enterprise E1
+
+The archive mailbox is not available for Office 365 Enterprise F3.
+
+1.5TB of archive storage is available for:
+
+* Microsoft 365 Business Premium
+* Office 365 Enterprise E3
+* Office 365 Enterprise E5
+
+If we have these licenses we'll receive auto-expanding archive. Its initial size will be 100GB. When the archive mailbox reaches the quota, additional 100GBs will be added. It doesn't require contacting Microsoft (that was the case in the past).
+
+### Note about auto-expanding archives
+
+We can have 1.5TB of mail storage for a single mailbox. Amazing, isn't it?
+
+Some people might think about buying a single license to store multiple archives at once. I'm not saying it's you. But, if you know anyone who came up with that idea, warn them!
+
+Here's what Microsoft states about such a case:
+
+> Using journaling, transport rules, or auto-forwarding rules to copy messages to an Exchange Online mailbox for the purposes of archiving is not permitted. A user's archive mailbox is intended for just that user. **Microsoft reserves the right to deny additional archive storage space** in instances where a user's archive mailbox is used to store archive data for other users or in other cases of inappropriate use.
 
 ## Features of Online Archive
 
