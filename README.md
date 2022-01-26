@@ -21,4 +21,26 @@ Blog is built using [Gatsby](https://www.gatsbyjs.com/). I'm using [Netlify](htt
 Content is being managed by [Netlify CMS](https://www.netlifycms.org/).
 
 ## 🏗️ Deploy configuration
-Entire deploy process (including previews) is handled by Netlify.
+The entire deployment process (including previews) is handled by Netlify.
+
+## ✍ Article writing
+
+### Adding Table of Contents
+
+Requires [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) in VS Code. The extension is already added to `devcontainer.json`.
+
+In the article add: 
+
+```markdown
+<!-- omit in toc -->
+## Table of Contents
+```
+
+The extension uses default settings:
+- `toc.levels` not set - all levels of heading are included
+
+Hit `Ctrl+Shift+P` and choose
+
+![Adding table of contents in VS Code](static/img/adding-toc.png)
+
+ToC settings can be found in [the extension page](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one#table-of-contents).
