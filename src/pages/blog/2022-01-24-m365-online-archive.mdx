@@ -11,6 +11,8 @@ tags:
 ---
 In this article, we're going through the functionalities of the Online Archive. We'll describe its key features (and limitations). You'll also see some guides about Online Archiving.
 
+If you use or want to use Online Archive in Microsoft 365, this article is for you.
+
 ## When do I need Online Archive?
 
 Depending on our email activity, we might reach the point our mailbox is very big. It comes with several implications.
@@ -24,6 +26,13 @@ Is there a way to sort this out? Of course, it is! Its name is Online Archive.
 Online Archive is an additional storage space in Exchange Online. It's optimized to store our old emails.
 
 We're not going to access emails stored in the archive daily. Thus, they can be stored online and not use our disk space. That's why it's called *Online Archive*.
+
+Alternative terms for Online Archive in Microsoft 365 are:
+
+* Outlook Online Archive
+* Exchange Online Archive
+
+You can find both terms in the documentation and online resources.
 
 ## How can I check if I have an Online Archive?
 
@@ -81,7 +90,37 @@ Here's what Microsoft states about such a case:
 
 ## Features of Online Archive
 
+Online Archive comes in two variants: for Exchange Online and for Exchange Server. There's a table comparing the features across the variants. You can find it in [Exchange Online Archiving service description](https://docs.microsoft.com/en-us/office365/servicedescriptions/exchange-online-archiving-service-description/exchange-online-archiving-service-description#feature-availability-across-exchange-online-archiving-plans).
+
+The differences are quite small. For us, the non-administrative users it's practically the same.
+
+The list of features includes:
+
+* Moving messages from `.pst` files
+* Importing messages using Outlook *Import and Export* wizard
+* Moving messages from primary mailbox (manually or automatically via [Retention Tags and Retention Policies](https://docs.microsoft.com/en-us/Exchange/policy-and-compliance/mrm/retention-tags-and-retention-policies))
+* Deleted email recovery (from *Deleted Items* or using *Recover Deleted Items*)
+* Mailbox server redundancy.\
+  We won't see it, but our mailbox is replicated to multiple regions across Microsoft datacenters
+* Autodiscover - we don't need to sign-in separately to Online Archive. We get it automatically in our Outlook
+
+Online Archive supports many security and compliance features. As this article is not intended for administrators, we won't go into details.
+
+If you want to learn more, check [Compliance and security features in Exchange Online Archiving - Service Descriptions | Microsoft Docs](https://docs.microsoft.com/en-us/office365/servicedescriptions/exchange-online-archiving-service-description/compliance-and-security-features).
+
 ## Limits of Online Archive
+
+Most obvious limit of the Online Archive is that... it's online. What does it mean? If we lose access to the network, we cannot access the archive.
+
+We can test it. In Outlook, let's switch to offline mode. In the **Send/Receive** tab (1) we click **Work offline** (2):
+
+![](../../img/20220126-210647-k4fdosnntw.png "Entering offline mode in Outlook")
+
+Now when we click the archive mailbox we'll receive an error. It states about failing to log on to Exchange:
+
+![](../../img/20220126-211130-2luv6vvgcb.png "Error while opening an archive in offline mode")
+
+The scenario when we need to access old emails offline is not very frequent. If we work offline a lot (for example travelling), it's important to be aware of such a limitation.
 
 ## How can I get Online Archive?
 
