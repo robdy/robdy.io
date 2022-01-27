@@ -124,9 +124,47 @@ The scenario when we need to access old emails offline is not very frequent. If 
 
 ## How can I get Online Archive?
 
+As a users, we cannot enable the archive ourselves. This must be done by Exchange administrators.
+
+Good place to start with Online Archive is the article: [Enable archive mailboxes for Microsoft 365 Compliance - Microsoft 365 Compliance | Microsoft Docs](https://docs.microsoft.com/en-us/microsoft-365/compliance/enable-archive-mailboxes?view=o365-worldwide).
+
 ## How do I access an Online Archive?
 
+Online Archive appears as an additional mailbox in both Outlook and [Outlook on the web](https://outlook.office365.com/mail). See the image below for comparison:
+
+![](../../img/online-archive-outlook-owa.png "Online Archive in Outlook and Outlook on the web")
+
 ## How do I start archiving emails?
+
+Archiving will start as soon as the archive mailbox is enabled. It requires proper archive policy. Administrators don't need to define such a policy. There's a default one, which archives all items older than 2 years.
+
+## How do I check my archiving settings?
+
+We can check archiving settings using the **Assign policy** button in Outlook. In Outlook on the web, we'll see **Assign policy** entry in the context menu. The menu is visible when we right-click the folder.
+
+See the image below for comparison:
+
+![](../../img/assign-archive-policy-outlook-owa.png "Assigning archive policy in Outlook and Outlook on the web")
+
+We'll notice that default option is to use parent folder policy. For folders like *Inbox*, *Sent Items* and others, the parent folder will be the root folder.
+
+The root folder in Outlook is the one with our email address. In Outlook on the web, it's the one with the name *Folders*.
+
+See the image below to identify the root folder:
+
+![](../../img/20220114-085209-Pa3zj3OD3P.png "Root folder in Outlook on the web and Outlook ")
+
+We check the policy the same way as for other folders.
+
+## How do I set my archiving settings?
+
+<Note>
+
+Not all archiving policies can be set by non-administrators. Only the ones marked as *Personal* can be used.
+
+An exception to it is the root folder. No personal policies can be assigned to it.
+
+</Note>
 
 ## How do I turn Online Archive off?
 
