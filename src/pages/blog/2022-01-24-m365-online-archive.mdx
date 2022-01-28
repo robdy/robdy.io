@@ -11,7 +11,7 @@ tags:
 ---
 In this article, we're going through the functionalities of the Online Archive. We'll describe its key features (and limitations). You'll also see some guides about Online Archiving.
 
-If you use or want to use Online Archive in Microsoft 365, this article is for you.
+If you use or want to use Online Archive in Microsoft 365 (previously called Office 365), this article is for you.
 
 ## When do I need Online Archive?
 
@@ -136,17 +136,25 @@ Online Archive appears as an additional mailbox in both Outlook and [Outlook on 
 
 ## How do I start archiving emails?
 
-Archiving will start as soon as the archive mailbox is enabled. It requires proper archive policy. Administrators don't need to define such a policy. There's a default one, which archives all items older than 2 years.
+Archiving will start as soon as the archive mailbox is enabled. It requires a proper archive policy. Administrators don't need to define such a policy. There's a default one, which archives all items older than 2 years.
+
+<Tip>
+
+Do not worry if the items are not moved to the archive automatically. Archiving process is not designed to start automatically. The server-side process for archiving runs at least **every seven days**. Here's the [technical reference](https://docs.microsoft.com/en-us/microsoft-365/compliance/set-up-an-archive-and-deletion-policy-for-mailboxes?view=o365-worldwide#optional-step-5-run-the-managed-folder-assistant-to-apply-the-new-settings) for that. 
+
+</Tip>
 
 ## How do I check my archiving settings?
 
-We can check archiving settings using the **Assign policy** button in Outlook. In Outlook on the web, we'll see **Assign policy** entry in the context menu. The menu is visible when we right-click the folder.
+We can check archiving settings using the **Assign policy** button in Outlook.
+
+In Outlook on the web, we'll see the **Assign policy** entry in the context menu. The menu is visible when we right-click the folder.
 
 See the image below for comparison:
 
 ![](../../img/assign-archive-policy-outlook-owa.png "Assigning archive policy in Outlook and Outlook on the web")
 
-We'll notice that default option is to use parent folder policy. For folders like *Inbox*, *Sent Items* and others, the parent folder will be the root folder.
+We'll notice that the default option is to use the parent folder policy. For folders like *Inbox*, *Sent Items*, and others, the parent folder will be the root folder.
 
 The root folder in Outlook is the one with our email address. In Outlook on the web, it's the one with the name *Folders*.
 
@@ -158,6 +166,20 @@ We check the policy the same way as for other folders.
 
 ## How do I set my archiving settings?
 
+<Warning>
+
+If archiving is not enabled, we might still see *Retention policies* to be set. Let's be careful about that - retention tags in the policy are responsible for deleting the messages!
+
+If we set the retention policy by mistake, we might lose emails.
+
+</Warning>
+
+Let's take one more look at the image from the previous chapter. It shows where to find the **Assign policy** button:
+
+![](../../img/assign-archive-policy-outlook-owa.png "Assigning archive policy in Outlook and Outlook on the web")
+
+Once we are in the **Assign policy** section, we can choose from the predefined set of policies.
+
 <Note>
 
 Not all archiving policies can be set by non-administrators. Only the ones marked as *Personal* can be used.
@@ -167,5 +189,20 @@ An exception to it is the root folder. No personal policies can be assigned to i
 </Note>
 
 ## How do I turn Online Archive off?
+
+There's no way to turn off the entire Online Archive. We could turn off the archiving for a single folder.
+
+To turn off archiving for a single folder:
+
+1. Go to the **Assign policy** section
+2. Choose **Do not archive** from the list
+
+If the subfolders are set to use the parent folder's policy, archiving will be disabled for all of them.
+
+## I don't see any policies to choose
+
+If we don't see any policies to choose from in the **Assign policy** section in Outlook, we've met a glitch in Outlook.
+
+The easiest way to fix that glitch is to restart Outlook. 
 
 ## Does Online Archive reduce mailbox size?
