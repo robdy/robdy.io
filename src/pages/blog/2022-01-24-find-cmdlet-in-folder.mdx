@@ -1,0 +1,137 @@
+---
+templateKey: blog-post
+title: How to find cmdlet in the entire folder
+date: 2022-01-24T11:06:35.695Z
+description: Learn how to find certain PowerShell cmdlets in all the scripts in the folder.
+featuredpost: false
+tags:
+  - powershell
+  - snippet
+---
+In this article we'll build a script. It will search for a cmdlet inside our script folder. 
+
+This blog post was inspired by the Microsoft Message Center announcement MC316139. It says about changes in the number assignment process via PowerShell.
+
+The announcement points out three cmdlets to be fully retired. It also mentioned one cmdlet to be deprecated only for number assignment functionality.
+
+## Issue
+
+After we read the announcement, one question popped up. How to verify if the change affects our scripts? Let's try to go step by step and find a way.
+
+## How to find where we use the cmdlets?
+
+We'll follow a few steps:
+
+* Define the list of cmdlets
+* Get all `.ps1` files in the folder and its subfolders
+* Search the files for *any* of the cmdlets
+
+## Defining the list of cmdlets
+
+We'll need an array of the string objects. Each element of the array will be a single cmdlet.
+
+There are several ways to define such an array. We can do it in one line:
+
+```powershell
+$cmdletsToBeChecked = @("Set-CsUser", "Set-CsOnlineVoiceUser", "Set-CsOnlineApplicationInstance", "Set-CsOnlineVoiceApplicationInstance")
+```
+
+I prefer a way where I can easily paste the list. Each element comes to a separate line.
+
+We can achieve this using [here-string](https://devblogs.microsoft.com/scripting/powertip-use-here-strings-with-powershell/).
+
+Let's convert it to an array using [`-split` operator](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_split). Our delimiter will be a newline character.
+
+```powershell
+$cmdletsToBeChecked = @"
+Set-CsUser
+Set-CsOnlineVoiceUser
+Set-CsOnlineApplicationInstance
+Set-CsOnlineVoiceApplicationInstance
+"@ -split "`n"
+
+# A quick test to verify
+$cmdletsToBeChecked[0]
+# Should return
+# Set-CsUser
+```
+
+<Tip>
+
+  Depending on the OS, you might experience different splitting behavior.
+  Check [this StackOverflow](https://stackoverflow.com/q/39252620) topic to find more options.
+
+</Tip>
+
+## Getting all script files
+
+Now let's find all script files. We'll search the selected folder and its subfolders.
+
+The cmdlet we use is [`Get-ChildItem`](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-childitem).
+
+We'll make use of some parameters:
+
+* *File* to not output folders
+* *Recurse* to go down the entire folder tree
+* *Filter* to get only `.ps1` files
+
+```powershell
+# Save folder path to a variable
+$scriptFolderPath = 'C:\temp'
+
+# Iterate through the folder
+Get-ChildItem -LiteralPath $scriptFolderPath -File -Recurse -Filter "*.ps1"
+```
+## Searching the files
+
+Last, but not least - let's search the files. We'll use [`Select-String`](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/select-string) cmdlet.
+
+We pipe the folder from the previous step. `Select-String` will check all of them. The cmdlet will search for a pattern we provide via the `Pattern` parameter.
+
+The pattern value is treated as a regular expression. We're not going to dig into regex in this article. If you want to expand your knowledge on that topic, check [about_Regular_Expressions](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_regular_expressions).
+
+For the purpose of this exercise we need to know the regex alternation. We'll separate the cmdlets with `|`. We'll get a match if any of them is found.
+
+We have the cmdlets already saved to a variable. We need to convert them to a string separated with regex alternation. Luckily we have a [`-join` operator](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_join):
+
+```powershell
+<# Result from previous step #> | Select-String -Pattern ($cmdletsToBeChecked -join "|")
+```
+
+## Full script
+
+Ok, we know all the steps. Let's compile them together:
+
+```powershell
+$scriptFolderPath = 'C:\temp'
+$cmdletsToBeChecked = @"
+Set-CsUser
+Set-CsOnlineVoiceUser
+Set-CsOnlineApplicationInstance
+Set-CsOnlineVoiceApplicationInstance
+"@ -split "`n"
+
+# Line break added for visibility
+Get-ChildItem $scriptFolderPath -File -Recurse -Filter "*.ps1" | 
+  Select-String -Pattern ($cmdletsToBeChecked -join "|")
+```
+
+## Limitations
+
+There are some edge cases for this script. It won't work unless we're using the full name of the cmdlet.
+
+Example of what won't be detected:
+
+```powershell
+$verb = 'Get'
+$noun = 'CsUser'
+ & "$verb-$noun"
+```
+
+## Conclusion
+
+When we learn that a cmdlet (or four of them) is being retired, we need to take care of it. Proper discovery is crucial - we need to know what to replace.
+
+In this article, we've built a script to do proper discovery. We learned about useful cmdlets, splitting an array, and using regular expressions.
+
+Now we're ready to run the script and do our discovery!
