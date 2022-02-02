@@ -14,7 +14,7 @@ tags:
 
 ## Preparation
 
-For the purpose of this article we'll use a test attendant. We'll also modify the call queue, where the calls land after going through auto attendant.
+For the purpose of this article, we'll use a test attendant. We'll also modify the call queue, where the calls land after going through auto attendant.
 
 Let's save their names to variables:
 
@@ -27,36 +27,95 @@ $callQueueName = 'CQ_TEST'
 
 Next, we'll use PowerShell to pull call queue and auto attendant objects. We'll use [`Get-CsAutoAttendant`](https://docs.microsoft.com/en-us/powershell/module/skype/get-csautoattendant?view=skype-ps) and [`Get-CsCallQueue`](https://docs.microsoft.com/en-us/powershell/module/skype/get-cscallqueue?view=skype-ps). 
 
+<Tip>
+
+We can also get the identity from the Teams Admin Center. When we edit an auto attendant or a call queue, id is the last part of the page URL:
+
+![](../../img/aa-cq-management-getting-id.png "Getting ID from the Teams Admin Center URL")
+
+</Tip>
+
 Both cmdlets have similar parameters. Two of them might be useful to get the identifiers of our objects: `Identity` and `NameFilter`. Both parameters accept string.
 
-We could use `NameFilter` to get our objects. We need to be careful though. Using `NameFilter` returns all objects matching the filter. For example, if our filter is *Test*, we'll get the objects with names:
+We will use `NameFilter` to get our objects. We need to be careful though. Using `NameFilter` returns all objects matching the filter. For example, if our filter is *Test*, we'll get the objects with names:
 
 * Test (this is desired)
 * Test2
 * NotTest
 
-We'll use the cmdlets to list the identities and then save them to variables manually
+After the *Get-* cmdlets we'll add an additional `Where-Object` at the end. This is to ensure that we only use the object with the exact name we provided:
+
+```powershell
+$aa = Get-CsAutoAttendant -NameFilter $attendantName |
+  Where-Object Name -eq $attendantName
+$cq = Get-CsCallQueue -NameFilter $callQueueName |
+  Where-Object Name -eq $callQueueName
+```
+
+We now have our objects saved to the variable. Let's start modifying them!
 
 <Tip>
 
-We can also get the identity from the Teams Admin Center. When we edit an auto attendant or a call queue, id is the last part of the page URL:
-
-![](../../img/aa-cq-management-get-id.png "Getting ID from the Teams Admin Center URL")
+The activities below are not dependent (unless specified otherwise). We can use only one of them and the effect will be the same.
 
 </Tip>
 
+## Changing default greeting
+
+Ok, something simple first - let's change a greeting for the auto attendant default workflow. Our greeting will be of text-to-speech type:
+
+```powershell
+# First we define the greeting
+$ttsPrompt = New-CsAutoAttendantPrompt -TextToSpeechPrompt "Welcome to Contoso!"
+# Then we overwrite current AA configuration
+$aa.DefaultCallFlow.Greetings = @($ttsPrompt)
+# And we set the auto attendant
+Set-CsAutoAttendant -Instance $aa
+```
+
+We can verify the prompt is saved successfully:
 
 
-## Changing greeting
 
+```powershell
+# We pull the AA info again
+$aa = Get-CsAutoAttendant -NameFilter $attendantName |
+  Where-Object Name -eq $attendantName
+# And now we list
+$aa.DefaultCallFlow.Greetings
+```
 
+The output should look similar to the image below:
+
+![](../../img/20220202-212929-rdgkk5ibpn.png "Verifying updated text-to-speech prompt")
+
+## Changing default greeting to audio file
+
+Changing the default greeting to the audio file is very similar. We'll use the example from the [`New-CsAutoAttendantPrompt` documentation](https://docs.microsoft.com/en-us/powershell/module/skype/new-csautoattendantprompt?view=skype-ps):
+
+```powershell
+# These three lines creates the prompt
+# If you use Windows PowerShell (5.1 or lower) use:
+$content = Get-Content "C:\temp\welcome.wav" -ReadCount 0 -Encoding byte
+# For PowerShell (multi-platform) use:
+$content = Get-Content "C:\temp\welcome.wav" -ReadCount 0 -AsByteStream
+# And then for any platform
+$audioFile = Import-CsOnlineAudioFile -ApplicationId "OrgAutoAttendant" -FileName "hello.wav" -Content $content
+$audioFilePrompt = New-CsAutoAttendantPrompt -AudioFilePrompt $audioFile
+# Now we use another variable
+$aa.DefaultCallFlow.Greetings = @($audioFilePrompt)
+# And we set the auto attendant again
+Set-CsAutoAttendant -Instance $aa
+```
+
+## Changing out of hours greeting
+
+## Changing holidays greeting
 
 ## Changing working hours
 
 ## Changing out of hours workflow
 
 ## Adding members in bulk
-
-
 
 ## Conclusion
