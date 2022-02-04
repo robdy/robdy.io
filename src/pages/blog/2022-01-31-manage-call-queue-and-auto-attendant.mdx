@@ -106,13 +106,67 @@ $aa.DefaultCallFlow.Greetings = @($audioFilePrompt)
 Set-CsAutoAttendant -Instance $aa
 ```
 
-## Adding out of hours workflow
+## Adding out-of-hours workflow
 
+When we create an auto attendant we don't need to specify an out-of-hours workflow. If we hit **Submit** in the **Call flow** window (as in the image below), it won't be created:
 
+![](../../img/20220204-134305-axntyw9ix9.png "Call flow window in auto attendant creator")
+
+We can check if that's the case by inspecting the value of the *Call flows* property in the `$aa` variable. If it's empty, as in the image below, the out-of-hours workflow is not defined:
+
+ 
+
+![](../../img/20220204-134647-r5p68s9p2h.png "Inspecting Call Flows value via PowerShell")
+
+If there's no out-of-hours workflow, we won't be able to modify it. Modifying is described in the later stages. Let's now take care of the workflow.
+
+To create a workflow, we'll use [`New-CsAutoAttendantCallFlow` cmdlet](https://docs.microsoft.com/en-us/powershell/module/skype/new-csautoattendantcallflow?view=skype-ps). 
+
+<Warning>
+
+The script below assumes there's no holiday workflow. If there's one defined, it'll be overwritten!
+
+</Warning>
+
+```powershell
+# First, menu option
+$newAAMenuOptionParams = @{
+  Action = "DisconnectCall"
+  DtmfResponse = "Automatic"
+}
+$AAOOHMenuOption = New-CsAutoAttendantMenuOption @newAAMenuOptionParams
+
+# Then, menu
+$newAAMenuParams = @{
+  Name = "Default Menu"
+  MenuOptions = @($AAOOHMenuOption)
+}
+$AAOOHMenu = New-CsAutoAttendantMenu @newAAMenuParams
+
+# Optional greeting
+$newAAOOHGreetingParams = @{
+  TextToSpeechPrompt = "The office is closed now"
+}
+$AAOOHGreeting = New-CsAutoAttendantPrompt @newAAOOHGreetingParams
+
+# And then, the workflow
+$newAAOOHFlowParams = @{
+  Name = "$attendantName After hours call flow"
+  Menu = $AAOOHMenu
+  Greetings = $AAOOHGreeting
+}
+$AAOOHFlow = New-CsAutoAttendantCallFlow @newAAOOHFlowParams
+
+# Now, assigning the workflow
+$aa.CallFlows = @($AAOOHFlow)
+
+### TODO: Assign schedules and call handling association
+
+# And saving
+Set-CsAutoAttendant -Instance $aa
+```
 
 ## Changing out of hours greeting
-
-
 
 ## Changing holidays greeting
 
