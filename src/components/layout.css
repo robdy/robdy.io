@@ -671,9 +671,11 @@ pre[class*='language-'].line-numbers > code {
 /*#endregion Prism */
 
 /*#region PrismJS customization */
-code[class*='language-'] {
+
+/* To be used for mobile (wrapped) view only */
+/* code[class*='language-'] {
   white-space: pre-wrap;
-}
+} */
 
 code[class*='language-'],
 pre[class*='language-'] {
@@ -682,19 +684,26 @@ pre[class*='language-'] {
   tab-size: 2;
 }
 
+/* Code block shading and radius (not apply to inline code) */
 pre {
   box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
-}
-
-.gatsby-highlight pre[class*='language-'].line-numbers {
-  padding-left: 3.3em;
 }
 
 /* Fix long param/cmdlets names overflowing */
 code[class*='language-'],
 pre[class*='language-'] {
   word-break: break-word;
+}
+
+/* To align with pre element padding */
+.line-numbers .line-numbers-rows {
+  top: 1em;
+}
+
+/* Overrides width:auto for span elements */
+.line-numbers .line-numbers-rows {
+  width: 3em !important;
 }
 
 /*#endregion PrismJS customization */
