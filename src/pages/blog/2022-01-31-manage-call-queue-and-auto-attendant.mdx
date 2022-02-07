@@ -66,9 +66,9 @@ Ok, something simple first - let's change a greeting for the auto attendant defa
 
 ```powershell
 # First we define the greeting
-$ttsPrompt = New-CsAutoAttendantPrompt -TextToSpeechPrompt "Welcome to Contoso!"
+$TTSPrompt = New-CsAutoAttendantPrompt -TextToSpeechPrompt "Welcome to Contoso!"
 # Then we overwrite current AA configuration
-$aa.DefaultCallFlow.Greetings = @($ttsPrompt)
+$aa.DefaultCallFlow.Greetings = @($TTSPrompt)
 # And we set the auto attendant
 Set-CsAutoAttendant -Instance $aa
 ```
@@ -98,7 +98,7 @@ $content = Get-Content "C:\temp\welcome.wav" -ReadCount 0 -Encoding byte
 # For PowerShell (multi-platform) use:
 $content = Get-Content "C:\temp\welcome.wav" -ReadCount 0 -AsByteStream
 # And then for any platform
-$audioFile = Import-CsOnlineAudioFile -ApplicationId "OrgAutoAttendant" -FileName "hello.wav" -Content $content
+$audioFile = Import-CsOnlineAudioFile -ApplicationId "OrgAutoAttendant" -FileName "welcome.wav" -Content $content
 $audioFilePrompt = New-CsAutoAttendantPrompt -AudioFilePrompt $audioFile
 # Now we use another variable
 $aa.DefaultCallFlow.Greetings = @($audioFilePrompt)
@@ -128,6 +128,8 @@ If we don't see anything, we need to add the workflow first.
 
 ### Adding out-of-hours workflow
 
+NOT WORKING, TO BE SET MANUALLY
+
 When we create an auto attendant we don't need to specify an out-of-hours workflow. If we hit **Submit** in the **Call flow** window (as in the image below), it won't be created:
 
 ![](../../img/20220204-134305-axntyw9ix9.png "Call flow window in auto attendant creator")
@@ -156,7 +158,7 @@ $AAOOHMenuOption = New-CsAutoAttendantMenuOption @newAAOOHMenuOptionParams
 
 # Then, menu
 $newAAMenuParams = @{
-  Name = "Default Menu"
+  Name = "After hours call flow"
   MenuOptions = @($AAOOHMenuOption)
 }
 $AAOOHMenu = New-CsAutoAttendantMenu @newAAMenuParams
@@ -182,7 +184,7 @@ $aa.CallFlows = @($AAOOHFlow)
 # Let's create it first
 $tr = New-CsOnlineTimeRange -Start 00:00 -End 1.00:00
 $scheduleOOHParams = @{
-  Name = "$attendantName OOH Schedule"
+  Name = "After hours $attendantName"
   WeeklyRecurrentSchedule = $true
   MondayHours = @($tr)
   TuesdayHours = @($tr)
@@ -213,11 +215,58 @@ $aa.CallHandlingAssociations = @($OOHAssociation)
 Set-CsAutoAttendant -Instance $aa
 ```
 
-### Changing out-of-hours greeting
+### Changing an out-of-hours greeting to text-to-speech
+
+Let's change the greeting we use out of hours.
+
+We'll find the workflow responsible for after-hours call handling. Then we'll use [`New-CsAutoAttendantPrompt` cmdlet](https://docs.microsoft.com/en-us/powershell/module/skype/new-csautoattendantprompt?view=skype-ps) to create a new text-to-speech prompt. Then we'll replace the existing one.
+
+```powershell
+# Find out-of-hours association
+$OOHAssociation = $aa.CallHandlingAssociations |
+  Where-Object {$_.Type.Value -eq 'AfterHours'}
+
+# Find the respective call flow
+$OOHCallFlow = $aa.CallFlows |
+  Where-Object Id -eq $OOHAssociation.CallFlowId
+  
+# Now we define the greeting
+$OOHTTSPrompt = New-CsAutoAttendantPrompt -TextToSpeechPrompt "Our offices are closed now!"
+# Then we overwrite the current configuration
+$OOHCallFlow.Greetings = @($OOHTTSPrompt)
+# And we set the auto attendant
+Set-CsAutoAttendant -Instance $aa
+```
+
+### Changing an out-of-hours greeting to an audio file
+
+We'll find the workflow responsible for after-hours call handling. Then we'll use [`New-CsAutoAttendantPrompt` cmdlet](https://docs.microsoft.com/en-us/powershell/module/skype/new-csautoattendantprompt?view=skype-ps) to create a new prompt from an audio file. Then we'll replace the existing one.
+
+```powershell
+# Find out-of-hours association
+$OOHAssociation = $aa.CallHandlingAssociations |
+  Where-Object {$_.Type.Value -eq 'AfterHours'}
+
+# Find the respective call flow
+$OOHCallFlow = $aa.CallFlows |
+  Where-Object Id -eq $OOHAssociation.CallFlowId
+  
+# These three lines creates the prompt
+# If you use Windows PowerShell (5.1 or lower) use:
+$OOHFileContent = Get-Content "C:\temp\ooh-welcome.wav" -ReadCount 0 -Encoding byte
+# For PowerShell (multi-platform) use:
+$OOHFileContent = Get-Content "C:\temp\ooh-welcome.wav" -ReadCount 0 -AsByteStream
+# And then for any platform
+$OOHAudioFile = Import-CsOnlineAudioFile -ApplicationId "OrgAutoAttendant" -FileName "ooh-welcome.wav" -Content $OOHFileContent
+$OOHAudioFilePrompt = New-CsAutoAttendantPrompt -AudioFilePrompt $OOHAudioFile
+
+# Then we overwrite the current configuration
+$OOHCallFlow.Greetings = @($OOHAudioFilePrompt)
+# And we set the auto attendant
+Set-CsAutoAttendant -Instance $aa
+```
 
 ## Adding holiday workflow
-
-
 
 ## Changing holidays greeting
 
