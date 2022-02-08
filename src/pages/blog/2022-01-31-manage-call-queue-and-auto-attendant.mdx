@@ -266,6 +266,41 @@ $OOHCallFlow.Greetings = @($OOHAudioFilePrompt)
 Set-CsAutoAttendant -Instance $aa
 ```
 
+### Removing out-of-hours greeting
+
+To remove the out-of-hours greeting we'll use the following script.
+
+For [`New-CsAutoAttendantPrompt` cmdlet](https://docs.microsoft.com/en-us/powershell/module/skype/new-csautoattendantprompt?view=skype-ps) we need to specify either a text-to-speech prompt or an audio file. We can set any value as it'll be ignored anyway.
+
+```powershell
+# Find out-of-hours association
+$OOHAssociation = $aa.CallHandlingAssociations |
+  Where-Object {$_.Type.Value -eq 'AfterHours'}
+
+# Find the respective call flow
+$OOHCallFlow = $aa.CallFlows |
+  Where-Object Id -eq $OOHAssociation.CallFlowId
+
+# Generate new prompt
+$OOHPromptParams = @{
+  TextToSpeechPrompt = 'Our offices are closed now!'
+  ActiveType = 'None'
+}
+$OOHPromptNone = New-CsAutoAttendantPrompt @OOHPromptParams
+
+# Replace it
+$OOHCallFlow.Greetings = @($OOHPromptNone)
+
+# And save the changes
+Set-CsAutoAttendant -Instance $aa
+```
+
+<Note>
+
+ In theory, we could just set *ActiveType* value of `$OOHCallFlow.Greetings` to *None*. It'd work, but it might be prone to error if Microsoft changes the structure of the call flow object.
+
+</Note>
+
 ## Adding holiday workflow
 
 ## Changing holidays greeting
