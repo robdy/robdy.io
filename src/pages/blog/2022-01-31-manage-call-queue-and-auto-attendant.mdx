@@ -60,7 +60,21 @@ The activities below are not dependent (unless specified otherwise). We can use 
 
 </Tip>
 
-## Changing default greeting
+## Managing general options
+
+### Changing the operator to a person
+
+### Changing the operator to call queue or auto attendant
+
+### Changing the operator to phone number
+
+### Removing the operator
+
+### Changing the time zone
+
+## Managing default call flow
+
+### Changing default greeting
 
 Ok, something simple first - let's change a greeting for the auto attendant default workflow. Our greeting will be of text-to-speech type:
 
@@ -87,7 +101,7 @@ The output should look similar to the image below:
 
 ![](../../img/20220202-212929-rdgkk5ibpn.png "Verifying updated text-to-speech prompt")
 
-## Changing default greeting to audio file
+### Changing default greeting to audio file
 
 Changing the default greeting to the audio file is very similar. We'll use the example from the [`New-CsAutoAttendantPrompt` documentation](https://docs.microsoft.com/en-us/powershell/module/skype/new-csautoattendantprompt?view=skype-ps):
 
@@ -106,9 +120,9 @@ $aa.DefaultCallFlow.Greetings = @($audioFilePrompt)
 Set-CsAutoAttendant -Instance $aa
 ```
 
-## Managing out-of-hours workflow
+## Managing the out-of-hours workflow
 
-Let's now do the changes to out-of-hours workflow.
+Let's now do the changes to the out-of-hours workflow.
 
 ### Checking if out-of-hours workflow exists
 
@@ -214,6 +228,47 @@ $aa.CallHandlingAssociations = @($OOHAssociation)
 # And saving
 Set-CsAutoAttendant -Instance $aa
 ```
+
+### Changing business hours
+
+In this example, we'll change the business hours. Outside the defined schedule, the out-of-hours workflow will be triggered.
+
+We'll set the business hours from 9 AM to 5 PM. On Friday, we'll add the additional break between 1 PM and 2 PM.
+
+```powershell
+# Find out-of-hours association
+$OOHAssociation = $aa.CallHandlingAssociations |
+  Where-Object {$_.Type.Value -eq 'AfterHours'}
+
+# Find the respective schedule
+$OOHSchedule = $aa.Schedules |
+  Where-Object Id -eq $OOHAssociation.ScheduleId
+
+# Time range for Monday-Thursday
+$weekTimeRange = New-CsOnlineTimeRange -Start 9:00 -End 17:00
+# And for Friday
+$fridayTimeRangeMorning = New-CsOnlineTimeRange -Start 9:00 -End 13:00
+$fridayTimeRangeAfternoon = New-CsOnlineTimeRange -Start 14:00 -End 17:00
+
+# Setting the schedule
+$OOHNewSchedule = @{
+  ComplementEnabled = $true
+  MondayHours = @($weekTimeRange)
+  TuesdayHours = @($weekTimeRange)
+  WednesdayHours = @($weekTimeRange)
+  ThursdayHours = @($weekTimeRange)
+  FridayHours =  @($fridayTimeRangeMorning, $fridayTimeRangeAfternoon)
+  SaturdayHours = @($null)
+  SundayHours = @($null)
+}
+$OOHSchedule.WeeklyRecurrentSchedule = $OOHNewSchedule
+
+### TO BE FINISHED
+# And saving
+Set-CsAutoAttendant -Instance $aa
+```
+
+### Removing business hours
 
 ### Changing an out-of-hours greeting to text-to-speech
 
