@@ -64,6 +64,8 @@ The activities below are not dependent (unless specified otherwise). We can use 
 
 ### Changing the operator to a person
 
+
+
 ### Changing the operator to call queue or auto attendant
 
 ### Changing the operator to phone number
@@ -71,6 +73,45 @@ The activities below are not dependent (unless specified otherwise). We can use 
 ### Removing the operator
 
 ### Changing the time zone
+
+Microsoft provides a cmdlet to find out which time zones are supported by auto attendants. The cmdlet is [`Get-CsAutoAttendantSupportedTimeZone`](https://docs.microsoft.com/en-us/powershell/module/skype/get-csautoattendantsupportedtimezone?view=skype-ps). We'll use it to find out the name of the specific zone we'd like to set.
+
+In this example, I'll try to set the time zone used in Poland. It is UTC+1 and should have Warsaw in its name.
+
+Let's run the `Get-CsAutoAttendantSupportedTimeZone` . We'll check the structure of the data returned:
+
+![](../../img/20220212-085154-rkphfln0cy.png "Type of data returned by Get-CsAutoAttendantSupportedTimeZone cmdlet")
+
+As we can see, each entry has two properties: *Id* and *DisplayName*. We'll filter using the DisplayName. Then we'll use the *Id* and pass it to the auto attendant object.
+
+We'll first try to filter using the hours' difference *+01:00* and then based on the city name (*Warsaw*).
+
+```powershell
+# By time difference
+Get-CsAutoAttendantSupportedTimeZone |
+  Where-Object DisplayName -like '*+01:00*'
+
+# By city name
+Get-CsAutoAttendantSupportedTimeZone |
+  Where-Object DisplayName -like '*warsaw*'
+```
+
+Here's what is returned in both cases:
+
+![](../../img/20220212-085905-lgtyacccuy.png "Filtering supported time zones")
+
+Now, when we know the identifier, we can pass it to the auto attendant object:
+
+```powershell
+# Copying data from the filtering above
+$timeZoneId = 'Central European Standard Time'
+
+# Setting the object
+$aa.timeZoneId = $timeZoneId
+
+# And saving
+Set-CsAutoAttendant -Instance $aa
+```
 
 ## Managing default call flow
 
@@ -142,7 +183,7 @@ If we don't see anything, we need to add the workflow first.
 
 ### Adding out-of-hours workflow
 
-NOT WORKING, TO BE SET MANUALLY
+TO BE TESTED AGAIN
 
 When we create an auto attendant we don't need to specify an out-of-hours workflow. If we hit **Submit** in the **Call flow** window (as in the image below), it won't be created:
 
@@ -215,8 +256,8 @@ $aa.Schedules = @($OOHSchedule)
 # And the same with call handling association
 # Creating
 $OOHCallHandlingAssociationParams = @{
-  CallFlowId = $OOHSchedule.Id
-  ScheduleId = $AAOOHFlow.Id
+  CallFlowId = $AAOOHFlow.Id
+  ScheduleId = $OOHSchedule.Id
   Type = 'AfterHours'
 }
 $OOHAssociation = New-CsAutoAttendantCallHandlingAssociation @OOHCallHandlingAssociationParams
@@ -244,6 +285,10 @@ $OOHAssociation = $aa.CallHandlingAssociations |
 $OOHSchedule = $aa.Schedules |
   Where-Object Id -eq $OOHAssociation.ScheduleId
 
+# Find the respective call flow
+$OOHCallFlow = $aa.CallFlows |
+  Where-Object Id -eq $OOHAssociation.CallFlowId
+
 # Time range for Monday-Thursday
 $weekTimeRange = New-CsOnlineTimeRange -Start 9:00 -End 17:00
 # And for Friday
@@ -251,8 +296,10 @@ $fridayTimeRangeMorning = New-CsOnlineTimeRange -Start 9:00 -End 13:00
 $fridayTimeRangeAfternoon = New-CsOnlineTimeRange -Start 14:00 -End 17:00
 
 # Setting the schedule
-$OOHNewSchedule = @{
-  ComplementEnabled = $true
+$OOHNewScheduleParams = @{
+  Name = "After hours $attendantName"
+  WeeklyRecurrentSchedule = $true
+  Complement = $true
   MondayHours = @($weekTimeRange)
   TuesdayHours = @($weekTimeRange)
   WednesdayHours = @($weekTimeRange)
@@ -261,9 +308,19 @@ $OOHNewSchedule = @{
   SaturdayHours = @($null)
   SundayHours = @($null)
 }
-$OOHSchedule.WeeklyRecurrentSchedule = $OOHNewSchedule
+$OOHNewSchedule = New-CsOnlineSchedule @OOHNewScheduleParams
 
-### TO BE FINISHED
+# Generating the association
+$OOHCallHandlingAssociationParams = @{
+  CallFlowId = $OOHCallFlow.Id
+  ScheduleId = $OOHNewSchedule.Id
+  Type = 'AfterHours'
+}
+$OOHAssociation = New-CsAutoAttendantCallHandlingAssociation @OOHCallHandlingAssociationParams
+
+# Setting the object
+$aa.CallHandlingAssociations = @($OOHAssociation)
+
 # And saving
 Set-CsAutoAttendant -Instance $aa
 ```
