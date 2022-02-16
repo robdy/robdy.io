@@ -161,7 +161,7 @@ In that case, our auto attendant might not have the resource account assigned ye
 
 ### Changing the operator to phone number
 
-The only callable entity we have left is the phone number.
+The only callable entity which we haven't set is the phone number. Let's set it, too.
 
 ```powershell
 # Here we enter the number
@@ -183,6 +183,16 @@ Set-CsAutoAttendant -Instance $aa
 ```
 
 ### Removing the operator
+
+To remove the operator we need to nullify the property:
+
+```powershell
+# We set the operator to $null
+$aa.Operator = $null
+
+# And we save
+Set-CsAutoAttendant -Instance $aa
+```
 
 ### Changing the time zone
 
