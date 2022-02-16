@@ -159,7 +159,7 @@ In that case, our auto attendant might not have the resource account assigned ye
 
 </Warning>
 
-### Changing the operator to phone number
+### Changing the operator to the phone number
 
 The only callable entity which we haven't set is the phone number. Let's set it, too.
 
@@ -168,7 +168,7 @@ The only callable entity which we haven't set is the phone number. Let's set it,
 # It must be in E.164 format
 $operatorNumber = '+48123456789'
 
-# We create the respetive entity
+# We create the respective entity
 $callableEntityNumberParams = @{
   Identity = $operatorNumber
   Type = 'ExternalPstn'
@@ -237,6 +237,10 @@ Set-CsAutoAttendant -Instance $aa
 
 ## Managing default call flow
 
+In this section, we'll manage the options available under the *Call flow* tab. These options will be effective during business hours on business (non-holiday) days.
+
+We have two areas to manage in this tab: greeting and the destination. Destination specifies where to route the call after the greeting.
+
 ### Changing default greeting
 
 Ok, something simple first - let's change a greeting for the auto attendant default workflow. Our greeting will be of text-to-speech type:
@@ -282,6 +286,125 @@ $aa.DefaultCallFlow.Greetings = @($audioFilePrompt)
 # And we set the auto attendant again
 Set-CsAutoAttendant -Instance $aa
 ```
+
+### Redirecting the call to the person
+
+Ok, let's make our auto attendant redirect the call to Megan Bowen:
+
+```powershell
+# Here we enter the User Principal Name
+$redirectPersonUPN = 'MeganB@contoso.com'
+
+# We define callable entity using Identity 
+$redirectPersonObjectId = (Get-CsOnlineUser $redirectPersonUPN).Identity
+$callableEntityPersonParams = @{
+  Identity = $redirectPersonObjectId
+  Type = 'User'
+}
+$callableEntityPerson = New-CsAutoAttendantCallableEntity @callableEntityPersonParams
+
+# We need menu option
+$newAAPersonMenuOptionParams = @{
+  Action = 'TransferCallToTarget'
+  DtmfResponse = 'Automatic'
+  CallTarget = $callableEntityPerson
+}
+$AAPersonMenuOption = New-CsAutoAttendantMenuOption @newAAPersonMenuOptionParams
+
+# Now, we update the default menu options
+$aa.DefaultCallFlow.Menu.MenuOptions = @($AAPersonMenuOption)
+
+# And we set the auto attendant
+Set-CsAutoAttendant -Instance $aa
+```
+
+### Redirecting the call to the call queue
+
+Our auto attendant can work as a proxy to the call queue. Let's set it up:
+
+```powershell
+# Here we enter the call queue name 
+$redirectCallQueueName = 'CQ_TEST'
+
+# We define callable entity using the resource account 
+$redirectQueue = Get-CsCallQueue -NameFilter $redirectCallQueueName |
+  Where-Object Name -eq $redirectCallQueueName
+$redirectQueueAccountId = $redirectQueue.ApplicationInstances[0]
+$callableEntityQueueParams = @{
+  Identity = $redirectQueueAccountId
+  Type = 'ApplicationEndpoint'
+}
+$callableEntityQueue = New-CsAutoAttendantCallableEntity @callableEntityQueueParams
+
+# We need menu option
+$newAAQueueMenuOptionParams = @{
+  Action = 'TransferCallToTarget'
+  DtmfResponse = 'Automatic'
+  CallTarget = $callableEntityQueue
+}
+$AAQueueMenuOption = New-CsAutoAttendantMenuOption @newAAQueueMenuOptionParams
+
+# Now, we update the default menu options
+$aa.DefaultCallFlow.Menu.MenuOptions = @($AAQueueMenuOption)
+
+# And we set the auto attendant
+Set-CsAutoAttendant -Instance $aa
+```
+
+<Warning>
+
+We might get the error saying *New-CsAutoAttendantCallableEntity: Cannot bind argument to parameter 'Identity' because it is an empty string.*
+
+In that case, our call queue might not have the resource account assigned yet. We must create the resource account, assign it, and try again.
+
+</Warning>
+
+### Redirecting the call to the auto attendant
+
+Our auto attendant can redirect the call to another attendant. Let's see, how to configure such workflow:
+
+```powershell
+# Here we enter the auto attendant name 
+$redirectAutoAttendantName = 'ATT_RobTest'
+
+# We define callable entity using the resource account 
+$redirectAttendant = Get-CsAutoAttendant -NameFilter $redirectAutoAttendantName |
+  Where-Object Name -eq $redirectAutoAttendantName
+$redirectAttendantAccountId = $redirectAttendant.ApplicationInstances[0]
+$callableEntityAttendantParams = @{
+  Identity = $redirectAttendantAccountId
+  Type = 'ApplicationEndpoint'
+}
+$callableEntityAttendant = New-CsAutoAttendantCallableEntity @callableEntityAttendantParams
+
+# We need menu option
+$newAAAttendantMenuOptionParams = @{
+  Action = 'TransferCallToTarget'
+  DtmfResponse = 'Automatic'
+  CallTarget = $callableEntityAttendant
+}
+$AAAttendantMenuOption = New-CsAutoAttendantMenuOption @newAAAttendantMenuOptionParams
+
+# Now, we update the default menu options
+$aa.DefaultCallFlow.Menu.MenuOptions = @($AAAttendantMenuOption)
+
+# And we set the auto attendant
+Set-CsAutoAttendant -Instance $aa
+```
+
+<Warning>
+
+We might get the error saying *New-CsAutoAttendantCallableEntity: Cannot bind argument to parameter 'Identity' because it is an empty string.*
+
+In that case, our auto attendant might not have the resource account assigned yet. We must create the resource account, assign it, and try again.
+
+</Warning>
+
+### Redirecting the call to the phone number
+
+### Redirecting the call to the voicemail
+
+### Redirecting the call to the menu
 
 ## Managing the out-of-hours workflow
 
