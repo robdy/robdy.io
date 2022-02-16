@@ -74,7 +74,11 @@ $operatorUPN = 'MeganB@contoso.com'
 
 # We define callable entity using Identity 
 $operatorObjectId = (Get-CsOnlineUser $operatorUPN).Identity
-$callableEntityPerson = New-CsAutoAttendantCallableEntity -Identity $operatorObjectId -Type User
+$callableEntityPersonParams = @{
+  Identity = $operatorObjectId
+  Type = 'User'
+}
+$callableEntityPerson = New-CsAutoAttendantCallableEntity @callableEntityPersonParams
 
 # We set the operator
 $aa.Operator = $callableEntityPerson
@@ -101,7 +105,11 @@ $operatorCallQueueName = 'CQ_TEST'
 $operatorQueue = Get-CsCallQueue -NameFilter $operatorCallQueueName |
   Where-Object Name -eq $operatorCallQueueName
 $operatorQueueAccountId = $operatorQueue.ApplicationInstances[0]
-$callableEntityQueue = New-CsAutoAttendantCallableEntity -Identity $operatorQueueAccountId -Type ApplicationEndpoint
+$callableEntityQueueParams = @{
+  Identity = $operatorQueueAccountId
+  Type = 'ApplicationEndpoint'
+}
+$callableEntityQueue = New-CsAutoAttendantCallableEntity @callableEntityQueueParams
 
 # We set the operator
 $aa.Operator = $callableEntityQueue
@@ -112,7 +120,7 @@ Set-CsAutoAttendant -Instance $aa
 
 <Warning>
 
-We might get the error saying *New-CsAutoAttendantCallableEntity: Cannot bind argument to parameter 'Identity' because it is an empty string.*.
+We might get the error saying *New-CsAutoAttendantCallableEntity: Cannot bind argument to parameter 'Identity' because it is an empty string.*
 
 In that case, our call queue might not have the resource account assigned yet. We must create the resource account, assign it, and try again.
 
@@ -130,7 +138,11 @@ $operatorAutoAttendantName = 'ATT_RobTest'
 $operatorAttendant = Get-CsAutoAttendant -NameFilter $operatorAutoAttendantName |
   Where-Object Name -eq $operatorAutoAttendantName
 $operatorAttendantAccountId = $operatorAttendant.ApplicationInstances[0]
-$callableEntityAttendant = New-CsAutoAttendantCallableEntity -Identity $operatorAttendantAccountId -Type ApplicationEndpoint
+$callableEntityAttendantParams = @{
+  Identity = $operatorAttendantAccountId
+  Type = 'ApplicationEndpoint'
+}
+$callableEntityAttendant = New-CsAutoAttendantCallableEntity @callableEntityAttendantParams
 
 # We set the operator
 $aa.Operator = $callableEntityAttendant
@@ -141,13 +153,34 @@ Set-CsAutoAttendant -Instance $aa
 
 <Warning>
 
-We might get the error saying *New-CsAutoAttendantCallableEntity: Cannot bind argument to parameter 'Identity' because it is an empty string.*.
+We might get the error saying *New-CsAutoAttendantCallableEntity: Cannot bind argument to parameter 'Identity' because it is an empty string.*
 
 In that case, our auto attendant might not have the resource account assigned yet. We must create the resource account, assign it, and try again.
 
 </Warning>
 
 ### Changing the operator to phone number
+
+The only callable entity we have left is the phone number.
+
+```powershell
+# Here we enter the number
+# It must be in E.164 format
+$operatorNumber = '+48123456789'
+
+# We create the respetive entity
+$callableEntityNumberParams = @{
+  Identity = $operatorNumber
+  Type = 'ExternalPstn'
+}
+$callableEntityNumber = New-CsAutoAttendantCallableEntity @callableEntityNumberParams
+
+# We set the operator
+$aa.Operator = $callableEntityNumber
+
+# And we save
+Set-CsAutoAttendant -Instance $aa
+```
 
 ### Removing the operator
 
