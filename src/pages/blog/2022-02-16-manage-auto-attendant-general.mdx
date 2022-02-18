@@ -2,14 +2,32 @@
 templateKey: blog-post
 title: Manage Auto Attendant General
 date: 2022-02-16T19:57:02.263Z
-description: How to manage general settings of the auto attendant using PowerShell
+description: Ever wondered how to manage the general settings of the auto
+  attendant using PowerShell? You'll learn here!
 featuredpost: false
 tags:
   - teams
   - powershell
   - auto attendant
 ---
+Have you ever thought it would be useful to have scripts related to the auto attendant in your script folder? Are you tired of managing settings using your mouse and Teams Admin Center? Do you ever need to change more than one auto attendant at a time?
+
+If you answered *yes* to at least one of the questions, you're in a good place. You'll find below the scripts for managing the general settings of the auto attendant.
+
+What do *general settings* mean? You can find them under the section named *General* in auto attendant configuration wizard. In the article I will be going through these settings:
+
+* Operator
+* Time zone
+
+Are you ready to go? Let's set the prerequisites and start!
+
 ## Prerequisites
+
+To go through the steps in this blog post, you need the following:
+
+* Microsoft 365 environment with [Phone System](https://docs.microsoft.com/en-us/MicrosoftTeams/what-is-phone-system-in-office-365)
+* An account with at least Teams Communications Administrator and User Administrator roles
+* PowerShell with Teams module installed. See [installation guide](https://docs.microsoft.com/en-us/MicrosoftTeams/teams-powershell-install)
 
 ## Preparation
 
@@ -27,7 +45,7 @@ Next, we'll use PowerShell to pull the auto attendant object. We'll use [`Get-Cs
 
 We can also get the identity from the Teams Admin Center. When we edit an auto attendant, id is the last part of the page URL:
 
-![](../../img/20220216-210151-qijhtlihyz.png "Getting ID from the Teams Admin Center URL")
+![Getting ID from the Teams Admin Center URL](../../img/20220216-210151-qijhtlihyz.png)
 
 </Tip>
 
@@ -48,17 +66,13 @@ $aa = Get-CsAutoAttendant -NameFilter $attendantName |
 
 We now have our object saved to the variable. Let's start modifying it!
 
-<Tip>
-
-The activities below are not dependent (unless specified otherwise). We can use only one of them and the effect will be the same.
-
-</Tip>
-
 ## Changing the operator
 
-### Changing the operator to a person
+The first set of scripts will be about managing the auto attendant's operator.
 
 The operator of an auto attendant is a callable entity. There is one difference in comparison to other entities (person, voice app, or phone number). When we create the menu, there's a predefined voice command, which redirects to the operator.
+
+### Changing the operator to a person
 
 In this example, we'll set Megan Bowen to be the auto attendant operator:
 
@@ -228,3 +242,9 @@ $aa.timeZoneId = $timeZoneId
 # And saving
 Set-CsAutoAttendant -Instance $aa
 ```
+
+## Summary
+
+In this article, we've learned how to manipulate the operator and the time zone of the auto attendant.
+
+Do you see anything missing? Do you have something you need to learn about in that topic? Let me know in the comments section!
