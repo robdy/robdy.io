@@ -14,13 +14,6 @@ Have you ever thought it would be useful to have scripts related to the auto att
 
 If you answered *yes* to at least one of the questions, you're in a good place. You'll find below the scripts for managing the general settings of the auto attendant.
 
-What do *general settings* mean? You can find them under the section named *General* in auto attendant configuration wizard. In the article I will be going through these settings:
-
-* Operator
-* Time zone
-
-Are you ready to go? Let's set the prerequisites and start!
-
 <Tip>
 
 This article is a part of the series about managing Teams call queues and auto attendants with PowerShell.
@@ -30,6 +23,15 @@ This article is a part of the series about managing Teams call queues and auto a
 Part 2 - Managing Auto Attendant general settings with PowerShell (this article)
 
 </Tip>
+
+## Scope
+
+What do *general settings* mean? You can find them under the section named *General* in auto attendant configuration wizard. In the article we will be going through these settings:
+
+* Operator
+* Time zone
+
+Are you ready to go? Let's set the prerequisites and start!
 
 ## Prerequisites
 
@@ -80,7 +82,7 @@ We now have our object saved to the variable. Let's start modifying it!
 
 The first set of scripts will be about managing the auto attendant's operator.
 
-The operator of an auto attendant is a callable entity. There is one difference in comparison to other entities (person, voice app, or phone number). When we create the menu, there's a predefined voice command, which redirects to the operator.
+The operator of an auto attendant is a callable entity. There is only one difference in comparison to other entities (person, voice app, or phone number). The difference is in the menu - there's a predefined voice command, which redirects to the operator. Other than that, operator is just another call destination.
 
 ### Changing the operator to a person
 
