@@ -13,20 +13,24 @@ tags:
 After the end-of-year holiday period, we finally got some interesting changes in Microsoft Teams PowerShell modules.
 
 <!-- omit in toc -->
-## Checklist only
 
-- [New cmdlets](#new-cmdlets)
-  - [Unassigned number treatment](#unassigned-number-treatment)
-  - [Shifts](#shifts)
-- [Removed cmdlets](#removed-cmdlets)
-- [New params](#new-params)
-  - [Meeting policy](#meeting-policy)
-  - [MSFT internal processing mode](#msft-internal-processing-mode)
-  - [Sync application instance](#sync-application-instance)
-- [Removed params](#removed-params)
-  - [For multiple cmdlets](#for-multiple-cmdlets)
-  - [Shifts schedule record](#shifts-schedule-record)
-- [Conclusion](#conclusion)
+## Table of Contents
+
+* [New cmdlets](#new-cmdlets)
+
+  * [Unassigned number treatment](#unassigned-number-treatment)
+  * [Shifts](#shifts)
+* [Removed cmdlets](#removed-cmdlets)
+* [New params](#new-params)
+
+  * [Meeting policy](#meeting-policy)
+  * [MSFT internal processing mode](#msft-internal-processing-mode)
+  * [Sync application instance](#sync-application-instance)
+* [Removed params](#removed-params)
+
+  * [For multiple cmdlets](#for-multiple-cmdlets)
+  * [Shifts schedule record](#shifts-schedule-record)
+* [Conclusion](#conclusion)
 
 ## New cmdlets
 
@@ -46,32 +50,32 @@ As the cmdlet is in preview now, it returns *Access Denied* error in my organiza
 
 New Shifts cmdlets in preview:
 
-- *Disable-CsTeamsShiftsConnectionErrorReport*
-- *Get-CsTeamsShiftsConnectionErrorReport*
-- *Get-CsTeamsShiftsConnectionOperation*
-- *Get-CsTeamsShiftsConnectionWfmUser*
-- *New-CsTeamsShiftsConnectionBatchTeamMap*
-- *Remove-CsTeamsShiftsScheduleRecord*
+* *Disable-CsTeamsShiftsConnectionErrorReport*
+* *Get-CsTeamsShiftsConnectionErrorReport*
+* *Get-CsTeamsShiftsConnectionOperation*
+* *Get-CsTeamsShiftsConnectionWfmUser*
+* *New-CsTeamsShiftsConnectionBatchTeamMap*
+* *Remove-CsTeamsShiftsScheduleRecord*
 
 ## Removed cmdlets
 
 There were quite a few cmdlets removed in the `3.2.0-preview` version of the module:
 
-- *ConvertTo-JsonForPSWS*
-- *Get-CsNetworkConfiguration*
-- *Get-CsTeamsVerticalPackagePolicy*
-- *Get-CsVoiceNormalizationRule*
-- *Grant-CsTeamsVerticalPackagePolicy*
-- *New-CsNetworkMediaBypassConfiguration*
-- *New-CsTeamsVerticalPackagePolicy*
-- *Remove-CsTeamsVerticalPackagePolicy*
-- *Remove-CsTenantNetworkConfiguration*
-- *Remove-CsVoiceNormalizationRule*
-- *Set-CsNetworkConfiguration*
-- *Set-CsTeamsVerticalPackagePolicy*
-- *Set-CsTenantNetworkConfiguration*
-- *Set-CsUserServicesPolicy*
-- *Set-CsVoiceNormalizationRule*
+* *ConvertTo-JsonForPSWS*
+* *Get-CsNetworkConfiguration*
+* *Get-CsTeamsVerticalPackagePolicy*
+* *Get-CsVoiceNormalizationRule*
+* *Grant-CsTeamsVerticalPackagePolicy*
+* *New-CsNetworkMediaBypassConfiguration*
+* *New-CsTeamsVerticalPackagePolicy*
+* *Remove-CsTeamsVerticalPackagePolicy*
+* *Remove-CsTenantNetworkConfiguration*
+* *Remove-CsVoiceNormalizationRule*
+* *Set-CsNetworkConfiguration*
+* *Set-CsTeamsVerticalPackagePolicy*
+* *Set-CsTenantNetworkConfiguration*
+* *Set-CsUserServicesPolicy*
+* *Set-CsVoiceNormalizationRule*
 
 You can find all the details in [Microsoft Teams PowerShell Release Notes](https://docs.microsoft.com/en-us/microsoftteams/teams-powershell-release-notes#release-notes).
 
@@ -113,9 +117,9 @@ As noted in [Microsoft Teams PowerShell Release Notes](https://docs.microsoft.co
 
 Based on my checking, there are 3 more parameters removed from multiple cmdlets:
 
-- *Instance*
-- *Force*
-- *LocalStore*
+* *Instance*
+* *Force*
+* *LocalStore*
 
 ### Shifts schedule record
 
