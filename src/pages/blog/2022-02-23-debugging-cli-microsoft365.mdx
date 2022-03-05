@@ -8,6 +8,7 @@ tags:
   - cli-microsoft365
   - vs code
   - javascript
+  - typescript
 ---
 ## Prerequisites
 
@@ -15,7 +16,7 @@ To go through the article we need to have our development environment. There are
 
 If you want to use your local environment, follow the article [Minimal Path to Awesome](https://github.com/pnp/cli-microsoft365/wiki/Minimal-Path-to-Awesome). For Remote Development Containers, follow [GitHub Codespaces & Visual Studio Remote Development Container](https://github.com/pnp/cli-microsoft365/wiki/GitHub-Codespaces-&-Visual-Studio-Remote-Development-Container).
 
-In this article we'll be using the environment based on GitHub Codespaces.
+In this article, we'll be using the environment based on GitHub Codespaces.
 
 ## Building the project
 
@@ -29,7 +30,45 @@ npm run build
 
 ## Debugging CLI
 
- 
+For CLI debugging we'll need to define the arguments. The debugger will run that *m365* command in debug mode.
+
+We can then set our breakpoints to pause the execution. Once paused, we'll be able to inspect the current context. We could also run the program step by step.
+
+### Opening launch file
+
+To configure the arguments passed in debug mode, we'll edit *.vscode/launch.json*. We can open it directly from the file explorer:
+
+![Opening launch.json from file explorer](../../img/20220305-134709-l2ieqme1dp.png)
+
+We can also open it from the *Run and Debug* bar (1). We need to click a little gear icon (2) next to the *Debug CLI* dropdown:
+
+![Opening launch.json from run and debug bar](../../img/20220305-135036-crgmpipcuo.png)
+
+### Setting the arguments
+
+The arguments need to be entered under the *configurations* array (1). We'll edit the one with the name Debug CLI (2). Our arguments need to go to the *args* array (3):
+
+![Finding proper section in launch file](../../img/20220305-140016-k24hedaxzs.png)
+
+The comments above the *args* array explain how to use it.
+
+In my example, I troubleshoot usage of the incorrect value for `--output`. I'd like to debug what's happening when I run:
+
+```shell
+m365 version --output asdasd
+```
+
+Translated to the array, it'll look like:
+
+```json
+"args": ["version", "--output", "asdasd"]
+```
+
+Let's save the file and run the debug mode.
+
+### Running the debug mode
+
+To run debug mode we can simply hit the F5 button. 
 
 ## Debugging tests
 
