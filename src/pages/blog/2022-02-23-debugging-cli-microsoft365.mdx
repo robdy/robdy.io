@@ -1,8 +1,8 @@
 ---
 templateKey: blog-post
-title: Debugging CLI-Microsoft365
+title: Setting debugging of CLI for Microsoft 365
 date: 2022-02-23T08:09:46.501Z
-description: How to debug CLI for Microsoft 365
+description: You'll learn how to configure debugging sessions in CLI for Microsoft 365.
 featuredpost: false
 tags:
   - cli-microsoft365
@@ -46,7 +46,7 @@ We can also open it from the *Run and Debug* bar (1). We need to click a little 
 
 ### Setting the arguments
 
-The arguments need to be entered under the *configurations* array (1). We'll edit the one with the name Debug CLI (2). Our arguments need to go to the *args* array (3):
+The arguments need to be entered under the *configurations* array (1). We'll edit the one with the name *Debug CLI* (2). Our arguments need to go to the *args* array (3):
 
 ![Finding proper section in launch file](../../img/20220305-140016-k24hedaxzs.png)
 
@@ -68,8 +68,52 @@ Let's save the file and run the debug mode.
 
 ### Running the debug mode
 
-To run debug mode we can simply hit the F5 button. 
+To run debug mode we can simply hit the F5 button. We can also run it by opening the *Run and Debug* tab (1) and clicking the play button (2):
+
+![Running the debug mode from the Run and Debug tab](../../img/20220311-152558-wi1ysis2rv.png)
+
+How to confirm we entered the debug mode? We can notice a few differences:
+
+* The little bar with debug controls will appear
+* The panel tab will switch to the *Debug Console*
+* The bottom bar will be orange
+
+The differences are outlined on the screenshot below:
+
+![Debug mode differences](../../img/20220311-152847-ebairro7ui.png)
 
 ## Debugging tests
+
+We now know how to debug command execution.
+
+But what about the tests? Tests are an important part of CLI for Microsoft 365. Current (and desired) test coverage is 100%. It means that for many of the changes we might need to troubleshoot the tests, too.
+
+Let's see how to do this!
+
+## Overwriting the launch file config
+
+The *launch.json* file contains another configuration object named *Debug Tests*. If we want, we can run it as is and it'd run all the tests.
+
+In most cases, we don't want to run all the tests each time. If tests from only one file fail, we want to run them separately. To do that, we can edit the first argument in the configuration object.
+
+By default the first argument is:
+
+```json
+ "dist/**/*.spec.js"
+```
+
+It means all tests from the files ending with `.spec.js` will run.
+
+## Cleaning up 
+
+## Basic actions in the debug mode
+
+To learn more about what you can do in the debug mode you can read the [Debugging in Visual Studio Code](https://code.visualstudio.com/docs/editor/debugging) article.
+
+In the linked article you'll learn how to:
+
+* Control the debug flow with [debug actions](https://code.visualstudio.com/docs/editor/debugging#_debug-actions)
+* Set [breakpoints](https://code.visualstudio.com/docs/editor/debugging#_breakpoints) or [logpoints](https://code.visualstudio.com/docs/editor/debugging#_logpoints)
+* [Inspect data](https://code.visualstudio.com/docs/editor/debugging#_data-inspection) during the execution
 
 ## Conclusion
