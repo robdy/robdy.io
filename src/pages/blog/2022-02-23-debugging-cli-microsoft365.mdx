@@ -78,7 +78,7 @@ How to confirm we entered the debug mode? We can notice a few differences:
 * The panel tab will switch to the *Debug Console*
 * The bottom bar will be orange
 
-The differences are outlined on the screenshot below:
+The differences are outlined in the screenshot below:
 
 ![Debug mode differences](../../img/20220311-152847-ebairro7ui.png)
 
@@ -102,9 +102,55 @@ By default the first argument is:
  "dist/**/*.spec.js"
 ```
 
-It means all tests from the files ending with `.spec.js` will run.
+It means all tests from the files ending with `.spec.js` will run. But we don't want to run all the tests. We only want to run tests from the specific file we edited.
 
-## Cleaning up 
+In our example, we edited tests in *src/m365/aad/commands/app/app-add.spec.ts*. We need to locate the respective JavaScript file in the *dist* folder. We need to change two things:
+
+```powershell
+ src/m365/aad/commands/app/app-add.spec.ts
+dist/m365/aad/commands/app/app-add.spec.js
+^                                       ^
+folder name                     extension
+```
+
+If we locate the compiled file in the folder tree, we can right-click it (1) and copy its relative path (2). The path needs to replace the first element in the *args* array (3):
+
+![Replacing argument with file path](../../img/20220330-100823-skg4zouvkm.png)
+
+<Note>
+
+There's a bug in the launch file now. It causes all the tests to run regardless of the arguments. To resolve it, we need to add one additional parameter to the *args* array: `--no-config`.
+
+In our example, the array will look as below:
+
+```json
+"args": [
+  "dist/**/*.spec.js",
+  "--timeout",
+  "10000",
+  "--no-config"
+],
+```
+
+The issue is reported as [\#3180 in the CLI-Microsoft365 repo](https://github.com/pnp/cli-microsoft365/issues/3180).
+
+</Note>
+
+### Running the debug mode
+
+After we save the *launch.json* file we can now run *Debug Tests* configuration. We need to go to *Run and Debug* tab (1) choose the configuration from the dropdown (2) and then hit the play button (3): 
+
+![Running Debug Tests configuration](../../img/20220330-101433-keqcuyasqx.png)
+
+The debug console will now indicate that only tests from a single file run. We can see it from the number of tests and the execution time:
+
+![Number of tests and execution time for a single file](../../img/20220330-101836-8yzo0cmsw7.png)
+
+If all tests run, the number will be bigger than 9.000 and the execution time will usually be more than 10 seconds:
+
+![Number of tests and execution time for all tests](../../img/20220330-102905-wvbkj9ddmx.png)
+
+## Cleaning up
 
 ## Basic actions in the debug mode
 
