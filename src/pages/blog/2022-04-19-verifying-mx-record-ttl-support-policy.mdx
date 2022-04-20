@@ -1,11 +1,121 @@
 ---
 templateKey: blog-post
-title: Verifying MX Record TTL Support Policy
+title: Verifying MX Record TTL for the list of domains
 date: 2022-04-19T17:09:49.303Z
-description: How to check TTL of MX records
+description: How to check TTL of MX records using PowerShell
 featuredpost: false
 tags:
   - powershell
   - exchange online
+  - snippet
 ---
-Microsoft has posted a message in regard to [MX Record TTL Support Policy](https://m365admin.handsontek.net/mx-record-ttl-support-policy/). Its ID on Message Center is MC346908. It says that recommended TTL value
+In this article, we'll learn how to check the TTL of the MX records using PowerShell. As an exercise, we'll write a script. The role of the script will be to check TTL for all accepted domains in our Exchange Online organization.
+
+## Background
+
+Microsoft has posted a message in regard to [MX Record TTL Support Policy](https://m365admin.handsontek.net/mx-record-ttl-support-policy/). Its ID on Message Center is [MC346908](https://admin.microsoft.com/AdminPortal/home#/MessageCenter/:/messages/MC346908). It says that recommended TTL value should be 21,600 seconds (6 hours) or less. It also specifies that recommended TTL value is 3,600 seconds (1 hour).
+
+We'll check whether our domains' records are in line with the recommendations.
+
+## Prerequisites
+
+The script uses [a connection to Exchange Online](https://docs.microsoft.com/en-us/powershell/exchange/connect-to-exchange-online-powershell?view=exchange-ps) using PowerShell. There's, however, an alternative way to define the list of domains. It is described below.
+
+## Getting the domains
+
+We first need to get the list of all the domains we're going to check. We want to check the [accepted domains](https://docs.microsoft.com/en-us/exchange/mail-flow-best-practices/manage-accepted-domains/manage-accepted-domains) in our Exchange Online organization:
+
+```powershell
+$acceptedDomains = Get-AcceptedDomain | Select-Object -ExpandProperty DomainName
+```
+
+What if we want to specify the list ourselves? We can define the array of domains inline. As long as the variable is an array of strings, it should be fine:
+
+```powershell
+# We can define an array
+$acceptedDomains = @(
+'contoso.com',
+'fabrikam.com'
+)
+
+# Or we can convert 
+# a multi-line string to array
+$acceptedDomains = @"
+contoso.com
+fabrikam.com
+"@ -split "`n"
+```
+
+## Getting DNS records
+
+We're going to
+
+```powershell
+$checkResults = foreach ($acceptedDomain in $acceptedDomains) {
+	<#
+	$acceptedDomain = $acceptedDomains[0]
+	#>
+	# Prepare the object to store data
+	$resObject = [PSCustomObject]@{
+		'DomainName'      = $acceptedDomain
+		'Result'          = 'TBD'
+		'HasValidTTL'     = $false
+		'HasSuggestedTTL' = $false
+	}
+
+	try {
+		# Get the record and stop in case any errors
+		$resolveDnsNameParams = @{
+			Name        = $acceptedDomain
+			Type        = 'MX'
+			Server      = '8.8.8.8'
+			ErrorAction = 'Stop'
+		}
+		# We're only interested in records pointing to
+		# Exchange Online Protection
+		$mxRecord = @(Resolve-DnsName @resolveDnsNameParams) |
+			Where-Object {$_.NameExchange -like '*.mail.protection.outlook.com'}
+		
+		if (-not $mxRecord) {
+			# No matching records, throw error
+			throw 'NoExO'
+		}
+		# Note the success
+		$resObject.Result = 'Success'
+
+		# Check if TTL is valid
+		if ($mxRecord.TTL -gt 0 -and $mxRecord.TTL -lt 21600) {
+			$resObject.HasValidTTL = $true
+		}
+
+		# Check if TTL value is 3600
+		if ($mxRecord.TTL -eq 3600) {
+			$resObject.HasSuggestedTTL = $true
+		}
+	} catch {
+		$e = $_
+		if ($e.Exception.Message -eq 'NoExO') {
+			$resObject.Result = 'NoExO'
+		} else {
+			# Note the failure
+			$resObject.Result = 'Failed'
+		}
+	} finally {
+		# Return the object
+		$resObject
+	}
+
+}
+```
+
+## Adding checks
+
+## Wrapping in a loop
+
+## Displaying the results
+
+## Entire script
+
+## Limitations
+
+## Conclusion
