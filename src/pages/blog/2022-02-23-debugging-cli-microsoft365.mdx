@@ -96,9 +96,21 @@ Below we're exploring all these options.
 
 ### Adding .only to the test suite
 
+The first option is to add `.only` to the test suite. We need to open a test file something.spec.ts. Inside, we replace `describe` with `describe.only:`
 
+![Replacing describe with describe.only](../../img/20220425-160042-7kal6y0w7f.png)
+
+If we want to run only one test, we can add `.only` after the `it` statement:
+
+![Replacing it with it.only](../../img/20220425-160343-l2xbyf14kj.png)
+
+In any case, we need to compile the code using `npm run build`. When the build task is finished, we can run the debug mode.
+
+Steps to run the debug mode are described under [Running the debug mode for tests](#running-the-debug-mode-for-tests). Before going there, let's explore other options for limiting the number of tests.
 
 ### Updating .mocharc.json
+
+
 
 ### Overwriting the launch file config
 
@@ -148,7 +160,7 @@ The issue is reported as [\#3180 in the CLI-Microsoft365 repo](https://github.co
 
 ### Debugging via Test Explorer
 
-### Running the debug mode
+### Running the debug mode for tests
 
 After we save the *launch.json* file we can now run *Debug Tests* configuration. We need to go to *Run and Debug* tab (1) choose the configuration from the dropdown (2) and then hit the play button (3): 
 
