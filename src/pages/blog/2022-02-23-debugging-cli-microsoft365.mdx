@@ -88,9 +88,19 @@ We now know how to debug command execution.
 
 But what about the tests? Tests are an important part of CLI for Microsoft 365. Current (and desired) test coverage is 100%. It means that for many of the changes we might need to troubleshoot the tests, too.
 
-Let's see how to do this!
+There are several options for running the tests. As described on [Adding a command](https://github.com/pnp/cli-microsoft365/wiki/Adding-a-command#implement-unit-tests) wiki page:
 
-## Overwriting the launch file config
+> To run just your tests, either add `.only` to your test suite (eg. `describe.only(commands.MY_COMMAND)`) or update the glob in the `.mocharc.json` file, `spec` property to match the path to your test files, like `dist/m365/aad/commands/approleassignment/**/*.spec.js`.
+
+Below we're exploring all these options.
+
+### Adding .only to the test suite
+
+
+
+### Updating .mocharc.json
+
+### Overwriting the launch file config
 
 The *launch.json* file contains another configuration object named *Debug Tests*. If we want, we can run it as is and it'd run all the tests.
 
@@ -135,6 +145,8 @@ In our example, the array will look as below:
 The issue is reported as [\#3180 in the CLI-Microsoft365 repo](https://github.com/pnp/cli-microsoft365/issues/3180).
 
 </Note>
+
+### Debugging via Test Explorer
 
 ### Running the debug mode
 
