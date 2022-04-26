@@ -110,13 +110,28 @@ Steps to run the debug mode are described under [Running the debug mode for test
 
 ### Updating .mocharc.json
 
+All the settings for Mocha (test framework used in the project) are stored in the `.mocharc.json` file. The file is in the root folder of the repository.
 
+The file contains the argument *spec*. It is responsible for specifying the files to be included in the test suite. If we want to run tests from only one file, we need to supply its path to the *spec* argument.
+
+We also need to remember that the path should lead to the compiled file. We'll simply change the *src* folder to the *dist* folder and the extension from *ts* to *js*.
+
+See the code block below for the example:
+
+```powershell
+ src/appInsights.spec.ts
+dist/appInsights.spec.js
+^                     ^
+folder name           extension
+```
 
 ### Overwriting the launch file config
 
-The *launch.json* file contains another configuration object named *Debug Tests*. If we want, we can run it as is and it'd run all the tests.
+The *launch.json* file we edited for CLI debugging contains another configuration object named *Debug Tests*.
 
-In most cases, we don't want to run all the tests each time. If tests from only one file fail, we want to run them separately. To do that, we can edit the first argument in the configuration object.
+TO BE CONTINUED
+
+
 
 By default the first argument is:
 
@@ -137,26 +152,7 @@ folder name                     extension
 
 If we locate the compiled file in the folder tree, we can right-click it (1) and copy its relative path (2). The path needs to replace the first element in the *args* array (3):
 
-![Replacing argument with file path](../../img/20220330-100823-skg4zouvkm.png)
 
-<Note>
-
-There's a bug in the launch file now. It causes all the tests to run regardless of the arguments. To resolve it, we need to add one additional parameter to the *args* array: `--no-config`.
-
-In our example, the array will look as below:
-
-```json
-"args": [
-  "dist/**/*.spec.js",
-  "--timeout",
-  "10000",
-  "--no-config"
-],
-```
-
-The issue is reported as [\#3180 in the CLI-Microsoft365 repo](https://github.com/pnp/cli-microsoft365/issues/3180).
-
-</Note>
 
 ### Debugging via Test Explorer
 
