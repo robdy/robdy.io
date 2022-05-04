@@ -127,11 +127,15 @@ folder name           extension
 
 ### Overwriting the launch file config
 
-The *launch.json* file we edited for CLI debugging contains another configuration object named *Debug Tests*.
+The *launch.json* file we edited for CLI debugging contains another configuration object named *Debug Tests*. The object has no arguments (property `args`). It uses the default configuration, pulled from *.mocharc.json* file.
+
+However, we can add the arguments ourselves. We also need to tell Mocha to ignore the config file.
+
+The example *args* array we can set would be:
+
+
 
 TO BE CONTINUED
-
-
 
 By default the first argument is:
 
@@ -151,8 +155,6 @@ folder name                     extension
 ```
 
 If we locate the compiled file in the folder tree, we can right-click it (1) and copy its relative path (2). The path needs to replace the first element in the *args* array (3):
-
-
 
 ### Debugging via Test Explorer
 
