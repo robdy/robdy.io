@@ -133,28 +133,18 @@ However, we can add the arguments ourselves. We also need to tell Mocha to ignor
 
 The example *args* array we can set would be:
 
-
-
-TO BE CONTINUED
-
-By default the first argument is:
-
 ```json
- "dist/**/*.spec.js"
+"args": [
+  "dist/appInsights.spec.js",
+  "--timeout",
+  "10000",
+  "--no-config"
+],
 ```
 
-It means all tests from the files ending with `.spec.js` will run. But we don't want to run all the tests. We only want to run tests from the specific file we edited.
+The first argument in the array specifies the file (or files if we use wildcard) to be given to Mocha. The next two overrides the default timeout value. They might be treated as optional. When we run single set of tests, we usually won't exceed the default timeout (which is 2000ms).
 
-In our example, we edited tests in *src/m365/aad/commands/app/app-add.spec.ts*. We need to locate the respective JavaScript file in the *dist* folder. We need to change two things:
-
-```powershell
- src/m365/aad/commands/app/app-add.spec.ts
-dist/m365/aad/commands/app/app-add.spec.js
-^                                       ^
-folder name                     extension
-```
-
-If we locate the compiled file in the folder tree, we can right-click it (1) and copy its relative path (2). The path needs to replace the first element in the *args* array (3):
+The last argument tells Mocha to ignore its config file.
 
 ### Debugging via Test Explorer
 
