@@ -191,9 +191,15 @@ To clean our codebase, we need to revert changes made to the files. The easiest 
 
 We can also do that from the console. The command to use is `git checkout` with the file path:
 
+```shell
+git checkout .vscode/launch.json
+```
 
+After reverting all the files we edited to set our debugging environment up, we should be ready to commit our changes.
 
 ## Basic actions in the debug mode
+
+Ok, we know how to set the environment, but what we can actually do in the debug mode? This article doesn't intend to cover such a big topic. Below you'll find some helpful resources to get started.
 
 To learn more about what you can do in the debug mode you can read the [Debugging in Visual Studio Code](https://code.visualstudio.com/docs/editor/debugging) article.
 
@@ -204,3 +210,9 @@ In the linked article you'll learn how to:
 * [Inspect data](https://code.visualstudio.com/docs/editor/debugging#_data-inspection) during the execution
 
 ## Conclusion
+
+There's more than one way to set our debugging environment for CLI for Microsoft 365. This article covered multiple approaches to do so.
+
+Once we have our environment ready, we can start debugging. I bet it's going to be even more interesting!
+
+Happy debugging!
