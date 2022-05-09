@@ -136,23 +136,26 @@ The example *args* array we can set would be:
 ```json
 "args": [
   "dist/appInsights.spec.js",
-  "--timeout",
+  "--no-config"
+],
+```
+
+The first argument in the array specifies the file (or files if we use wildcard) to be given to Mocha. The last argument tells Mocha to ignore its config file.
+
+As we only run a couple of tests, we don't need to change the default timeout value (which is 2000 ms). If we want to increase the timeout, our *args* array would look as below:
+
+```json
+"args": [
+  "dist/appInsights.spec.js",
+  "timeout",
   "10000",
   "--no-config"
 ],
 ```
 
-The first argument in the array specifies the file (or files if we use wildcard) to be given to Mocha. The next two overrides the default timeout value. They might be treated as optional. When we run a single set of tests, we usually won't exceed the default timeout (which is 2000ms).
-
-The last argument tells Mocha to ignore its config file.
-
-### Debugging via Test Explorer
-
-![Test Explorer action buttons](../../img/20220504-213953-zf0rgwgjyc.png)
-
 ### Running the debug mode for tests
 
-After we save the *launch.json* file we can now run *Debug Tests* configuration. We need to go to *Run and Debug* tab (1) choose the configuration from the dropdown (2) and then hit the play button (3): 
+After we set we can now run *Debug Tests* configuration. We need to go to *Run and Debug* tab (1) choose the configuration from the dropdown (2) and then hit the play button (3): 
 
 ![Running Debug Tests configuration](../../img/20220330-101433-keqcuyasqx.png)
 
@@ -164,7 +167,31 @@ If all tests run, the number will be bigger than 9.000 and the execution time wi
 
 ![Number of tests and execution time for all tests](../../img/20220330-102905-wvbkj9ddmx.png)
 
+## Debugging tests via Test Explorer
+
+[Test Explorer](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-test-explorer) is an addon to Visual Studio Code, which provides an interface to run tests from the sidebar. The addon [has been recently added](https://github.com/pnp/cli-microsoft365/pull/3024) to the default devcontainer file.
+
+As with all the methods described above, the prerequisite is to build the project.
+
+Once the project is built, we can click the Test Explorer UI icon in the sidebar (1). Our sidebar will show a list of all the files containing tests. Using the toggle left to the file title, we can expand the list of tests in that file.
+
+By moving our mouse over the test or file title, we will see three buttons. Clicking the bug button (2) runs the test (or tests) in the debug mode. Play button icon (3) runs the test. File icon (4) opens the test's source file. 
+
+![Test Explorer action buttons](../../img/20220504-213953-zf0rgwgjyc.png)
+
 ## Cleaning up
+
+Ok, we configured our environment for testing. Now we only need to talk about cleaning it up.
+
+The reason for the cleanup is to make sure that we don't push our changes to the repository. We don't want the next person to run exactly the same tests as we did.
+
+To clean our codebase, we need to revert changes made to the files. The easiest way to do that is to go to the *Source Control* tab and find the affected file(s). Then we right-click on them and choose *Discard changes*:
+
+![Discarding changes made to launch.json file](../../img/20220509-173714-04hsicopmt.png)
+
+We can also do that from the console. The command to use is `git checkout` with the file path:
+
+
 
 ## Basic actions in the debug mode
 
