@@ -30,13 +30,13 @@ npm run build
 
 ## Debugging CLI
 
-For CLI debugging we'll need to define the arguments. The debugger will run that *m365* command in debug mode.
+For the CLI debugging we'll need to define the arguments. The debugger will run that *m365* command in debug mode. In simple words, we'll be able to dig into what happens when we run a command such as `m365 login` or `m365 aad policy list`.
 
-We can then set our breakpoints to pause the execution. Once paused, we'll be able to inspect the current context. We could also run the program step by step.
+What can we do in debug mode? If you scroll down to [Basic actions in the debug mode](#basic-actions-in-the-debug-mode), you'll find some useful resources. For now, let's focus on setting up the environment for debugging.
 
 ### Opening launch file
 
-To configure the arguments passed in debug mode, we'll edit *.vscode/launch.json*. We can open it directly from the file explorer:
+To configure the command we'd like to debug, we'll edit *.vscode/launch.json*. We can open it directly from the file explorer:
 
 ![Opening launch.json from file explorer](../../img/20220305-134709-l2ieqme1dp.png)
 
@@ -92,7 +92,7 @@ There are several options for running the tests. As described on [Adding a comma
 
 > To run just your tests, either add `.only` to your test suite (eg. `describe.only(commands.MY_COMMAND)`) or update the glob in the `.mocharc.json` file, `spec` property to match the path to your test files, like `dist/m365/aad/commands/approleassignment/**/*.spec.js`.
 
-Below we're exploring all these options.
+Below we're exploring all these options. We're also talking about the options, which are not listed.
 
 ### Adding .only to the test suite
 
