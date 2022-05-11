@@ -10,6 +10,7 @@ tags:
   - javascript
   - typescript
 ---
+<!-- omit in toc -->
 ## Prerequisites
 
 To go through the article we need to have our development environment. There are two main ways to create the environment: locally and using Remote Development Containers.
@@ -17,6 +18,23 @@ To go through the article we need to have our development environment. There are
 If you want to use your local environment, follow the article [Minimal Path to Awesome](https://github.com/pnp/cli-microsoft365/wiki/Minimal-Path-to-Awesome). For Remote Development Containers, follow [GitHub Codespaces & Visual Studio Remote Development Container](https://github.com/pnp/cli-microsoft365/wiki/GitHub-Codespaces-&-Visual-Studio-Remote-Development-Container).
 
 In this article, we'll be using the environment based on GitHub Codespaces.
+
+<!-- omit in toc -->
+## Table of Contents
+- [Building the project](#building-the-project)
+- [Debugging CLI](#debugging-cli)
+  - [Opening launch file](#opening-launch-file)
+  - [Setting the arguments](#setting-the-arguments)
+  - [Running the debug mode](#running-the-debug-mode)
+- [Debugging tests](#debugging-tests)
+  - [Adding .only to the test suite](#adding-only-to-the-test-suite)
+  - [Updating .mocharc.json](#updating-mocharcjson)
+  - [Overwriting the launch file config](#overwriting-the-launch-file-config)
+  - [Running the debug mode for tests](#running-the-debug-mode-for-tests)
+- [Debugging tests via Test Explorer](#debugging-tests-via-test-explorer)
+- [Cleaning up](#cleaning-up)
+- [Basic actions in the debug mode](#basic-actions-in-the-debug-mode)
+- [Conclusion](#conclusion)
 
 ## Building the project
 
