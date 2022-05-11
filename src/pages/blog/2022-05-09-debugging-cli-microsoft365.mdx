@@ -125,6 +125,10 @@ dist/appInsights.spec.js
 folder name           extension
 ```
 
+The updated file will look like the one below:
+
+![.mocharc.json file with updated spec property](../../img/20220511-140557-l3fjjsmmy7.png)
+
 ### Overwriting the launch file config
 
 The *launch.json* file we edited for CLI debugging contains another configuration object named *Debug Tests*. The object has no arguments (property `args`). It uses the default configuration, pulled from *.mocharc.json* file.
@@ -173,7 +177,7 @@ If all tests run, the number will be bigger than 9.000 and the execution time wi
 
 As with all the methods described above, the prerequisite is to build the project.
 
-Once the project is built, we can click the Test Explorer UI icon in the sidebar (1). Our sidebar will show a list of all the files containing tests. Using the toggle left to the file title, we can expand the list of tests in that file.
+Once the project is built, we can click the Test Explorer UI icon in the sidebar (1 on the image below). Our sidebar will show a list of all the files containing tests. Using the toggle left to the file title, we can expand the list of tests in that file.
 
 By moving our mouse over the test or file title, we will see three buttons. Clicking the bug button (2) runs the test (or tests) in the debug mode. Play button icon (3) runs the test. File icon (4) opens the test's source file. 
 
