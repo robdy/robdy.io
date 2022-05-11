@@ -706,6 +706,47 @@ pre[class*='language-'] {
   width: 3em !important;
 }
 
+/* Margin moved to codeheader-section */
+/* Radius moved to codeheader */
+pre[class*='language-'] {
+  margin-top: 0;
+  border-radius: 0;
+}
+
+.codeheader-section {
+  margin-top: 0.5em;
+  color: #ccc;
+}
+
+.codeheader {
+  /* Doesn't work as right radius is behind the copy button */
+  /* border-radius: 0.25em 0.25em 0 0; */
+  background-color: hsl(0, 0%, 28%);
+  padding-left: 2em;
+  font-size: 0.9em;
+}
+
+.codeheader-language {
+  padding: 0.5em 0;
+  flex-grow: 1;
+  text-transform: uppercase;
+}
+
+.codeheader-button {
+  padding: 0.5em 1em;
+  color: inherit;
+  background-color: hsl(0, 0%, 28%);
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.codeheader-button:hover {
+  background-color: hsl(0, 0%, 23%);
+}
+
 /*#endregion PrismJS customization */
 
 /*#region Comments */
