@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
 import Footer from '../components/Footer'
 import './layout.css'
@@ -11,6 +11,7 @@ import CodeBlock from './CodeBlock'
 
 const TemplateWrapper = ({ children }) => {
   const { title, description, siteUrl } = useSiteMetadata()
+  const [codeShouldWrap, setCodeShouldWrap] = useState(false);
   return (
     <div>
       <Helmet>
@@ -150,7 +151,9 @@ const TemplateWrapper = ({ children }) => {
           Warning: WarningBlock,
           Tip: TipBlock,
           a: LinkToAnywhere,
-          pre: CodeBlock
+          pre: ({ children, ...props }) => (
+            <CodeBlock shouldWrap={codeShouldWrap} shouldWrapCallback={setCodeShouldWrap} {...props}>{children}</CodeBlock>
+          )
         }}
       >
         {children}
