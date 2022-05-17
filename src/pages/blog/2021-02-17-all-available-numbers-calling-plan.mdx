@@ -34,7 +34,7 @@ $csPhoneNumberAssignmentParams = @{
   NumberType = 'CallingPlan'
   PstnAssignmentStatus = 'Unassigned'
 }
-Get-CsPhoneNumberAssignment @csPhoneNumberAssignmentParams
+$allNumbers = Get-CsPhoneNumberAssignment @csPhoneNumberAssignmentParams
 ```
 
 Parameters we use:
@@ -43,17 +43,40 @@ Parameters we use:
 * *NumberType* - we don't consider direct routing or operator connect in our example. If you're looking for non-Microsoft numbers, you'd have to update the value accordingly
 * *PstnAssignmentStatus* - we need to assign the number afterwards. If the number was already assigned, we'd not be interested in it
 
+## Supporting more than 500 numbers
+
+The example above will return only the first 500 numbers. If we have a larger tenancy, we'd need to consider the fact that we might have more numbers available.
+
+The new cmdlet doesn't have a *ResultSize* parameter we could use. We need to run the cmdlet in a loop using *Top* and *Skip* parameters. An example of how we can do that is shown below:
+
+```powershell
+$skip = 0
+$allNumbers = do {
+  $csPhoneNumberAssignmentParams = @{
+    CapabilitiesContain = 'UserAssignment'
+    NumberType = 'CallingPlan'
+    PstnAssignmentStatus = 'Unassigned'
+    Skip = $skip
+  }
+  $res = Get-CsPhoneNumberAssignment @csPhoneNumberAssignmentParams
+  $skip += 500
+  $res
+} while ($res)
+```
+
+## Processing data
+
 Now we have our numbers saved into a variable. We can process them, as we need. 
 
 Few examples:
 
 ```powershell
-# Group by city
-$allNumbers | Group-Object CityCode -NoElement
+# Count by country
+$allNumbers | Group-Object IsoCountryCode -NoElement
 
 # List all numbers
-$allNumbers.Id
+$allNumbers.TelephoneNumber
 
 # Copy all numbers to clipboard
-$allNumbers.Id | clip
+$allNumbers.TelephoneNumber | clip
 ```
