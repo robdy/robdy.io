@@ -2,44 +2,48 @@
 templateKey: blog-post
 title: Get all available user numbers in Calling Plans
 date: 2021-02-17T19:12:21.192Z
-description: You can check how many numbers you have in your Teams Calling Plans.
-  PowerShell cmdlet to use is Get-CsOnlineTelephoneNumber
+description: You can check how many numbers you have in your Teams Calling
+  Plans. PowerShell cmdlet to use is Get-CsPhoneNumberAssignment.
 featuredpost: false
 tags:
   - powershell
   - teams
   - calling plan
 ---
-> **NOTE**: The article below doesn't apply to numbers provided via Direct Routing
+## Description
 
-We'll use Teams PowerShell module. Since version 2.0 the cmdlet to use is:
+In the example below, we'll list all the user numbers. We're only interested in the ones, which are available to assign. Therefore, we'll filter out the numbers already assigned.
+
+The most frequent use-case for such listing will be to find out a number, which can be assigned to a new employee. 
+
+## Script
+
+We'll use the Teams PowerShell module. Since version 2.0 the cmdlet for connecting is:
 
 ```powershell
 Connect-MicrosoftTeams
 ```
 
-If you use earlier version you can still use the legacy way:
+The cmdlet we used in the previous version of this article was [`Get-CsOnlineTelephoneNumber`](https://docs.microsoft.com/en-us/powershell/module/skype/get-csonlinetelephonenumber?view=skype-ps). However, that one is currently decommissioned. Its replacement is [`Get-CsPhoneNumberAssignment`](https://docs.microsoft.com/en-us/powershell/module/teams/get-csphonenumberassignment?view=teams-ps).
 
-```
-$sfbSession = New-CsOnlineSession
-Import-PSSession $sfbSession
-```
-
-> **NOTE**: If you still use Skype for Business Online module, remember that it's being decomissioned. I have [an article showing how to migrate to new module](/skype-connector-decomission/).
-
-The cmdlet we'll be using is [`Get-CsOnlineTelephoneNumber`](https://docs.microsoft.com/en-us/powershell/module/skype/get-csonlinetelephonenumber?view=skype-ps):
+The set of parameters we need to use is:
 
 ```powershell
-$allNumbers = Get-CsOnlineTelephoneNumber -IsNotAssigned -ResultSize 2147483647 -InventoryType Subscriber
+$csPhoneNumberAssignmentParams = @{
+  CapabilitiesContain = 'UserAssignment'
+  NumberType = 'CallingPlan'
+  PstnAssignmentStatus = 'Unassigned'
+}
+Get-CsPhoneNumberAssignment @csPhoneNumberAssignmentParams
 ```
 
 Parameters we use:
 
-* `-IsNotAssigned` - self explanatory
-* `-ResultSize 2147483647` - there's no support for **Unlimited**, in contrary to other  Microsoft 365 cmdlets, so we specify maximum value (based on [the docs](https://docs.microsoft.com/en-us/powershell/module/skype/get-csonlinetelephonenumber?view=skype-ps#parameters))
-* `-InventoryType Subscriber` - based on the docs, it's used to display numbers, which can be assigned to users.
+* *CapabilitiesContain* - in our example we're only interested in user numbers
+* *NumberType* - we don't consider direct routing or operator connect in our example. If you're looking for non-Microsoft numbers, you'd have to update the value accordingly
+* *PstnAssignmentStatus* - we need to assign the number afterwards. If the number was already assigned, we'd not be interested in it
 
-Now we have our numbers saved into variable. We can process them, as we need. 
+Now we have our numbers saved into a variable. We can process them, as we need. 
 
 Few examples:
 
