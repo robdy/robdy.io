@@ -672,10 +672,11 @@ pre[class*='language-'].line-numbers > code {
 
 /*#region PrismJS customization */
 
-/* To be used for mobile (wrapped) view only */
-/* code[class*='language-'] {
+/* Wrap text */
+/* If line numbers are on, it's overwritten */
+code[class*='language-'] {
   white-space: pre-wrap;
-} */
+}
 
 code[class*='language-'],
 pre[class*='language-'] {

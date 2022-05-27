@@ -1,22 +1,39 @@
-import React from 'react'
+import React, { useRef } from "react";
 
 function CodeBlock(props) {
+	const codeBlockRef = useRef(null);
+	const isLineNumber = (el) => el.props.className === 'line-numbers-rows';
+		
+	const copyCode = () => {
+		console.log(codeBlockRef)
+		codeBlockRef.current.select();
+		// navigator.clipboard.writeText('a')
+	};
+
 	const languageString = props.className.replace(/(language-| line-numbers)/mg, '');
 	const shouldWrap = props.shouldWrap;
 	const shouldWrapCallback = props.shouldWrapCallback;
 	let modifiedProps = { ...props };
 
 	if (shouldWrap) {
-		let lineNumbers = modifiedProps.children.find((el) => el.props.className === 'line-numbers-rows');
-		const lineNumbersStyle = { display: 'none', ...lineNumbers.props.style};
-		const lineNumberComponent = {style: lineNumbersStyle, ...lineNumbers};
-		const a = [modifiedProps.children[0], lineNumberComponent]
-		modifiedProps = {children: a, ...modifiedProps};
-		console.log(modifiedProps);
+		// Hides span.line-numbers-rows
+		const lineNumbers = modifiedProps.children.find(isLineNumber);
+		let { props: lineNumbersProps } = lineNumbers;
+		let { style: lineNumbersStyle } = lineNumbersProps;
+		lineNumbersStyle = { display: 'none', ...lineNumbersStyle };
+		lineNumbersProps = { ...lineNumbersProps, style: lineNumbersStyle };
+		const modifiedChildren = modifiedProps.children.map((child) =>
+			isLineNumber(child)
+				? { ...lineNumbers, props: lineNumbersProps }
+				: child
+		)
+		modifiedProps.children = modifiedChildren;
 
+		// Removes left padding on the code
 		modifiedProps.className = modifiedProps.className.replace(/ line-numbers/, '');
-
 	}
+
+
 	return (
 		<React.Fragment>
 			<section className='codeheader-section'>
@@ -24,20 +41,10 @@ function CodeBlock(props) {
 					<span className='codeheader-language'>{languageString}</span>
 					<button className='codeheader-button' onClick={() => {
 						shouldWrapCallback(!shouldWrap)
-						// const preBlocks = Array.from(document.querySelectorAll("pre[class*='language-']"));
-						// if (preBlocks[0].classList.contains('line-numbers')) {
-						// 	preBlocks.forEach((el) => el.classList.remove('line-numbers'));
-						// 	document.querySelectorAll('span.line-numbers-rows').forEach((el) => {
-						// 		el.style
-						// 	})
-						// } else {
-						// 	preBlocks.forEach((el) => el.classList.add('line-numbers'));
-						// }
-					}}>Wrap</button>
+					}}>Wrap: {shouldWrap ? 'ON' : 'OFF'}</button>
+					<button className='codeheader-button' onClick={copyCode}>Copy</button>
 				</div>
-				<pre {...modifiedProps}>
-					{props.children}
-				</pre>
+				<pre {...modifiedProps} ref={codeBlockRef}	/>
 			</section>
 		</React.Fragment>
 	)
