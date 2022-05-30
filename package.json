@@ -1,7 +1,7 @@
 {
   "name": "robdy-io",
   "description": "Robert Dyjas - blog",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "author": "Robert Dyjas",
   "dependencies": {
     "@mdx-js/mdx": "^1.6.22",

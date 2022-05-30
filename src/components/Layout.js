@@ -13,9 +13,14 @@ const TemplateWrapper = ({ children }) => {
   const { title, description, siteUrl } = useSiteMetadata()
 
   // Set wrapping
-  const wrappingPreference = localStorage.getItem('codeShouldWrap');
-
   const checkWrapPref = () => {
+    // If building server-side
+    if (typeof window === 'undefined') return false;
+
+    // If not server-side, check local storage first
+    const wrappingPreference = window.localStorage.getItem('codeShouldWrap');
+
+    // If no preference set
     if (wrappingPreference === null) {
       // Determine whether code should wrap
       // https://stackoverflow.com/a/63440872/9902555
@@ -24,6 +29,10 @@ const TemplateWrapper = ({ children }) => {
       if (isMobile) return true;
       return false;
     }
+
+    // If preference set, return it
+    // Not returning directly as it's a string
+    // Defaults to false
     return wrappingPreference.toLowerCase() === 'true';
   }
 
