@@ -735,6 +735,7 @@ pre[class*='language-'] {
 
 .codeheader-button {
   padding: 0.5em 1em;
+  width: 7em;
   color: inherit;
   background-color: hsl(0, 0%, 28%);
   cursor: pointer;
@@ -742,9 +743,15 @@ pre[class*='language-'] {
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
+  transition: background-color 0.5s;
 }
 
-.codeheader-button:hover {
+.codeheader-button-clicked {
+  background-color: hsl(120, 100%, 23%);
+  transition: background-color 0.5s;
+}
+
+.codeheader-button:hover:not(.codeheader-button-clicked) {
   background-color: hsl(0, 0%, 23%);
 }
 

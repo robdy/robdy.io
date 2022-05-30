@@ -11,7 +11,24 @@ import CodeBlock from './CodeBlock'
 
 const TemplateWrapper = ({ children }) => {
   const { title, description, siteUrl } = useSiteMetadata()
-  const [codeShouldWrap, setCodeShouldWrap] = useState(false);
+
+  // Set wrapping
+  const wrappingPreference = localStorage.getItem('codeShouldWrap');
+
+  const checkWrapPref = () => {
+    if (wrappingPreference === null) {
+      // Determine whether code should wrap
+      // https://stackoverflow.com/a/63440872/9902555
+      const width = window.innerWidth;
+      const isMobile = width <= 768;
+      if (isMobile) return true;
+      return false;
+    }
+    return wrappingPreference.toLowerCase() === 'true';
+  }
+
+  const [codeShouldWrap, setCodeShouldWrap] = useState(checkWrapPref);
+
   return (
     <div>
       <Helmet>
