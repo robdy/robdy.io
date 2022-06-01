@@ -19,7 +19,6 @@ export const LinkToAnywhere = (props) => {
     )
   }
 
-  console.log()
   // Paragraph links
   if (props.href.startsWith('#') && props.children?.props?.mdxType === 'svg') {
     return (

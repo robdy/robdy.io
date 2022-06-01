@@ -6,7 +6,6 @@ import home from '../img/home-solid.svg'
 
 const Navbar = () => {
   const currentUrl = typeof window !== 'undefined' ? window.location.href : ''
-  console.log(currentUrl)
   return (
     <div className="container post-nav flex">
       <ul className="flex navbar-links">
