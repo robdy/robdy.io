@@ -755,6 +755,18 @@ pre[class*='language-'] {
   background-color: hsl(0, 0%, 23%);
 }
 
+/* Copied from gatsby-remark-prismjs */
+span.line-numbers-rows {
+  white-space: 'normal';
+  width: 'auto';
+  left: 0
+}
+
+/* Hides horizontal scroll appearing in rare cases */
+pre[class*='language-']:not(.line-numbers){
+  overflow-x: hidden;
+}
+
 /*#endregion PrismJS customization */
 
 /*#region Comments */

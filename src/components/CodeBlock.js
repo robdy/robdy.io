@@ -1,13 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 
 function CodeBlock(props) {
+	// Code copy
 	const codeBlockRef = useRef(null);
 	const [codeCopied, setCodeCopied] = useState(false);
-	const isLineNumber = (el) => el.props.className === 'line-numbers-rows';
-
 
 	useEffect(() => {
-		// TODO Clean the code, add animation
 		const timeoutId = setTimeout(() => {
 			if (codeCopied) { setCodeCopied(false) }
 		}, 2000);
@@ -23,26 +21,20 @@ function CodeBlock(props) {
 		return;
 	};
 
+	// End of Code copy
+
+	// Language string to be use in the header
 	const languageString = props.className.replace(/(language-| line-numbers)/mg, '');
+	const codeProps = props.children.props;
+
+	// Code wrapping
 	let { shouldWrap, shouldWrapCallback, ...modifiedProps } = props;
-
-	if (shouldWrap) {
-		// Hides span.line-numbers-rows
-		const lineNumbers = modifiedProps.children.find(isLineNumber);
-		let { props: lineNumbersProps } = lineNumbers;
-		let { style: lineNumbersStyle } = lineNumbersProps;
-		lineNumbersStyle = { display: 'none', ...lineNumbersStyle };
-		lineNumbersProps = { ...lineNumbersProps, style: lineNumbersStyle };
-		const modifiedChildren = modifiedProps.children.map((child) =>
-			isLineNumber(child)
-				? { ...lineNumbers, props: lineNumbersProps }
-				: child
-		)
-		modifiedProps.children = modifiedChildren;
-
-		// Removes left padding on the code
-		modifiedProps.className = modifiedProps.className.replace(/ line-numbers/, '');
-	}
+	// To force pre rerender
+	const [refresh, setRefresh] = useState(false);
+	useEffect(()=> {
+		setRefresh(!refresh);
+	}, [shouldWrap])
+	// End of Code wrapping
 
 	return (
 		<React.Fragment>
@@ -57,12 +49,46 @@ function CodeBlock(props) {
 						codeCopied ? 'Copied' : 'Copy'
 					}</button>
 				</div>
-				<pre {...modifiedProps} ref={codeBlockRef} />
 			</section>
+			{/* https://stackoverflow.com/a/48434525/9902555 
+			https://www.freecodecamp.org/news/force-refreshing-a-react-child-component-the-easy-way-6cdbb9e6d99c/ */}
+			<pre className={`${props.className}${shouldWrap ? '' : ' line-numbers'}`} ref={codeBlockRef} key={refresh}>
+				<code {...props.children.props}></code>
+				{shouldWrap ? null : <LineNumbers codeProps={codeProps} />}
+			</pre>
 		</React.Fragment>
 	)
 }
 
+const LineNumbers = (props) => {
+	// From gatsby-remark-prismjs
+	// https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-remark-prismjs/src/add-line-numbers.js
+
+	const countLines = (lineObject) => (String(lineObject).match(/\n/g) || []).length;
+
+	const numberOfLines = (codeElements) => {
+		let lines = 1
+		for (let i = 0; i < codeElements.children.length; i++) {
+			typeof codeElements.children[i] === 'string'
+				? lines += countLines(codeElements.children[i])
+				: lines += countLines(codeElements.children[i].props.children);
+		}
+		return lines;
+	}
+
+	// Generate as many `<span></span>` as there are code lines
+	const generateSpans = (numberOfLines) => {
+		let spans = [];
+		for (let i = 0; i < numberOfLines; i++) {
+			spans.push(<span></span>)
+		}
+		return spans
+	}
+
+	return (
+		<span aria-hidden="true" className="line-numbers-rows" style={{ 'white-space': 'normal', width: 'auto', left: 0 }}>
+			{generateSpans(numberOfLines(props.codeProps))}
+		</span>)
+}
+
 export default CodeBlock
-
-
