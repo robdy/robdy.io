@@ -65,9 +65,6 @@ const AboutPage = () => (
           </ExternalLink>
           )
         </li>
-        <li>
-          Text wrap icon made from <ExternalLink href="http://www.onlinewebfonts.com/icon">Icon Fonts</ExternalLink> is licensed by CC BY 3.0
-        </li>
       </ul>
     </div>
   </Layout>
