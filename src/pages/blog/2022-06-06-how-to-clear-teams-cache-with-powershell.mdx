@@ -1,0 +1,64 @@
+---
+templateKey: blog-post
+title: How to clear Teams cache with PowerShell
+date: 2022-06-6T13:14:33.065Z
+description: |
+  How to clear Teams cache using PowerShell.
+  Be careful about removing your custom backgrounds! 
+featuredpost: false
+tags:
+  - teams
+  - powershell
+  - snippet
+---
+Clearing Teams cache is one of the first steps in troubleshooting client-side issues with Microsoft Teams. Very often it's the only step.
+
+In this article I'm presenting a code snippet to automate this process. The code might then be used as a self-service activity. What do you think - how many tickets would be immediately solved if your users had such a tool?
+
+## The manual way and its issue
+
+Microsoft provides a dedicated article on how to [Clear Teams cache](https://docs.microsoft.com/en-us/microsoftteams/troubleshoot/teams-administration/clear-teams-cache).
+
+The solution presented in the article is absolutely correct. It clears all of the temporary files and forces Teams to recreate them.
+
+For me this solutions come with the issues:
+
+- Most important to me, user-uploaded background images are lost
+- It's not easy to memorize which path to empty. Every time you need to reset your Teams, you need to search it using you favorite search engine
+
+The solution for above is to have a script doing it instead.
+
+There's one more thing to be aware of. Some of our client-side settings will still be lost. Example of these setting is the preview mode - we need to opt-in for it manually. So far I haven't found a way to cover these settings in the script.
+
+## The script
+
+The lines below will remove all the temporary files from the _%appdata%\Microsoft\Teams_. It will, however, leave the _Backgrounds_ folder intact.
+
+The script also stops the Teams process on the machine. Once the cleanup is done, it starts it once again.
+
+```powershell
+$proc = Get-Process 'Teams' -ErrorAction SilentlyContinue
+$cacheFolderPath = "$($env:APPDATA)\Microsoft\Teams"
+$proc | Stop-Process
+$cacheItems = Get-ChildItem $cacheFolderPath -Exclude 'Backgrounds'
+$cacheItems | Remove-Item -Recurse -Force
+$startProcessArgs = @{
+  FilePath = "$($env:LOCALAPPDATA)\Microsoft\Teams\Update.exe"
+  ArgumentList = '--processStart "Teams.exe"'
+}
+Start-Process  @startProcessArgs
+```
+
+## Distributing the script
+
+Now when we have our script, what's next. If we want people to use it without calling support, we can package the script and push it to the machines.
+
+For packaging the script, feel free to check ATA and Friends' guide [The De Facto Guide for Converting a PS1 to EXE (7 Ways)](https://adamtheautomator.com/ps1-to-exe/). There are other ways but covering them would be an extensive topic.
+
+## Summary
+
+In this article we created a script to clear Microsoft Teams cache.
+
+Do you find it useful? Would you like to read more about distributing the script to the machines? Or perhaps the article is missing something?
+
+Let me know in the comments!
