@@ -1,5 +1,4 @@
 import React from 'react'
-import { navigate } from 'gatsby-link'
 import { Link } from 'gatsby'
 import thList from '../img/th-list-solid.svg'
 import home from '../img/home-solid.svg'
