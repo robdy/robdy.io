@@ -4,7 +4,7 @@ import { kebabCase } from 'lodash'
 import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
-import Content, { HTMLContent } from '../components/Content'
+import { HTMLContent } from '../components/Content'
 import Comments from '../components/Comments'
 import useSiteMetadata from '../components/SiteMetadata'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
@@ -21,7 +21,6 @@ const BlogPostTemplate = ({
   helmet,
   relativePath,
 }) => {
-  const PostContent = contentComponent || Content
   const formattedDate = date.toLocaleDateString('en-us', {
     month: 'short',
     day: '2-digit',
