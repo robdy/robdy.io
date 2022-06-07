@@ -28,12 +28,12 @@ function CodeBlock(props) {
 	const codeProps = props.children.props;
 
 	// Code wrapping
-	let { shouldWrap, shouldWrapCallback, ...modifiedProps } = props;
+	let { shouldWrap, shouldWrapCallback } = props;
 	// To force pre rerender
 	const [refresh, setRefresh] = useState(false);
 	useEffect(()=> {
 		setRefresh(!refresh);
-	}, [shouldWrap])
+	}, [shouldWrap, refresh])
 	// End of Code wrapping
 
 	return (
