@@ -40,7 +40,7 @@ export default class PostTile extends React.Component {
                 <div>
                   <ul className="taglist">
                     {postData.frontmatter.tags.map((tag) => (
-                      <Link to={`/tags/${kebabCase(tag)}/`}>
+                      <Link to={`/tags/${kebabCase(tag)}/`} key={tag + `tagLink`}>
                         <li key={tag + `tag`}>{tag}</li>
                       </Link>
                     ))}

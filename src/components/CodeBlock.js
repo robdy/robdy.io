@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-function CodeBlock(props) {
+function CodeBlock({ className, children, shouldWrap, shouldWrapCallback}) {
 	// Code copy
 	const codeBlockRef = useRef(null);
 	const [codeCopied, setCodeCopied] = useState(false);
@@ -24,16 +24,15 @@ function CodeBlock(props) {
 	// End of Code copy
 
 	// Language string to be use in the header
-	const languageString = props.className.replace(/(language-| line-numbers)/mg, '');
-	const codeProps = props.children.props;
+	const languageString = className.replace(/(language-| line-numbers)/mg, '');
+	const { mdxType, originalType, parentName, ...codeProps } = children.props;
 
 	// Code wrapping
-	let { shouldWrap, shouldWrapCallback } = props;
 	// To force pre rerender
 	const [refresh, setRefresh] = useState(false);
-	useEffect(()=> {
+	useEffect(() => {
 		setRefresh(!refresh);
-	}, [shouldWrap, refresh])
+	}, [shouldWrap]) // eslint-disable-line react-hooks/exhaustive-deps
 	// End of Code wrapping
 
 	return (
@@ -52,8 +51,8 @@ function CodeBlock(props) {
 			</section>
 			{/* https://stackoverflow.com/a/48434525/9902555 
 			https://www.freecodecamp.org/news/force-refreshing-a-react-child-component-the-easy-way-6cdbb9e6d99c/ */}
-			<pre className={`${props.className}${shouldWrap ? '' : ' line-numbers'}`} ref={codeBlockRef} key={refresh}>
-				<code {...props.children.props}></code>
+			<pre className={`${className}${shouldWrap ? '' : ' line-numbers'}`} ref={codeBlockRef} key={refresh}>
+				<code {...codeProps}></code>
 				{shouldWrap ? null : <LineNumbers codeProps={codeProps} />}
 			</pre>
 		</React.Fragment>

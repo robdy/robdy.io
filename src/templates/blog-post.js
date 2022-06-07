@@ -41,7 +41,7 @@ const BlogPostTemplate = ({
               Robert Dyjas
             </Link>
             {' on '}
-            <time datetime={isoDate}>{formattedDate}</time>
+            <time dateTime={isoDate}>{formattedDate}</time>
             &nbsp;&bull;&nbsp;
             <a
               href={`https://github.com/robdy/robdy.io/edit/src/src/pages/${relativePath}`}
@@ -56,7 +56,7 @@ const BlogPostTemplate = ({
             <div className="taglist-container">
               <ul className="taglist">
                 {tags.map((tag) => (
-                  <Link to={`/tags/${kebabCase(tag)}/`}>
+                  <Link to={`/tags/${kebabCase(tag)}/`} key={tag + `tagLink`}>
                     <li key={tag + `tag`}>{tag}</li>
                   </Link>
                 ))}
