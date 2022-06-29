@@ -1,0 +1,83 @@
+---
+templateKey: blog-post
+title: Teams PowerShell datamining - June 2022
+date: 2022-06-24T05:59:37.124Z
+description: Changes introduced in June modify the calling policy and add a new
+  setting to control media logging via the Teams PowerShell module.
+featuredpost: false
+tags:
+  - teams
+  - powershell
+  - datamining
+---
+In this article, I'm describing the changes to the Teams PowerShell module introduced in June. The changes appeared in the 4.4.3-preview version.
+
+## Calling policy
+
+The cmdlet *Get-CsTeamsCallingPolicy* is now returning 2 new parameters:
+
+* PopoutForIncomingPstnCalls
+* PopoutAppPathForIncomingPstnCalls
+
+At the same time, 2 properties are no longer displayed 
+
+* SafeTransferEnabled
+* AllowNetworkConfigurationSettingsLookup
+
+Let's talk more about these properties.
+
+### Popout for incoming calls
+
+Both *PopoutForIncomingPstnCalls* and *PopoutAppPathForIncomingPstnCalls* seem to be related. Since (at least) 2020 people were asking about the customization of the call notification (check [here](https://techcommunity.microsoft.com/t5/microsoft-teams/teams-pop-ups-for-incoming-calls/m-p/1445181) or [here](https://techcommunity.microsoft.com/t5/microsoft-teams/custom-notification-pop-up-on-incoming-call/m-p/2112586)). Is that feature coming to Teams soon?
+
+The [Roadmap](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=In%20development%2CRolling%20out%2CMicrosoft%20Teams&searchterms=call#owRoadmapMainContent) doesn't help much, but it shows some changes to the calling. We're going to have [recording and transcript for 1:1 calls](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=Microsoft%20Teams&searchterms=68774) (doesn't specify whether PSTN calls are included). Transcript and recording are going to [be displayed in the calling app V2](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=Microsoft%20Teams&searchterms=83497).
+
+*V2* might also indicate a refresh of the *Calls* app in Teams. As far as I'm aware, there are no other mentions of the V2 in the official announcements. It's possible that it refers to Teams 2.0 - the new and rebuilt version of the Teams app [based on WebView2](https://twitter.com/TandonRish/status/1408084132786151427).
+
+Parameters are settable using *Set-CsTeamsCallingPolicy* cmdlet:
+
+* *PopoutForIncomingPstnCalls* can be either *Enabled* or *Disabled* (default option)
+* *PopoutAppPathForIncomingPstnCalls* requires a string. The [docs for *New-CsTeamsCallingPolicy*](https://docs.microsoft.com/en-us/powershell/module/skype/new-csteamscallingpolicy?view=skype-ps) say it's an MS-reserved parameter
+
+### Safe transfer
+
+The description for *SafeTransferEnabled* used to be:
+
+> Teams users will be able to transfer a call safely, between Teams and Skype For Business. If the target user does not answer the call, it will ring back to the transferrer. The person transferring the call must be a Teams user. The person the call is being transferred to must be either a Teams or Skype for Business user in the same tenant or in a federated tenant.
+
+It's very likely that the parameter is being decommissioned as a part of Skype for Business Online removal.
+
+The parameter was introduced in 2020. You can read more details on Erik's blog: [Safe transfer with Microsoft Teams Calling – erik365.blog](https://erik365.blog/2020/07/06/safe-transfer-with-microsoft-teams-calling/).
+
+### Network configuration settings lookup
+
+*AllowNetworkConfigurationSettingsLookup* was first described in my [January 2022 datamining article](/teams-powershell-datamining-jan-2022/). Currently, the only description of that parameter is in [*Set-CsTeamsMeetingPolicy* docs](https://docs.microsoft.com/en-us/powershell/module/skype/set-csteamsmeetingpolicy?view=skype-ps) where it says:
+
+> Determines whether network configuration setting lookup can be made for users who are not Enterprise Voice enabled. It is used to enable Network Roaming policy
+
+The parameter is also mentioned in the [*Set-CsTeamsNetworkRoamingPolicy* docs](https://docs.microsoft.com/en-us/powershell/module/skype/set-csteamsnetworkroamingpolicy?view=skype-ps) as a dependency.
+
+## Client policy
+
+The cmdlet *Get-CsClientPolicy* now returns the error *This cmdlet is no longer supported, please consult public documentation*.
+
+## Media logging policy
+
+New cmdlet *Get-CsTeamsMediaLoggingPolicy* appeared. It doesn't have many settings. There are two policies created by default:
+
+* Global policy which disallows media logging
+* Policy named *Enabled* which allows media logging
+
+For me, the policy is an attempt to improve the control over [media log files](https://docs.microsoft.com/en-us/microsoftteams/log-files). It's currently unknown how the policy affects the client-side settings for media logging.
+
+## Auto attendant
+
+*GreetingsSettingAuthorizedUsers* for *\[New|Set]-CsAutoAttendant* has been renamed to *AuthorizedUsers*. The parameter is mentioned in the [4.4.3-preview release notes](https://docs.microsoft.com/en-us/microsoftteams/teams-powershell-release-notes) for the Teams module.
+
+*Import-CsAutoAttendantHolidays* now uses *InputBytes* instead of *Input*.
+
+There were some changes made to call queue and auto attendant cmdlets. I noticed that because the order of the parameters has changed. Slight modification, but noticeable.
+
+## Summary
+
+The most interesting part of this datamining is about changes to the calling policy. However, there were changes to auto attendant and call queue cmdlets. It shows that someone in Microsoft is working on the calling applications recently.
