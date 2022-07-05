@@ -2,7 +2,7 @@
 templateKey: blog-post
 title: Moving Viva Insights emails to a folder
 date: 2022-07-05T05:49:49.697Z
-description: Viva Insights emails cannot be managed by inbox rules? What to do
+description: Viva Insights emails cannot be managed by inbox rules. What to do
   if we want to move them to a different folder?
 featuredpost: false
 tags:
@@ -25,6 +25,7 @@ To learn how to process Viva Insights email, we need the following:
 * Some items in the calendar for the following days - to make sure daily briefing email is sent
 * No additional license is required - daily briefing emails are [already included in the Microsoft 365 license](https://www.microsoft.com/en-us/microsoft-viva/pricing)
 * Viva Insights [enabled on the tenant level](https://docs.microsoft.com/en-us/viva/insights/personal/briefing/be-admin#tenant-level-configuration) (default setting)
+* Power Automate enabled for the account (M365-included license is enough)
 
 ## Setting up Viva Insights
 
@@ -36,7 +37,7 @@ Daily briefing emails won't be sent if there are no actionable items for the acc
 
 </Tip>
 
-To go to the settings, we can scroll down one of the daily briefing emails. At the bottom, there's a *Settings* link which leads to [](https://cortana.office.com/settings)[the settings page](https://cortana.office.com/settings):
+To go to the settings, we can scroll down one of the daily briefing emails. At the bottom, there's a *Settings* link that leads to [](https://cortana.office.com/settings)[the settings page](https://cortana.office.com/settings):
 
 ![Settings link in the footer](../../img/20220705-094930-wyggxwz1x6.png)
 
@@ -56,4 +57,18 @@ But the next day, Viva Insights emails were still in my inbox. I started by chec
 
 ## Creating Power Automate flow
 
-Ok, we now know the inbox rule won't work.
+Ok, we now know the inbox rule won't work. Let's then create a flow in Power Automate and try to use it.
+
+To start we go to [flow.microsoft.com](https://flow.microsoft.com). If needed, change the environment.
+
+We start with creating a scheduled flow from the *New flow* dropdown:
+
+![Starting the wizard for a schedule flow](../../img/20220705-134338-kvvmu0nwhk.png)
+
+In the initial window, we choose the name (1) and we set the flow to run **at 5:30 AM** (2) **every day** (3). This ensures that the flow runs after the daily briefing email pops up in the mailbox.
+
+We confirm the settings by *Create* (4):
+
+![Flow schedule settings](../../img/20220705-134604-ktann1eefh.png)
+
+We
