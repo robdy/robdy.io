@@ -59,11 +59,15 @@ But the next day, Viva Insights emails were still in my inbox. I started by chec
 
 Ok, we now know the inbox rule won't work. Let's then create a flow in Power Automate and try to use it.
 
-To start we go to [flow.microsoft.com](https://flow.microsoft.com). If needed, change the environment.
+To start we go to [](https://flow.microsoft.com)[make.powerautomate.com](https://make.powerautomate.com/). If needed, change the environment.
 
 We start with creating a scheduled flow from the *New flow* dropdown:
 
 ![Starting the wizard for a schedule flow](../../img/20220705-134338-kvvmu0nwhk.png)
+
+The same options are available under the *Create* position in the menu:
+
+![Choosing flow type from the wizard ](../../img/20220708-112629-w3qfiic6kv.png)
 
 In the initial window, we choose the name (1) and we set the flow to run **at 5:30 AM** (2) **every day** (3). This ensures that the flow runs after the daily briefing email pops up in the mailbox.
 
@@ -71,4 +75,92 @@ We confirm the settings by *Create* (4):
 
 ![Flow schedule settings](../../img/20220705-134604-ktann1eefh.png)
 
-We
+We now start adding the actions.
+
+### Getting the email
+
+The first action is pretty obvious - we need to find the email(s). We choose the newest version available: *Get emails (V3)*:
+
+![Adding get emails action](../../img/20220708-113918-flc333ydfk.png)
+
+The action pulls from the *Inbox* folder by default. At a minimum, we need to specify the *From* address. The value of it will be *viva-noreply@microsoft.com*.
+
+There are also other options we can consider, depending on our needs:
+
+* *Fetch Only Unread Messages* - if we leave the default value *Yes*, the flow won't do anything if we mark the message as read earlier. For this demo, I change it to *No*.
+* *Top* - we can set it to 1 to fetch only the latest message. I'm leaving it as the default (10) for this demo.
+* *Subject Filter* - we can filter only the daily briefing messages. If left empty, the flow will also process the weekly digest and other emails sent from the address. I'm not using it in this demo. 
+
+The chosen settings are as follows:
+
+![Settings for getting the message](../../img/20220708-120503-b5ozqszyyy.png)
+
+### Analyzing the output
+
+Ok, we have the first step. Let's now save the flow and make a test run. We'll take a look at the output from the previous step.
+
+<Note>
+
+Before running the test, make sure that at least one Viva email is in your inbox. Otherwise, the output will be empty.
+
+</Note>
+
+We save first:
+
+![Saving the flow](../../img/20220708-115320-wnjkvnpiio.png)
+
+Then we click *Test*:
+
+![Testing the flow](../../img/20220708-115346-1h42fypnwh.png)
+
+We need to manually trigger the test (1) and confirm by *Save & Test* (2):
+
+![Choosing manual test](../../img/20220708-115547-629mjorc2i.png)
+
+We confirm the setting with the *Run flow* button:
+
+![Confirming the test settings](../../img/20220708-115905-ckec41qkhw.png)
+
+On the next page, we close the modal with *Done*:
+
+![Closing the modal](../../img/20220708-120015-29sropafme.png)
+
+After the first test is finished, we should see both steps with the green checkmark:
+
+![Successful test results](../../img/20220708-120322-x1jaly7prt.png)
+
+Now we can click the *Get emails (V3)* title bar to see all the inputs and outputs from the action. We don't need to check inputs (we've just defined them), but we'll be interested in outputs.
+
+Let's click the Show raw outputs to look at the response structure. We'll need that knowledge in a bit:
+
+![Clicking Show raw outputs](../../img/20220708-121019-bll5gjpnsc.png)
+
+The raw output shows the JSON structure. The top-level element *body* (1) has the *value* element (2). The *value* element stores an array of objects (3 - in JSON, square brackets represent an array). The objects in the array store the mail data, such as its ID (4):
+
+![](../../img/20220708-121145-6tyk8d3xxm.png)
+
+### Creating the loop
+
+We now know where is the message data. Let's create a loop to iterate through the messages.
+
+To go to the edit mode, we click the *Edit* button. Then we hit the *New step* button at the bottom:
+
+![Clicking new step button](../../img/20220708-122013-9rq0xrnd2e.png)
+
+ Our next step will be *Apply to each*:
+
+![Adding Apply to each action](../../img/20220708-122127-jkejrufztl.png)
+
+In the newly-added action, we click the empty field. It'll show us the dynamic content window. From it, we click the *value* property (1) from the *Get emails (V3)* action. Once clicked, it'll be displayed in the *Select an output...* field (2):
+
+![Adding dynamic content to the loop](../../img/20220708-122622-eqiizwqrj0.png)
+
+Let's now add the *Compose* action inside the loop. It'll show us whether we're pulling the message ID correctly. The input for the action will be:
+
+```text
+item()?['id']
+```
+
+
+
+### Marking the message as read
