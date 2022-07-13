@@ -48,7 +48,7 @@
 html {
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
-  font-size: 22px;
+  font-size: min(22px, 4vw);
   font-weight: 300;
   color: var(--main-text-color);
   overflow-y: scroll;
