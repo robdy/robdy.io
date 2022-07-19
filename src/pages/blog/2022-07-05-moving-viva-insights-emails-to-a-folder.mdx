@@ -137,7 +137,7 @@ Let's click the Show raw outputs to look at the response structure. We'll need t
 
 The raw output shows the JSON structure. The top-level element *body* (1) has the *value* element (2). The *value* element stores an array of objects (3 - in JSON, square brackets represent an array). The objects in the array store the mail data, such as its ID (4):
 
-![](../../img/20220708-121145-6tyk8d3xxm.png)
+![Analyzing JSON structure of the output](../../img/20220708-121145-6tyk8d3xxm.png)
 
 ### Creating the loop
 
@@ -161,6 +161,84 @@ Let's now add the *Compose* action inside the loop. It'll show us whether we're 
 item()?['id']
 ```
 
+We use `item()` to refer to the [current item in the loop](https://powerusers.microsoft.com/t5/General-Power-Automate/How-to-get-just-the-quot-Value-quot-of-the-quot-Current-Item/m-p/346451/highlight/true#M33612). Then we use `?['id']` to access the property *id*. We need to paste the formula into the *Expression* tab of the *Dynamic Content* window.
 
+We first need to click the *Inputs* textbox (1) and then need to switch to the *Expression* tab (2). From here we can paste the value into the formula box (3) and confirm by *OK* (4):
+
+![Extracting id to the compose function](../../img/20220719-084115-rs6vwnw7ob.png)
+
+We can now run a test to confirm the composed value is the message id. After clicking test we can run it either manually or automatically with a recently used trigger:
+
+![Choosing to run a test manually or automatically](../../img/20220719-084934-iauyj8iix8.png)
+
+Follow the wizard to run the test. Once finished, click the titles to go into *Apply to each* and then *Compose* actions. The *Outputs* (and in that case also *Inputs*) field should contain the message ID:
+
+![Output from Compose action](../../img/20220719-085454-8hhmaeqpbv.png)
+
+We have extracted the message ID. We can reuse it for other actions. Let's just rename the compose action so that it's clear what it contains:
+
+![Compose action renamed to MessageID](../../img/20220719-085912-z9b9rbhlq5.png)
+
+Now we can add the action to move emails. We'll use *Move email (V2)* - at the moment of writing, the newest version.
+
+For the *Message Id* we'll use the value from the previous action:
+
+![Choosing message ID from the previous action](../../img/20220719-092144-cqxoktlwva.png)
+
+Next, we choose a folder from the folder picker:
+
+![](../../img/20220719-092406-tdaemb0byq.png)
+
+That's all! We can save and test. The message should disappear from our Inbox this time. It'll disappear every time the flow runs in the morning. When we start work, we won't see it in our inbox.
 
 ### Marking the message as read
+
+Ok, the message is moved. End of story... NOT! Now our message is in the folder but doesn't it annoy you that it's shown as unread?
+
+![Moved message shown as unread](../../img/20220719-094234-qnseyzmp87.png)
+
+Personally, I set all my inbox rules to mark messages as read. Thanks to it, I don't see the number of emails I still need to read. It helps to focus on priority tasks.
+
+If you have a similar approach, let's add an additional action to mark the message as read. If you don't, skip this step.
+
+<Warning>
+
+Before reading further, move the message from Viva back to your *Inbox* folder and mark it as unread. Otherwise, your flow will return *success* but will do nothing.
+
+</Warning>
+
+The action we'll add will be *Mark as read or unread (V3)*. *Message Id* will get the value from our composing action (*MessageID*).
+
+<Tip>
+
+If you search for *MessageID* value and you get way too many options, search for *Outputs*:
+
+![](../../img/20220719-095639-fw8xxhuhog.png)
+
+</Tip>
+
+Next, we need to choose the value for *Mark as* property. It's a bit counterintuitive in my opinion, but we need to choose *Yes*. Let's think of it as *Is read?* - might help to better remember the value.
+
+<Note>
+
+Here's the reference thread from the community forum: [Move email then mark as 'unread' action offers... - Power Platform Community](https://powerusers.microsoft.com/t5/Building-Flows/Move-email-then-mark-as-unread-action-offers-Boolean-yes-no/m-p/892030/highlight/true#M125459).
+
+</Note>
+
+Our action should look like this:
+
+![Action to mark as read](../../img/20220719-100237-znexxfxouj.png)
+
+We run it and... boom 💣. It doesn't work:
+
+![Flow run failed](../../img/20220719-102604-e4gtihwmjk.png)
+
+Apparently, the action is only capable of finding the message in the *Inbox* folder. Our message has already been moved. Let's change the order of actions so that moving comes after marking as read:
+
+![Correct order of actions](../../img/20220719-102912-ggjjnp6gvi.png)
+
+Let's move the email back to *Inbox*. Then, let's run the test. Now it works like a charm!
+
+## Summary
+
+Daily briefings from Viva cannot be managed using inbox rules. But we have Power Automate! It allows us to move email and mark it as read using scheduled flow. Thank you, Power Automate!
