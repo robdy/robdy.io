@@ -22,35 +22,35 @@ For the demo we’ll need:
 
 We’ll need a database, so let’s create one. At the bottom of the Notion’s left bar, hit *New page*:
 
-![Creating new page in Notion](../../img/How%20to%20pull%20Notion%20site%20via%20PowerShell%2071c4c2ad2ea142e1b176d67eefeebef3/Untitled.png)
+![Creating new page in Notion](../../img/pull-notion-site/Untitled.png)
 
 Let’s name it *Test DB* and create a database table:
 
-![Untitled](../../img/How%20to%20pull%20Notion%20site%20via%20PowerShell%2071c4c2ad2ea142e1b176d67eefeebef3/Untitled%201.png)
+![Untitled](../../img/pull-notion-site/Untitled%201.png)
 
 From here we’ll create a new database, instead of connecting to the existing one. We’ll click *New database* at the bottom right:
 
-![Creating a new database in the wizard](../../img/How%20to%20pull%20Notion%20site%20via%20PowerShell%2071c4c2ad2ea142e1b176d67eefeebef3/Untitled%202.png)
+![Creating a new database in the wizard](../../img/pull-notion-site/Untitled%202.png)
 
 From here we’ll see the database with 3 empty records:
 
  
 
-![The database with 3 empty records](../../img/How%20to%20pull%20Notion%20site%20via%20PowerShell%2071c4c2ad2ea142e1b176d67eefeebef3/Untitled%203.png)
+![The database with 3 empty records](../../img/pull-notion-site/Untitled%203.png)
 
 Let’s add some names to it:
 
  
 
-![The database with names](../../img/How%20to%20pull%20Notion%20site%20via%20PowerShell%2071c4c2ad2ea142e1b176d67eefeebef3/Untitled%204.png)
+![The database with names](../../img/pull-notion-site/Untitled%204.png)
 
 Now let’s add some content. Click *Open* (1) next to the page name. Then hit *Enter* or click below the comment section (2):
 
-![Adding the content to the page](../../img/How%20to%20pull%20Notion%20site%20via%20PowerShell%2071c4c2ad2ea142e1b176d67eefeebef3/20220721-153620-gQ6L73nosb.png)
+![Adding the content to the page](../../img/pull-notion-site/20220721-153620-gQ6L73nosb.png)
 
 Add some content there and click outside the page view to save:
 
-![Saving the edits](../../img/How%20to%20pull%20Notion%20site%20via%20PowerShell%2071c4c2ad2ea142e1b176d67eefeebef3/Untitled%205.png)
+![Saving the edits](../../img/pull-notion-site/Untitled%205.png)
 
 ## Setting up the integration
 
@@ -58,7 +58,7 @@ We will set up the private integration and get the internal integration key. Fol
 
 For the capabilities, we only need the *Read content*. No user information is needed. For reference, see the picture below:
 
-![Integration capabilities](../../img/How%20to%20pull%20Notion%20site%20via%20PowerShell%2071c4c2ad2ea142e1b176d67eefeebef3/Untitled%206.png)
+![Integration capabilities](../../img/pull-notion-site/Untitled%206.png)
 
 Now, make sure to [share the database with the integration](https://developers.notion.com/docs/getting-started#step-2-share-a-database-with-your-integration). You’re done with the setup.
 
@@ -156,11 +156,11 @@ $dbRequestRes = Invoke-RestMethod @dbRequestParams
 
 The response we should receive will look like that:
 
-![Database query response](../../img/How%20to%20pull%20Notion%20site%20via%20PowerShell%2071c4c2ad2ea142e1b176d67eefeebef3/Untitled%207.png)
+![Database query response](../../img/pull-notion-site/Untitled%207.png)
 
 It’s quite clear that we’re interested in the `results` property. Let’s inspect it:
 
-![Objects in the results property](../../img/How%20to%20pull%20Notion%20site%20via%20PowerShell%2071c4c2ad2ea142e1b176d67eefeebef3/Untitled%208.png)
+![Objects in the results property](../../img/pull-notion-site/Untitled%208.png)
 
 Voilà! We got the array of objects. All objects contain the page ID. We’ll use it later.
 
@@ -194,7 +194,7 @@ $pageChildrenRes = Invoke-RestMethod @pageChildrenParams
 
 Similarly, let’s inspect the `results` property:
 
-![Page block’s children objects](../../img/How%20to%20pull%20Notion%20site%20via%20PowerShell%2071c4c2ad2ea142e1b176d67eefeebef3/Untitled%209.png)
+![Page block’s children objects](../../img/pull-notion-site/Untitled%209.png)
 
 We now got the array of blocks. Each block represents the block on the page.
 
