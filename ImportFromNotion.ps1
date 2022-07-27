@@ -10,7 +10,7 @@
   Author: Robert Dyjas https://dyjas.cc
 
   .EXAMPLE
-  .\ConvertFromNotion.ps1 -PageId 'c7b03c7f5bfd460183e4a850d5168215'
+  .\ImportFromNotion.ps1 -PageId 'c7b03c7f5bfd460183e4a850d5168215'
 #>
 Param(
 	[Parameter(Mandatory = $true,
