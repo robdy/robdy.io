@@ -32,7 +32,6 @@ jobs:
 
       - name: Commit changes
         run: |
-          cd data
           git add .
           git config --global user.name 'Robert Dyjas'
           git config --global user.email '15113729+robdy@users.noreply.github.com'
