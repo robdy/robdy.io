@@ -19,7 +19,7 @@ jobs:
         run: |
           git config --global user.name 'Robert Dyjas'
           git config --global user.email '15113729+robdy@users.noreply.github.com'
-          git checkout -b %NOTION_PAGE_ID%
+          git checkout -b $env:NOTION_PAGE_ID
         env:
           NOTION_PAGE_ID: ${{ inputs.pageId }}
 
@@ -33,10 +33,10 @@ jobs:
       - name: Commit changes
         run: |
           git add .
-          git config --global user.name 'Robert Dyjas'
-          git config --global user.email '15113729+robdy@users.noreply.github.com'
           git commit -am "Import blog post from Notion"
-          git push
+          git push --set-upstream origin $env:NOTION_PAGE_ID
+        env:
+          NOTION_PAGE_ID: ${{ inputs.pageId }}
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
