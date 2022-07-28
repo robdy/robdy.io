@@ -41,6 +41,7 @@ $pageParams = @{
 	Authentication = 'Bearer'
 	Token          = $notionKey
 }
+Write-Output "Getting page properties"
 $pageRes = Invoke-RestMethod @pageParams
 #endregion Get page properties
 
@@ -54,6 +55,7 @@ $slugParams = @{
 	Authentication = 'Bearer'
 	Token          = $notionKey
 }
+Write-Output "Getting page slug"
 $slugRes = Invoke-RestMethod @slugParams
 #endregion Get slug
 
@@ -67,6 +69,7 @@ $titleParams = @{
 	Authentication = 'Bearer'
 	Token          = $notionKey
 }
+Write-Output "Getting page title"
 $titleRes = Invoke-RestMethod @titleParams
 #endregion Get title
 
@@ -80,6 +83,7 @@ $tagsParams = @{
 	Authentication = 'Bearer'
 	Token          = $notionKey
 }
+Write-Output "Getting page tags"
 $tagsRes = Invoke-RestMethod @tagsParams
 #endregion Get tags
 
@@ -93,6 +97,7 @@ $descriptionParams = @{
 	Authentication = 'Bearer'
 	Token          = $notionKey
 }
+Write-Output "Getting page description"
 $descriptionRes = Invoke-RestMethod @descriptionParams
 #endregion Get description
 
@@ -105,6 +110,7 @@ $pageChildrenParams = @{
 	Authentication = 'Bearer'
 	Token          = $notionKey
 }
+Write-Output "Getting page blocks"
 $pageChildrenRes = Invoke-RestMethod @pageChildrenParams
 #endregion Get blocks
 
@@ -230,7 +236,16 @@ $frontmatter += "---`n"
 #region Exporting
 $frontmatter | Out-File -FilePath (Join-Path $mdxFolderPath $mdxFileName) 
 $convertedTextArr | Out-File -FilePath (Join-Path $mdxFolderPath $mdxFileName) -Append
+#endregion Exporting
+
+#region Outputs
+Write-Output "::group::Output values"
+Write-Output "COMMIT_MSG: Adds blog $($titleRes.results[0].title.plain_text)"
+Write-Output "PR_TITLE: Imports from Notion $($titleRes.results[0].title.plain_text)"
+Write-Output "SLUG: $pageSlug
+Write-Output "::endgroup::"
+
 Write-Output "::set-output name=COMMIT_MSG::Adds blog $($titleRes.results[0].title.plain_text)"
 Write-Output "::set-output name=PR_TITLE::Imports from Notion $($titleRes.results[0].title.plain_text)"
 Write-Output "::set-output name=SLUG::$pageSlug"
-#endregion Exporting
+#endregion Outputs
