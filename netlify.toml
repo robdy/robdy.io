@@ -9,12 +9,12 @@
   base    = ""
   publish = "public"
   functions = "lambda"
-  environment = { NODE_ENV  = "production", NODE_VERSION = "14.15.0" }
+  environment = { NODE_ENV  = "production", NODE_VERSION = "16.14.0" }
 
 # For optimizing build time
 # https://www.netlify.com/blog/2020/06/11/5-optimizations-for-faster-gatsby-builds/
 [[plugins]]
-  package = "netlify-plugin-gatsby-cache"
+  package = "@netlify/plugin-gatsby"
 
 # Production context: All deploys to the main
 # repository branch will inherit these settings.
