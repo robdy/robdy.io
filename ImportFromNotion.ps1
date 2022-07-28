@@ -32,6 +32,9 @@ $headers.Add("Notion-Version", "2022-06-28")
 $notionKey = $env:NOTION_KEY | ConvertTo-SecureString -AsPlainText -Force
 #endregion Variables
 
+Write-Output "::echo::on"
+Write-Output "::group::Getting data"
+
 #region Get page properties
 $pageParams = @{
 	Uri            = "https://api.notion.com/v1/pages/$PageId"
@@ -41,6 +44,7 @@ $pageParams = @{
 	Authentication = 'Bearer'
 	Token          = $notionKey
 }
+Write-Output "Getting page properties"
 $pageRes = Invoke-RestMethod @pageParams
 #endregion Get page properties
 
@@ -54,6 +58,7 @@ $slugParams = @{
 	Authentication = 'Bearer'
 	Token          = $notionKey
 }
+Write-Output "Getting page slug"
 $slugRes = Invoke-RestMethod @slugParams
 #endregion Get slug
 
@@ -67,6 +72,7 @@ $titleParams = @{
 	Authentication = 'Bearer'
 	Token          = $notionKey
 }
+Write-Output "Getting page title"
 $titleRes = Invoke-RestMethod @titleParams
 #endregion Get title
 
@@ -80,6 +86,7 @@ $tagsParams = @{
 	Authentication = 'Bearer'
 	Token          = $notionKey
 }
+Write-Output "Getting page tags"
 $tagsRes = Invoke-RestMethod @tagsParams
 #endregion Get tags
 
@@ -93,6 +100,7 @@ $descriptionParams = @{
 	Authentication = 'Bearer'
 	Token          = $notionKey
 }
+Write-Output "Getting page description"
 $descriptionRes = Invoke-RestMethod @descriptionParams
 #endregion Get description
 
@@ -105,8 +113,10 @@ $pageChildrenParams = @{
 	Authentication = 'Bearer'
 	Token          = $notionKey
 }
+Write-Output "Getting page blocks"
 $pageChildrenRes = Invoke-RestMethod @pageChildrenParams
 #endregion Get blocks
+Write-Output "::endgroup::"
 
 #region Calculated variables
 $mdxFilePrefix = Get-Date $pageRes.last_edited_time -Format 'yyyy-MM-dd'
@@ -231,3 +241,11 @@ $frontmatter += "---`n"
 $frontmatter | Out-File -FilePath (Join-Path $mdxFolderPath $mdxFileName) 
 $convertedTextArr | Out-File -FilePath (Join-Path $mdxFolderPath $mdxFileName) -Append
 #endregion Exporting
+
+#region Outputs
+Write-Output "::set-output name=COMMIT_MSG::Imports blog article from Notion"
+Write-Output "::set-output name=PR_TITLE::Adds blog $($titleRes.results[0].title.plain_text)"
+Write-Output "::set-output name=BRANCH_NAME::cms/blog/$pageSlug"
+#endregion Outputs
+
+Write-Output "::echo::off"

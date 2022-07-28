@@ -13,32 +13,23 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Change branch
-        run: |
-          cd data
-          git config --global user.name 'Robert Dyjas'
-          git config --global user.email '15113729+robdy@users.noreply.github.com'
-          git checkout -b %NOTION_PAGE_ID%
-        env:
-          NOTION_PAGE_ID: ${{ inputs.pageId }}
+    # Checking out current branch to pull the latest script version
+      - name: Checkout current branch
+        uses: actions/checkout@v3
 
       - name: Run script
-        id: checker
+        id: importer
         run: ./ImportFromNotion.ps1 $env:NOTION_PAGE_ID
         env:
           NOTION_KEY: ${{ secrets.NOTION_KEY }}
           NOTION_PAGE_ID: ${{ inputs.pageId }}
 
-      - name: Commit changes
-        run: |
-          cd data
-          git add .
-          git config --global user.name 'Robert Dyjas'
-          git config --global user.email '15113729+robdy@users.noreply.github.com'
-          git commit -am "Import blog post from Notion"
-          git push
-
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
+        with:
+          branch: ${{ steps.importer.outputs.BRANCH_NAME }}
+          base: src
+          commit-message: ${{ steps.importer.outputs.COMMIT_MSG }}
+          delete-branch: true
+          labels: netlify-cms/draft
+          title: ${{ steps.importer.outputs.PR_TITLE }}
