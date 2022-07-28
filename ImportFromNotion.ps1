@@ -242,7 +242,7 @@ $convertedTextArr | Out-File -FilePath (Join-Path $mdxFolderPath $mdxFileName) -
 Write-Output "::group::Output values"
 Write-Output "COMMIT_MSG: Adds blog $($titleRes.results[0].title.plain_text)"
 Write-Output "PR_TITLE: Imports from Notion $($titleRes.results[0].title.plain_text)"
-Write-Output "SLUG: $pageSlug
+Write-Output "SLUG: $pageSlug"
 Write-Output "::endgroup::"
 
 Write-Output "::set-output name=COMMIT_MSG::Adds blog $($titleRes.results[0].title.plain_text)"
