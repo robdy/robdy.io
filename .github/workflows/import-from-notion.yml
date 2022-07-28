@@ -27,7 +27,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
-          branch: ${{ steps.importer.outputs.SLUG }}
+          branch: ${{ steps.importer.outputs.BRANCH_NAME }}
           base: src
           commit-message: ${{ steps.importer.outputs.COMMIT_MSG }}
           delete-branch: true
