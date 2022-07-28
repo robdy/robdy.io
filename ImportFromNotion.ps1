@@ -230,4 +230,7 @@ $frontmatter += "---`n"
 #region Exporting
 $frontmatter | Out-File -FilePath (Join-Path $mdxFolderPath $mdxFileName) 
 $convertedTextArr | Out-File -FilePath (Join-Path $mdxFolderPath $mdxFileName) -Append
+Write-Output "::set-output name=COMMIT_MSG::Adds blog $($titleRes.results[0].title.plain_text)"
+Write-Output "::set-output name=PR_TITLE::Imports from Notion $($titleRes.results[0].title.plain_text)"
+Write-Output "::set-output name=SLUG::$pageSlug"
 #endregion Exporting
