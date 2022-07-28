@@ -32,7 +32,7 @@ $headers.Add("Notion-Version", "2022-06-28")
 $notionKey = $env:NOTION_KEY | ConvertTo-SecureString -AsPlainText -Force
 #endregion Variables
 
-::echo::on
+Write-Output "::echo::on"
 
 #region Get page properties
 $pageParams = @{
@@ -252,4 +252,4 @@ Write-Output "::set-output name=PR_TITLE::Imports from Notion $($titleRes.result
 Write-Output "::set-output name=SLUG::$pageSlug"
 #endregion Outputs
 
-::echo::off
+Write-Output "::echo::off"
