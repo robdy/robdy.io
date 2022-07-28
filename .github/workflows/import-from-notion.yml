@@ -31,4 +31,5 @@ jobs:
           base: src
           commit-message: ${{ steps.importer.outputs.COMMIT_MSG }}
           delete-branch: true
+          labels: netlify-cms/draft
           title: ${{ steps.importer.outputs.PR_TITLE }}

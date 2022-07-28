@@ -33,6 +33,7 @@ $notionKey = $env:NOTION_KEY | ConvertTo-SecureString -AsPlainText -Force
 #endregion Variables
 
 Write-Output "::echo::on"
+Write-Output "::group::Getting data"
 
 #region Get page properties
 $pageParams = @{
@@ -115,6 +116,7 @@ $pageChildrenParams = @{
 Write-Output "Getting page blocks"
 $pageChildrenRes = Invoke-RestMethod @pageChildrenParams
 #endregion Get blocks
+Write-Output "::endgroup::"
 
 #region Calculated variables
 $mdxFilePrefix = Get-Date $pageRes.last_edited_time -Format 'yyyy-MM-dd'
@@ -241,15 +243,9 @@ $convertedTextArr | Out-File -FilePath (Join-Path $mdxFolderPath $mdxFileName) -
 #endregion Exporting
 
 #region Outputs
-Write-Output "::group::Output values"
-Write-Output "COMMIT_MSG: Adds blog $($titleRes.results[0].title.plain_text)"
-Write-Output "PR_TITLE: Imports from Notion $($titleRes.results[0].title.plain_text)"
-Write-Output "SLUG: $pageSlug"
-Write-Output "::endgroup::"
-
-Write-Output "::set-output name=COMMIT_MSG::Adds blog $($titleRes.results[0].title.plain_text)"
-Write-Output "::set-output name=PR_TITLE::Imports from Notion $($titleRes.results[0].title.plain_text)"
-Write-Output "::set-output name=SLUG::$pageSlug"
+Write-Output "::set-output name=COMMIT_MSG::Imports blog article from Notion"
+Write-Output "::set-output name=PR_TITLE::Adds blog $($titleRes.results[0].title.plain_text)"
+Write-Output "::set-output name=BRANCH_NAME::cms/blog/$pageSlug"
 #endregion Outputs
 
 Write-Output "::echo::off"
