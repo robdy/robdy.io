@@ -18,27 +18,11 @@ jobs:
         with:
           ref: src
 
-      - name: Change branch
-        run: |
-          git config --global user.name 'Robert Dyjas'
-          git config --global user.email '15113729+robdy@users.noreply.github.com'
-          git checkout -b $env:NOTION_PAGE_ID
-        env:
-          NOTION_PAGE_ID: ${{ inputs.pageId }}
-
       - name: Run script
         id: checker
         run: ./ImportFromNotion.ps1 $env:NOTION_PAGE_ID
         env:
           NOTION_KEY: ${{ secrets.NOTION_KEY }}
-          NOTION_PAGE_ID: ${{ inputs.pageId }}
-
-      - name: Commit changes
-        run: |
-          git add .
-          git commit -am "Import blog post from Notion"
-          git push --set-upstream origin $env:NOTION_PAGE_ID
-        env:
           NOTION_PAGE_ID: ${{ inputs.pageId }}
 
       - name: Create Pull Request
