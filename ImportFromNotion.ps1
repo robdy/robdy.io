@@ -32,6 +32,8 @@ $headers.Add("Notion-Version", "2022-06-28")
 $notionKey = $env:NOTION_KEY | ConvertTo-SecureString -AsPlainText -Force
 #endregion Variables
 
+::echo::on
+
 #region Get page properties
 $pageParams = @{
 	Uri            = "https://api.notion.com/v1/pages/$PageId"
@@ -249,3 +251,5 @@ Write-Output "::set-output name=COMMIT_MSG::Adds blog $($titleRes.results[0].tit
 Write-Output "::set-output name=PR_TITLE::Imports from Notion $($titleRes.results[0].title.plain_text)"
 Write-Output "::set-output name=SLUG::$pageSlug"
 #endregion Outputs
+
+::echo::off
