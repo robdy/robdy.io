@@ -20,7 +20,7 @@
     "gatsby-remark-images": "^6.19.0",
     "gatsby-remark-prismjs": "^6.19.0",
     "gatsby-remark-relative-images": "^2.0.2",
-    "gatsby-source-filesystem": "^4.19.0",
+    "gatsby-source-filesystem": "^4.24.0",
     "gatsby-source-rss-feed": "^1.2.2",
     "gatsby-transformer-sharp": "^4.19.0",
     "lodash": "^4.17.21",
