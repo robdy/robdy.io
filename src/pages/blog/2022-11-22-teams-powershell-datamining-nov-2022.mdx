@@ -10,7 +10,7 @@ tags:
   - datamining
 ---
 
-In this article, I'm describing the changes to the Teams PowerShell module introduced in October and November. The changes appeared in the versions up to 4.9.1.****
+In this article, I'm describing the changes to the Teams PowerShell module introduced in October and November. The changes appeared in the versions up to 4.9.1.
 
 ## SMS in Teams
 
@@ -26,7 +26,7 @@ The parameter first appeared in the 4.9.0 version released on November 2, 2022.
 
 ## Security end-user reporting
 
-*AllowSecurityEndUserReporting *is the new property in the messaging policy. Its default value is *true* and it expects a boolean value. The parameter is already settable. It's not mentioned anywhere in the docs. The only place I found it is [the issue opened in Office docs PowerShell repository](https://github.com/MicrosoftDocs/office-docs-powershell/issues/10141).
+*AllowSecurityEndUserReporting* is the new property in the messaging policy. Its default value is *true* and it expects a boolean value. The parameter is already settable. It's not mentioned anywhere in the docs. The only place I found it is [the issue opened in Office docs PowerShell repository](https://github.com/MicrosoftDocs/office-docs-powershell/issues/10141).
 
 My guess is there will be an option to report spam in the chats. Perhaps it will go directly to Microsoft so that they can block the sender after it's confirmed to be a spammer. I guess it might work similarly to reporting spam emails in Outlook.
 
@@ -40,13 +40,17 @@ The parameter first appeared in the 4.9.0 version of the module. It's mentioned 
 
 ## Private team discovery
 
-*EnablePrivateTeamDiscovery* property appeared in *Get-CsTeamsChannelsPolicy *output.* The same *parameter appeared in the corresponding cmdlets for setting (*Set-CsTeamsChannelsPolicy*) and creating (*New-CsTeamsChannelsPolicy*) policies.
+*EnablePrivateTeamDiscovery* property appeared in *Get-CsTeamsChannelsPolicy* output. The same parameter appeared in the corresponding cmdlets for setting (*Set-CsTeamsChannelsPolicy*) and creating (*New-CsTeamsChannelsPolicy*) policies.
 
-The parameter above adds some confusion to channel policy. We currently have two similarly-named parameters: *AllowPrivateTeamDiscovery* and *EnablePrivateTeamDiscovery*. See the output from the *Get-CsTeamsChannelsPolicy* cmdlet*:*
+The parameter above adds some confusion to channel policy. We currently have two similarly-named parameters:
+* *AllowPrivateTeamDiscovery*
+* *EnablePrivateTeamDiscovery*.
 
-![](../../img/teams-powershell-datamining-nov-2022/Untitled.png)
+See the output from the *Get-CsTeamsChannelsPolicy* cmdlet*:*
 
-The *AllowPrivateTeamDiscovery* parameter was removed in version 4.9.0 (November 11, 2022) and then added back with the release of the 4.9.1 version. Something similar happened in July - the same parameter was removed and added back one day later. To be even more confusing, the *AllowPrivateTeamDiscovery* is in the documentation while *EnablePrivateTeamDiscovery* is not mentioned there yet.
+![Output from Get-CsTeamsChannelsPolicy](../../img/teams-powershell-datamining-nov-2022/Untitled.png)
+
+The *AllowPrivateTeamDiscovery* parameter was removed in version 4.9.0 (November 11, 2022) and then added back with the release of the 4.9.1 version. Something similar happened in July - the same parameter was removed and added back one day later. To be even more confusing, the *AllowPrivateTeamDiscovery* is in the documentation. *EnablePrivateTeamDiscovery* is not mentioned there yet.
 
 The good news is that the *AllowPrivateTeamDiscovery* is not settable, so we cannot mix the parameters while changing them.
 
@@ -89,13 +93,13 @@ The following properties re-appeared in the 4.9.0 version released on November 2
 * *AppDesktopSharingMode*
 * *EnableOutlookAddIn*
 
-*EnableLowBandwidthConsumption*, *AllowTeamsMeeting*, and *EnableOutlookAddIn* were removed from the docs in this commit: [Update Meeting and Messaging policy cmdlets · MicrosoftDocs/office-docs-powershell@465ec08 (github.com)](https://github.com/MicrosoftDocs/office-docs-powershell/commit/465ec0843e01f61da951272aa014857ede1b8945#diff-46482f2e1cfbef702f8d1c66bc54656966aa7bc8eedd0b58bec32b490b53eaed)
+*EnableLowBandwidthConsumption*, *AllowTeamsMeeting*, and *EnableOutlookAddIn* were removed from the docs in this commit: [Update Meeting and Messaging policy cmdlets](https://github.com/MicrosoftDocs/office-docs-powershell/commit/465ec0843e01f61da951272aa014857ede1b8945#diff-46482f2e1cfbef702f8d1c66bc54656966aa7bc8eedd0b58bec32b490b53eaed)
 
 *MeetingRecordingExpirationDays* was removed between October and November 2021 (versions 2.6.0 and 2.6.2 of the module).
 
 *MeetingInviteLanguage1* and *MeetingInviteLanguage2 *appeared first in May 2021. In June 2021 they were replaced by *MeetingInviteLanguages*. This parameter is still in use, so I'm not sure why would the separated ones be reintroduced.
 
-*AppDesktopSharingMode *was removed in 2018 with this commit: [AppDesktopSharingMode parameter cannot set with New-CsTeamsMeeting… · MicrosoftDocs/office-docs-powershell@0721122 (github.com)](https://github.com/MicrosoftDocs/office-docs-powershell/commit/072112266c77370ae85eb8329985327463d88008))
+*AppDesktopSharingMode *was removed in 2018 with this commit: [AppDesktopSharingMode parameter cannot set with New-CsTeamsMeeting…](https://github.com/MicrosoftDocs/office-docs-powershell/commit/072112266c77370ae85eb8329985327463d88008))
 
 ## Summary
 
