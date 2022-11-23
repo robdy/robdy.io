@@ -16,6 +16,8 @@ In this article, I'm describing the changes to the Teams PowerShell module intro
 
 There are two places where we can see *SMS* in the recent changes. *Get-CsTenantFederationConfiguration* now returns *AllowTeamsSms* property. *Get-CsExternalAccessPolicy* returns *EnableTeamsSmsAccess*.
 
+Based on my research this property can be related with [SMS-based authentication](https://learn.microsoft.com/en-us/azure/active-directory/authentication/howto-authentication-sms-signin). The linked article states that Teams is the only native Office application to support that method.
+
 Both properties default to `true`. They first appeared in the 4.9.0 version of the module. At the moment, there are no corresponding parameters in *Set-* cmdlets. That means the properties are not settable.
 
 ## Editing messages by owners
