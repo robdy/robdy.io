@@ -201,6 +201,12 @@ $($blockObj.code.rich_text[0].plain_text)
 			if ($blockObj.callout.icon.emoji -eq '💡') {
 				$convertedText = "<Tip>`n`n$(ConvertFrom-RichText -RichText $blockObj.callout)`n`n</Tip>"
 			}
+			if ($blockObj.callout.icon.emoji -eq '🗒️') {
+				$convertedText = "<Note>`n`n$(ConvertFrom-RichText -RichText $blockObj.callout)`n`n</Note>"
+			}
+			if ($blockObj.callout.icon.emoji -eq '⚠️') {
+				$convertedText = "<Warning>`n`n$(ConvertFrom-RichText -RichText $blockObj.callout)`n`n</Warning>"
+			}
 		}
 		"paragraph" {
 			$convertedText = "$(ConvertFrom-RichText -RichText $blockObj.paragraph)"
