@@ -126,7 +126,6 @@ $mdxFileName = "$mdxFilePrefix-$pageSlug.mdx"
 
 #region Processing content
 [object[]]$blockArray = $pageChildrenRes.results
-# TODO add numbered list
 function ConvertFrom-RichText {
 	param([parameter(Mandatory, ValueFromPipeline)]
 		[object[]]$RichText)
@@ -201,6 +200,9 @@ $($blockObj.code.rich_text[0].plain_text)
 		}
 		"bulleted_list_item" {
 			$convertedText = "* $(ConvertFrom-RichText -RichText $blockObj.bulleted_list_item)"
+		}
+		"numbered_list_item" {
+			$convertedText = "1. $(ConvertFrom-RichText -RichText $blockObj.numbered_list_item)"
 		}
 		"callout" {
 			if ($blockObj.callout.icon.emoji -eq '💡') {
