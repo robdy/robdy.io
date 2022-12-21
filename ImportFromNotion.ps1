@@ -177,6 +177,11 @@ foreach ($blockObj in $blockArray) {
 			Invoke-RestMethod -Method GET -Uri $blockObj.image.file.url -OutFile (Join-Path $imageSubFolder $fileNameWithExt)
 			$convertedText = "![$caption](../../img/$imgSubFolderName/$fileNameWithExt)"
 		}
+		# H1 is converted to H2 to prevent script breaking
+		# H1 and H2 are hard to distinguish in Notion UI 
+		"heading_1" {
+			$convertedText = "## $(ConvertFrom-RichText -RichText $blockObj.heading_1)"
+		}
 		"heading_2" {
 			$convertedText = "## $(ConvertFrom-RichText -RichText $blockObj.heading_2)"
 		}
