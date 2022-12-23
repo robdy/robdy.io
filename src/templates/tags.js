@@ -13,9 +13,8 @@ class TagRoute extends React.Component {
     const tag = this.props.pageContext.tag
     const title = this.props.data.site.siteMetadata.title
     const totalCount = this.props.data.allMdx.totalCount
-    const tagHeader = `${totalCount} post${
-      totalCount === 1 ? '' : 's'
-    } tagged with “${tag}”`
+    const tagHeader = `${totalCount} post${totalCount === 1 ? '' : 's'
+      } tagged with “${tag}”`
     const tagPath = kebabCase(tag)
     const siteUrl = this.props.data.site.siteMetadata.siteUrl
 
@@ -56,8 +55,8 @@ export const tagPageQuery = graphql`
     }
     allMdx(
       limit: 1000
-      sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      sort: {frontmatter: {date: DESC}}
+      filter: {frontmatter: {tags: {in: [$tag]}}}
     ) {
       totalCount
       edges {
