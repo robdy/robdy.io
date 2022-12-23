@@ -9,7 +9,7 @@
   base    = ""
   publish = "public"
   functions = "lambda"
-  environment = { NODE_ENV  = "production", NODE_VERSION = "18.12.0" }
+  environment = { NODE_ENV  = "production", NODE_VERSION = "18.12.1" }
 
 # No longer needed as it's installed from Netlify portal
 # For optimizing build time
