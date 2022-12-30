@@ -32,7 +32,7 @@
     "react-dom": "^18.2.0",
     "react-helmet": "^6.0.0",
     "uuid": "^8.3.2",
-    "webpack": "^5.74.0"
+    "webpack": "^5.75.0"
   },
   "keywords": [
     "gatsby"
