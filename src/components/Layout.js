@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Helmet } from 'react-helmet'
 import Footer from '../components/Footer'
 import './layout.css'
@@ -7,36 +7,9 @@ import { withPrefix } from 'gatsby'
 import { MDXProvider } from '@mdx-js/react'
 import { NoteBlock, WarningBlock, TipBlock } from './Block'
 import { LinkToAnywhere } from './LinkToAnywhere'
-import CodeBlock from './CodeBlock'
 
 const TemplateWrapper = ({ children }) => {
   const { title, description, siteUrl } = useSiteMetadata()
-
-  // Set wrapping
-  const checkWrapPref = () => {
-    // If building server-side
-    if (typeof window === 'undefined') return false;
-
-    // If not server-side, check local storage first
-    const wrappingPreference = window.localStorage.getItem('codeShouldWrap');
-
-    // If no preference set
-    if (wrappingPreference === null) {
-      // Determine whether code should wrap
-      // https://stackoverflow.com/a/63440872/9902555
-      const width = window.innerWidth;
-      const isMobile = width <= 768;
-      if (isMobile) return true;
-      return false;
-    }
-
-    // If preference set, return it
-    // Not returning directly as it's a string
-    // Defaults to false
-    return wrappingPreference.toLowerCase() === 'true';
-  }
-
-  const [codeShouldWrap, setCodeShouldWrap] = useState(checkWrapPref);
 
   return (
     <div>
@@ -177,9 +150,6 @@ const TemplateWrapper = ({ children }) => {
           Warning: WarningBlock,
           Tip: TipBlock,
           a: LinkToAnywhere,
-          pre: ({ children, ...props }) => (
-            <CodeBlock shouldWrap={codeShouldWrap} shouldWrapCallback={setCodeShouldWrap} {...props}>{children}</CodeBlock>
-          )
         }}
       >
         {children}
