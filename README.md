@@ -32,8 +32,16 @@ Requires [Markdown All in One](https://marketplace.visualstudio.com/items?itemNa
 In the article add: 
 
 ```markdown
-<!-- omit in toc -->
 ## Table of Contents
+```
+
+Then, in the `.vscode/settings.json` add to the top of the `markdown.extension.toc.omittedFromToc` array:
+
+```json
+    "src/pages/blog/2022-05-09-debugging-cli-microsoft365.mdx": [
+      "## Prerequisites",
+      "## Table of Contents"
+    ],
 ```
 
 The extension uses default settings:
@@ -43,4 +51,4 @@ Hit `Ctrl+Shift+P` and choose
 
 ![Adding table of contents in VS Code](static/img/adding-toc.png)
 
-ToC settings can be found in [the extension page](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one#table-of-contents).
+ToC settings can be found on [the extension page](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one#table-of-contents).

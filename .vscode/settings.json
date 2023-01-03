@@ -1,6 +1,34 @@
 {
-	"files.associations": {
-		"*.mdx": "markdown"
-	},
-	"workbench.tree.indent": 12
+  "files.associations": {
+    "*.mdx": "markdown"
+  },
+  "workbench.tree.indent": 12,
+  "markdown.extension.toc.omittedFromToc": {
+    "src/pages/blog/2022-05-09-debugging-cli-microsoft365.mdx": [
+      "## Prerequisites",
+      "## Table of Contents"
+    ],
+    "src/pages/blog/2022-02-22-teams-powershell-datamining-feb-2022.mdx": [
+      "## Table of Contents"
+    ],
+    "src/pages/blog/2022-02-20-manage-auto-attendant-general.mdx": [
+      "## Table of Contents"
+    ],
+    "src/pages/blog/2022-01-17-outlook-mailbox-clean-up.mdx": [
+      "## Table of Contents"
+    ],
+    "src/pages/blog/2022-01-07-teams-powershell-datamining-jan-2022.mdx": [
+      "## Table of Contents"
+    ],
+    "src/pages/blog/2020-12-29-custom-connectors-with-dlp-policy.mdx": [
+      "## Table of Contents"
+    ],
+    "src/pages/blog/2020-04-22-finding-all-domains-used-to-sync-onedrive.mdx": [
+      "## Table of Contents"
+    ],
+    "src/pages/blog/2019-01-29-host-sfb-meetings-like-a-pro.mdx": [
+      "## Checklist only",
+      "## Table of Contents"
+    ]
+  }
 }
