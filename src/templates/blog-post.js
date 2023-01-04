@@ -7,13 +7,13 @@ import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
 import Comments from '../components/Comments'
 import useSiteMetadata from '../components/SiteMetadata'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Navbar from '../components/Navbar'
 
 const BlogPostTemplate = ({
   content,
   contentComponent,
   body,
+  children,
   date,
   description,
   tags,
@@ -66,7 +66,7 @@ const BlogPostTemplate = ({
           ) : null}
         </div>
         <p className="description">{description}</p>
-        <MDXRenderer>{body}</MDXRenderer>
+        {children}
         <Comments />
       </div>
     </section>
@@ -85,8 +85,8 @@ BlogPostTemplate.propTypes = {
   body: PropTypes.string,
 }
 
-const BlogPost = ({ data }) => {
-  const { mdx: post } = data
+const BlogPost = (props) => {
+  const { mdx: post } = props.data
   const { siteUrl } = useSiteMetadata()
 
   return (
@@ -95,6 +95,7 @@ const BlogPost = ({ data }) => {
         content={post.body}
         contentComponent={HTMLContent}
         body={post.body}
+        children={props.children}
         date={new Date(post.frontmatter.date)}
         description={post.frontmatter.description}
         helmet={
