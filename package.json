@@ -7,7 +7,7 @@
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "gatsby": "^4.25.1",
-    "gatsby-core-utils": "^4.3.1",
+    "gatsby-core-utils": "^4.4.0",
     "gatsby-plugin-feed": "^4.25.0",
     "gatsby-plugin-image": "^2.25.0",
     "gatsby-plugin-mdx": "^3.20.0",
