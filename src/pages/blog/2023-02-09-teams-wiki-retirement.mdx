@@ -28,7 +28,7 @@ If you want to know the details, keep reading. If you stop here, thanks for your
 
 Wiki will be retired from Teams. We know that based on Microsoft's announcement published in the beginning of January:
 
-![](../../img/teams-wiki-retirement/20230208-102228-MEjCMT3obC.png)
+![Microsoft's announcement MC496248](../../img/teams-wiki-retirement/20230208-102228-MEjCMT3obC.png)
 
 If you want to check the announcement here is the link (requires admin account to access) [Message Center entry MC496248](https://admin.microsoft.com/Adminportal/Home?ref=MessageCenter/:/messages/MC496248). You can also read it on [unofficial M365 Changelog](https://petri.com/m365-changelog-wiki-retirement-and-the-future-of-note-taking-in-teams-channels/) (no account required).
 
@@ -73,10 +73,10 @@ Once we click the **Get details** button you'll be redirected to the next screen
 The pop-up says:
 
 > What to expect when you export:
-- Each wiki page **will be saved in as a separate page** (in OneNote) in the Notes tab
-- Some changes to formatting such as font style and spacing may occur
-- We'll keep a read-only version of your content in the Wiki app for reference
-- In Notes, you can take notes and organize content for this channel
+* Each wiki page **will be saved in as a separate page** (in OneNote) in the Notes tab
+* Some changes to formatting such as font style and spacing may occur
+* We'll keep a read-only version of your content in the Wiki app for reference
+* In Notes, you can take notes and organize content for this channel
 
 After using **Export to Notes** button we'll see the progress screen:
 
@@ -86,7 +86,7 @@ And then the confirmation screen:
 
 ![Confirmation screen](../../img/teams-wiki-retirement/2023-02-06_17_34_47-000090.png)
 
-After confirming with **Finish** we'll be redirected to the **Notes **tab. The tab is the default name for a OneNote tab in the channel.
+After confirming with **Finish** we'll be redirected to the **Notes**tab. The tab is the default name for a OneNote tab in the channel.
 
 ![Notes tab with migrated pages](../../img/teams-wiki-retirement/2023-02-06_17_30_54-000083.png)
 
@@ -118,10 +118,8 @@ OneNote can be considered *wiki on steroids*. Wiki was always meant to be a simp
 
 * Cannot be used outside of Teams
 * Limited formatting options
-
 * No full-text search
 * No recycle bin
-
 * No offline use
 * Poorly designed version history
 
@@ -133,13 +131,23 @@ On the other hand, OneNote [got a nice refresh in 2022](https://techcommunity.mi
 
 If you want to be up-to-date, here's the [OneNote section of the M365 roadmap](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=OneNote).
 
-## Can we export list of wiki users in an organization?
+## Can I export list of wiki users in an organization?
 
 Now when we know what to expect, let's think how many users will be affected by this change. Are our users using wiki at all? How to check this?
 
 Tony Redmond has written an excellent guide describing [How to Find Teams Channels With a Wiki Tab](https://office365itpros.com/2023/01/24/teams-wiki-report/).
 
 For meeting notes, the only discovery way I can think of is via eDiscovery. Knowing that meeting notes are kept under *OneDrive* > *Microsoft Teams Data* > *Wiki*, we'd need to find the people with such folder existing. But that only covers people, who created the notes, not talking about the ones reading them.
+
+## Can I remove wiki tab programatically?
+
+Removing wiki tab is possible using Microsoft Graph. Andres Bohren has written a guide showing this: [How to remove Microsoft Teams wiki tab with Microsoft Graph](https://blog.icewolf.ch/archive/2021/02/20/microsoft-teams-remove-wiki-tab-with-microsoft-graph.aspx).
+
+<Tip>
+
+  Although the article is in German, browser's built-in translation works just fine. If you want, you can also go directly to the [translated article](https://blog-icewolf-ch.translate.goog/archive/2021/02/20/microsoft-teams-remove-wiki-tab-with-microsoft-graph.aspx?_x_tr_sl=de&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=sc).
+
+</Tip>
 
 ## How can I prepare for Teams wiki retirement?
 
