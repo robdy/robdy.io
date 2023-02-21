@@ -7,6 +7,7 @@ import { withPrefix } from 'gatsby'
 import { MDXProvider } from '@mdx-js/react'
 import { NoteBlock, WarningBlock, TipBlock } from './Block'
 import { LinkToAnywhere } from './LinkToAnywhere'
+import { H2 } from './Headers'
 
 const TemplateWrapper = ({ children }) => {
   const { title, description, siteUrl } = useSiteMetadata()
@@ -150,6 +151,7 @@ const TemplateWrapper = ({ children }) => {
           Warning: WarningBlock,
           Tip: TipBlock,
           a: LinkToAnywhere,
+          h2: H2,
         }}
       >
         {children}
