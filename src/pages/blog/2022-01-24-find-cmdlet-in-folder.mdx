@@ -14,6 +14,12 @@ This blog post was inspired by the Microsoft Message Center announcement MC31613
 
 The announcement points out three cmdlets to be fully retired. It also mentioned one cmdlet to be deprecated only for number assignment functionality.
 
+<Tip>
+
+  It turned out that there's a new opportunity to use the script. It's about [retirement of license assignment APIs from Microsoft Graph](https://techcommunity.microsoft.com/t5/microsoft-entra-azure-ad-blog/migrate-your-apps-to-access-the-license-managements-apis-from/ba-p/2464366). I've added a snippet for this [at the end of the article](#full-script).
+
+</Tip>
+
 ## Issue
 
 After we read the announcement, one question popped up. How to verify if the change affects our scripts? Let's try to go step by step and find a way.
@@ -115,6 +121,30 @@ Set-CsOnlineVoiceApplicationInstance
 Get-ChildItem $scriptFolderPath -File -Recurse -Filter "*.ps1" | 
   Select-String -Pattern ($cmdletsToBeChecked -join "|")
 ```
+
+If you're here because of the retirement of license assignment APIs for Microsoft Graph, below is the snippet you can use:
+
+
+```powershell
+$scriptFolderPath = 'C:\temp'
+$cmdletsToBeChecked = @"
+Set-MsolUserLicense
+New-MsolUser
+Set-AzureADUserLicense
+assignLicense
+"@ -split "`n"
+
+# Line break added for visibility
+Get-ChildItem $scriptFolderPath -File -Recurse -Filter "*.ps1" | 
+  Select-String -Pattern ($cmdletsToBeChecked -join "|")
+```
+<Note>
+
+  The retirement of license assignment APIs is a bit different than the changes in the number assignment process. The cmdlets are not fully retired (yet) so you need to do some manual checking:
+  * For *New-MsolUser* check whether *-LicenseAssignment* or *-LicenseOptions* is used
+  * For *assignLicense* check if *graph.windows.net* endpoint is used
+
+</Note>
 
 ## Limitations
 
