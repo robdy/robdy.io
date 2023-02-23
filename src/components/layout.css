@@ -767,6 +767,15 @@ pre[class*='language-']:not(.line-numbers){
   overflow-x: hidden;
 }
 
+/* Fixed inline codeblocks display block */
+/* Introduced in MDX V2 https://github.com/robdy/robdy.io/pull/712 */
+div:has(code){
+  display: inline;
+}
+div:has(div code){
+  display: block;
+}
+
 /*#endregion PrismJS customization */
 
 /*#region Comments */
