@@ -10,13 +10,12 @@ export default class PostTile extends React.Component {
 
     return (
       <div className="roll-tile-container">
-        <Link className="roll-post-link" to={postData.fields.slug}>
-          <div className="roll-post-container" key={postData.id}>
-            <article
-              className={`roll-list-item tile is-child box notification ${
-                postData.frontmatter.featuredpost ? 'is-featured' : ''
+        <div className="roll-post-container" key={postData.id}>
+          <article
+            className={`roll-list-item tile is-child box notification ${postData.frontmatter.featuredpost ? 'is-featured' : ''
               }`}
-            >
+          >
+            <Link className="roll-post-link" to={postData.fields.slug}>
               <header>
                 {/* {postData.frontmatter.featuredimage ? (
                     <div className="featured-thumbnail">
@@ -30,26 +29,31 @@ export default class PostTile extends React.Component {
                   ) : null} */}
                 <p className="roll-post-title">{postData.frontmatter.title}</p>
               </header>
+            </Link>
+            <Link className="roll-post-link" to={postData.fields.slug}>
               <p className={`roll-post-date`}>
                 {postDate.toLocaleDateString('en-GB', postDateOptions)}
               </p>
+            </Link>
+            <Link className="roll-post-link" to={postData.fields.slug}>
               <p className={`roll-post-description`}>
                 {postData.frontmatter.description}
               </p>
-              {postData.frontmatter.tags && postData.frontmatter.tags.length ? (
-                <div>
-                  <ul className="taglist">
-                    {postData.frontmatter.tags.map((tag) => (
-                      <Link to={`/tags/${kebabCase(tag)}/`}>
-                        <li key={tag + `tag`}>{tag}</li>
-                      </Link>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-            </article>
-          </div>
-        </Link>
+            </Link>
+            {postData.frontmatter.tags && postData.frontmatter.tags.length ? (
+              <div>
+                <ul className="taglist" key={postData.id + `taglist`}>
+                  {postData.frontmatter.tags.map((tag) => (
+                    <Link to={`/tags/${kebabCase(tag)}/`} key={tag + `taglink`}>
+                      <li key={tag + `tag`}>{tag}</li>
+                    </Link>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+          </article>
+        </div>
+
       </div>
     )
   }
