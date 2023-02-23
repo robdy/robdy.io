@@ -772,7 +772,7 @@ pre[class*='language-']:not(.line-numbers){
 div:has(code){
   display: inline;
 }
-div:has(pre code){
+div{
   display: block;
 }
 
