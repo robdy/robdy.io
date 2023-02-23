@@ -22,9 +22,9 @@ function BlogRoll(props) {
       {postsToRender &&
         postsToRender.map(({ node: post }) =>
           post?.fields?.slug ? (
-            <PostTile postData={post} />
+            <PostTile postData={post} key={post.id} />
           ) : (
-            <GuestPostTile postData={post} />
+              <GuestPostTile postData={post} key={post.id} />
           )
         )}
       {maxPosts ? (
