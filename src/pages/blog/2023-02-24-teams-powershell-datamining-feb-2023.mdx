@@ -1,0 +1,129 @@
+---
+templateKey: blog-post
+title: Teams PowerShell datamining - Feb 2023
+date: 2023-02-24T10:38:00.0000000Z
+description: When we dig into new additions to Teams PowerShell we’ll discover plenty of new things. There’s a lot of information missing from the official docs
+featuredpost: false
+tags:
+  - teams
+  - powershell
+  - datamining
+---
+Do we want to know, what's not in the official docs for Teams PowerShell module? Of course we do. Let's do some digging and learn more about the changes made during first two months of 2023.
+
+## Emergency calling policies
+
+*ExtendedNotifications* parameter appeared in emergency calling policies cmdlets. It's available for the entire set of cmdlets: *Get-*, *Set-*, and *New-*.
+
+A new cmdlet to create emergency calling extended notification popped up, too. It's name is *New-CsTeamsEmergencyCallingExtendedNotification*. Although the release notes say:
+
+> Functionality remains the same as the previous implementation
+
+There is no mention of the cmdlet or the new parameter in the cmdlet help pages ([New-](https://learn.microsoft.com/en-us/powershell/module/skype/new-csteamsemergencycallingpolicy?view=skype-ps), [Set-](https://learn.microsoft.com/en-us/powershell/module/skype/set-csteamsemergencycallingpolicy?view=skype-ps)) nor in the [Manage emergency calling policies in Microsoft Teams](https://learn.microsoft.com/en-us/microsoftteams/manage-emergency-calling-policies) article.
+
+The cmdlet and parameter were both added with the release of the 4.9.3 version.
+
+### New-CsTeamsEmergencyCallingExtendedNotification
+
+The new cmdlet accepts the following parameters:
+
+* *EmergencyDialString* \<string\> - the only mandatory one
+* *NotificationGroup* \<string\>
+
+* *NotificationDialOutNumber* \<string\>
+* *NotificationMode* \<string\>
+
+When we try to run it, it returns error:
+
+> New-CsTeamsEmergencyCallingExtendedNotification: Could not find the resource "XsdClassGeneratorStringsResources.resources" among the resources "" embedded in the assembly "Microsoft.Teams.Policy.Administration.Cmdlets.Providers.PolicyRp", nor among the resources in any satellite assemblies for the specified culture. Perhaps the resources were embedded with an incorrect name.
+
+## Call hold policies
+
+*StreamingSourceAuthType* and *StreamingSourceUrl* were added to Teams call hold policy.
+
+These properties are currently returned by *Get-CsTeamsCallHoldPolicy*. The cmdlets for setting (*New-CsTeamsCallHoldPolicy* and *Set-CsTeamsCallHoldPolicy*) have these parameters, too.
+
+For now, these parameters are described as *reserved for internal Microsoft use* and we can only guess whether that's something to be released for clients.
+
+In my opinion, call hold streaming might be a useful service. Companies could use it to provide real-time marketing instead of boring music played on hold. Or they can play Last Christmas between September and December 😅.
+
+## Meeting branding policies
+
+Microsoft released [meeting branding](https://learn.microsoft.com/en-us/MicrosoftTeams/meeting-themes) as a part of [Teams Premium license](https://www.microsoft.com/en-us/microsoft-365/blog/2023/02/01/microsoft-teams-premium-cut-costs-and-add-ai-powered-productivity/). For that, there is plenty of additions to the PowerShell module. First of all, policy-related cmdlets:
+
+* *Grant-CsTeamsMeetingBrandingPolicy*
+* *Get-CsTeamsMeetingBrandingPolicy*
+
+* *New-CsTeamsMeetingBrandingPolicy*
+* *Remove-CsTeamsMeetingBrandingPolicy*
+
+* *Set-CsTeamsMeetingBrandingPolicy*
+
+There are also cmdlets supporting creation of the policy:
+
+* *New-CsTeamsMeetingBrandingTheme*
+* *New-CsTeamsMeetingBackgroundImage*
+
+### Get-CsTeamsMeetingBrandingPolicy
+
+Currently, *Get-CsTeamsMeetingBrandingPolicy* shows the following properties:
+
+* *Identity*
+* *NdiAssuranceSlateImages*
+
+* *MeetingBackgroundImages*
+* *MeetingBrandingThemes*
+
+* *DefaultTheme*
+* *EnableMeetingOptionsThemeOverride*
+
+* *EnableNdiAssuranceSlate*
+* *EnableMeetingBackgroundImages*
+
+This cmdlet returns more parameters. They are visible if you use the trick:
+
+```powershell
+Get-CsTeamsMeetingBrandingPolicy | Select-Object *
+```
+
+The properties are:
+
+* *UpaSeparator4*
+* *UpaSeparator3*
+
+* *UpaSeparator2*
+* *UpaSeparator*
+
+* *EnableLobbyBackgroundBranding*
+* *EnableLobbyLogoBranding*
+
+* *LobbyBackgroundBrandingImages*
+* *LobbyLogoBrandingImages*
+
+The first four don't say much about their purpose. From what I found UpaSeparator was the parameter returned by Skype for Business Server's cmdlet *Get-CsConferenceDirectory*. What's its purpose on Teams? I have no idea.
+
+### NDI Assurance Slate
+
+There is one new cmdlet related to *EnableNdiAssuranceSlate* and it is *New-CsTeamsNdiAssuranceSlate*.
+
+The parameters accepted by these cmdlets are:
+
+* *Id* \<string\>
+* *Name* \<string\>
+
+* *NdiImageUri* \<string\>
+* *IsDefault* \<bool\> (optional)
+
+What's interesting, there is no *Set-CsTeamsNdiAssuranceSlate* or *Delete-CsTeamsNdiAssuranceSlate* cmdlet available yet. There's no related documentation available.
+
+## Call queue
+
+We already had *WelcomeMusicAudioFileId* parameter for call queues. Now we also get text to speech option with *WelcomeTextToSpeechPrompt*. It's already available for both cmdlets: *Set-CsCallQueue* and *New-CsCallQueue*.
+
+## Connecting to module
+
+The [application-based authentication](https://learn.microsoft.com/en-us/microsoftteams/teams-powershell-application-authentication) for Teams PowerShell module got a new parameter: *Certificate*. If you want to have a look, Andres Bohren has an article showing how to use it: [MicrosoftTeams PowerShell Module 4.9.3 released as GA](https://blog.icewolf.ch/archive/2023/02/01/microsoftteams-powershell-module-4-9-3-released-as-ga.aspx).
+
+## Summary
+
+I would say that we're getting more detailed release notes lately. It's not so easy to discover exciting features before they are announced. But as always - we found something. And we'll keep digging for more.
