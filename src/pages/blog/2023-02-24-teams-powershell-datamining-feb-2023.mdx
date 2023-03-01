@@ -9,7 +9,6 @@ tags:
   - powershell
   - datamining
 ---
-
 Do we want to know, what's not in the official docs for Teams PowerShell module? Of course we do. Let's do some digging and learn more about the changes made during first two months of 2023.
 
 ## Emergency calling policies
@@ -20,7 +19,7 @@ A new cmdlet to create emergency calling extended notification popped up, too. I
 
 > Functionality remains the same as the previous implementation
 
-There is no mention of the cmdlet or the new parameter in the cmdlet help pages ([New-](https://learn.microsoft.com/en-us/powershell/module/skype/new-csteamsemergencycallingpolicy?view=skype-ps), [Set-](https://learn.microsoft.com/en-us/powershell/module/skype/set-csteamsemergencycallingpolicy?view=skype-ps)) nor in the [Manage emergency calling policies in Microsoft Teams ](https://learn.microsoft.com/en-us/microsoftteams/manage-emergency-calling-policies)article.
+There is no mention of the cmdlet or the new parameter in the cmdlet help pages ([New-](https://learn.microsoft.com/en-us/powershell/module/skype/new-csteamsemergencycallingpolicy?view=skype-ps), [Set-](https://learn.microsoft.com/en-us/powershell/module/skype/set-csteamsemergencycallingpolicy?view=skype-ps)) nor in the [Manage emergency calling policies in Microsoft Teams](https://learn.microsoft.com/en-us/microsoftteams/manage-emergency-calling-policies) article.
 
 The cmdlet and parameter were both added with the release of the 4.9.3 version.
 
@@ -28,11 +27,11 @@ The cmdlet and parameter were both added with the release of the 4.9.3 version.
 
 The new cmdlet accepts the following parameters:
 
-* EmergencyDialString <string> - the only mandatory one
-* NotificationGroup <string>
+* EmergencyDialString \<string\> - the only mandatory one
+* NotificationGroup \<string\>
 
-* NotificationDialOutNumber <string>
-* NotificationMode <string>
+* NotificationDialOutNumber \<string\>
+* NotificationMode \<string\>
 
 When we try to run it, it returns error:
 
@@ -109,11 +108,11 @@ There is one new cmdlet related to *EnableNdiAssuranceSlate* and it is *New-CsTe
 
 The parameters accepted by these cmdlets are:
 
-* *Id* <string>
-* *Name* <string>
+* *Id* \<string\>
+* *Name* \<string\>
 
-* *NdiImageUri* <string>
-* *IsDefault *<bool> (optional)
+* *NdiImageUri* \<string\>
+* *IsDefault* \<bool\> (optional)
 
 What's interesting, there is no *Set-CsTeamsNdiAssuranceSlate* or *Delete-CsTeamsNdiAssuranceSlate* cmdlet available yet. There's no related documentation available.
 
@@ -128,5 +127,3 @@ The [application-based authentication](https://learn.microsoft.com/en-us/microso
 ## Summary
 
 I would say that we're getting more detailed release notes lately. It's not so easy to discover exciting features before they are announced. But as always - we found something. And we'll keep digging for more.
-
-
