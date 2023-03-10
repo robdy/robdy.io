@@ -16,7 +16,7 @@ export default class BlogIndexPage extends React.Component {
           <Navbar />
 						<div className="flex newest-posts-container">
 							<h2 className="newest-posts-header">All posts</h2>
-							<a href="rss.xml" className="rss-link" rel="nofollow noopener noreferrer" target="_blank">
+							<a href="/rss.xml" className="rss-link" rel="nofollow noopener noreferrer" target="_blank">
 								<img src={rss} className="rss-icon" alt="RSS icon" />
 							</a>
 						</div>
