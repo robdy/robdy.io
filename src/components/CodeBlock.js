@@ -1,46 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react'
+import Prism from "prismjs"
 
-function CodeBlock(props) {
-	const [codeCopied, setCodeCopied] = useState(false);
-	const codeBlockRef = useRef(null);
-	const codeProps = props.children.props;
-	console.log(codeProps);
-
- 	useEffect(() => {
- 		const timeoutId = setTimeout(() => {
- 			if (codeCopied) { setCodeCopied(false) }
- 		}, 2000);
-
- 		return () => clearTimeout(timeoutId);
- 	}, [codeCopied]);
-
- 	const copyCode = (e) => {
- 		if (!codeCopied) {
- 			navigator.clipboard.writeText(codeBlockRef.current.innerText)
- 				.then(setCodeCopied(true));
- 		}
- 		return;
- 	};
-
-	const languageString = codeProps.className.replace(/(language-| line-numbers)/mg, '');
+export const CodeBlock = (props) => {
+	useEffect(() => {
+		Prism.highlightAll()
+	})
 	return (
-		<React.Fragment>
-			<section className='codeheader-section'>
-				<div className='codeheader flex'>
-					<span className='codeheader-language'>{languageString}</span>
-					<button className={`codeheader-button ${codeCopied ? 'codeheader-button-clicked' : null}`} onClick={copyCode}>{
-						codeCopied ? 'Copied' : 'Copy'
-					}</button>
-				</div>
-			</section>
-			<pre className={`${codeProps.className}`} ref={codeBlockRef}>
-				<code {...codeProps} />
-			</pre>
-		</React.Fragment>
+		<span>
+			<div class="gatsby-highlight" data-language="powershell">
+				<pre class="language-powershell">
+					<code class="language-powershell">
+						{props.children}
+					</code>
+				</pre>
+			</div>
+		</span>
 	)
 }
-
-export default CodeBlock
 
 // import React, { useEffect, useRef, useState } from "react";
 

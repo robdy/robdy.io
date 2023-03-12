@@ -8,7 +8,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { NoteBlock, WarningBlock, TipBlock } from './Block'
 import { LinkToAnywhere } from './LinkToAnywhere'
 import { Header } from './Header'
-import CodeBlock from './CodeBlock'
+import { CodeBlock } from './CodeBlock'
 
 const TemplateWrapper = ({ children }) => {
   const { title, description, siteUrl } = useSiteMetadata()
@@ -158,7 +158,7 @@ const TemplateWrapper = ({ children }) => {
           h4: props => <Header level={'4'} {...props} />,
           h5: props => <Header level={'5'} {...props} />,
           h6: props => <Header level={'6'} {...props} />,
-          pre: CodeBlock
+          pre: CodeBlock,
         }}
       >
         {children}
