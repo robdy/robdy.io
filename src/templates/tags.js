@@ -56,8 +56,8 @@ export const tagPageQuery = graphql`
     }
     allMdx(
       limit: 1000
-      sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      sort: {frontmatter: {date: DESC}}
+      filter: {frontmatter: {tags: {in: [$tag]}}}
     ) {
       totalCount
       edges {
