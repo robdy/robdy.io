@@ -1,12 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react'
-import Prism from "prismjs"
+import React from 'react'
 
 export const CodeBlock = (props) => {
-	useEffect(() => {
-		Prism.highlightAll()
-	})
 	return (
-		<span>
+		<span className='blabla'>
 			<div class="gatsby-highlight" data-language="powershell">
 				<pre class="language-powershell">
 					<code class="language-powershell">
