@@ -10,7 +10,7 @@ tags:
   - sharepoint
 ---
 
-Imagine we have a PowerShell script to upload a file to a specific SharePoint site. It's pretty simple - we can use *Connect-PnPOnline *and then *Add-PnPFile*.
+Imagine we have a PowerShell script to upload a file to a specific SharePoint site. It's pretty simple - we can use *Connect-PnPOnline* and then *Add-PnPFile*.
 
 But at some point, our script gets popular and someone else is coming to us. They are asking to upload the same file to another SharePoint site. Then things start to be interesting.
 
@@ -65,7 +65,7 @@ Get-PnPSite | Select-Object Url
 
 Get-PnPSite will return the second site:
 
-![Return from the cmdlet showing only the second site](../../img/multiple-pnp-connections/20230314-142702-uLUpotIGXf-0.png)
+![Return from the cmdlet showing only the second site](../../img/multiple-pnp-connections/20230314-142702-uLUpotIGXf.png)
 
 ## Inspecting the connections
 
@@ -73,11 +73,9 @@ Get-PnPSite will return the second site:
 
 If we search the [PnP cmdlet list](https://pnp.github.io/powershell/cmdlets/Add-PnPAlert.html), we'll find something that can help: Get-PnPConnection. Let's check what it returns:
 
-![Return from Get-PnPConnection cmdlet showing only the second site](../../img/multiple-pnp-connections/20230314-143024-bQDX1a5xMu-0.png)
+![Return from Get-PnPConnection cmdlet showing only the second site](../../img/multiple-pnp-connections/20230314-143024-bQDX1a5xMu.png)
 
 There is only one connection returned. We cannot find the first connection at all.
-
-![](../../img/multiple-pnp-connections/20230314-143024-bQDX1a5xMu-1.png)
 
 ## Disconnecting
 
@@ -90,9 +88,7 @@ Get-PnPConnection
 
 What we get in return doesn't help:
 
-![Return from Get-PnPConnection showing an error](../../img/multiple-pnp-connections/20230314-143403-YjCRUziK3L-0.png)
-
-![](../../img/multiple-pnp-connections/20230314-143403-YjCRUziK3L-1.png)
+![Return from Get-PnPConnection showing an error](../../img/multiple-pnp-connections/20230314-143403-YjCRUziK3L.png)
 
 ## Returning connection
 
@@ -111,7 +107,7 @@ Get-PnPConnection -Connection $secondConnection
 
 And we get both sites in return:
 
-![Return from Get-PnPConnection showing both sites](../../img/multiple-pnp-connections/20230314-145614-H0UmG5MSEI-0.png)
+![Return from Get-PnPConnection showing both sites](../../img/multiple-pnp-connections/20230314-145614-H0UmG5MSEI.png)
 
 Now we can incorporate the parameters we found into our script:
 
@@ -140,8 +136,6 @@ Add-PnPFile -path $uploadFilePath -Folder $secondSiteFolderPath -NewFileName $ra
 ```
 
 As a result, the file is uploaded to both sites:
-
-![](../../img/multiple-pnp-connections/20230314-145614-H0UmG5MSEI-1.png)
 
 ![Result from the script showing the same file uploaded to both sites](../../img/multiple-pnp-connections/20230314-150107-qwcZSluBMP.png)
 
