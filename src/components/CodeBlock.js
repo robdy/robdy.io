@@ -1,18 +1,81 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import Prism from 'prismjs'
+// https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-remark-prismjs/src/load-prism-language.js#LL2-L2C54
+const prismComponents = require(`prismjs/components`)
 
 export const CodeBlock = (props) => {
+	const codeProps = props.children.props;
+	const blockLang = codeProps.className ? codeProps.className.replace(/^language-/g, '') : 'markup'
+
+	const loadLangData = (lang) => {
+		if (!lang) {
+			// No language specified
+			return
+		}
+
+		if (Prism.languages[lang]) {
+			// Language already loaded
+			return
+		}
+		const languageData = prismComponents.languages[lang]
+
+		if (languageData.require) {
+			// Load the required language first
+			if (Array.isArray(languageData.require)) {
+				languageData.require.forEach(loadLangData)
+			} else {
+				loadLangData(languageData.require)
+			}
+		}
+
+		require(`prismjs/components/prism-${lang}.js`)
+	}
+
+	// Load language data first
+	loadLangData(blockLang);
+
+	// Highlight code
+	const highlightedCode = Prism.highlight(codeProps.children, Prism.languages[blockLang], blockLang)
+
 	return (
-		<span className='blabla'>
-			<div class="gatsby-highlight" data-language="powershell">
-				<pre class="language-powershell">
-					<code class="language-powershell">
-						{props.children}
-					</code>
-				</pre>
-			</div>
-		</span>
+		<div className="gatsby-highlight" data-language={blockLang}>
+			<pre className={codeProps.className}>
+				<code className={codeProps.className} dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+			</pre>
+		</div>
 	)
 }
+
+
+// https://github.com/PrismJS/prism/issues/972#issuecomment-374736957
+
+// useEffect(() => {
+// 	Prism.highlightAll();
+// }, []);
+// 	const wrappedHighlight = document.createElement('div');
+// 	wrappedHighlight.className = 'language-powershell'
+// 	wrappedHighlight.innerHTML = `
+// 	<pre class="language-powershell"><code class="language-powershell">
+// ${props.children.props.children}</code>
+// </pre>
+// 				`
+// 	console.log(wrappedHighlight);
+
+// 	Prism.highlightElement(wrappedHighlight)
+// 	console.log(wrappedHighlight);
+// 	console.log(wrappedHighlight.innerHTML)
+
+// console.log(Prism.highlight(props.children.props.children, Prism.languages['powershell'], 'powershell' ))
+
+{/* <div class="gatsby-highlight" data-language="powershell" dangerouslySetInnerHTML={{ __html: wrappedHighlight.innerHTML }}>
+			</div> */}
+
+
+
+
+
+
+
 
 // import React, { useEffect, useRef, useState } from "react";
 
