@@ -70,7 +70,7 @@ module.exports = {
               aliases: {},
               // If you wish to only show line numbers on certain code blocks,
               // leave false and use the {numberLines: true} syntax below
-              showLineNumbers: false,
+              showLineNumbers: true,
               noInlineHighlight: false,
               // Customize the prompt used in shell output
               // Values below are default
@@ -91,7 +91,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
-        // Exclude specific pages or groups of pages using glob parameters
+        // Exclude specifijc pages or groups of pages using glob parameters
         // See: https://github.com/isaacs/minimatch
         excludes: [`/tags/*`, `/tags/`],
       },
