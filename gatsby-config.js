@@ -62,7 +62,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
-        // Exclude specifijc pages or groups of pages using glob parameters
+        // Exclude specific pages or groups of pages using glob parameters
         // See: https://github.com/isaacs/minimatch
         excludes: [`/tags/*`, `/tags/`],
       },
