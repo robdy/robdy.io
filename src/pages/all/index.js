@@ -1,5 +1,4 @@
 import React from 'react'
-import { Helmet } from 'react-helmet'
 import Layout from '../../components/Layout'
 import BlogRoll from '../../components/BlogRoll'
 import Navbar from '../../components/Navbar'
@@ -9,9 +8,6 @@ export default class BlogIndexPage extends React.Component {
   render() {
     return (
       <Layout>
-        <Helmet>
-          <link rel="canonical" href="https://robdy.io/all/" />
-        </Helmet>
         <div className="container">
           <Navbar />
 						<div className="flex newest-posts-container">
@@ -33,3 +29,8 @@ export default class BlogIndexPage extends React.Component {
     )
   }
 }
+
+export const Head = () => (
+  // Fix it so it's not hardcoded
+  <link rel="canonical" href="https://robdy.io/all" />
+)

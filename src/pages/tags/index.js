@@ -1,6 +1,5 @@
 import React from 'react'
 import { kebabCase } from 'lodash'
-import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 import Layout from '../../components/Layout'
 import Navbar from '../../components/Navbar'
@@ -8,17 +7,10 @@ import Navbar from '../../components/Navbar'
 const TagsPage = ({
   data: {
     allMdx: { group },
-    site: {
-      siteMetadata: { title, siteUrl },
-    },
   },
 }) => (
   <Layout>
     <section className="section">
-      <Helmet title={`Tags | ${title}`}>
-        <meta name="robots" content="noindex" />
-        <link rel="canonical" href={`${siteUrl}/tags/`} />
-      </Helmet>
       <div className="container content">
         <Navbar />
         <div className="columns">
@@ -44,6 +36,22 @@ const TagsPage = ({
 )
 
 export default TagsPage
+
+export const Head = ({
+  data: {
+    site: {
+      siteMetadata: { title, siteUrl },
+    },
+  },
+}) => {
+  return (
+    <React.Fragment>
+      <title>{`Tags | ${title}`}</title>
+      <meta name="robots" content="noindex" />
+      <link rel="canonical" href={`${siteUrl}/tags/`} />
+    </React.Fragment>
+  )
+}
 
 export const tagPageQuery = graphql`
   query TagsQuery {

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Helmet } from 'react-helmet'
 import { Link } from 'gatsby'
 import Layout from '../components/Layout'
 import BlogRoll from '../components/BlogRoll'
@@ -9,11 +8,6 @@ export default class BlogIndexPage extends React.Component {
   render() {
     return (
       <Layout>
-        <Helmet>
-          {/* Fix it so it's not hardcoded */}
-          <link rel="canonical" href="https://robdy.io" />
-        </Helmet>
-
         <div className="bio">
           <div className="container flex">
             <div className="bio-picture-container flex">
@@ -62,3 +56,8 @@ export default class BlogIndexPage extends React.Component {
     )
   }
 }
+
+export const Head = () => (
+  // Fix it so it's not hardcoded
+  <link rel="canonical" href="https://robdy.io" />
+)

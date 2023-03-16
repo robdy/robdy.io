@@ -1,15 +1,10 @@
 import React from 'react'
 import Layout from '../../components/Layout'
 import ExternalLink from '../../components/ExternalLink'
-import { Helmet } from 'react-helmet'
 import Navbar from '../../components/Navbar'
 
 const AboutPage = () => (
   <Layout>
-    <Helmet>
-      {/* Fix it so it's not hardcoded */}
-      <link rel="canonical" href="https://robdy.io/about" />
-    </Helmet>
     <div className="container">
       <Navbar />
       <h1>About me</h1>
@@ -68,6 +63,11 @@ const AboutPage = () => (
       </ul>
     </div>
   </Layout>
+)
+
+export const Head = () => (
+  // Fix it so it's not hardcoded
+  <link rel = "canonical" href = "https://robdy.io/about" />
 )
 
 export default AboutPage

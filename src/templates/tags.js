@@ -1,5 +1,4 @@
 import React from 'react'
-import Helmet from 'react-helmet'
 import { kebabCase } from 'lodash'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
@@ -11,21 +10,14 @@ class TagRoute extends React.Component {
   render() {
     const posts = this.props.data.allMdx.edges
     const tag = this.props.pageContext.tag
-    const title = this.props.data.site.siteMetadata.title
     const totalCount = this.props.data.allMdx.totalCount
-    const tagHeader = `${totalCount} post${
-      totalCount === 1 ? '' : 's'
-    } tagged with “${tag}”`
-    const tagPath = kebabCase(tag)
+    const tagHeader = `${totalCount} post${totalCount === 1 ? '' : 's'
+      } tagged with “${tag}”`
     const siteUrl = this.props.data.site.siteMetadata.siteUrl
 
     return (
       <Layout>
         <section className="section">
-          <Helmet title={`${tag} | ${title}`}>
-            <meta name="robots" content="noindex" />
-            <link rel="canonical" href={`${siteUrl}/tags/${tagPath}/`} />
-          </Helmet>
           <div className="container content">
             <Navbar />
             <div className="">
@@ -45,6 +37,27 @@ class TagRoute extends React.Component {
 }
 
 export default TagRoute
+
+export const Head = ({
+  data: {
+    site: {
+      siteMetadata: { title, siteUrl },
+    },
+  },
+  pageContext: {
+    tag
+  }
+}) => {
+  const tagPath = kebabCase(tag)
+
+  return (
+    <React.Fragment>
+      <title>{`${tag} | ${title}`}</title>
+      <meta name="robots" content="noindex" />
+      <link rel="canonical" href={`${siteUrl}/tags/${tagPath}/`} />
+    </React.Fragment>
+  )
+}
 
 export const tagPageQuery = graphql`
   query TagPage($tag: String) {
