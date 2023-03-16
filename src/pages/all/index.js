@@ -32,5 +32,5 @@ export default class BlogIndexPage extends React.Component {
 
 export const Head = () => (
   // Fix it so it's not hardcoded
-  <link rel="canonical" href="https://robdy.io/all" />
+  <link id="canonical" rel="canonical" href="https://robdy.io/all" />
 )

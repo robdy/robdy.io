@@ -5,6 +5,7 @@ import Layout from '../components/Layout'
 import PostTile from '../components/PostTile'
 import { TagsData } from '../components/TagsData'
 import Navbar from '../components/Navbar'
+import { Metadata } from '../components/Metadata'
 
 class TagRoute extends React.Component {
   render() {
@@ -51,11 +52,11 @@ export const Head = ({
   const tagPath = kebabCase(tag)
 
   return (
-    <React.Fragment>
-      <title>{`${tag} | ${title}`}</title>
+    <Metadata>
+      <title id="title">{`${tag} | ${title}`}</title>
       <meta name="robots" content="noindex" />
       <link rel="canonical" href={`${siteUrl}/tags/${tagPath}/`} />
-    </React.Fragment>
+    </Metadata>
   )
 }
 

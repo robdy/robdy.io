@@ -2,6 +2,7 @@ import React from 'react'
 import Layout from '../../components/Layout'
 import ExternalLink from '../../components/ExternalLink'
 import Navbar from '../../components/Navbar'
+import { Metadata } from '../../components/Metadata'
 
 const AboutPage = () => (
   <Layout>
@@ -66,8 +67,10 @@ const AboutPage = () => (
 )
 
 export const Head = () => (
-  // Fix it so it's not hardcoded
+  <Metadata>
+    {/* Fix it so it's not hardcoded */}
   <link rel = "canonical" href = "https://robdy.io/about" />
+  </Metadata>
 )
 
 export default AboutPage
