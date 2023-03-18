@@ -1,27 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { kebabCase } from 'lodash'
-import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
-import Content, { HTMLContent } from '../components/Content'
 import Comments from '../components/Comments'
 import useSiteMetadata from '../components/SiteMetadata'
 import Navbar from '../components/Navbar'
+import { Metadata } from '../components/Metadata'
 
 const BlogPostTemplate = ({
-  content,
-  contentComponent,
-  body,
   children,
   date,
   description,
   tags,
   title,
-  helmet,
   relativePath,
 }) => {
-  const PostContent = contentComponent || Content
   const formattedDate = date.toLocaleDateString('en-us', {
     month: 'short',
     day: '2-digit',
@@ -31,7 +25,6 @@ const BlogPostTemplate = ({
 
   return (
     <section className="section">
-      {helmet || ''}
       <div className="container content">
         <div className="header-container">
           <Navbar />
@@ -74,50 +67,22 @@ const BlogPostTemplate = ({
 }
 
 BlogPostTemplate.propTypes = {
-  content: PropTypes.node.isRequired,
-  contentComponent: PropTypes.func,
   date: PropTypes.instanceOf(Date),
   description: PropTypes.string,
   title: PropTypes.string,
   slug: PropTypes.string,
-  helmet: PropTypes.object,
   relativePath: PropTypes.string,
-  body: PropTypes.string,
 }
 
 const BlogPost = (props) => {
   const { mdx: post } = props.data
-  const { siteUrl } = useSiteMetadata()
 
   return (
     <Layout>
       <BlogPostTemplate
-        content={post.body}
-        contentComponent={HTMLContent}
-        body={post.body}
         children={props.children}
         date={new Date(post.frontmatter.date)}
         description={post.frontmatter.description}
-        helmet={
-          <Helmet titleTemplate="%s | Robert Dyjas">
-            <title>{`${post.frontmatter.title}`}</title>
-            <meta
-              name="description"
-              content={`${post.frontmatter.description}`}
-            />
-            <meta
-              property="og:description"
-              content={`${post.frontmatter.description}`}
-            />
-            <meta property="og:title" content={`${post.frontmatter.title}`} />
-            <meta property="og:url" content={`${siteUrl}${post.fields.slug}`} />
-            <meta
-              property="article:published_time"
-              content={`${post.frontmatter.date}`}
-            />
-            <link rel="canonical" href={`${siteUrl}${post.fields.slug}`} />
-          </Helmet>
-        }
         relativePath={post.parent.relativePath}
         tags={post.frontmatter.tags}
         title={post.frontmatter.title}
@@ -134,6 +99,31 @@ BlogPost.propTypes = {
 
 export default BlogPost
 
+export const Head = ({ data: { mdx: post } }) => {
+  const { siteUrl } = useSiteMetadata()
+
+  return (
+    <Metadata>
+      <title id="title">{`${post.frontmatter.title} | Robert Dyjas`}</title>
+      <meta
+        name="description"
+        content={`${post.frontmatter.description}`}
+      />
+      <meta
+        property="og:description"
+        content={`${post.frontmatter.description}`}
+      />
+      <meta property="og:title" content={`${post.frontmatter.title}`} />
+      <meta property="og:url" content={`${siteUrl}${post.fields.slug}`} />
+      <meta
+        property="article:published_time"
+        content={`${post.frontmatter.date}`}
+      />
+      <link rel="canonical" href={`${siteUrl}${post.fields.slug}`} />
+    </Metadata>
+  )
+}
+
 export const pageQuery = graphql`
   query BlogPostByID($id: String!) {
     mdx(id: { eq: $id }) {
@@ -146,7 +136,6 @@ export const pageQuery = graphql`
       fields {
         slug
       }
-      body
       frontmatter {
         date
         title
