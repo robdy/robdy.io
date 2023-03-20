@@ -2,7 +2,7 @@ import React from 'react'
 import useSiteMetadata from './SiteMetadata'
 import { withPrefix } from 'gatsby'
 
-export const Metadata = ({ children }) => {
+export const Metadata = ({ children, pathname}) => {
 	const { title, description, siteUrl } = useSiteMetadata()
 
 	return (
@@ -130,6 +130,7 @@ export const Metadata = ({ children }) => {
 				content={`${siteUrl}${withPrefix('/')}img/og-image.png`}
 			/>
 			<meta property="og:description" content={description} />
+			<link id="canonical" rel="canonical" href={`${siteUrl}${withPrefix('/')}${pathname}`} />
 			<script
 				async
 				defer

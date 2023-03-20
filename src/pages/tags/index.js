@@ -43,15 +43,13 @@ export const Head = ({
       siteMetadata: { title, siteUrl },
     },
   },
-}) => {
-  return (
-    <React.Fragment>
-      <title>{`Tags | ${title}`}</title>
-      <meta name="robots" content="noindex" />
-      <link rel="canonical" href={`${siteUrl}/tags/`} />
-    </React.Fragment>
-  )
-}
+}) => (
+  <React.Fragment>
+    <title id="title">{`Tags | ${title}`}</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={`${siteUrl}/tags/`} />
+  </React.Fragment>
+)
 
 export const tagPageQuery = graphql`
   query TagsQuery {

@@ -3,6 +3,8 @@ import Layout from '../../components/Layout'
 import BlogRoll from '../../components/BlogRoll'
 import Navbar from '../../components/Navbar'
 import rss from '../../img/rss-solid.svg'
+import { Metadata } from '../../components/Metadata'
+import useSiteMetadata from '../../components/SiteMetadata'
 
 export default class BlogIndexPage extends React.Component {
   render() {
@@ -10,12 +12,12 @@ export default class BlogIndexPage extends React.Component {
       <Layout>
         <div className="container">
           <Navbar />
-						<div className="flex newest-posts-container">
-							<h2 className="newest-posts-header">All posts</h2>
-							<a href="/rss.xml" className="rss-link" rel="nofollow noopener noreferrer" target="_blank">
-								<img src={rss} className="rss-icon" alt="RSS icon" />
-							</a>
-						</div>
+          <div className="flex newest-posts-container">
+            <h2 className="newest-posts-header">All posts</h2>
+            <a href="/rss.xml" className="rss-link" rel="nofollow noopener noreferrer" target="_blank">
+              <img src={rss} className="rss-icon" alt="RSS icon" />
+            </a>
+          </div>
 
         </div>
         <section className="section">
@@ -30,7 +32,11 @@ export default class BlogIndexPage extends React.Component {
   }
 }
 
-export const Head = () => (
-  // Fix it so it's not hardcoded
-  <link id="canonical" rel="canonical" href="https://robdy.io/all" />
-)
+export const Head = ({ location: { pathname } }) => {
+  const { title, siteUrl } = useSiteMetadata()
+  return (
+    <Metadata pathname={pathname}>
+      <title id="title">{`All posts | ${title}`}</title>
+    </Metadata>
+  )
+}
