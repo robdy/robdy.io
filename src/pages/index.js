@@ -3,7 +3,6 @@ import { Link } from 'gatsby'
 import Layout from '../components/Layout'
 import BlogRoll from '../components/BlogRoll'
 import rss from '../img/rss-solid.svg'
-import { Metadata } from '../components/Metadata'
 
 export default class BlogIndexPage extends React.Component {
   render() {

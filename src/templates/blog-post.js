@@ -4,7 +4,6 @@ import { kebabCase } from 'lodash'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Comments from '../components/Comments'
-import useSiteMetadata from '../components/SiteMetadata'
 import Navbar from '../components/Navbar'
 import { Metadata } from '../components/Metadata'
 
@@ -99,27 +98,24 @@ BlogPost.propTypes = {
 
 export default BlogPost
 
-export const Head = ({ data: { mdx: post } }) => {
-  const { siteUrl } = useSiteMetadata()
-
+export const Head = ({ data: { mdx: post }, location: { pathname } }) => {
   return (
-    <Metadata>
+    <Metadata pathname={pathname}>
       <title id="title">{`${post.frontmatter.title} | Robert Dyjas`}</title>
       <meta
         name="description"
         content={`${post.frontmatter.description}`}
       />
       <meta
+        id="og:description"
         property="og:description"
         content={`${post.frontmatter.description}`}
       />
-      <meta property="og:title" content={`${post.frontmatter.title}`} />
-      <meta property="og:url" content={`${siteUrl}${post.fields.slug}`} />
+      <meta id="og:title" property="og:title" content={`${post.frontmatter.title} | Robert Dyjas`} />
       <meta
         property="article:published_time"
         content={`${post.frontmatter.date}`}
       />
-      <link rel="canonical" href={`${siteUrl}${post.fields.slug}`} />
     </Metadata>
   )
 }

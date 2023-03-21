@@ -130,7 +130,7 @@ export const Metadata = ({ children, pathname}) => {
 				property="og:image"
 				content={`${siteUrl}${withPrefix('/')}img/og-image.png`}
 			/>
-			<meta property="og:description" content={description} />
+			<meta id="og:description" property="og:description" content={description} />
 			<link id="canonical" rel="canonical" href={canonical} />
 			<script
 				async
