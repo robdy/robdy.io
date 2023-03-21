@@ -33,10 +33,12 @@ export default class BlogIndexPage extends React.Component {
 }
 
 export const Head = ({ location: { pathname } }) => {
-  const { title, siteUrl } = useSiteMetadata()
+  const { title } = useSiteMetadata()
+  const calculatedTitle = `All posts | ${title}`
   return (
     <Metadata pathname={pathname}>
-      <title id="title">{`All posts | ${title}`}</title>
+      <title id="title">{calculatedTitle}</title>
+      <meta id="og:title" property="og:title" content={calculatedTitle} />
     </Metadata>
   )
 }

@@ -4,7 +4,6 @@ import Layout from '../components/Layout'
 import BlogRoll from '../components/BlogRoll'
 import rss from '../img/rss-solid.svg'
 import { Metadata } from '../components/Metadata'
-import useSiteMetadata from '../components/SiteMetadata'
 
 export default class BlogIndexPage extends React.Component {
   render() {
@@ -60,10 +59,7 @@ export default class BlogIndexPage extends React.Component {
 }
 
 export const Head = () => {
-  const { siteUrl } = useSiteMetadata()
   return (
-    <Metadata>
-      <link rel="canonical" href={`${siteUrl}`} />
-    </Metadata>
+    <Metadata />
   )
 }

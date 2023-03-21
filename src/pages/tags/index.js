@@ -3,6 +3,7 @@ import { kebabCase } from 'lodash'
 import { Link, graphql } from 'gatsby'
 import Layout from '../../components/Layout'
 import Navbar from '../../components/Navbar'
+import { Metadata } from '../../components/Metadata'
 
 const TagsPage = ({
   data: {
@@ -43,12 +44,13 @@ export const Head = ({
       siteMetadata: { title, siteUrl },
     },
   },
+  location: { pathname }
 }) => (
-  <React.Fragment>
+  <Metadata pathname={pathname}>
     <title id="title">{`Tags | ${title}`}</title>
+    <meta id="og:title" property="og:title" content={`Tags | ${title}`} />
     <meta name="robots" content="noindex" />
-    <link rel="canonical" href={`${siteUrl}/tags/`} />
-  </React.Fragment>
+  </Metadata>
 )
 
 export const tagPageQuery = graphql`

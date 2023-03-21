@@ -50,12 +50,14 @@ export const Head = ({
   }
 }) => {
   const tagPath = kebabCase(tag)
+  const canonical = `${siteUrl}/tags/${tagPath}/`
 
   return (
     <Metadata>
       <title id="title">{`${tag} | ${title}`}</title>
       <meta name="robots" content="noindex" />
-      <link rel="canonical" href={`${siteUrl}/tags/${tagPath}/`} />
+      <meta id="og:url" property="og:url" content={canonical} />
+      <link id="canonical" rel="canonical" href={canonical} />
     </Metadata>
   )
 }

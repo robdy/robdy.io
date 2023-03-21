@@ -4,6 +4,7 @@ import { withPrefix } from 'gatsby'
 
 export const Metadata = ({ children, pathname}) => {
 	const { title, description, siteUrl } = useSiteMetadata()
+	const canonical = `${siteUrl}${pathname ? pathname : ''}`
 
 	return (
 		<React.Fragment>
@@ -124,13 +125,13 @@ export const Metadata = ({ children, pathname}) => {
 
 			<meta property="og:type" content="business.business" />
 			<meta id="og:title" property="og:title" content={title} />
-			<meta property="og:url" content="/" />
+			<meta id="og:url" property="og:url" content={canonical} />
 			<meta
 				property="og:image"
 				content={`${siteUrl}${withPrefix('/')}img/og-image.png`}
 			/>
 			<meta property="og:description" content={description} />
-			<link id="canonical" rel="canonical" href={`${siteUrl}${withPrefix('/')}${pathname}`} />
+			<link id="canonical" rel="canonical" href={canonical} />
 			<script
 				async
 				defer

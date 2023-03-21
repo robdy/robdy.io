@@ -66,11 +66,8 @@ const AboutPage = () => (
   </Layout>
 )
 
-export const Head = () => (
-  <Metadata>
-    {/* Fix it so it's not hardcoded */}
-  <link rel = "canonical" href = "https://robdy.io/about" />
-  </Metadata>
+export const Head = ({ location: { pathname } }) => (
+  <Metadata pathname={pathname} />
 )
 
 export default AboutPage
