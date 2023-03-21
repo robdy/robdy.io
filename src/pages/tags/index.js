@@ -41,7 +41,7 @@ export default TagsPage
 export const Head = ({
   data: {
     site: {
-      siteMetadata: { title, siteUrl },
+      siteMetadata: { title },
     },
   },
   location: { pathname }

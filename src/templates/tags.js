@@ -14,7 +14,6 @@ class TagRoute extends React.Component {
     const totalCount = this.props.data.allMdx.totalCount
     const tagHeader = `${totalCount} post${totalCount === 1 ? '' : 's'
       } tagged with “${tag}”`
-    const siteUrl = this.props.data.site.siteMetadata.siteUrl
 
     return (
       <Layout>

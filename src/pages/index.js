@@ -58,8 +58,4 @@ export default class BlogIndexPage extends React.Component {
   }
 }
 
-export const Head = () => {
-  return (
-    <Metadata />
-  )
-}
+export { Metadata as Head } from '../components/Metadata'
