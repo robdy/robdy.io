@@ -10,7 +10,7 @@ export const Metadata = ({ children, pathname}) => {
 		<React.Fragment>
 			<html lang="en" />
 			<title id="title">{title}</title>
-			<meta name="description" content={description} />
+			<meta id="description" name="description" content={description} />
 			<link
 				rel="apple-touch-icon-precomposed"
 				sizes="144x144"

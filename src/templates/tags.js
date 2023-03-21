@@ -1,5 +1,4 @@
 import React from 'react'
-import { kebabCase } from 'lodash'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import PostTile from '../components/PostTile'
@@ -41,22 +40,20 @@ export default TagRoute
 export const Head = ({
   data: {
     site: {
-      siteMetadata: { title, siteUrl },
+      siteMetadata: { title },
     },
   },
   pageContext: {
     tag
-  }
+  },
+  location: { pathname }
 }) => {
-  const tagPath = kebabCase(tag)
-  const canonical = `${siteUrl}/tags/${tagPath}/`
-
+  const calculatedTitle = `${tag} | ${title}`
   return (
-    <Metadata>
-      <title id="title">{`${tag} | ${title}`}</title>
+    <Metadata pathname={pathname}>
+      <title id="title">{calculatedTitle}</title>
+      <meta id="og:title" property="og:title" content={calculatedTitle} />
       <meta name="robots" content="noindex" />
-      <meta id="og:url" property="og:url" content={canonical} />
-      <link id="canonical" rel="canonical" href={canonical} />
     </Metadata>
   )
 }
@@ -65,7 +62,6 @@ export const tagPageQuery = graphql`
   query TagPage($tag: String) {
     site {
       siteMetadata {
-        siteUrl
         title
       }
     }

@@ -6,6 +6,7 @@ import Layout from '../components/Layout'
 import Comments from '../components/Comments'
 import Navbar from '../components/Navbar'
 import { Metadata } from '../components/Metadata'
+import useSiteMetadata from '../components/SiteMetadata'
 
 const BlogPostTemplate = ({
   children,
@@ -99,10 +100,13 @@ BlogPost.propTypes = {
 export default BlogPost
 
 export const Head = ({ data: { mdx: post }, location: { pathname } }) => {
+  const { title } = useSiteMetadata();
+  const calculatedTitle = `${post.frontmatter.title} | ${title}`
   return (
     <Metadata pathname={pathname}>
-      <title id="title">{`${post.frontmatter.title} | Robert Dyjas`}</title>
+      <title id="title">{calculatedTitle}</title>
       <meta
+        id="description"
         name="description"
         content={`${post.frontmatter.description}`}
       />
@@ -111,7 +115,7 @@ export const Head = ({ data: { mdx: post }, location: { pathname } }) => {
         property="og:description"
         content={`${post.frontmatter.description}`}
       />
-      <meta id="og:title" property="og:title" content={`${post.frontmatter.title} | Robert Dyjas`} />
+      <meta id="og:title" property="og:title" content={calculatedTitle} />
       <meta
         property="article:published_time"
         content={`${post.frontmatter.date}`}
