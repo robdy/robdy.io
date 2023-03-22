@@ -5,7 +5,6 @@ module.exports = {
     siteUrl: `https://robdy.io`,
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
     {
       // keep as first gatsby-source-filesystem plugin for gatsby image support
       resolve: 'gatsby-source-filesystem',
