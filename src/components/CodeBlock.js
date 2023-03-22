@@ -1,94 +1,85 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from 'react'
+import Prism from 'prismjs'
+const prismComponents = require(`prismjs/components`)
 
-function CodeBlock(props) {
-	// Code copy
-	const codeBlockRef = useRef(null);
-	const [codeCopied, setCodeCopied] = useState(false);
-
-	useEffect(() => {
-		const timeoutId = setTimeout(() => {
-			if (codeCopied) { setCodeCopied(false) }
-		}, 2000);
-
-		return () => clearTimeout(timeoutId);
-	}, [codeCopied]);
-
-	const copyCode = (e) => {
-		if (!codeCopied) {
-			navigator.clipboard.writeText(codeBlockRef.current.innerText)
-				.then(setCodeCopied(true));
-		}
-		return;
-	};
-
-	// End of Code copy
-
-	// Language string to be use in the header
-	const languageString = props.className.replace(/(language-| line-numbers)/mg, '');
+export const CodeBlock = (props) => {
 	const codeProps = props.children.props;
+	const blockLang = codeProps.className ? codeProps.className.replace(/^language-/g, '') : 'markup'
 
-	// Code wrapping
-	let { shouldWrap, shouldWrapCallback, ...modifiedProps } = props;
-	// To force pre rerender
-	const [refresh, setRefresh] = useState(false);
-	useEffect(()=> {
-		setRefresh(!refresh);
-	}, [shouldWrap])
-	// End of Code wrapping
+	// Inspired by
+	// https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-remark-prismjs/src/load-prism-language.js
+
+	// Get the real name of a language given it or an alias
+	const getBaseLanguage = (nameOrAlias, components = prismComponents) => {
+		if (components.languages[nameOrAlias]) {
+			return nameOrAlias
+		}
+		return Object.keys(components.languages).find(language => {
+			const { alias } = components.languages[language]
+			if (!alias) return false
+			if (Array.isArray(alias)) {
+				return alias.includes(nameOrAlias)
+			} else {
+				return alias === nameOrAlias
+			}
+		})
+	}
+
+	const loadLangData = (lang) => {
+		if (!lang) {
+			// No language specified
+			return
+		}
+
+		if (Prism.languages[lang]) {
+			// Language already loaded
+			return
+		}
+		const languageData = prismComponents.languages[lang]
+
+		if (languageData.require) {
+			// Load the required language first
+			if (Array.isArray(languageData.require)) {
+				languageData.require.forEach(loadLangData)
+			} else {
+				loadLangData(languageData.require)
+			}
+		}
+
+		require(`prismjs/components/prism-${lang}.js`)
+	}
+
+	// Load language data first
+	const baseLang = getBaseLanguage(blockLang)
+
+	if (!baseLang) {
+		throw new Error(`Prism doesn't support language '${blockLang}'.`)
+	}
+
+	loadLangData(baseLang);
+
+	// Highlight code
+	const highlightedCode = Prism.highlight(codeProps.children, Prism.languages[blockLang], blockLang)
+	// Line numbering WIP
+	// const highlightedCodeArray = highlightedCode.split(/\r?\n/g)
+	// const codeRows = highlightedCodeArray.map(el => {
+	// 	return `<span></span><code>${el}</code>`
+	// })
+	// const codeRowsStr = codeRows.join('\n')
 
 	return (
 		<React.Fragment>
-			<section className='codeheader-section'>
-				<div className='codeheader flex'>
-					<span className='codeheader-language'>{languageString}</span>
-					<button className='codeheader-button' onClick={() => {
-						localStorage.setItem('codeShouldWrap', !shouldWrap);
-						shouldWrapCallback(!shouldWrap)
-					}}>Wrap: {shouldWrap ? 'ON' : 'OFF'}</button>
-					<button className={`codeheader-button ${codeCopied ? 'codeheader-button-clicked' : null}`} onClick={copyCode}>{
-						codeCopied ? 'Copied' : 'Copy'
-					}</button>
+			<section class='codeheader-section'>
+				<div class='codeheader flex'>
+					<span class='codeheader-language'>{blockLang}</span>
+					<button class='codeheader-button'>Wrap: OFF</button>
 				</div>
 			</section>
-			{/* https://stackoverflow.com/a/48434525/9902555 
-			https://www.freecodecamp.org/news/force-refreshing-a-react-child-component-the-easy-way-6cdbb9e6d99c/ */}
-			<pre className={`${props.className}${shouldWrap ? '' : ' line-numbers'}`} ref={codeBlockRef} key={refresh}>
-				<code {...props.children.props}></code>
-				{shouldWrap ? null : <LineNumbers codeProps={codeProps} />}
-			</pre>
+			<div className="gatsby-highlight" data-language={blockLang}>
+				<pre className={`language-${blockLang}`}>
+					<code className={`language-${blockLang}`} dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+				</pre>
+			</div>
 		</React.Fragment>
 	)
 }
-
-const LineNumbers = (props) => {
-	// From gatsby-remark-prismjs
-	// https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-remark-prismjs/src/add-line-numbers.js
-
-	const countLines = (lineObject) => (String(lineObject).match(/\n/g) || []).length;
-
-	const numberOfLines = (codeElements) => {
-		let lines = 1
-		for (let i = 0; i < codeElements.children.length; i++) {
-			typeof codeElements.children[i] === 'string'
-				? lines += countLines(codeElements.children[i])
-				: lines += countLines(codeElements.children[i].props.children);
-		}
-		return lines;
-	}
-
-	// Generate as many `<span></span>` as there are code lines
-	const generateSpans = (numberOfLines) => {
-		let spans = [];
-		for (let i = 0; i < numberOfLines; i++) {
-			spans.push(<span></span>)
-		}
-		return spans
-	}
-
-	return (
-		<span aria-hidden="true" className="line-numbers-rows" style={{ 'white-space': 'normal', width: 'auto', left: 0 }}>
-			{generateSpans(numberOfLines(props.codeProps))}
-		</span>)
-}
-
-export default CodeBlock
