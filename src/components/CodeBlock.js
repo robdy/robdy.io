@@ -4,7 +4,7 @@ const prismComponents = require(`prismjs/components`)
 
 export const CodeBlock = (props) => {
 	const codeProps = props.children.props;
-	const blockLang = codeProps.className ? codeProps.className.replace(/^language-/g, '') : 'text'
+	const blockLang = codeProps.className ? codeProps.className.replace(/^language-/g, '') : 'markup'
 
 	// Inspired by
 	// https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-remark-prismjs/src/load-prism-language.js
