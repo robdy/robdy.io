@@ -8,6 +8,23 @@ export const CodeBlock = (props) => {
 
 	// Inspired by
 	// https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-remark-prismjs/src/load-prism-language.js
+
+	// Get the real name of a language given it or an alias
+	const getBaseLanguage = (nameOrAlias, components = prismComponents) => {
+		if (components.languages[nameOrAlias]) {
+			return nameOrAlias
+		}
+		return Object.keys(components.languages).find(language => {
+			const { alias } = components.languages[language]
+			if (!alias) return false
+			if (Array.isArray(alias)) {
+				return alias.includes(nameOrAlias)
+			} else {
+				return alias === nameOrAlias
+			}
+		})
+	}
+
 	const loadLangData = (lang) => {
 		if (!lang) {
 			// No language specified
@@ -33,10 +50,22 @@ export const CodeBlock = (props) => {
 	}
 
 	// Load language data first
-	loadLangData(blockLang);
+	const baseLang = getBaseLanguage(blockLang)
+
+	if (!baseLang) {
+		throw new Error(`Prism doesn't support language '${blockLang}'.`)
+	}
+
+	loadLangData(baseLang);
 
 	// Highlight code
 	const highlightedCode = Prism.highlight(codeProps.children, Prism.languages[blockLang], blockLang)
+	// Line numbering WIP
+	// const highlightedCodeArray = highlightedCode.split(/\r?\n/g)
+	// const codeRows = highlightedCodeArray.map(el => {
+	// 	return `<span></span><code>${el}</code>`
+	// })
+	// const codeRowsStr = codeRows.join('\n')
 
 	return (
 		<React.Fragment>
