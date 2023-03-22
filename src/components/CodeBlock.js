@@ -60,12 +60,13 @@ export const CodeBlock = (props) => {
 
 	// Highlight code
 	const highlightedCode = Prism.highlight(codeProps.children, Prism.languages[blockLang], blockLang)
+
 	// Line numbering WIP
-	// const highlightedCodeArray = highlightedCode.split(/\r?\n/g)
-	// const codeRows = highlightedCodeArray.map(el => {
-	// 	return `<span></span><code>${el}</code>`
-	// })
-	// const codeRowsStr = codeRows.join('\n')
+	const highlightedCodeArray = highlightedCode.split(/\r?\n/g).slice(0, -1)
+	const codeRows = highlightedCodeArray.map(el => {
+		return `<span></span><code>${el}</code>`
+	})
+	const codeRowsStr = codeRows.join('\n')
 
 	return (
 		<React.Fragment>
@@ -76,8 +77,8 @@ export const CodeBlock = (props) => {
 				</div>
 			</section>
 			<div className="gatsby-highlight" data-language={blockLang}>
-				<pre className={`language-${blockLang}`}>
-					<code className={`language-${blockLang}`} dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+				<pre className={`language-${blockLang} line-numbers`}>
+					<code className={`language-${blockLang} line-numbers-rows`} dangerouslySetInnerHTML={{ __html: codeRowsStr }} />
 				</pre>
 			</div>
 		</React.Fragment>
