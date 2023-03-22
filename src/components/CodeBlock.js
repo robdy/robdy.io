@@ -72,7 +72,7 @@ export const CodeBlock = (props) => {
 			<section class='codeheader-section'>
 				<div class='codeheader flex'>
 					<span class='codeheader-language'>{blockLang}</span>
-					<button class='codeheader-button'>Wrap: OFF</button>
+					{/* <button class='codeheader-button'>Wrap: OFF</button> */}
 				</div>
 			</section>
 			<div className="gatsby-highlight" data-language={blockLang}>
