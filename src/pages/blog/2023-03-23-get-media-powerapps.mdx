@@ -39,7 +39,7 @@ When I go to the media library in the app, I can see that there is no option to 
 
 ## Accessing media with browser dev tools
 
-Our first option to download the media is to use browser dev tools. We need to play our app first. We can do that by accessing its link or using the **Play*** *button (top-right corner of the editor):
+Our first option to download the media is to use browser dev tools. We need to play our app first. We can do that by accessing its link or using the **Play** button (top-right corner of the editor):
 
 ![Play button in the PowerApps app editor](../../img/get-media-powerapps/20230317-084843-cYrEyOdij2.png)
 
@@ -47,7 +47,11 @@ From here we can right-click the image and choose **Inspect**:
 
 ![Choosing Inspect button](../../img/get-media-powerapps/20230317-085654-wTg5CGJxaH.png)
 
-![Choosing Inspect button](../../img/get-media-powerapps/20230317-085654-wTg5CGJxaH.png)
+<Tip>
+
+I’m using Edge for the screenshots. If you use another browser, the interface might look slightly different. The concept remains unchanged.
+
+</Tip>
 
 The **Inspect** option will open dev tools. It'll automatically select one of the elements close to the image:
 
@@ -79,7 +83,11 @@ The folder contains many files and our two images:
 
 ![Folder with files, including uploaded images](../../img/get-media-powerapps/20230321-140823-7qDMsLvkzo.png)
 
-![Folder with files, including uploaded images](../../img/get-media-powerapps/20230321-140823-7qDMsLvkzo.png)
+<Tip>
+
+Kudos to [this Connor551’s helpful answer](https://powerusers.microsoft.com/t5/Building-Power-Apps/How-to-download-media-in-app/m-p/812528/highlight/true#M259039) for the idea.
+
+</Tip>
 
 ## Exporting the entire app
 
@@ -110,6 +118,10 @@ The *.zip* file will have all the images under *Assets > Images*:
 <Tip>
 
 We can get the *.msapp* file directly from the PowerApps editor. Click the dropdown next to the **Save** button (1) and choose **Download a copy** (2):
+
+![Downloading a copy of the app from the editor](../../img/get-media-powerapps/20230321-143450-m54CUVAxf6.png)
+
+On the next screen, we confirm the download and we will get the .msapp file straight to your downloads folder. We already know what to do next - rename to .zip and find the folder.
 
 </Tip>
 
@@ -149,5 +161,3 @@ It is because the object returned by *Get-FileHash* also has the *Path* property
 ## Summary
 
 Luckily for us, Microsoft doesn't do any compression of the images uploaded to the PowerApps app. (But remember, it might change anytime in the future.) Thanks to that, we can easily recover the files we uploaded to PowerApps, if we lost their local copy.
-
-
