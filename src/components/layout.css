@@ -756,22 +756,12 @@ div:has(div code){
 }
 
 /* Line numbering */
-pre[class*='language-'].line-numbers {
-  padding-left: 0;
-}
-
-.line-numbers-rows>span {
-  display: inline-block;
-  width: 3em;
-  border-right: 1px solid grey;
-  margin-right: 0.8em;
-}
-
 .line-numbers .line-numbers-rows {
   left: 0;
   -webkit-user-select: auto;
   user-select: auto;
-  border-right: none;
+  border-right: 1px solid grey;
+  margin-top: 1em;
 }
 
 /*#endregion PrismJS customization */

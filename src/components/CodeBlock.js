@@ -64,7 +64,7 @@ export const CodeBlock = (props) => {
 	// Line numbering WIP
 	const highlightedCodeArray = highlightedCode.split(/\r?\n/g).slice(0, -1)
 	const codeRows = highlightedCodeArray.map(el => {
-		return `<span></span><code>${el}</code>`
+		return `${el}`
 	})
 	const codeRowsStr = codeRows.join('\n')
 
@@ -78,9 +78,41 @@ export const CodeBlock = (props) => {
 			</section>
 			<div className="gatsby-highlight" data-language={blockLang}>
 				<pre className={`language-${blockLang} line-numbers`}>
-					<code className={`language-${blockLang} line-numbers-rows`} dangerouslySetInnerHTML={{ __html: codeRowsStr }} />
+					<LineNumbers codeProps={codeProps} />
+					<code className={`language-${blockLang}`} dangerouslySetInnerHTML={{ __html: codeRowsStr }} />
 				</pre>
 			</div>
 		</React.Fragment>
 	)
+}
+
+const LineNumbers = ({ codeProps }) => {
+	// From gatsby-remark-prismjs
+	// https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-remark-prismjs/src/add-line-numbers.js
+
+	const countLines = (lineObject) => (String(lineObject).match(/\n/g) || []).length;
+
+	const numberOfLines = (codeElements) => {
+		let lines = 0
+		for (let i = 0; i < codeElements.children.length; i++) {
+			typeof codeElements.children[i] === 'string'
+				? lines += countLines(codeElements.children[i])
+				: lines += countLines(codeElements.children[i].props.children);
+		}
+		return lines;
+	}
+
+	// Generate as many `<span></span>` as there are code lines
+	const generateSpans = (numberOfLines) => {
+		let spans = [];
+		for (let i = 0; i < numberOfLines; i++) {
+			spans.push(<span className='line-numbers-cell'></span>)
+		}
+		return spans
+	}
+
+	return (
+		<span aria-hidden="true" className="line-numbers-rows">
+			{generateSpans(numberOfLines(codeProps))}
+		</span>)
 }
