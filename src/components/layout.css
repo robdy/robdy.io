@@ -698,16 +698,6 @@ pre[class*='language-'] {
   word-break: break-word;
 }
 
-/* To align with pre element padding */
-.line-numbers .line-numbers-rows {
-  top: 1em;
-}
-
-/* Overrides width:auto for span elements */
-.line-numbers .line-numbers-rows {
-  width: 3em !important;
-}
-
 /* Margin moved to codeheader-section */
 /* Radius moved to codeheader */
 pre[class*='language-'] {
@@ -756,18 +746,6 @@ pre[class*='language-'] {
   background-color: hsl(0, 0%, 23%);
 }
 
-/* Copied from gatsby-remark-prismjs */
-span.line-numbers-rows {
-  white-space: 'normal';
-  width: 'auto';
-  left: 0
-}
-
-/* Hides horizontal scroll appearing in rare cases */
-pre[class*='language-']:not(.line-numbers){
-  overflow-x: hidden;
-}
-
 /* Fixed inline codeblocks display block */
 /* Introduced in MDX V2 https://github.com/robdy/robdy.io/pull/712 */
 div:has(code){
@@ -775,6 +753,15 @@ div:has(code){
 }
 div:has(div code){
   display: block;
+}
+
+/* Line numbering */
+.line-numbers .line-numbers-rows {
+  left: 0;
+  -webkit-user-select: auto;
+  user-select: auto;
+  border-right: 1px solid grey;
+  margin-top: 1em;
 }
 
 /*#endregion PrismJS customization */
