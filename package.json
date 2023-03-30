@@ -17,7 +17,7 @@
     "gatsby-remark-images": "^7.7.0",
     "gatsby-remark-prismjs": "^7.7.0",
     "gatsby-remark-relative-images-v2": "^0.1.5",
-    "gatsby-source-filesystem": "^5.7.0",
+    "gatsby-source-filesystem": "^5.8.0",
     "gatsby-source-rss-feed": "^1.2.2",
     "gatsby-transformer-sharp": "^5.8.0",
     "lodash": "^4.17.21",
