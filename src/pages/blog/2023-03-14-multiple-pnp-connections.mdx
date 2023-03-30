@@ -77,6 +77,12 @@ If we search the [PnP cmdlet list](https://pnp.github.io/powershell/cmdlets/Add
 
 There is only one connection returned. We cannot find the first connection at all.
 
+<Tip>
+
+If you use *Connect-PnPOnline* twice, the second connection will always take over. It might cause errors, that are difficult to trace if we are not aware of that.
+
+</Tip>
+
 ## Disconnecting
 
 Let's see if disconnecting the last session can help. We will first disconnect and then try to see if the previous connection is still available:
