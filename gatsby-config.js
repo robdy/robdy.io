@@ -21,9 +21,16 @@ module.exports = {
       },
     },
     {
+    resolve: 'gatsby-source-filesystem',
+    options: {
+      path: `${__dirname}/blog${process.env.NODE_ENV === 'production' ? '' : 'dev'}`,
+      name: 'articles',
+    },
+    },
+    {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/img`,
+        path: `${__dirname}/src/img${process.env.NODE_ENV === 'production' ? '' : 'dev'}`,
         name: 'images',
       },
     },
