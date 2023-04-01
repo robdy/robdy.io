@@ -21,7 +21,7 @@ Param(
 
 #region Variables
 $imageRootFolderPath = './src/img'
-$mdxFolderPath = './src/pages/blog'
+$mdxFolderPath = './blog'
 $convertedTextArr = @()
 $frontmatter = @()
 
@@ -256,9 +256,9 @@ $convertedTextArr | Out-File -FilePath (Join-Path $mdxFolderPath $mdxFileName) -
 #endregion Exporting
 
 #region Outputs
-Write-Output "::set-output name=COMMIT_MSG::Imports blog article from Notion"
-Write-Output "::set-output name=PR_TITLE::Adds blog $($titleRes.results[0].title.plain_text)"
-Write-Output "::set-output name=BRANCH_NAME::cms/blog/$pageSlug"
+"COMMIT_MSG=Imports blog article from Notion" >> $env:GITHUB_OUTPUT
+"PR_TITLE=Adds blog $($titleRes.results[0].title.plain_text)" >> $env:GITHUB_OUTPUT
+"BRANCH_NAME=cms/blog/$pageSlug" >> $env:GITHUB_OUTPUT
 #endregion Outputs
 
 Write-Output "::echo::off"
