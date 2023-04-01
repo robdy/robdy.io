@@ -21,7 +21,7 @@ Param(
 
 #region Variables
 $imageRootFolderPath = './src/img'
-$mdxFolderPath = './src/pages/blog'
+$mdxFolderPath = './blog'
 $convertedTextArr = @()
 $frontmatter = @()
 
