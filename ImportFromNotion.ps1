@@ -256,9 +256,9 @@ $convertedTextArr | Out-File -FilePath (Join-Path $mdxFolderPath $mdxFileName) -
 #endregion Exporting
 
 #region Outputs
-Write-Output "::set-output name=COMMIT_MSG::Imports blog article from Notion"
-Write-Output "::set-output name=PR_TITLE::Adds blog $($titleRes.results[0].title.plain_text)"
-Write-Output "::set-output name=BRANCH_NAME::cms/blog/$pageSlug"
+Write-Output "COMMIT_MSG=Imports blog article from Notion" >> $GITHUB_OUTPUT
+Write-Output "PR_TITLE=Adds blog $($titleRes.results[0].title.plain_text)" >> $GITHUB_OUTPUT
+Write-Output "BRANCH_NAME=cms/blog/$pageSlug" >> $GITHUB_OUTPUT
 #endregion Outputs
 
 Write-Output "::echo::off"
