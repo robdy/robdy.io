@@ -80,7 +80,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
   if (node.internal.type === `Mdx`) {
     const value = createFilePath({ node, getNode }).replace(
-      /blog\/\d{4}-\d{2}-\d{2}-/,
+      /\d{4}-\d{2}-\d{2}-/,
       ''
     )
     createNodeField({
