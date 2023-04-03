@@ -38,7 +38,7 @@ const BlogPostTemplate = ({
             <time datetime={isoDate}>{formattedDate}</time>
             &nbsp;&bull;&nbsp;
             <a
-              href={`https://github.com/robdy/robdy.io/edit/src/src/pages/${relativePath}`}
+              href={`https://github.com/robdy/robdy.io/edit/src/blog/${relativePath}`}
               className="post-subheader-link"
               target="_blank"
               rel="nofollow noopener noreferrer"
