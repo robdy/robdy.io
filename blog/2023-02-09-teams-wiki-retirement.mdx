@@ -53,19 +53,37 @@ The dates mentioned above apply to these two changes:
 
 There's one change with no specific date. The announcement mentions that soon *Notes tabs powered by OneNote will be added by default when users create new channels*.
 
+## What will change with Wiki tab?
+
+At the first stage, the Teams application will suggest adding OneNote tab:
+
+![Top bar suggesting OneNote tab](../../img/teams-wiki-retirement/20230403-100825-HyLdRQf0Ri.png)
+
+The empty Wiki tab will not be locked yet. We will still be able to make some edits.
+
+When we go to the page with existing content, we will see a different bar:
+
+![Top bar proposing to migrate to OneNote](../../img/teams-wiki-retirement/zWcpmWZFjX.png)
+
+That experience is now (as of April 2023) generally available.
+
+<Note>
+
+  The bars will be visible to users with rights to add or remove tab in a channel. For others, there will be no bar.
+
+</Note>
+
 ## How will the migration process look like?
 
-We don't have any details yet. The only information we can get is from the [GIF attached to the Message Center entry](https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE5egwT?ver=2d0e%22). The GIF shows the yellow warning bar which will be added to the top of wiki tab:
+The yellow warning bar will be added to the top of wiki tab:
 
 ![Warning bar at the top of wiki tab](../../img/teams-wiki-retirement/2023-02-06_17_33_06-000086.png)
 
 The bar says:
 
-> Wiki tabs will go away in [April 2023], you can export your content to the Notes tab, as a way to keep your content in this channel
+> Wiki tabs will go away in June 2023, you can export your content to a new Notes tab that will be created for this channel
 
-The mentioned date is probably a placeholder. There was no official announcement yet. Also, Microsoft likes to postpone decommissioning dates based on client's feedback. They did that for [basic authentication](https://techcommunity.microsoft.com/t5/exchange/microsoft-pushes-removal-of-basic-authentication-from-exchange/m-p/1279824), [license assignment APIs](https://techcommunity.microsoft.com/t5/microsoft-entra-azure-ad-blog/migrate-your-apps-to-access-the-license-managements-apis-from/ba-p/2464366) and some other.
-
-Once we click the **Get details** button you'll be redirected to the next screen giving more information:
+Once we click the **Get details** button we'll be redirected to the next screen giving more information:
 
 ![Details screen](../../img/teams-wiki-retirement/2023-02-06_17_33_26-000087.png)
 
@@ -97,9 +115,9 @@ Next pop-up will suggest to delete the **Wiki** tab:
 
 ## Will private channel wiki be retired?
 
-The Message Center announcement doesn't distinguish the type of channel, except one sentence. It says that users will have an option to export their wiki content to OneNote notebooks in Teams **standard channel**.
+Yes, wiki tab will be retired from private channels, too. There is an important difference in terms of the migration. According to [Export a wiki to a OneNote notebook](https://support.microsoft.com/en-us/office/export-a-wiki-to-a-onenote-notebook-8cd8ab0c-2314-42b0-a1d0-5c6c4c5e1547):
 
-Currently there's no information about private or shared channels. I'd assume the migration tool will work the same way, regardless of channel type. We'll find out when new announcements come.
+> Private channel wikis will also be deprecated. Unlike with standard channels, there will be no migration experience for private channels, so users will need to copy-paste the content into OneNote manually.
 
 ## Will meeting notes be retired?
 
@@ -134,6 +152,14 @@ OneNote can be considered *wiki on steroids*. Wiki was always meant to be a simp
 
 If you want to read more, I recommend the following articles: [Don't use Teams wiki – Vesa Nopanen](https://mymetaverseday.com/2018/05/08/dont-use-teams-wiki/) and [What's wrong with Microsoft Teams built-in wiki? Five built-in wiki limitations that you should know](https://perfectwikiforteams.com/blog/ms-teams-wiki-cons/).
 
+## What's the experience for Teams 2.0?
+
+As [new Teams client doesn't support Wiki app](https://learn.microsoft.com/en-us/microsoftteams/new-teams-desktop-admin?tabs=teams-admin-center#what-features-are-changing) it's not suitable for Wiki migration. In fact, new client doesn't show Wiki tab at all:
+
+![Difference between standard and new client](../../img/teams-wiki-retirement/20230419-093832-dAu6VgRs7U.png)
+
+The new experience is far from ideal - it should at least indicate there is a Wiki app available.
+
 ## Upcoming OneNote improvements
 
 On the other hand, OneNote [got a nice refresh in 2022](https://techcommunity.microsoft.com/t5/microsoft-365-blog/refreshing-the-onenote-app-on-windows/ba-p/3401914). There are more improvements coming, such as [new navigation options](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=100492), [dictating notes](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=88993).
@@ -167,6 +193,8 @@ Microsoft has some good resources you can use to get people familiar with OneNot
 Next part is discovery - find out who uses wiki and prepare a targeted communication about migrating to OneNote. Check the section Can we export list of wiki users in an organization to find out how to do that.
 
 Last, but not least - stay in the loop. Get back to this post frequently for updates. Keep checking the [Message Center](https://admin.microsoft.com/#/MessageCenter) and [M365 Roadmap](https://www.microsoft.com/en-us/microsoft-365/roadmap). Make sure you don't miss important updates.
+
+You can also bookmark this support article [Export a wiki to a OneNote notebook](https://support.microsoft.com/en-us/office/export-a-wiki-to-a-onenote-notebook-8cd8ab0c-2314-42b0-a1d0-5c6c4c5e1547). It seems to have a lot of useful information (including timeline). Such information is not mentioned anywhere else.
 
 ## Summary
 
