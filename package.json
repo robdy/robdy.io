@@ -5,30 +5,30 @@
   "author": "Robert Dyjas",
   "dependencies": {
     "@mdx-js/react": "^2.3.0",
-    "gatsby": "^5.8.1",
-    "gatsby-core-utils": "^4.3.1",
-    "gatsby-plugin-feed": "^5.8.0",
-    "gatsby-plugin-image": "^3.8.0",
-    "gatsby-plugin-mdx": "^5.8.0",
-    "gatsby-plugin-sharp": "^5.8.1",
-    "gatsby-plugin-sitemap": "^6.8.0",
-    "gatsby-remark-copy-linked-files": "^6.8.0",
-    "gatsby-remark-images": "^7.8.0",
+    "gatsby": "^5.9.0",
+    "gatsby-core-utils": "^4.9.0",
+    "gatsby-plugin-feed": "^5.9.0",
+    "gatsby-plugin-image": "^3.9.0",
+    "gatsby-plugin-mdx": "^5.9.0",
+    "gatsby-plugin-sharp": "^5.9.0",
+    "gatsby-plugin-sitemap": "^6.9.0",
+    "gatsby-remark-copy-linked-files": "^6.9.0",
+    "gatsby-remark-images": "^7.9.0",
     "gatsby-remark-relative-images-v2": "^0.1.5",
-    "gatsby-source-filesystem": "^5.8.0",
+    "gatsby-source-filesystem": "^5.9.0",
     "gatsby-source-rss-feed": "^1.2.2",
-    "gatsby-transformer-sharp": "^5.8.0",
+    "gatsby-transformer-sharp": "^5.9.0",
     "lodash": "^4.17.21",
     "lodash-webpack-plugin": "^0.11.6",
-    "postcss": "^8.4.22",
+    "postcss": "^8.4.23",
     "prismjs": "^1.29.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-helmet": "^6.0.0",
+    "react-helmet": "^6.1.0",
     "remark-images": "^3.1.0",
     "uuid": "^9.0.0",
-    "webpack": "^5.79.0"
+    "webpack": "^5.81.0"
   },
   "keywords": [
     "gatsby"
@@ -47,7 +47,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "prettier": "^2.8.7"
+    "prettier": "^2.8.8"
   },
   "prettier": {
     "trailingComma": "es5",
