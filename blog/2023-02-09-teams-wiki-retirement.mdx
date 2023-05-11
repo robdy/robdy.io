@@ -40,8 +40,6 @@ The changes announced already are:
 * Users will be able to continue to access and edit existing wikis but will not be able to create new wikis in Teams channels
 * Notes tabs powered by OneNote will be added by default when users create new channels
 
-## When the change will happen?
-
 The changes are already available in public preview. The initial announcement mentioned mid-February as a start date. However, the rollout started closer to the end of March. There is no mention of the end date. If you have the *EA* ([Early Access](https://techcommunity.microsoft.com/t5/microsoft-teams-public-preview/new-indicator-ea-on-avatar-for-microsoft-teams-public-preview/m-p/3768794)) indicator next to your profile picture (see below) you should see the new interface now.
 
 ![Early Access indicator in Teams](../../img/teams-wiki-retirement/20230403-102002-vIe5er579R.png)
@@ -103,15 +101,77 @@ And then the confirmation screen:
 
 ![Confirmation screen](../../img/teams-wiki-retirement/2023-02-06_17_34_47-000090.png)
 
-After confirming with **Finish** we'll be redirected to the **Notes**tab. The tab is the default name for a OneNote tab in the channel.
+After confirming with **Finish** we'll be redirected to the **Notes** tab. The tab is the default name for a OneNote tab in the channel.
 
 ![Notes tab with migrated pages](../../img/teams-wiki-retirement/2023-02-06_17_30_54-000083.png)
 
-The context pop-up says that each page from wiki was saved as a separate page in the section. It's currently unknown whether we'll be able to choose the section or there's going to be a default one (such as **Wiki**).
+The context pop-up says that each page from wiki was saved as a separate page in the section. The section name comes from the channel name. For details see [To which section is the wiki migrated?](#to-which-section-is-the-wiki-migrated-).
 
 Next pop-up will suggest to delete the **Wiki** tab:
 
 ![Pop-up suggesting deletion of Wiki tab](../../img/teams-wiki-retirement/2023-02-06_17_31_47-000084.png)
+
+<Tip>
+
+If we click *Wiki* tab after the migration, it will show the read-only snapshot of the wiki **at the moment of migration**. The tab will not reflect any changes made afterwards.
+
+</Tip>
+
+## To which section is the wiki migrated?
+
+Migration of wiki creates a section named after the channel. The pages contain the wiki name and page title separated by underscore. For example, *Getting started* from *Wiki* in *test2* channel will land under *test2* section in Notes. The page will be named *Wiki_Getting started*:
+
+![Structure of migrated wiki pages in Notes](../../img/teams-wiki-retirement/20230511-090411-JGOWVON4rJ.png)
+
+<Warning>
+
+For some reason, pages under *General* channel **with only one wiki** will not have *Wiki_* added to the page name in Notes:
+
+![No prefix for General channel wiki](../../img/teams-wiki-retirement/20230511-085521-XyL3YV5EXE.png)
+
+</Warning>
+
+## How are multiple wikis migrated?
+
+Our channel can have multiple wiki tabs. All wikis will be migrated to the same section in Notes. They will have different prefixes added to page name. With this, we'll distinguish them easily:
+
+![Different prefixes for different wiki tabs](../../img/teams-wiki-retirement/20230511-090944-QOTX2t579B.png)
+
+## What are the known issues with migration?
+
+There is no official list of known issues. However, based on my experience we might see one of the cases described below. The remediation is to migrate the broken content manually.
+
+### Pages title not appearing correctly
+
+It happened to me once that page titles didn't populate correctly. At the page list all were shown as *Untitled Page* while the title on the page itself was correct:
+
+![All pages shown as untitled](../../img/teams-wiki-retirement/20230511-122736-k9oOyOSDyQ.png)
+
+### Broken pages
+
+I saw the issue happening once when the title had a slash character `/`. When I tried to open the page in OneNote it displayed the error message:
+
+![Error message indicating sync error](../../img/teams-wiki-retirement/ONENOTE_Ro1pyuGyb4.png)
+
+Waiting multiple days didn't fix the issue. However, I was not able to reproduce it later. The page I migrated later had no issue:
+
+![Page with slashes migrated correctly](../../img/teams-wiki-retirement/20230511-121555-L8H7q9n1uu.png)
+
+### Duplicated pages
+
+From time to time, when we close the last modal with the top-right **X** button, we might be able to run the migration once again:
+
+![Closing the model prematurely](../../img/teams-wiki-retirement/20230511-124351-zv5p1Cgpth.png)
+
+As a result, we'll see the duplicated pages in Notes:
+
+![Duplicated pages in Notes](../../img/teams-wiki-retirement/20230511-124734-oyV3Gv98C9.png)
+
+### Incorrect section linked
+
+When the channel has the brackets, Notes tab might lead to incorrect section in the notebook. I didn't find any pattern how it works.
+
+In some cases, the first section in the notebook was linked. In others, the random section.
 
 ## Will private channel wiki be retired?
 
@@ -202,4 +262,4 @@ There's a lot of things uncovered for the Teams wiki retirement. However, there 
 
 Once we're prepared, we only can hope that Microsoft provides a nice transition experience for the discovery, migration and decommission of the wiki.
 
-Bye, bye, wiki! You'll be missed (but only by some of us) ;)
+Bye, bye, wiki! You'll be missed (but only by some of us) 😉
