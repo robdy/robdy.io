@@ -12,7 +12,7 @@
     "gatsby-plugin-mdx": "^5.9.0",
     "gatsby-plugin-sharp": "^5.9.0",
     "gatsby-plugin-sitemap": "^6.9.0",
-    "gatsby-remark-copy-linked-files": "^6.9.0",
+    "gatsby-remark-copy-linked-files": "^6.10.0",
     "gatsby-remark-images": "^7.9.0",
     "gatsby-remark-relative-images-v2": "^0.1.5",
     "gatsby-source-filesystem": "^5.9.0",
