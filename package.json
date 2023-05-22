@@ -8,7 +8,7 @@
     "gatsby": "^5.9.1",
     "gatsby-core-utils": "^4.9.0",
     "gatsby-plugin-feed": "^5.9.0",
-    "gatsby-plugin-image": "^3.9.0",
+    "gatsby-plugin-image": "^3.10.0",
     "gatsby-plugin-mdx": "^5.9.0",
     "gatsby-plugin-sharp": "^5.9.0",
     "gatsby-plugin-sitemap": "^6.9.0",
