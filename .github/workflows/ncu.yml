@@ -6,12 +6,11 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    # Checking out current branch to pull the latest script version
       - name: Checkout current branch
         uses: actions/checkout@v3
 
       - name: Run script
-        id: importer
+        id: bumper
         run: |
           git branch bump 
           npm i npm-check-updates -g
