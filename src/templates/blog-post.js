@@ -58,7 +58,6 @@ const BlogPostTemplate = ({
             </div>
           ) : null}
         </div>
-        <p className="description">{description}</p>
         {children}
         <Comments />
       </div>

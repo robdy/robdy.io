@@ -9,6 +9,8 @@ tags:
   - powershell
   - snippet
 ---
+Let's construct a wrapper for Get-MessageTrace cmdlet.
+
 Sometimes we need to pull a lot of emails from message trace in Exchange Online. We might want to grab some stats. We might want to analyze only specific emails.
 
 For example, I did some analysis of the delay introduced by [Microsoft 365 Safe Attachments](https://docs.microsoft.com/en-us/microsoft-365/security/office-365-security/safe-attachments?view=o365-worldwide). I wanted to check only emails bigger than 1MB. To get such data I had to pull all the emails and then use `Where-Object`.
