@@ -18,11 +18,10 @@ The entire set of cmdlets for virtual appointment policy has been released. The 
 
 * Get-CsTeamsVirtualAppointmentsPolicy
 * Grant-CsTeamsVirtualAppointmentsPolicy
-
 * New-CsTeamsVirtualAppointmentsPolicy
 * Remove-CsTeamsVirtualAppointmentsPolicy
-
 * Set-CsTeamsVirtualAppointmentsPolicy
+
 The *Get-* cmdlet returns the identity and one meaningful parameter: *EnableSmsNotifications*. The parameter is related with [Roadmap entry 127901: Microsoft Teams: SMS Notifications in Virtual Appointments Template (Premium)](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=127901). The entry says:
 
 > External guest users will receive SMS text notifications about their appointment, including appointment details and the meeting join link so they can join directly from mobile. Text notifications are sent for appointment confirmation, updates, and a reminder 15 minutes before the appointment begins. This is available in US only at this time.
@@ -31,7 +30,7 @@ Rollout of this feature is scheduled for August 2023.
 
 What's interesting about these cmdlet is that my developer tenant is the only one where they work. For all the other tenants I checked they return: *Type TeamsVirtualAppointmentsPolicy is not currently enabled in flighting Please refer to documentation.*
 
-![Error returned by Get-CsTeamsVirtualAppointmentsPolicy for most of the tenants](../../img/teams-powershell-datamining-jul-2023/Untitled.png)
+![Error returned by Get-CsTeamsVirtualAppointmentsPolicy for most of the tenants](../../img/posts/teams-powershell-datamining-jul-2023/Untitled.png)
 
 The parameter *EnableSmsNotifications* is currently settable for the tenants where the cmdlet is working.
 
@@ -41,7 +40,7 @@ The *Grant-* cmdlet contains -Group and -Rank which might suggest that admins wi
 
 *Get-CsPhoneNumberAssignment* and *Set-CsPhoneNumberAssignment* have a new parameter: *AssignmentCategory*. It's mentioned in [5.3.1 Release Notes](https://learn.microsoft.com/en-us/microsoftteams/teams-powershell-release-notes), but without any explanation. I found no mention of it in existing documentation.
 
-The parameter accepts string and there's no predefined set of values you can submit to it. While digging into API responses from Teams Admin Center I only found some numbers with *AssignmentCategory *equal to *Primary*.
+The parameter accepts string and there's no predefined set of values you can submit to it. While digging into API responses from Teams Admin Center I only found some numbers with *AssignmentCategory* equal to *Primary*.
 
 ## Summary
 
