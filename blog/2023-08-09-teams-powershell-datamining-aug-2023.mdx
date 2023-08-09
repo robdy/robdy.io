@@ -1,0 +1,182 @@
+---
+templateKey: blog-post
+title: Teams PowerShell datamining - August 2023
+date: 2023-08-09T06:59:00.0000000Z
+description: For me, chat in Live Events is the winner of this month’s datamining. Check out the others - this edition uncovers plenty of new things!
+featuredpost: false
+tags:
+  - teams
+  - powershell
+  - datamining
+---
+
+At the beginning of August Microsoft released the 5.5.0 version of the Microsoft Teams PowerShell module.
+
+## Release notes
+
+The [official release notes](https://learn.microsoft.com/en-us/microsoftteams/teams-powershell-release-notes) mention the following changes:
+
+* Releases New-CsTeamsHiddenTemplate cmdlet.
+* Releases [New|Get|Set|Remove]-CsTeamsTemplatePermissionPolicy cmdlets.
+
+* Adds a new paramater -IncludePhoneNumbers to Get-CsTenantNetworkSite.
+* [BREAKING CHANGE] Deprecates EnableShiftPresence parameter from TeamsShiftsPolicy.
+
+* Contains a new implementation of [Get|Set]-CsTeamsUpgradeConfiguration, [Get|Set|Remove|New]-CsTeamsComplianceRecordingPolicy, [Get|Set|Remove|New]-CsTeamsComplianceRecordingApplication, New-CsTeamsComplianceRecordingPairedApplication. Functionality remains the same as previous implementation.
+
+However, there is more. Let's talk about them!
+
+## Custom prompts
+
+The most mysterious feature comes first. We're getting custom prompts along with a custom prompt package. The cmdlets are:
+
+* *New-CsCustomPrompt*
+* *New-CsCustomPromptPackage*
+
+For the custom prompt itself, we can set the following properties:
+
+* *AudioPrompt*
+* *Id*
+
+* *Locale*
+* *Name*
+
+* *TextPrompt*
+* *Type*
+
+All the parameters accept strings. Only three of them are mandatory: *Id*, *Type*, and *Locale*.
+
+The policy package contains the following properties:
+
+* I*d*
+* *DefaultLocale*
+
+* *Name*
+* *InboundEndRecordingPrompt*
+
+* *InboundStartRecordingPrompt*
+* *MeetingEndRecordingPrompt*
+
+* *MeetingStartRecordingPrompt*
+* *OutboundEndRecordingPrompt*
+
+* *OutboundStartRecordingPrompt *
+*Id*, *DefaultLocale*, and *Name* accept string values. Recording prompt values accepts *PSListModifier[string]* type. From the documentation of [PSListModifier](https://learn.microsoft.com/en-us/dotnet/api/system.management.automation.pslistmodifier?view=powershellsdk-7.3.0), we will be able to supply multiple prompts for each type.
+
+Unfortunately, we cannot test it yet. Both *New-CsCustomPrompt* and *New-CsCustomPromptPackage* cmdlets currently return the same error:
+
+> *Could not find the resource "XsdClassGeneratorStringsResources.resources" among the resources "" embedded in the assembly "Microsoft.Teams.Policy.Administration.Cmdlets.Providers.PolicyRp", nor among the resources in any satellite assemblies for the specified culture. Perhaps the resources were embedded with an incorrect name.*
+
+![The error returned by both cmdlets related to the custom prompt](../../img/teams-powershell-datamining-aug-2023/20230807-085337-oZyCzULOdO.png)
+
+Checklist for *New-CsCustomPrompt*:
+
+* ❌Documentation not available
+* ❌Not found via search engines (Google, Bing) 
+
+* ❌Not found on GitHub
+* ❌No roadmap mention
+
+* ❌No Message Center mention
+
+Checklist for *New-CsCustomPromptPackage*:
+
+* ❌Documentation not available
+* ❌Not found via search engines (Google, Bing) 
+
+* ❌Not found on GitHub
+* ❌No roadmap mention
+
+* ❌No Message Center mention
+
+## Custom audio conferencing prompts
+
+We get four new cmdlets containing *custom prompts* in their names:
+
+* *Get-CsTeamsAudioConferencingCustomPromptsConfiguration*
+* *Set-CsTeamsAudioConferencingCustomPromptsConfiguration*
+
+The *Set-* cmdlet accepts:
+
+* *Identity* - mandatory, accepts a string
+* *Packages* - optional, accepts *PSListModifier[CustomPromptPackage]*
+
+* *Prompts* - optional, accepts *PSListModifier[CustomPrompt]*
+
+Similar to custom prompt packages, we will be able to add multiple prompts using `@{Add='Identifier'}` method.
+
+For now, both *Get-* and *Set-* cmdlets return an error:
+
+> *Provided type TeamsAudioConferencingCustomPromptsConfiguration is not valid Please check your request parameters.*
+
+![The error returned by both cmdlets related to the audio conferencing custom prompt configuration](../../img/teams-powershell-datamining-aug-2023/20230807-090733-Es1BuH4tGu.png)
+
+Checklist for *Get-CsTeamsAudioConferencingCustomPromptsConfiguration*:
+
+* ❌Documentation not available
+* ❌Not found via search engines (Google, Bing) 
+
+* ❌Not found on GitHub
+* ❌No roadmap mention
+
+* ❌No Message Center mention
+
+Checklist for *Set-CsTeamsAudioConferencingCustomPromptsConfiguration*:
+
+* ❌Documentation not available
+* ❌Not found via search engines (Google, Bing) 
+
+* ❌Not found on GitHub
+* ❌No roadmap mention
+
+* ❌No Message Center mention
+
+## Compliance recording policy
+
+*New-CsTeamsComplianceRecordingPolicy* and *Set-CsTeamsComplianceRecordingPolicy* now have three new parameters:
+
+* *CustomPromptsEnabled*
+* *CustomPromptsPackageId*
+
+* *RecordReroutedCalls*
+*CustomPromptsEnabled* and *RecordReroutedCalls* accepts a boolean value. They both default to *false*. Setting both parameters already work:
+
+![A screenshot showing both parameters can be changed](../../img/teams-powershell-datamining-aug-2023/20230808-075642-xFX2UtsxYx.png)
+
+*CustomPromptsPackageId *accepts a string. We can assume it will need a package identifier from *New-CsCustomPromptPackage*. The default value is an empty string.
+
+When trying to provide an identifier we get the same error message as for *New-CsCustomPrompt* and *New-CsCustomPromptPackage*:
+
+![Error when using CustomPromptsPackageId parameter](../../img/teams-powershell-datamining-aug-2023/20230808-075251-rxQxFMgj0a.png)
+
+Checklist for *CustomPromptsEnabled* and *CustomPromptsPackageId*:
+
+* ❌Documentation not available
+* ❌Not found via search engines (Google, Bing) 
+
+* ❌Not found on GitHub
+* ❌No roadmap mention
+
+* ❌No Message Center mention
+
+Checklist for *RecordReroutedCalls*:
+
+* ✅Documentation updated
+* ❌No roadmap mention
+
+* ❌No Message Center mention
+
+## Events policy
+
+*New-CsTeamsEventsPolicy* and *Set-CsTeamsEventsPolicy* now have three new parameters:
+
+* *AllowedTownhallTypesForRecordingPublish*
+* *AllowedWebinarTypesForRecordingPublish*
+
+* *TownhallChatExperience*
+*Get-CsTeamsEventsPolicy* cmdlet already returns these parameters.
+
+*AllowedTownhallTypesForRecordingPublish* and *AllowedWebinarTypesForRecordingPublish* both default to *Everyone*. They both accept the following values:
+
+* *None*
+* *InviteOnly*
