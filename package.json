@@ -20,7 +20,7 @@
     "gatsby-transformer-sharp": "^5.11.0",
     "lodash": "^4.17.21",
     "lodash-webpack-plugin": "^0.11.6",
-    "postcss": "^8.4.26",
+    "postcss": "^8.4.27",
     "prismjs": "^1.29.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -28,7 +28,7 @@
     "react-helmet": "^6.1.0",
     "remark-images": "^3.1.0",
     "uuid": "^9.0.0",
-    "webpack": "^5.88.1"
+    "webpack": "^5.88.2"
   },
   "keywords": [
     "gatsby"
@@ -47,7 +47,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "prettier": "^3.0.0"
+    "prettier": "^3.0.1"
   },
   "prettier": {
     "trailingComma": "es5",
