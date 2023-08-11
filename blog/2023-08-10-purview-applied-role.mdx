@@ -11,7 +11,7 @@ tags:
 
 When fixing issues with roles, we frequently are not sure, which role is currently active and which is not. We can wait 15-30 mins to be sure that roles are updated. But is there a more efficient way?
 
-I recently came into that issue. This time in Purview. I got *Audit Reader *role, but did not see any audit entries. After digging into my browser dev tools, I found a workaround. I'm sharing it below.
+I recently came into that issue. This time in Purview. I got *Audit Reader* role, but did not see any audit entries. After digging into my browser dev tools, I found a workaround. I'm sharing it below.
 
 ## Preparing Developer Tools
 
@@ -41,7 +41,7 @@ In DevTools, let's now switch to the **Network** tab (1). We can also disable ca
 
 ## Generating the request
 
-Now we need to force our browser to ask for the roles assigned to our account. To do this, let's go to audit log search. You can either click *Audit *from the left menu or use [direct link to Audit page](https://compliance.microsoft.com/auditlogsearch?viewid=Async%20Search).
+Now we need to force our browser to ask for the roles assigned to our account. To do this, let's go to audit log search. You can either click *Audit* from the left menu or use [direct link to Audit page](https://compliance.microsoft.com/auditlogsearch?viewid=Async%20Search).
 
 Our DevTools will show plenty of requests. But we are interested in one: *GetUserRolesWithScopeInfo*. Let's put that phrase into the search box (1). Then we click the request from the list (2) and go to **Preview** tab (3): 
 
@@ -68,5 +68,3 @@ In Edge/Chrome you can right-click and choose **Expand recursively**.
 We used DevTools to dig into low-level request sent by Purview. But the roles is not the only thing we can find there. How about exploring it a little more?
 
 Make sure to share any interesting things you found. I suggest the comments section below. Happy exploring!
-
-
