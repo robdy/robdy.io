@@ -1,0 +1,83 @@
+---
+templateKey: blog-post
+title: CsTeamsFilesPolicy cmdlets
+date: 2021-12-09T14:27:35.216Z
+description: "New cmdlets appeared in Teams PowerShell: Get-, New-, Set-,
+  Remove- and Grant-CsTeamsFilesPolicy."
+featuredpost: false
+tags:
+  - teams
+  - powershell
+  - datamining
+---
+New cmdlets appeared in Teams PowerShell: Get-, New-, Set-, Remove- and Grant-CsTeamsFilesPolicy.
+
+Set of mysterious cmdlets were added to Microsoft Teams PowerShell module:
+
+* Get-CsTeamsFilesPolicy
+* New-CsTeamsFilesPolicy
+* Remove-CsTeamsFilesPolicy
+* Set-CsTeamsFilesPolicy
+* Grant-CsTeamsFilesPolicy
+
+All four cmdlets were added to `2.6.2-preview` version of the module they remain even on stable `3.0.0` version.
+
+## Default settings
+
+As `Get-CsTeamsFilesPolicy` currently returns error saying *The term is not recognized as the name of a cmdlet, function, 
+script file, or operable program*, the default parameters for newly-introduced policy are unknown.
+
+## Syntax
+
+Help data for the cmdlets show the following syntax:
+
+```powershell
+Get-CsTeamsFilesPolicy [-LocalStore] [-Identity <Object>] [-Filter <Object>] [<CommonParameters>]
+
+New-CsTeamsFilesPolicy [-SPChannelFilesTab <Object>] [-NativeFileEntryPoints <Object>] [-Identity <Object>] [-InMemory] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Remove-CsTeamsFilesPolicy [-Identity <Object>] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Set-CsTeamsFilesPolicy [-SPChannelFilesTab <Object>] [-NativeFileEntryPoints <Object>] [-Identity <Object>] [-Force] [-Instance <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Grant-CsTeamsFilesPolicy [-PassThru] [-PolicyName <Object>] [-Identity <Object>] [-Global] [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+
+## Available parameters
+
+Except common parameters, the following ones are available for `New-`/`Set-` cmdlets:
+
+* **SPChannelFilesTab** \<Object\>
+* **NativeFileEntryPoints** \<Object\>
+
+One parameter, which slowly become a standard one is **InMemory** \[\<SwitchParameter\>\]. This parameter can be used to not save the object in the organization data, but to store it only in memory.
+
+Example of `InMemory` parameter usage would be along these lines:
+
+```powershell
+# Instead of writing
+$policy = New-CsTeamsFilesPolicy -Identity 'Test policy' -SPChannelFilesTab $something -NativeFileEntryPoints $somethingElse
+
+# You can write
+$policy = New-CsTeamsFilesPolicy -InMemory
+$policy.SPChannelFilesTab =  $something
+$policy.NativeFileEntryPoints =  $somethingElse
+Set-CsTeamsFilesPolicy -Identity 'Test policy' -Instance $policy
+```
+
+## References
+
+There is no mention of that cmdlet in Teams-related [M365 Roadmap items (GA excluded)](https://www.microsoft.com/en-ww/microsoft-365/roadmap?filters=Microsoft%20Teams%2CPreview%2CTargeted%20Release%2CTargeted%20Release%20(Entire%20Organization)%2CTargeted%20Release%20(Select%20People)%2CLimited%20Availability%2CSemi-Annual%20Enterprise%20Channel%20(Preview)%2CSemi-Annual%20Enterprise%20Channel%2CBeta%20Channel%2CStable%20Channel%2CCurrent%20Channel%20(Preview)%2CCurrent%20Channel#owRoadmapMainContent).
+
+Searching GitHub doesn't return any results in the documentation repositories, which means the cmdlets were never added to the documentation.
+
+The results from GitHub return some results from [timoleo23
+/Teams-PhoneNumbersManager](https://github.com/timoleo23/Teams-PhoneNumbersManager), which seems to be an interesting solution to manage phone numbers in Teams. However, the project is totally unrelated to the cmdlets we talk about. We get the search results because the author included Teams module in the repo.
+
+Using search engines only returns items from [PowerShell Gallery](https://www.powershellgallery.com/) (and hopefully this blog post).
+
+## Summary
+
+There isn't much to say about the new cmdlets, as all the sources have barely any mention about them. We can only be sure that Microsoft is working on something in relation to Teams files.
+
+As the cmdlets are related to policies, the settings will be per-user. It's possible that tenant-wide cmdlets will also receive such parameter in the future.

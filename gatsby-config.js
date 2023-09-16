@@ -1,13 +1,10 @@
 module.exports = {
   siteMetadata: {
-    title: 'robdy · personal site',
-    description:
-      'MS Teams and SfB specialist, developer in my free time',
-    siteUrl: `https://robdy.github.io`,
+    title: 'Robert Dyjas - blog',
+    description: 'MS Teams and SfB expert. In my free time I write code',
+    siteUrl: `https://robdy.io`,
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sass',
     {
       // keep as first gatsby-source-filesystem plugin for gatsby image support
       resolve: 'gatsby-source-filesystem',
@@ -24,22 +21,29 @@ module.exports = {
       },
     },
     {
+    resolve: 'gatsby-source-filesystem',
+    options: {
+      path: `${__dirname}/blog${process.env.NODE_ENV === 'production' ? '' : 'dev'}`,
+      name: 'articles',
+    },
+    },
+    {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/img`,
+        path: `${__dirname}/src/img${process.env.NODE_ENV === 'production' ? '' : 'dev'}`,
         name: 'images',
       },
     },
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     {
-      resolve: 'gatsby-transformer-remark',
+      resolve: 'gatsby-plugin-mdx',
       options: {
-        plugins: [
+        gatsbyRemarkPlugins: [
           {
-            resolve: 'gatsby-remark-relative-images',
+            resolve: 'gatsby-remark-relative-images-v2',
             options: {
-              name: 'uploads',
+              // name: 'uploads',
             },
           },
           {
@@ -48,7 +52,8 @@ module.exports = {
               // It's important to specify the maxWidth (in pixels) of
               // the content container as this plugin uses this as the
               // base for generating different widths of each image.
-              maxWidth: 2048,
+              maxWidth: 1920,
+              srcSetBreakpoints: [471, 942],
             },
           },
           {
@@ -57,18 +62,6 @@ module.exports = {
               destinationDir: 'static',
             },
           },
-          "gatsby-remark-external-links",
-          {
-            resolve: "gatsby-remark-table-of-contents",
-            options: {
-              exclude: "Table of Contents",
-              tight: false,
-              fromHeading: 1,
-              toHeading: 6,
-              className: "table-of-contents"
-            },
-          },
-          "gatsby-remark-autolink-headers",
         ],
       },
     },
@@ -77,16 +70,67 @@ module.exports = {
       options: {
         // Exclude specific pages or groups of pages using glob parameters
         // See: https://github.com/isaacs/minimatch
-        exclude: [`/tags/*`]
-      }
-    },
-
-    {
-      resolve: 'gatsby-plugin-netlify-cms',
-      options: {
-        modulePath: `${__dirname}/src/cms/cms.js`,
+        excludes: [`/tags/*`, `/tags/`],
       },
     },
-    'gatsby-plugin-netlify', // make sure to keep it last in the array
+    {
+      resolve: `gatsby-source-rss-feed`,
+      options: {
+        url: `https://adamtheautomator.com/author/robert-dyjas/feed`,
+        name: `AdamTheAutomator`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMdx } }) => {
+              return allMdx.edges.map((edge) => {
+                return Object.assign({}, edge.node.frontmatter, {
+                  description: edge.node.frontmatter.description,
+                  date: edge.node.frontmatter.date,
+                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                })
+              })
+            },
+            query: `
+              {
+                allMdx(
+                  filter :{ frontmatter: { templateKey: { eq: "blog-post" } } }, 
+                  sort: { order: DESC, fields: [frontmatter___date] },
+                ) {
+                  edges {
+                    node {
+                      fields { slug }
+                      frontmatter {
+                        title
+                        date
+                        description
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+            output: '/rss.xml',
+            title: "Robert Dyjas - Blog's RSS feed",
+          },
+        ],
+      },
+    },
   ],
 }

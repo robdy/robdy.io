@@ -10,8 +10,7 @@ const AboutPage = () => (
       <Navbar />
       <h1>About me</h1>
       <p>
-        My name is Robert Dyjas. I'm Microsoft Teams and Microsoft 365
-        specialist who also likes to learn{' '}
+        My name is Robert Dyjas. I'm Microsoft Teams and Microsoft 365 specialist who also likes to learn{' '}
         <code class="language-text">$newThings</code> in the meantime.
       </p>
       <p>
@@ -22,6 +21,7 @@ const AboutPage = () => (
       <p>
         Since the beginning of my career I'm working with Microsoft products. I'm mainly focused on communication tools: Teams, Skype for Business and Exchange.
       </p>
+
       <h2>Projects</h2>
       <p>
         I've been participating in various non-commercial projects in the past.
@@ -65,13 +65,14 @@ const AboutPage = () => (
 
         <b>Technologies used</b>: Git, Node.js, Sails.JS, Reddit API, Discord.JS
       </p>
-
+                                                                                            
       <h2>Blog</h2>
       <p>
         On this blog I include some random hints/instructions about the issues I
         have resolved and decided to note so I don't have to search for the
         information once again. I'm glad if you find it somewhat useful!
       </p>
+                                                                                            
       <h2>Credits</h2>
       <ul>
         <li>

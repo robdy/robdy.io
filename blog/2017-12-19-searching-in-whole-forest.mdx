@@ -1,0 +1,36 @@
+---
+templateKey: 'blog-post'
+title: 'Searching in whole forest'
+date: 2017-12-19T10:11:12.000Z
+featuredpost: false
+description: >-
+  Here's how to search for users in multi-domain environment.
+tags:
+  - powershell
+  - active directory
+---
+Here's how to search for users in multi-domain environment.
+
+When you want to find a user in Active Directory you usually use:
+
+``` powershell
+Get-ADUser -Filter {SamAccountName -eq "User1"}
+```
+
+However, if you are in multi-domain environment and you’re looking for the user from another domain you’ll receive the error:
+
+``` powershell
+Get-ADUser : Cannot find an object with identity: 'User1' under: 'DC=europe,DC=domain,DC=com'.
+```
+
+To resolve this issue you have to send your query to Global Catalog directly. If your Domain Controller is also Global Catalog you can do it by specyfying server with port 3268:
+
+``` powershell
+Get-ADUser -Filter {SamAccountName -eq "User1"} -Server "DC1:3268"
+```
+
+If you don’t know the name of your DC you can try to use the DC you authenticates to:
+
+``` powershell
+Get-ADUser -Filter {SamAccountName -eq "User1"} -Server "$((Get-ADDomainController).Name):3268"
+```

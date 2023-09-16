@@ -1,0 +1,324 @@
+---
+templateKey: blog-post
+title: Teams PowerShell datamining - August 2023
+date: 2023-08-09T06:59:00.0000000Z
+description: For me, chat in Live Events is the winner of this month’s datamining. Check out the others - this edition uncovers plenty of new things!
+featuredpost: false
+tags:
+  - teams
+  - powershell
+  - datamining
+---
+
+At the beginning of August Microsoft released the 5.5.0 version of the Microsoft Teams PowerShell module.
+
+## Release notes
+
+The [official release notes](https://learn.microsoft.com/en-us/microsoftteams/teams-powershell-release-notes) mention the following changes:
+
+* Releases New-CsTeamsHiddenTemplate cmdlet.
+* Releases [New|Get|Set|Remove]-CsTeamsTemplatePermissionPolicy cmdlets.
+* Adds a new paramater -IncludePhoneNumbers to Get-CsTenantNetworkSite.
+* [BREAKING CHANGE] Deprecates EnableShiftPresence parameter from TeamsShiftsPolicy.
+
+* Contains a new implementation of [Get|Set]-CsTeamsUpgradeConfiguration, [Get|Set|Remove|New]-CsTeamsComplianceRecordingPolicy, [Get|Set|Remove|New]-CsTeamsComplianceRecordingApplication, New-CsTeamsComplianceRecordingPairedApplication. Functionality remains the same as previous implementation.
+
+However, there is more. Let's talk about them!
+
+## Custom prompts
+
+The most mysterious feature comes first. We're getting custom prompts along with a custom prompt package. The cmdlets are:
+
+* *New-CsCustomPrompt*
+* *New-CsCustomPromptPackage*
+
+For the custom prompt itself, we can set the following properties:
+
+* *AudioPrompt*
+* *Id*
+* *Locale*
+* *Name*
+* *TextPrompt*
+* *Type*
+
+All the parameters accept strings. Only three of them are mandatory: *Id*, *Type*, and *Locale*.
+
+The policy package contains the following properties:
+
+* *Id*
+* *DefaultLocale*
+* *Name*
+* *InboundEndRecordingPrompt*
+* *InboundStartRecordingPrompt*
+* *MeetingEndRecordingPrompt*
+* *MeetingStartRecordingPrompt*
+* *OutboundEndRecordingPrompt*
+* *OutboundStartRecordingPrompt*
+
+*Id*, *DefaultLocale*, and *Name* accept string values. Recording prompt values accepts *PSListModifier[string]* type. From the documentation of [PSListModifier](https://learn.microsoft.com/en-us/dotnet/api/system.management.automation.pslistmodifier?view=powershellsdk-7.3.0), we will be able to supply multiple prompts for each type.
+
+Unfortunately, we cannot test it yet. Both *New-CsCustomPrompt* and *New-CsCustomPromptPackage* cmdlets currently return the same error:
+
+> *Could not find the resource "XsdClassGeneratorStringsResources.resources" among the resources "" embedded in the assembly "Microsoft.Teams.Policy.Administration.Cmdlets.Providers.PolicyRp", nor among the resources in any satellite assemblies for the specified culture. Perhaps the resources were embedded with an incorrect name.*
+
+![The error returned by both cmdlets related to the custom prompt](../../img/teams-powershell-datamining-aug-2023/20230807-085337-oZyCzULOdO.png)
+
+Checklist for *New-CsCustomPrompt*:
+
+* ❌Documentation not available
+* ❌Not found via search engines (Google, Bing) 
+* ❌Not found on GitHub
+* ❌No roadmap mention
+* ❌No Message Center mention
+
+Checklist for *New-CsCustomPromptPackage*:
+
+* ❌Documentation not available
+* ❌Not found via search engines (Google, Bing) 
+* ❌Not found on GitHub
+* ❌No roadmap mention
+* ❌No Message Center mention
+
+## Custom audio conferencing prompts
+
+We get two more new cmdlets containing *custom prompts* in their names:
+
+* *Get-CsTeamsAudioConferencingCustomPromptsConfiguration*
+* *Set-CsTeamsAudioConferencingCustomPromptsConfiguration*
+
+The *Set-* cmdlet accepts:
+
+* *Identity* - mandatory, accepts a string
+* *Packages* - optional, accepts *PSListModifier[CustomPromptPackage]*
+* *Prompts* - optional, accepts *PSListModifier[CustomPrompt]*
+
+Similar to custom prompt packages, we will be able to add multiple prompts using `@{Add='Identifier'}` method.
+
+For now, both *Get-* and *Set-* cmdlets return an error:
+
+> *Provided type TeamsAudioConferencingCustomPromptsConfiguration is not valid Please check your request parameters.*
+
+![The error returned by both cmdlets related to the audio conferencing custom prompt configuration](../../img/teams-powershell-datamining-aug-2023/20230807-090733-Es1BuH4tGu.png)
+
+Checklist for *Get-CsTeamsAudioConferencingCustomPromptsConfiguration*:
+
+* ❌Documentation not available
+* ❌Not found via search engines (Google, Bing) 
+* ❌Not found on GitHub
+* ❌No roadmap mention
+* ❌No Message Center mention
+
+Checklist for *Set-CsTeamsAudioConferencingCustomPromptsConfiguration*:
+
+* ❌Documentation not available
+* ❌Not found via search engines (Google, Bing) 
+* ❌Not found on GitHub
+* ❌No roadmap mention
+* ❌No Message Center mention
+
+## Compliance recording policy
+
+*New-CsTeamsComplianceRecordingPolicy* and *Set-CsTeamsComplianceRecordingPolicy* now have three new parameters:
+
+* *CustomPromptsEnabled*
+* *CustomPromptsPackageId*
+* *RecordReroutedCalls*
+
+*CustomPromptsEnabled* and *RecordReroutedCalls* accepts a boolean value. They both default to *false*. Setting both parameters already work:
+
+![A screenshot showing both parameters can be changed](../../img/teams-powershell-datamining-aug-2023/20230808-075642-xFX2UtsxYx.png)
+
+*CustomPromptsPackageId* accepts a string. We can assume it will need a package identifier from *New-CsCustomPromptPackage*. The default value is an empty string.
+
+When trying to provide an identifier we get the same error message as for *New-CsCustomPrompt* and *New-CsCustomPromptPackage*:
+
+![Error when using CustomPromptsPackageId parameter](../../img/teams-powershell-datamining-aug-2023/20230808-075251-rxQxFMgj0a.png)
+
+Checklist for *CustomPromptsEnabled* and *CustomPromptsPackageId*:
+
+* ❌Documentation not available
+* ❌Not found via search engines (Google, Bing) 
+* ❌Not found on GitHub
+* ❌No roadmap mention
+* ❌No Message Center mention
+
+Checklist for *RecordReroutedCalls*:
+
+* ✅Documentation updated
+* ❌No roadmap mention
+* ❌No Message Center mention
+
+## Events policy
+
+*New-CsTeamsEventsPolicy* and *Set-CsTeamsEventsPolicy* now have three new parameters:
+
+* *AllowedTownhallTypesForRecordingPublish*
+* *AllowedWebinarTypesForRecordingPublish*
+* *TownhallChatExperience*
+
+*Get-CsTeamsEventsPolicy* cmdlet already returns these parameters.
+
+*AllowedTownhallTypesForRecordingPublish* and *AllowedWebinarTypesForRecordingPublish* both default to *Everyone*. They both accept the following values:
+
+* *None*
+* *InviteOnly*
+* *EveryoneInCompanyIncludingGuests*
+* *Everyone*
+
+How can we check it? We can pass a random value and inspect the error:
+
+![Error message showing possible values](../../img/teams-powershell-datamining-aug-2023/20230808-081811-hAp1lIXIGM.png)
+
+For *TownhallChatExperience* it is not that easy. It accepts any string value and does not return any error. However, it effectively does nothing: 
+
+![Setting TownhallChatExperience does not work yet](../../img/teams-powershell-datamining-aug-2023/20230808-082110-Ufx308NDqK.png)
+
+In events policies, the word *townhall* refers to Live Events. That gives us some ideas. For webinars, we already know about on-demand recording ([123052](https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=123052), [MC661825](https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC661825)). We will get similar functionality for Live Events, but it is not announced.
+
+We will also get chat functionality in Live Events, which is big news. However, no details are available about the timeline or functional details.
+
+Checklist for *AllowedTownhallTypesForRecordingPublish*:
+
+- ❌Documentation not available
+- ❌Not found via search engines (Google, Bing)
+- ❌Not found on GitHub
+- ❌No roadmap mention
+- ❌No Message Center mention
+
+Checklist for *AllowedWebinarTypesForRecordingPublish*:
+
+- ❌Documentation not available
+- ✅Found via search engines (Google, Bing)
+- ❌Not found on GitHub
+- ✅Roadmap entry [123052](https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=123052)
+- ✅Message Center entry [MC661825](https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC661825) ([non-admin mirror](https://west.jcteams.info/bhit11/docs/MC661825.html))
+
+Checklist for *TownhallChatExperience*:
+
+- ❌Documentation not available
+- ❌Not found via search engines (Google, Bing)
+- ❌Not found on GitHub
+- ❌No roadmap mention
+- ❌No Message Center mention
+
+## Meeting policy
+
+*New-CsTeamsMeetingPolicy* and *Set-CsTeamsMeetingPolicy* now have two new parameters:
+
+- *AllowLocalRecording* - accepts boolean value, defaults to *false*
+- *ConnectToMeetingControls - accepts string, defaults to empty string*
+
+*Get-CsTeamsMeetingPolicy* cmdlet already returns these properties.
+
+From the first parameter’s name, it might seem that we will have the option to store recordings locally. Zoom has a [similar parameter in the SDK](https://marketplacefront.zoom.us/sdk/meeting/electron/module-zoom_meeting_recording.html). I can see one big pro of local recordings - they will not expire. However, [this Pull Request](https://github.com/MicrosoftDocs/office-docs-powershell/pull/11144) suggests that the parameter is for Microsoft internal use only.
+
+The other property suggests connecting to meeting controls by something that does not natively belong to Teams. Is it for [Elgato Steam Deck](https://techcommunity.microsoft.com/t5/healthcare-and-life-sciences/update-teams-powerpoint-plugins-for-elgato-stream-deck-and/ba-p/3767650) or for something else? We don’t know yet.
+
+Checklist for *AllowLocalRecording*:
+
+- ❌Documentation not available
+- ❌Not found via search engines (Google, Bing)
+- ✅Pull Request [found on GitHub](https://github.com/MicrosoftDocs/office-docs-powershell/pull/11144)
+- ❌No roadmap mention
+- ❌No Message Center mention
+
+Checklist for *ConnectToMeetingControls*:
+
+- ❌Documentation not available
+- ❌Not found via search engines (Google, Bing)
+- ❌Nothing useful found on GitHub, only [this issue](https://github.com/MicrosoftDocs/office-docs-powershell/issues/11138)
+- ❌No roadmap mention
+- ❌No Message Center mention
+
+## Shared calling routing policy
+
+The routing policy for shared calling is a new type of policy introduced in the 5.5.0 release. The entire set of cmdlets is already available:
+
+- *Get-CsTeamsSharedCallingRoutingPolicy*
+- *New-CsTeamsSharedCallingRoutingPolicy*
+- *Remove-CsTeamsSharedCallingRoutingPolicy*
+- *Set-CsTeamsSharedCallingRoutingPolicy*
+- *Grant-CsTeamsSharedCallingRoutingPolicy*
+
+Granting policy to a group is available with the *-Group* and *-Rank* parameters for *Grant-* cmdlet. The policy contains the following configurable parameters (via *New-* and *Set-*):
+
+- *Description* - accepts a string, defaults to an empty string
+- *EmergencyNumbers* - accepts *PSListModifier[string]*, defaults to an empty object
+- *Identity* - required, accepts a string
+- *ResourceAccount* - required, accepts a string
+
+*Get-CsTeamsSharedCallingRoutingPolicy* cmdlet already returns these parameters. However, seting or creating anything ends with our well-known error:
+
+![Error running any of the shared calling routing policy cmdlets](T../../img/teams-powershell-datamining-aug-2023/20230809-074758-TicBN7Z1sW.png)
+
+I found an announcement that might be related to this policy. Its title is *Call delegation feature enhancements*. It is described as *the ability for delegates and delegators to join active calls, if permitted*. Roadmap item [123753](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=123753) and Message Center entry [MC649047](https://admin.microsoft.com/Adminportal/Home?ref=MessageCenter/:/messages/MC649047) ([non-admin mirror](https://west.jcteams.info/jcteamsinfo/docs/MC649047.html)) describe it quite well.
+
+Checklist for shared calling routing policy:
+
+- ❌Documentation not available
+- ❌Not found via search engines (Google, Bing)
+- ❌Not found on GitHub
+- 🚨Possible roadmap mention: [123753](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=123753)
+- 🚨Possible Message Center entry [MC649047](https://admin.microsoft.com/Adminportal/Home?ref=MessageCenter/:/messages/MC649047) ([non-admin mirror](https://west.jcteams.info/jcteamsinfo/docs/MC649047.html))
+
+## Voice applications policy
+
+*New-CsTeamsVoiceApplicationsPolicy* and *Set-CsTeamsVoiceApplicationsPolicy* get three new parameters:
+
+- HistoricalAgentMetricsPermission
+- HistoricalAutoAttendantMetricsPermission
+- HistoricalCallQueueMetricsPermission
+
+The default value for all three parameters is *Disabled*. The available values are:
+
+- *Disabled*
+- *AuthorizedOnly*
+- *All*
+
+*Get-CsTeamsVoiceApplicationsPolicy* cmdlet already returns these parameters. Surprisingly, all the parameters are already described in the  [Manage voice applications policies for Microsoft Teams](https://learn.microsoft.com/en-us/microsoftteams/manage-voice-applications-policies) article.
+
+Checklist for new parameters:
+
+- ✅Documentation already available
+
+## Network site ID
+
+*NetworkSiteID* parameter is now available for *Get-CsPhoneNumberAssignment* and *Set-CsPhoneNumberAssignment*.
+
+It is currently unknown what is the site identified for. Is it possible that the number assignment will be dynamic, based on the network? 
+
+Checklist for *NetworkSiteID*:
+
+- ❌Documentation not available
+- ❌Ambiguous results on search engines
+- ❌Ambiguous results on GitHub
+- ❌No roadmap mention
+- ❌No Message Center mention
+
+<Warning>
+
+Searching for this parameter is difficult as there are other cmdlets using it. Therefore, the checklist might be misleading.
+
+</Warning>
+
+## Upgrade configuration
+
+*Set-CsTeamsUpgradeConfiguration* gets one new parameter: *BlockLegacyAuthorization*. It accepts a boolean value. Its default value is *false*.
+
+The parameter was already visible in *Get-CsTeamsUpgradeConfiguration* since May 2023. However, it is still unclear what it does.
+
+There is plenty of articles on the web showing [how to block legacy authentication (using Conditional Access)](https://learn.microsoft.com/en-us/azure/active-directory/conditional-access/block-legacy-authentication). However, the parameter name is about authorization, which is [a different topic](https://learn.microsoft.com/en-us/azure/active-directory/develop/authentication-vs-authorization).
+
+Checklist for *BlockLegacyAuthorization*:
+
+- ❌Documentation not available
+- ❌Not found via search engines (Google, Bing)
+- ❌Not found on GitHub
+- ❌No roadmap mention
+- ❌No Message Center mention
+
+## Summary
+
+Quite a long article, isn’t it? But that is because there were plenty of *hidden* features introduced in this version.
+
+Which one do you find the most interesting? Let me know in the comments if you want!

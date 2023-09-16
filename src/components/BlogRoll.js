@@ -1,96 +1,38 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { Link, graphql, StaticQuery } from 'gatsby'
-import PreviewCompatibleImage from './PreviewCompatibleImage'
+import PostTile from '../components/PostTile'
+import GuestPostTile from '../components/GuestPostTile'
+import { usePostList } from './use-post-list'
+import { Link } from 'gatsby'
 
-class BlogRoll extends React.Component {
-  render() {
-    const { data } = this.props
-    const { edges: posts } = data.allMarkdownRemark
+function BlogRoll(props) {
+  const data = usePostList()
+  const { maxPosts } = props
+  const { edges: localPosts } = data.allMdx
+  const { edges: guestPosts } = data.allFeedAdamTheAutomator
+  const posts = localPosts.concat(guestPosts)
+  posts.sort(
+    ({ node: firstItem }, { node: secondItem }) =>
+      new Date(secondItem?.frontmatter?.date || secondItem?.isoDate) -
+      new Date(firstItem?.frontmatter?.date || firstItem?.isoDate)
+  )
+  const postsToRender = maxPosts ? posts.slice(0, maxPosts) : posts
 
-    return (
-      <div className="columns is-multiline">
-        {posts &&
-          posts.map(({ node: post }) => (
-            <div className="is-parent column is-6" key={post.id}>
-              <article
-                className={`blog-list-item tile is-child box notification ${post.frontmatter.featuredpost ? 'is-featured' : ''
-                  }`}
-              >
-                <header>
-                  {post.frontmatter.featuredimage ? (
-                    <div className="featured-thumbnail">
-                      <PreviewCompatibleImage
-                        imageInfo={{
-                          image: post.frontmatter.featuredimage,
-                          alt: `featured image thumbnail for post ${post.frontmatter.title}`,
-                        }}
-                      />
-                    </div>
-                  ) : null}
-                  <p className="post-meta">
-                    <Link
-                      className="title has-text-primary is-size-4"
-                      to={post.fields.slug}
-                    >
-                      {post.frontmatter.title}
-                    </Link>
-                    <span> &bull; </span>
-                    <span className="subtitle is-size-5 is-block">
-                      {post.frontmatter.date}
-                    </span>
-                  </p>
-                </header>
-                <p>
-                  {post.frontmatter.description}
-                  <br />
-                  <br />
-                  <Link className="button" to={post.fields.slug}>
-                    Keep Reading →
-                  </Link>
-                </p>
-              </article>
-            </div>
-          ))}
-      </div>
-    )
-  }
+  return (
+    <div className="columns is-multiline">
+      {postsToRender &&
+        postsToRender.map(({ node: post }) =>
+          post?.fields?.slug ? (
+            <PostTile postData={post} key={post.id} />
+          ) : (
+              <GuestPostTile postData={post} key={post.id} />
+          )
+        )}
+      {maxPosts ? (
+        <div className={`button all-posts-button`}>
+          <Link to="/all">Read all posts</Link>
+        </div>
+      ) : null}
+    </div>
+  )
 }
-
-BlogRoll.propTypes = {
-  data: PropTypes.shape({
-    allMarkdownRemark: PropTypes.shape({
-      edges: PropTypes.array,
-    }),
-  }),
-}
-
-export default () => (
-  <StaticQuery
-    query={graphql`
-      query BlogRollQuery {
-        allMarkdownRemark(
-          sort: { order: DESC, fields: [frontmatter___date] }
-          filter: { frontmatter: { templateKey: { eq: "blog-post" } } }
-        ) {
-          edges {
-            node {
-              id
-              fields {
-                slug
-              }
-              frontmatter {
-                title
-                templateKey
-                date(formatString: "MMMM DD, YYYY")
-                featuredpost
-                description
-              }
-            }
-          }
-        }
-      }
-    `}
-    render={(data, count) => <BlogRoll data={data} count={count} />}
-  />
-)
+export default BlogRoll

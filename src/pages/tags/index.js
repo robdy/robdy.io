@@ -1,21 +1,19 @@
 import React from 'react'
 import { kebabCase } from 'lodash'
-import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 import Layout from '../../components/Layout'
+import Navbar from '../../components/Navbar'
+import { Metadata } from '../../components/Metadata'
 
 const TagsPage = ({
   data: {
-    allMarkdownRemark: { group },
-    site: {
-      siteMetadata: { title },
-    },
+    allMdx: { group },
   },
 }) => (
   <Layout>
     <section className="section">
-      <Helmet title={`Tags | ${title}`} />
       <div className="container content">
+        <Navbar />
         <div className="columns">
           <div
             className="column is-10 is-offset-1"
@@ -23,7 +21,7 @@ const TagsPage = ({
           >
             <h1 className="title is-size-2 is-bold-light">Tags</h1>
             <ul className="taglist">
-              {group.map(tag => (
+              {group.map((tag) => (
                 <li key={tag.fieldValue}>
                   <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
                     {tag.fieldValue} ({tag.totalCount})
@@ -40,15 +38,31 @@ const TagsPage = ({
 
 export default TagsPage
 
+export const Head = ({
+  data: {
+    site: {
+      siteMetadata: { title },
+    },
+  },
+  location: { pathname }
+}) => (
+  <Metadata pathname={pathname}>
+    <title id="title">{`Tags | ${title}`}</title>
+    <meta id="og:title" property="og:title" content={`Tags | ${title}`} />
+    <meta name="robots" content="noindex" />
+  </Metadata>
+)
+
 export const tagPageQuery = graphql`
   query TagsQuery {
     site {
       siteMetadata {
         title
+        siteUrl
       }
     }
-    allMarkdownRemark(limit: 1000) {
-      group(field: frontmatter___tags) {
+    allMdx(limit: 1000) {
+      group(field: {frontmatter: {tags: SELECT}}) {
         fieldValue
         totalCount
       }

@@ -1,0 +1,27 @@
+name: NPM check updates
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout current branch
+        uses: actions/checkout@v3
+
+      - name: Run script
+        id: bumper
+        run: |
+          git branch bump 
+          npm i npm-check-updates -g
+          npm-check-updates -u
+          npm install
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: bump
+          base: src
+          commit-message: "Bump all dependencies"
+          delete-branch: true
+          title: "Bump all dependencies"

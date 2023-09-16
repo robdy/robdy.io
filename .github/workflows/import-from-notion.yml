@@ -1,0 +1,35 @@
+name: Import from Notion
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      pageId:
+        description: 'Notion page ID'     
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    # Checking out current branch to pull the latest script version
+      - name: Checkout current branch
+        uses: actions/checkout@v3
+
+      - name: Run script
+        id: importer
+        run: ./ImportFromNotion.ps1 $env:NOTION_PAGE_ID
+        env:
+          NOTION_KEY: ${{ secrets.NOTION_KEY }}
+          NOTION_PAGE_ID: ${{ inputs.pageId }}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: ${{ steps.importer.outputs.BRANCH_NAME }}
+          base: src
+          commit-message: ${{ steps.importer.outputs.COMMIT_MSG }}
+          delete-branch: true
+          labels: netlify-cms/draft
+          title: ${{ steps.importer.outputs.PR_TITLE }}

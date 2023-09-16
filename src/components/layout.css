@@ -1,0 +1,849 @@
+/*#region Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+/*#endregion Fonts */
+
+/*#region Variables */
+:root {
+  /* Scheme */
+  /* https://coolors.co/5603ad-8367c7-b3e9c7-c2f8cb-f0fff1*/
+  --purple: #5603adff;
+  --blue-violet-crayola: #8367c7ff;
+  --magic-mint: #b3e9c7ff;
+  --tea-green: #c2f8cbff;
+  --honeydew: #f0fff1ff;
+  --go-green: #32ae60ff;
+
+  /* Colors */
+  --main-text-color: hsl(0, 0%, 20%);
+  --roll-date-color: hsl(0, 0%, 70%);
+  --roll-title-color: hsl(0, 0%, 40%);
+  /* Link colors */
+  --link-text-color: hsl(0, 0%, 40%);
+  --link-text-color-hover: hsl(0, 0%, 20%);
+  --link-underline-color: var(--blue-violet-crayola);
+  --link-underline-color-hover: var(--purple);
+  --post-nav-color: hsl(0, 0%, 60%);
+  /* Tags */
+  --tag-border-color: hsl(120, 100%, 80%);
+  --tag-background-color: hsl(120, 100%, 80%);
+  /* Footer */
+  --footer-bg: #cccccc;
+  /* Misc */
+  --header-top-margin: 2rem;
+}
+
+/*#endregion Variables */
+
+/*#region Basics */
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  word-break: break-word;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+  font-size: min(22px, 4vw);
+  font-weight: 300;
+  color: var(--main-text-color);
+  overflow-y: scroll;
+}
+
+.container {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: block;
+}
+
+.flex {
+  display: flex;
+}
+
+::-moz-selection {
+  background: var(--go-green);
+}
+::selection {
+  background: var(--go-green);
+}
+/*#endregion Basics */
+
+/*#region Main page */
+.bio {
+  background-color: var(--tea-green);
+}
+
+.bio div::-moz-selection {
+  background: var(--go-green);
+}
+.bio div::selection {
+  background: var(--go-green);
+}
+
+.bio-picture-container {
+  align-items: center;
+}
+
+.bio-picture {
+  width: 12.5rem;
+  border-radius: 6.25rem;
+}
+
+.bio-text {
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+}
+
+.bio-links {
+  margin-top: 1.5rem;
+  list-style-type: none;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.bio-links > li {
+  padding: 0.5rem;
+  background-color: var(--tea-green);
+}
+
+.newest-posts-container {
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.newest-posts-header {
+  text-transform: uppercase;
+  color: hsl(0, 0%, 50%);
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.rss-link,
+.rss-link:hover,
+.rss-link:visited {
+  border-bottom: 0;
+}
+
+.rss-icon {
+  height: 1rem;
+  margin-top: var(--header-top-margin);
+  filter: opacity(0.5);
+  -webkit-filter: opacity(0.5);
+}
+
+.rss-icon:hover, .rss-icon:visited {
+  filter: opacity(0.3);
+  -webkit-filter: opacity(0.3);
+}
+
+.roll-tile-container {
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+.roll-post-link,
+.roll-post-link:hover,
+.roll-post-link:visited {
+  border: 0px;
+  font-weight: 300;
+  color: var(--main-text-color);
+}
+
+.roll-post-container {
+  padding: 1rem 1rem 2rem;
+  /* background-color: #eeeeee; */
+}
+
+.roll-post-container:not(:first-of-type) {
+  margin-top: 2rem;
+}
+
+.roll-post-container:hover {
+  background-color: var(--honeydew);
+}
+
+.roll-post-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.1rem;
+  font-weight: 600;
+  color: var(--roll-title-color);
+}
+
+.roll-post-date {
+  font-size: 0.8rem;
+  margin-bottom: 0.6rem;
+  color: var(--roll-date-color);
+  font-weight: 600;
+}
+
+.roll-post-description {
+  margin-bottom: 0.8rem;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+.all-posts-button {
+  margin-top: 2rem;
+}
+
+.button a {
+  background-color: var(--go-green);
+  padding: 0.5rem 1rem;
+}
+
+.button a,
+.button a:hover,
+.button a:visited {
+  border-bottom: 0;
+  color: var(--honeydew);
+}
+
+.button a:hover {
+  filter: brightness(90%);
+}
+
+article.roll-list-item p {
+  margin-top: 0px;
+}
+
+.guest-post-note::before {
+  content: '=> ';
+}
+
+/*#endregion Main page */
+
+/*#region Blog header */
+.header-container {
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.post-nav {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  justify-content: center;
+}
+
+.post-nav p {
+  margin-top: 0;
+}
+
+.post-nav a,
+.post-nav a:hover,
+.post-nav a:visited {
+  border-bottom: 0;
+}
+
+.navbar-links {
+  display: flex;
+  list-style-type: none;
+  padding: 0.5rem;
+}
+
+.navbar-links li {
+  margin-left: 2rem;
+}
+
+.navbar-links li a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-icon {
+  height: 1rem;
+  margin-right: 0.5em;
+}
+
+.post-title {
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+	font-weight: 600;
+  color: var(--roll-title-color);
+}
+
+.post-subheader {
+  margin-top: 0;
+  font-size: 1rem;
+}
+
+.post-subheader-link {
+  border-bottom: 0;
+}
+
+.taglist-container {
+  margin-top: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.taglist {
+  margin: 0;
+  margin-top: 0.5rem;
+  padding: 0;
+  overflow: hidden;
+  list-style-type: none;
+}
+
+.taglist a li {
+  font-size: 0.8rem;
+  float: left;
+  padding-right: 10px;
+  border-radius: 0.1rem;
+  border: 1px solid var(--tag-border-color);
+  padding: 0 0.4rem;
+  margin-right: 0.2rem;
+}
+
+.taglist a {
+  text-decoration: none;
+  line-height: 1.8em;
+  border-bottom: 0px;
+  font-weight: 400;
+}
+
+.taglist a:hover {
+  text-decoration: underline;
+  font-weight: 400;
+}
+
+.taglist a:hover li {
+  background: var(--tag-background-color);
+  transition: all 0.5s ease-out;
+}
+
+.description {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+/*#endregion Blog header */
+
+/*#region Blog entry content */
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: var(--header-top-margin);
+}
+
+/*#region Header anchors */
+.anchor.before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  padding-right: 4px;
+}
+
+.anchor.after {
+  display: inline-block;
+  padding-left: 4px;
+}
+
+h1 .anchor svg,
+h2 .anchor svg,
+h3 .anchor svg,
+h4 .anchor svg,
+h5 .anchor svg,
+h6 .anchor svg {
+  visibility: hidden;
+}
+
+h1:hover .anchor svg,
+h2:hover .anchor svg,
+h3:hover .anchor svg,
+h4:hover .anchor svg,
+h5:hover .anchor svg,
+h6:hover .anchor svg,
+h1 .anchor:focus svg,
+h2 .anchor:focus svg,
+h3 .anchor:focus svg,
+h4 .anchor:focus svg,
+h5 .anchor:focus svg,
+h6 .anchor:focus svg {
+  visibility: visible;
+}
+/*#endregion Header anchors */
+
+.page-header {
+  font-size: 2rem;
+  border-bottom: 1px solid #cccccc;
+}
+
+li {
+  line-height: 1.5;
+}
+
+p {
+  margin-top: 1rem;
+  line-height: 1.5;
+}
+
+p img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+/* em {
+  color: var(--purple);
+}
+
+strong {
+  color: var(--purple);
+} */
+
+a,
+a:hover,
+a:visited {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a,
+a:visited {
+  border-bottom: 3px solid var(--link-underline-color);
+  color: var(--link-text-color);
+}
+
+a:hover {
+  border-bottom: 3px solid var(--link-underline-color-hover);
+  color: var(--link-text-color-hover);
+}
+
+a.anchor {
+  border-bottom: 0px;
+}
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+ul,
+ol {
+  padding: 0 1.5rem;
+}
+
+li p {
+  margin-top: 0px;
+}
+
+blockquote {
+  background-color: hsl(0, 0%, 97%);
+  padding: 1rem 1.5rem;
+  border: 0px;
+  border-left: 0.3rem solid hsl(0, 0%, 60%);
+  margin: 1rem 0;
+}
+blockquote p {
+  margin-top: 0px;
+}
+
+strong {
+  font-weight: bold;
+}
+
+/*#region Blocks */
+p.block-title {
+  display: flex;
+  align-items: center;
+  line-height: 2em;
+  font-variant: small-caps;
+}
+
+.block-icon {
+  margin-right: 0.2em;
+}
+
+blockquote.block-Note {
+  background-color: hsl(142, 55%, 95%);
+  border-color: hsl(142, 55%, 40%);
+}
+
+.block-icon-Note {
+  color: hsl(142, 55%, 40%);
+}
+
+blockquote.block-Warning {
+  background-color: hsl(355, 85%, 95%);
+  border-color: hsl(355, 85%, 55%);
+  border-left-color: hsl(355, 85%, 55%);
+}
+
+.block-icon-Warning {
+  color: hsl(355, 100%, 55%);
+}
+
+blockquote.block-Tip {
+  background-color: hsl(222, 55%, 95%);
+  border-color: hsl(222, 55%, 40%);
+}
+
+.block-icon-Tip {
+  color: hsl(222, 55%, 40%);
+}
+
+/*#endregion Blocks */
+
+/*#endregion Blog entry content */
+
+/*#region Prism */
+/* PrismJS 1.22.0
+https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+powershell */
+/**
+* prism.js tomorrow night eighties for JavaScript, CoffeeScript, CSS and HTML
+* Based on https://github.com/chriskempson/tomorrow-theme
+* @author Rose Pritchard
+*/
+
+code[class*='language-'],
+pre[class*='language-'] {
+  color: #ccc;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 1em;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*='language-'] {
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+}
+
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
+  background: #2d2d2d;
+}
+
+/* Inline code */
+:not(pre) > code[class*='language-'] {
+  padding: 0.1em;
+  border-radius: 0.3em;
+  white-space: normal;
+}
+
+.token.comment,
+.token.block-comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #999;
+}
+
+.token.punctuation {
+  color: #ccc;
+}
+
+.token.tag,
+.token.attr-name,
+.token.namespace,
+.token.deleted {
+  color: #e2777a;
+}
+
+.token.function-name {
+  color: #6196cc;
+}
+
+.token.boolean,
+.token.number,
+.token.function {
+  color: #f08d49;
+}
+
+.token.property,
+.token.class-name,
+.token.constant,
+.token.symbol {
+  color: #f8c555;
+}
+
+.token.selector,
+.token.important,
+.token.atrule,
+.token.keyword,
+.token.builtin {
+  color: #cc99cd;
+}
+
+.token.string,
+.token.char,
+.token.attr-value,
+.token.regex,
+.token.variable {
+  color: #7ec699;
+}
+
+.token.operator,
+.token.entity,
+.token.url {
+  color: #67cdcc;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.inserted {
+  color: green;
+}
+
+pre[class*='language-'].line-numbers {
+  position: relative;
+  padding-left: 3.8em;
+  counter-reset: linenumber;
+}
+
+pre[class*='language-'].line-numbers > code {
+  position: relative;
+  white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  font-size: 100%;
+  left: -3.8em;
+  width: 3em; /* works for line-numbers below 1000 lines */
+  letter-spacing: -1px;
+  border-right: 1px solid #999;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.line-numbers-rows > span {
+  display: block;
+  counter-increment: linenumber;
+}
+
+.line-numbers-rows > span:before {
+  content: counter(linenumber);
+  color: #999;
+  display: block;
+  padding-right: 0.8em;
+  text-align: right;
+}
+
+/*#endregion Prism */
+
+/*#region PrismJS customization */
+
+/* Wrap text */
+/* If line numbers are on, it's overwritten */
+code[class*='language-'] {
+  white-space: pre-wrap;
+}
+
+code[class*='language-'],
+pre[class*='language-'] {
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+}
+
+/* Code block shading and radius (not apply to inline code) */
+pre {
+  box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+}
+
+/* Fix long param/cmdlets names overflowing */
+code[class*='language-'],
+pre[class*='language-'] {
+  word-break: break-word;
+}
+
+/* Margin moved to codeheader-section */
+/* Radius moved to codeheader */
+pre[class*='language-'] {
+  margin-top: 0;
+  border-radius: 0;
+}
+
+.codeheader-section {
+  margin-top: 0.5em;
+  color: #ccc;
+}
+
+.codeheader {
+  /* Doesn't work as right radius is behind the copy button */
+  /* border-radius: 0.25em 0.25em 0 0; */
+  background-color: hsl(0, 0%, 28%);
+  padding-left: 2em;
+  font-size: 0.9em;
+}
+
+.codeheader-language {
+  padding: 0.5em 0;
+  flex-grow: 1;
+  text-transform: uppercase;
+}
+
+.codeheader-button {
+  padding: 0.5em 1em;
+  width: 7em;
+  color: inherit;
+  background-color: hsl(0, 0%, 28%);
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  transition: background-color 0.5s;
+}
+
+.codeheader-button-clicked {
+  background-color: hsl(120, 100%, 23%);
+  transition: background-color 0.5s;
+}
+
+.codeheader-button:hover:not(.codeheader-button-clicked) {
+  background-color: hsl(0, 0%, 23%);
+}
+
+/* Fixed inline codeblocks display block */
+/* Introduced in MDX V2 https://github.com/robdy/robdy.io/pull/712 */
+div:has(code){
+  display: inline;
+}
+div:has(div code){
+  display: block;
+}
+
+/* Line numbering */
+.line-numbers .line-numbers-rows {
+  left: 0;
+  -webkit-user-select: auto;
+  user-select: auto;
+  border-right: 1px solid grey;
+  margin-top: 1em;
+}
+
+/*#endregion PrismJS customization */
+
+/*#region Comments */
+.utterances {
+  max-width: 100%;
+}
+
+.comment-box {
+  margin: 2rem 0;
+}
+/*#endregion Comments */
+
+/*#region Tag page */
+.tag-postlist {
+  list-style-type: none;
+  padding: 0;
+}
+
+.tag-postheader {
+  border-bottom: 0px;
+  margin: 0px;
+}
+/*#endregion Tag page */
+
+/*#region Footer */
+.footer {
+  /* background-color: var(--footer-bg); */
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+  /* border-top: 1px solid; */
+}
+
+.footer-container {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-text {
+  margin-top: 0.8rem;
+  align-self: center;
+}
+
+.footer-link,
+.footer-link:hover,
+.footer-link:visited {
+  border-bottom: 0;
+}
+
+.footer-link .footer-icon {
+  opacity: 0.6;
+}
+
+.footer-link:hover .footer-icon {
+  opacity: 1;
+}
+
+.footer-icon {
+  height: 2rem;
+  margin: 0 0.6rem;
+}
+
+.footer-links {
+  margin-top: 0.8rem;
+}
+
+@media (max-width: 600px) {
+  .navbar,
+  .footer-container,
+  .bio .flex {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .bio {
+    padding: 0.8rem;
+  }
+
+  .bio-text {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+/*#endregion Footer */

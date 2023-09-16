@@ -1,0 +1,70 @@
+---
+templateKey: blog-post
+title: How to check applied roles in Purview
+date: 2023-08-10T19:41:00.0000000Z
+description: We will explore browser DevTools. They have plenty of interesting things, but this time we look for Purview roles.
+featuredpost: false
+tags:
+  - purview
+  - devtools
+---
+
+When fixing issues with roles, we frequently are not sure, which role is currently active and which is not. We can wait 15-30 mins to be sure that roles are updated. But is there a more efficient way?
+
+I recently came into that issue. This time in Purview. I got *Audit Reader* role, but did not see any audit entries. After digging into my browser dev tools, I found a workaround. I'm sharing it below.
+
+## Preparing Developer Tools
+
+Let's start with basics. We need to sign-in to [Purview](https://compliance.microsoft.com/) first.
+
+<Tip>
+
+Do you already know [msportals.io](https://msportals.io/)? If not, check it out. You will be grateful next time you need to find any from multiple Microsoft admin portals.
+
+</Tip>
+
+From Purview main page, let's now open Developer Tools (DevTools). I usually use *Ctrl + Shift + I* or *F12*. Both works in Edge, Firefox and Chrome.
+
+<Tip>
+
+The screenshots below are from Edge. The experience in other browsers will be similar, but not identical.
+
+</Tip>
+
+For me, it's easier to navigate DevTools in separate window. Let's switch the view:
+
+![Opening DevTools in separate window](../../img/purview-applied-role/20230810-210702-Mvslk8YMo7.png)
+
+In DevTools, let's now switch to the **Network** tab (1). We can also disable cache (2) to make sure all requests are sent once again: 
+
+![Opening network tab in DevTools](../../img/purview-applied-role/20230810-211054-4oKuqDJ5QF.png)
+
+## Generating the request
+
+Now we need to force our browser to ask for the roles assigned to our account. To do this, let's go to audit log search. You can either click *Audit* from the left menu or use [direct link to Audit page](https://compliance.microsoft.com/auditlogsearch?viewid=Async%20Search).
+
+Our DevTools will show plenty of requests. But we are interested in one: *GetUserRolesWithScopeInfo*. Let's put that phrase into the search box (1). Then we click the request from the list (2) and go to **Preview** tab (3): 
+
+![Navigating to response preview](../../img/purview-applied-role/20230810-212904-BLpKpV1O4y.png)
+
+<Warning>
+
+In Firefox, there is no **Preview** tab. The preview is incorporated into the **Response** tab.
+
+</Warning>
+
+We're almost there. Now let's expand *GrantedByRoleGroupInfos* property. We will get the list of roles assigned:
+
+![All the roles listed in the response preview](../../img/purview-applied-role/20230810-213636-ya4WEYjCde.png)
+
+<Tip>
+
+In Edge/Chrome you can right-click and choose **Expand recursively**.
+
+</Tip>
+
+## Summary
+
+We used DevTools to dig into low-level request sent by Purview. But the roles is not the only thing we can find there. How about exploring it a little more?
+
+Make sure to share any interesting things you found. I suggest the comments section below. Happy exploring!

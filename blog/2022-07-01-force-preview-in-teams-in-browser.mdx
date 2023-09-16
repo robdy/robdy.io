@@ -1,0 +1,72 @@
+---
+templateKey: blog-post
+title: Force preview in Teams in browser
+date: 2022-07-01T10:13:38.978Z
+description: How to force preview in Teams (in browser) after removing the site cache.
+featuredpost: false
+tags:
+  - teams
+---
+How to force preview in Teams (in browser) after removing the site cache.
+
+## Background
+
+Working with Teams requires to clear client cache many times. While it's not very difficult activity, it resets some of the settings. One fundamental setting being erased is public/developer preview.
+
+<Tip>
+
+Want to read how to programmatically remove Teams cache? I've got you covered: [How to clear Teams cache with PowerShell](/how-to-clear-teams-cache-with-powershell/)
+
+</Tip>
+
+Teams doesn't save our preview settings on the server. The only place where it's stored is the local machine. Therefore, every time we clear the cache we'd need to set it up manually.
+
+Is there a way to start the session in the preview version?
+
+## Solution
+
+There is! We can use a [query string](https://en.wikipedia.org/wiki/Query_string) to specify the update ring.
+
+The query string to use is `?ring=ring3_6`. We can bookmark the following link in our browser:
+
+```
+https://teams.microsoft.com/_?ring=ring3_6
+```
+
+## Preview ring
+
+At the moment the only non-default ring I'm aware of is _ring3_6_.
+
+When the application loads in full, the preview settings will look the same as when you activate the preview from the interface:
+
+- If your account can upload custom apps, you'll see _Developer preview_ option checked
+- If the administrator of your organization allows your account to use _Public preview_ that option will be checked
+- If you have both public and developer preview allowed, both options will be checked
+
+You'll also notice a little _P_ tag next to your profile picture (or initials if you don't have a profile picture). The picture below shows initials with the preview tag:
+
+![Preview tag in Teams client](../../img/20220701-100735-NLoluHYFNB.png)
+
+As far as I'm aware, there's no option to have one of the option checked and the other unchecked. The configuration shown in the image below is then impossible. I only edited the image to show it.
+
+![Impossible preview configuration](../../img/20220701-095709-bZ3oBzjry1.png)
+
+## Default ring
+
+There might be cases where we need to force the default (GA or general availability) ring. For example, we want to check if the brand new feature we noticed is generally available.
+
+In such case the link to bookmark is:
+
+```
+https://teams.microsoft.com/_?ring=clear
+```
+
+<Warning>
+
+Web client uses its storage to save some of the Teams settings. If you try to run both GA and preview version side-by-side, it might cause unexpected issues.
+
+</Warning>
+
+## Summary
+
+Having control over the preview settings is a useful for comparing the differences between versions. Bookmarking the specific URL we can force our Teams client to start with preview version, saving some time after every cache clear.
