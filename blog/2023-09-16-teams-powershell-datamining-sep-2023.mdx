@@ -10,7 +10,7 @@ tags:
   - datamining
 ---
 
-The release of 5.6.0 version of the Microsoft Teams PowerShell module brings only two undocumented changes. One is about meetings and might interest plenty of people. Who does not use meetings in Teams?****
+The release of 5.6.0 version of the Microsoft Teams PowerShell module brings only two undocumented changes. One is about meetings and might interest plenty of people. Who does not use meetings in Teams?
 
 The other change is for a smaller subset of companies that use compliance recording. Or maybe it will encourage some companies to think about compliance recording. We will see.
 
@@ -20,10 +20,8 @@ The [**official release notes**](https://learn.microsoft.com/en-us/microsofttea
 
 * Updates [Set|Get]-CsPhoneNumberAssignment to support NetworkSiteId of un-assigned numbers.
 * Fixes Get-CsTenantNetworkSite cmdlet error introduced in version 5.5.0.
-
 * Releases [Get|Set]-CsTeamsSipDevicesConfiguration cmdlets.
 * Releases New-CsSdgBulkSignInRequest, Get-CsSdgBulkSignInRequestStatus & Get-CsSDGBulkSignInRequestsSummary cmdlets in GA.
-
 * Releases [New|Get|Set|Remove]-CsTeamsCustomBannerText cmdlets.
 * Contains a new implementation of [Get|Set]-CsTeamsMeetingConfiguration. Functionality remains the same as previous implementation.
 
@@ -51,21 +49,21 @@ When running on my test tenant, I do not see any error:
 
 From the default value we can assume that when Microsoft introduces a way to limit presenter permission, it will not be enforced by default. Note that it might change. If yes, hopefully, we will get a proper Message Center communication.
 
-Command-based help does not 
+Command-based help does not help as it does not recognized such parameter:
+
+![Inspecting LimitPresenterRolePermissions with Get-Help returns an error](../../img/teams-powershell-datamining-sep-2023/20230916-115728-bHpyqD7NAb.png)
 
 Checklist for *LimitPresenterRolePermissions*:
 
 * ❌Documentation not available
 * ❌Not found via search engines (Google, Bing)
-
 * ❌Not found on GitHub
 * ❌No roadmap mention
-
 * ❌No Message Center mention
 
 ## Compliance recording banner
 
-We know from the release notes about custom banner. But the notes do not say anything about the purpose of such banner. 
+We know from the release notes about custom banner. But the notes do not say anything about the purpose of such banner.
 
 Knowing that [New-CsTeamsComplianceRecordingPolicy](https://learn.microsoft.com/en-us/powershell/module/skype/new-csteamscompliancerecordingpolicy?view=skype-ps) and [Set-CsTeamsComplianceRecordingPolicy](https://learn.microsoft.com/en-us/powershell/module/skype/set-csteamscompliancerecordingpolicy?view=skype-ps) have a new parameter *CustomBanner* explains a lot.
 
@@ -87,10 +85,8 @@ Checklist for *CustomBanner*:
 
 * ❌Documentation not available
 * ❌Not found via search engines (Google, Bing)
-
 * ❌Not found on GitHub
 * ❌No roadmap mention
-
 * ❌No Message Center mention
 
 ## Summary
