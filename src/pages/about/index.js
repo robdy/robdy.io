@@ -41,28 +41,36 @@ const AboutPage = () => (
           <li>Setting nicknames on the server</li>
           <li>Pulling social media entries and sending to predefined channels</li>
           <li>Getting RSS entries from predefined URLs and sharing to predefined channels</li>
-          <li>Caching pulled data</li>
+          <li>Data caching</li>
         </ul>
+      </p>
+      <p>
         <ExternalLink href="https://github.com/robdy/elekid-bot">
           GitHub repository
         </ExternalLink>
-
+      </p>
+      <p>
         <b>Technologies used</b>: Node.js, Discord.JS, Twitter API, PM2, Giphy API, Circle CI
       </p>
 
       <h3>FlairHQ</h3>
       <p>
-        Web application to help moderating r/pokemontrades subreddit. I added new features (<ExternalLink href="https://github.com/pokemontrades/flairhq/pull/651">integration with Discord</ExternalLink>, <ExternalLink href="https://github.com/pokemontrades/flairhq/pull/625">[new type of notifications</ExternalLink>, <ExternalLink href="https://github.com/pokemontrades/flairhq/pull/612">support for new games</ExternalLink>), fixed various bugs and added many small enhancements (
+        Web application to help moderating r/pokemontrades subreddit. I added new features (<ExternalLink href="https://github.com/pokemontrades/flairhq/pull/651">integration with Discord</ExternalLink>, <ExternalLink href="https://github.com/pokemontrades/flairhq/pull/625">new type of notifications</ExternalLink>, <ExternalLink href="https://github.com/pokemontrades/flairhq/pull/612">support for new games</ExternalLink>), fixed various bugs and added many small enhancements (
         <ExternalLink href="https://github.com/pokemontrades/flairhq/pull/629">#629</ExternalLink>,{' '}
         <ExternalLink href="https://github.com/pokemontrades/flairhq/pull/627">#627</ExternalLink>,{' '}
         <ExternalLink href="https://github.com/pokemontrades/flairhq/pull/597">#597</ExternalLink>,{' '}
         <ExternalLink href="https://github.com/pokemontrades/flairhq/pull/637">#637</ExternalLink>,{' '}
         <ExternalLink href="https://github.com/pokemontrades/flairhq/pull/631">#631</ExternalLink>,{' '}
         <ExternalLink href="https://github.com/pokemontrades/flairhq/pull/628">#628</ExternalLink>,{' '}
-        <ExternalLink href="https://github.com/pokemontrades/flairhq/pull/645">#645</ExternalLink>) and <ExternalLink href="https://github.com/pokemontrades/flairhq/pull/599">added proper documentation</ExternalLink>. That was my first real application involving Node.js.
-
+        <ExternalLink href="https://github.com/pokemontrades/flairhq/pull/645">#645</ExternalLink>) and <ExternalLink href="https://github.com/pokemontrades/flairhq/pull/599">added proper documentation</ExternalLink>.
+      </p>
+      <p>
+        FlairHQ was my first real application involving Node.js.
+      </p>
+      <p>
         <ExternalLink href="https://github.com/pokemontrades/flairhq">GitHub repository</ExternalLink>
-
+      </p>
+      <p>
         <b>Technologies used</b>: Git, Node.js, Sails.JS, Reddit API, Discord.JS
       </p>
                                                                                             
@@ -72,8 +80,7 @@ const AboutPage = () => (
         have resolved and decided to note so I don't have to search for the
         information once again. I'm glad if you find it somewhat useful!
       </p>
-                                                                                            
-      <h2>Credits</h2>
+      <h3>Credits</h3>
       <ul>
         <li>
           Built and hosted by {' '}
