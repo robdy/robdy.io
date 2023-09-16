@@ -1,0 +1,100 @@
+---
+templateKey: blog-post
+title: Teams PowerShell datamining - September 2023
+date: 2023-09-16T09:50:00.0000000Z
+description: How can Teams administrators limit the permissions of meeting presenters? We do not know yet. But we know Microsoft is preparing something.
+featuredpost: false
+tags:
+  - teams
+  - powershell
+  - datamining
+---
+
+The release of 5.6.0 version of the Microsoft Teams PowerShell module brings only two undocumented changes. One is about meetings and might interest plenty of people. Who does not use meetings in Teams?****
+
+The other change is for a smaller subset of companies that use compliance recording. Or maybe it will encourage some companies to think about compliance recording. We will see.
+
+## Release notes
+
+The [**official release notes**](https://learn.microsoft.com/en-us/microsoftteams/teams-powershell-release-notes) mention the following changes:
+
+* Updates [Set|Get]-CsPhoneNumberAssignment to support NetworkSiteId of un-assigned numbers.
+* Fixes Get-CsTenantNetworkSite cmdlet error introduced in version 5.5.0.
+
+* Releases [Get|Set]-CsTeamsSipDevicesConfiguration cmdlets.
+* Releases New-CsSdgBulkSignInRequest, Get-CsSdgBulkSignInRequestStatus & Get-CsSDGBulkSignInRequestsSummary cmdlets in GA.
+
+* Releases [New|Get|Set|Remove]-CsTeamsCustomBannerText cmdlets.
+* Contains a new implementation of [Get|Set]-CsTeamsMeetingConfiguration. Functionality remains the same as previous implementation.
+
+* Adds new parameters CopyRestriction and CopilotWithoutTranscript to [New|Set]-CsTeamsMeetingPolicy cmdlets.
+
+However, there is more. Let's talk about them!
+
+## Limit presenter role permissions
+
+Let's start with a new tenant-wide setting for meetings: *LimitPresenterRolePermissions*. Tenant-wide means it's available for meeting configuration, not meeting policy. We can see the parameter returned by [Get-CsTeamsMeetingConfiguration](https://learn.microsoft.com/en-us/powershell/module/skype/get-csteamsmeetingconfiguration?view=skype-ps). We can set it using [Set-CsTeamsMeetingConfiguration](https://learn.microsoft.com/en-us/powershell/module/skype/set-csteamsmeetingconfiguration?view=skype-ps).
+
+The default value of *LimitPresenterRolePermissions* is false. It accepts a boolean value and we can already change this setting if we want:
+
+```powershell
+# Changing tenant-wide setting
+Set-CsTeamsMeetingConfiguration -Identity global -LimitPresenterRolePermissions $true
+
+# Reverting to the default value
+Set-CsTeamsMeetingConfiguration -Identity global -LimitPresenterRolePermissions $false
+```
+
+When running on my test tenant, I do not see any error:
+
+![Changing the value of LimitPresenterRolePermissions parameter](../../img/teams-powershell-datamining-sep-2023/20230916-113531-6yIyskTJr8.png)
+
+From the default value we can assume that when Microsoft introduces a way to limit presenter permission, it will not be enforced by default. Note that it might change. If yes, hopefully, we will get a proper Message Center communication.
+
+Command-based help does not 
+
+Checklist for *LimitPresenterRolePermissions*:
+
+* ❌Documentation not available
+* ❌Not found via search engines (Google, Bing)
+
+* ❌Not found on GitHub
+* ❌No roadmap mention
+
+* ❌No Message Center mention
+
+## Compliance recording banner
+
+We know from the release notes about custom banner. But the notes do not say anything about the purpose of such banner. 
+
+Knowing that [New-CsTeamsComplianceRecordingPolicy](https://learn.microsoft.com/en-us/powershell/module/skype/new-csteamscompliancerecordingpolicy?view=skype-ps) and [Set-CsTeamsComplianceRecordingPolicy](https://learn.microsoft.com/en-us/powershell/module/skype/set-csteamscompliancerecordingpolicy?view=skype-ps) have a new parameter *CustomBanner* explains a lot.
+
+We cannot tell much more about the parameter. Any attempt to use it results in an error:
+
+> Could not find the resource "XsdClassGeneratorStringsResources.resources" among the resources "" embedded in the assembly "Microsoft.Teams.Policy.Administration.Cmdlets.Providers.PolicyRp", nor among the resources in any satellite assemblies for the specified culture. Perhaps the resources were embedded with an incorrect name.
+
+Also, any use of New-CsTeamsCustomBannerText resulted in an error. I found a [draft of the documentation for the new cdmlet](https://github.com/saleens7/office-docs-powershell/blob/saleens7-patch-2/teams/teams-ps/teams/New-CsTeamsCustomBannerText.md). Copying directly from there also gives an error:
+
+![Error given by running an example from GitHub](../../img/teams-powershell-datamining-sep-2023/20230916-112033-EpEBa0y6JY.png)
+
+I tried different variants but never succeeded:
+
+![Different attempts to use New-CsTeamsCustomBannerText](../../img/teams-powershell-datamining-sep-2023/20230916-112227-mqfswBIGAQ.png)
+
+That behavior is surprising - needless to say the cmdlets released to general availability should work. Otherwise, they should land in the preview.
+
+Checklist for *CustomBanner*:
+
+* ❌Documentation not available
+* ❌Not found via search engines (Google, Bing)
+
+* ❌Not found on GitHub
+* ❌No roadmap mention
+
+* ❌No Message Center mention
+
+## Summary
+
+When I started reviewing the recent changes, I was surprised that the release notes were that long. I thought that maybe all the changes were documented and I no longer needed to do the datamining. Imagine how relieved were I after finding those small changes that were supposed to be left unnoticed.
+
+What do you think about them? Do you have any guesses on what kind of permission limits we might get for presenters? Is custom banner something important for you when thinking about compliance recording? Let me know in the comments!
