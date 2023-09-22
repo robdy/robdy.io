@@ -69,7 +69,7 @@ Let's start with the export delivered to the mailbox. We can see some examples o
 
 We can create a formula to extract the type from the message ID. First, we take everything except the `<odspmicro-` part using [RIGHT](https://support.microsoft.com/en-us/office/right-rightb-functions-240267ee-9afa-4639-a02b-f19e1786cf2f) and [LEN](https://support.microsoft.com/en-us/office/len-lenb-functions-29236f94-cedc-429d-affd-b5e33d2c67cb) functions.  *F2* is the cell with message ID:
 
-```plain text
+```markup
 =RIGHT(F2,LEN(F2)-11)
 ```
 
@@ -79,7 +79,7 @@ We can create a formula to extract the type from the message ID. First, we take 
 
 Now we need to discard everything starting with the dash character `-`. We use [LEFT](https://support.microsoft.com/en-us/office/left-leftb-functions-9203d2d2-7960-479b-84c6-1ea52b99640c) function to return a substring. We also use [SEARCH](https://support.microsoft.com/en-us/office/search-function-f79ef0b8-0991-4fc1-93b0-627f019a69e3) to find the position of the dash. For visibility, we calculate it in a separate cell. L2 is the cell with the substring we already have:
 
-```plain text
+```markup
 =LEFT(L2,SEARCH("-",L2)-1)
 ```
 
@@ -89,7 +89,7 @@ We should have:
 
 Now we need to merge the formula. We replace the first formula with the second (so it is in the proper row). Then we replace *L2* with the first formula: 
 
-```plain text
+```markup
 =LEFT(RIGHT(F2,LEN(F2)-11),SEARCH("-",RIGHT(F2,LEN(F2)-11))-1)
 ```
 
