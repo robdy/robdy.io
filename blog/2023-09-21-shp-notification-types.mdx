@@ -1,0 +1,311 @@
+---
+templateKey: blog-post
+title: Types of SharePoint email notification
+date: 2023-09-21T15:09:00.0000000Z
+description: We discover different notification types sent by SharePoint and OneDrive. Do you know how to distinguish them?
+featuredpost: false
+tags:
+  - sharepoint
+---
+
+I was recently asked to analyze how many auto-news digest emails are received within the organization. Doing the checking I found a way to report on different notification types sent from SharePoint and OneDrive.
+
+## Checking the custom domain
+
+My first idea was to run the message trace. The default sender to check would be no-reply@sharepointonline.com. If the organization configured ["Send email notifications from your domain" setting](https://learn.microsoft.com/en-us/microsoft-365/admin/email/select-domain-to-use-for-email-from-microsoft-365-products?view=o365-worldwide), we'd need to use the the configured address.
+
+The image below illustrates how to check whether the custom domain was set:
+
+![Navigating to settings of custom domain for email notification ](../../img/shp-notification-types/20230918-155524-DCNSFzzCLE.png)
+
+## Running the message trace from admin center
+
+To run a message trace we can use Exchange Admin Center. Go to **Message trace** (1) under **Mail flow**. Hit **Start a trace** (2) and paste the sender address into the **Senders** field (3). 
+
+![Configuring the message trace options](../../img/shp-notification-types/20230919-060236-g7Rmi0ox5A.png)
+
+Configure the other options and follow the wizard to confirm. In case we choose 10 days or less, we will see the option to export the results.
+
+If we choose to get data from more than 10 days, we will need to specify the email address to be notified about the report. From there we will have the option to download the report.
+
+## Running the message trace from PowerShell
+
+We prefer to use PowerShell, instead of GUI, don't we? Let's remind how to run the message trace from PowerShell. We'll need the [Exchange Online PowerShell](https://learn.microsoft.com/en-us/powershell/exchange/exchange-online-powershell?view=exchange-ps) module. After connecting via `Connect-ExchangeOnline` we need to run:
+
+```powershell
+# Put the address we found while checking custom domain configuration
+$senderAddress = 'no-reply@sharepointonline.com'
+# Choose up to 10 days
+$start = (Get-Date).AddDays(-10)
+$end = (Get-Date)
+$msgTrace = Get-MessageTrace -SenderAddress -StartDate $start -EndDate $end
+```
+
+<Tip>
+
+If you hit the limit of items returned, I have written an article to workaround it: [Get all messages from message trace](https://robdy.io/message-trace-wrapper/).
+
+</Tip>
+
+After finishing, we need to export the results. Let's make it a CSV file to match the output from the admin center:
+
+```powershell
+$msgTrace | Export-Csv -Path 'messageTrace.csv' -NoTypeInformation
+```
+
+## Inspecting MessageId in Excel
+
+The property that holds the information we need is the message ID. Depending on how we run the message trace it can have a different name. When we get the report delivered to our mailbox, the property name will be *message_id*. In other cases, it will be named *MessageId*.
+
+<Tip>
+
+In the procedure below we process the CSV file delivered to the mailbox.
+
+</Tip>
+
+Let's start with the export delivered to the mailbox. We can see some examples of the message IDs. They all begin with `<odspmicro-` followed by a notification type. We ignore the following part:
+
+![Examples of message ID](../../img/shp-notification-types/230920-061803-6qIDow4mux.png)
+
+We can create a formula to extract the type from the message ID. First, we take everything except the `<odspmicro-` part using [RIGHT](https://support.microsoft.com/en-us/office/right-rightb-functions-240267ee-9afa-4639-a02b-f19e1786cf2f) and [LEN](https://support.microsoft.com/en-us/office/len-lenb-functions-29236f94-cedc-429d-affd-b5e33d2c67cb) functions.  *F2* is the cell with message ID:
+
+```markup
+=RIGHT(F2,LEN(F2)-11)
+```
+
+*LEN* returns the length of the text (or the ID, in our example). *RIGHT* returns a substring with our calculated length. We want the entire string except for the first 11 characters. Here is what we have:
+
+![Substring of the message ID](../../img/shp-notification-types/230920-062329-JPwcQhH9e1.png)
+
+Now we need to discard everything starting with the dash character `-`. We use [LEFT](https://support.microsoft.com/en-us/office/left-leftb-functions-9203d2d2-7960-479b-84c6-1ea52b99640c) function to return a substring. We also use [SEARCH](https://support.microsoft.com/en-us/office/search-function-f79ef0b8-0991-4fc1-93b0-627f019a69e3) to find the position of the dash. For visibility, we calculate it in a separate cell. L2 is the cell with the substring we already have:
+
+```markup
+=LEFT(L2,SEARCH("-",L2)-1)
+```
+
+We should have:
+
+![Substring of the previous substring](../../img/shp-notification-types/230920-062624-GProEY8IFP.png)
+
+Now we need to merge the formula. We replace the first formula with the second (so it is in the proper row). Then we replace *L2* with the first formula: 
+
+```markup
+=LEFT(RIGHT(F2,LEN(F2)-11),SEARCH("-",RIGHT(F2,LEN(F2)-11))-1)
+```
+
+When we expand the formula to all the rows below, we will have the types calculated for all the messages:
+
+![Calculated notification types](../../img/shp-notification-types/230920-062737-oYVPwICZCQ.png)
+
+<Warning>
+
+If you see some *(blank)* values in the pivot table that means the formula did not propagate to the columns below. It usually happens due to non-English characters in the message subject.
+
+</Warning>
+
+## Inspecting MessageId PowerShell way
+
+<Warning>
+
+For me, importing the CSV file that was delivered to my mailbox always caused a weird column format. Because of that, the example below will get the message trace directly from PowerShell.
+
+</Warning>
+
+This blog is all about automation. That is why we will repeat the same process with PowerShell. We need to connect to Exchange Online using [Connect-ExchangeOnline](https://learn.microsoft.com/en-us/powershell/exchange/connect-to-exchange-online-powershell?view=exchange-ps). Remember that we need a proper access level. Otherwise, we will not see the cmdlets.
+
+```powershell
+# 10 days is maximum for Get-MessageTrace
+$start = (Get-Date).AddDays(-10)
+$end = (Get-Date)
+$senderAddress = 'no-reply@sharepointonline.com'
+$msgTraceParams = @{
+  SenderAddress = $senderAddress
+  StartDate = $start
+  EndDate = $end
+}
+$msgTrace = Get-MessageTrace @msgTraceParams
+
+# Let's see the output
+$msgTrace[0..9]
+```
+
+If we get the list of emails, we are close to our goal. Now we only need to extract the interesting part of *MessageId* property. We can split it by the dash character and take the second element from the array returned:
+
+```powershell
+$msgTrace | Select-Object @{name="MessageType";expression={
+  ($_.MessageId -split "-")[1]}
+}
+```
+
+Now all we need is to group based on that property:
+
+```powershell
+$msgTrace |
+  Group-Object -Property {($_.MessageId -split "-")[1]} -NoElement
+```
+
+Our output should be similar to the image below:
+
+![Output from Group-Object cmdlet](../../img/shp-notification-types/230920-064421-yOtRTC64l3_%281%29.png)
+
+## Notification types
+
+We already see there are plenty of notification types. Let's show some examples:
+
+*SpoAccessRequest*:
+
+![Example of SpoAccessRequest notification](../../img/shp-notification-types/20230921163910yM42lAXAJA.png)
+
+*AutoNewsDigest* -  email about the SharePoint news you might have missed:
+
+![Example of AutoNewsDigest notification](../../img/shp-notification-types/230921-165232-YCPRFWkMnr.png)
+
+Emails about comments in the particular file:
+
+* CommentExcel
+* CommentPowerpoint
+
+* CommentVisio
+* CommentWord
+
+![Example of notification about comment](../../img/shp-notification-types/230921-165524-n3wwltu0w7.png)
+
+The other types I found are:
+
+* BusinessAppsSetup
+* CommentDocument
+
+* CommentReplyExcel
+* CommentReplyPage
+
+* CommentReplyFailure
+* CommentReplyMedia
+
+* CommentReplyPowerpoint
+* CommentReplyVisio
+
+* CommentReplyWord
+* CommentMedia
+
+* CommentMentionExcel
+* CommentPage
+
+* DocumentDigestEmail
+* FileDeleteAfterExpiration
+
+* LikePage
+* LinkOpen
+
+* ListRule
+* MassDelete
+
+* PlannerDueDate
+* PlannerMobileInstallLink
+
+* PlannerTaskAssigned
+* ProjectTaskAssigned
+
+* ShareReminder
+* SharingAccessResponse
+
+* SpoDailyAlert
+* SpoOther
+
+* SpoShare
+* Share
+
+* ShareReminder
+* SharingReport
+
+* SpoAccessRequest
+* SpoCsom
+
+* SpoImmediateAlert
+* SpoMySiteCleanup
+
+* SpoWeeklyAlert
+* TaskCompletion
+
+* TaskReopen
+
+## Azure notifications
+
+Okay, we have seen plenty of different notification types, but what about others? For example, notifications from Privileged Access Management, and Access Reviews. Can we use the same method to analyze them?
+
+Unfortunately, no. From what I checked, Azure notifications don't follow the same format. There is no information in the message ID header.
+
+## Discovering more formats
+
+Different tenants have different features enabled. This article surely does not cover all the notification types.
+
+Do you want to help with discovering other notification types? Please run the script below and paste the output in the comments section. If you wish, you can [add it directly](https://github.com/robdy/robdy.io/edit/src/blog/2023-09-21-shp-notification-types.mdx). Your help will help other administrators!
+
+All you need to do is run the following script:
+
+```powershell
+# Replace with the sender address for your organization
+$senderAddress = 'no-reply@sharepointonline.com'
+$start = (Get-Date).AddDays(-10)
+$end = (Get-Date)
+$msgTraceParams = @{
+  SenderAddress = $senderAddress
+  StartDate = $start
+  EndDate = $end
+}
+$msgTrace = Get-MessageTrace @msgTraceParams
+$uniqueTypes = $msgTrace |
+  Group-Object -Property {($_.MessageId -split "-")[1]} -NoElement |
+ Select-Object -ExpandProperty Name
+$knownTypes = @"
+AutoNewsDigest
+BusinessAppsSetup
+CommentDocument
+CommentExcel
+CommentMedia
+CommentMentionExcel
+CommentPage
+CommentPowerpoint
+CommentReplyExcel
+CommentReplyFailure
+CommentReplyMedia
+CommentReplyPage
+CommentReplyPowerpoint
+CommentReplyVisio
+CommentReplyWord
+CommentVisio
+CommentWord
+DocumentDigestEmail
+FileDeleteAfterExpiration
+LikePage
+LinkOpen
+ListRule
+MassDelete
+PlannerDueDate
+PlannerMobileInstallLink
+PlannerTaskAssigned
+ProjectTaskAssigned
+Share
+ShareReminder
+ShareReminder
+SharingAccessResponse
+SharingReport
+SpoAccessRequest
+SpoAccessRequest
+SpoCsom
+SpoDailyAlert
+SpoImmediateAlert
+SpoMySiteCleanup
+SpoOther
+SpoShare
+SpoWeeklyAlert
+TaskCompletion
+TaskReopen
+"@ -split "`n"
+$uniqueTypes | Where-Object {$_ -notin $knownTypes }
+```
+
+## Summary
+
+There are plenty of different notification types sent by SharePoint and OneDrive. This article explains how to inspect them. It also lists all the examples I found.
+
+Keeping information in the message ID is a convenient way to categorize messages. Perhaps other notification types will follow this example?
