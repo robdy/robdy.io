@@ -239,3 +239,73 @@ Unfortunately, no. From what I checked, Azure notifications don't follow the sam
 Different tenants have different features enabled. This article surely does not cover all the notification types.
 
 Do you want to help with discovering other notification types? Please run the script below and paste the output in the comments section. If you wish, you can [add it directly](https://github.com/robdy/robdy.io/edit/src/blog/2023-09-21-shp-notification-types.mdx). Your help will help other administrators!
+
+All you need to do is run the following script:
+
+```powershell
+# Replace with the sender address for your organization
+$senderAddress = 'no-reply@sharepointonline.com'
+$start = (Get-Date).AddDays(-10)
+$end = (Get-Date)
+$msgTraceParams = @{
+  SenderAddress = $senderAddress
+  StartDate = $start
+  EndDate = $end
+}
+$msgTrace = Get-MessageTrace @msgTraceParams
+$uniqueTypes = $msgTrace |
+  Group-Object -Property {($_.MessageId -split "-")[1]} -NoElement |
+ Select-Object -ExpandProperty Name
+$knownTypes = @"
+AutoNewsDigest
+BusinessAppsSetup
+CommentDocument
+CommentExcel
+CommentMedia
+CommentMentionExcel
+CommentPage
+CommentPowerpoint
+CommentReplyExcel
+CommentReplyFailure
+CommentReplyMedia
+CommentReplyPage
+CommentReplyPowerpoint
+CommentReplyVisio
+CommentReplyWord
+CommentVisio
+CommentWord
+DocumentDigestEmail
+FileDeleteAfterExpiration
+LikePage
+LinkOpen
+ListRule
+MassDelete
+PlannerDueDate
+PlannerMobileInstallLink
+PlannerTaskAssigned
+ProjectTaskAssigned
+Share
+ShareReminder
+ShareReminder
+SharingAccessResponse
+SharingReport
+SpoAccessRequest
+SpoAccessRequest
+SpoCsom
+SpoDailyAlert
+SpoImmediateAlert
+SpoMySiteCleanup
+SpoOther
+SpoShare
+SpoWeeklyAlert
+TaskCompletion
+TaskReopen
+"@ -split "`n"
+$uniqueTypes | Where-Object {$_ -notin $knownTypes }
+```
+
+## Summary
+
+There are plenty of different notification types sent by SharePoint and OneDrive. This article explains how to inspect them. It also lists all the examples I found.
+
+Keeping information in the message ID is a convenient way to categorize messages. Perhaps other notification types will follow this example?
