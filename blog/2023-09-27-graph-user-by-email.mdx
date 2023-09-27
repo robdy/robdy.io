@@ -1,0 +1,125 @@
+---
+templateKey: blog-post
+title: Find Graph user by email address
+date: 2023-09-27T04:54:00.0000000Z
+description: We use Graph Explorer and Graph PowerShell SDK to find user by their email address. Not only by UPN - that would be too easy!
+featuredpost: false
+tags:
+  - powershell
+  - graph
+---
+
+Finding user by User Principal Name is easy. In this article we will expand the Graph query to also filter via email address.
+
+This scenario might be helpful in the complex environments. People change names, organizations acquire others. Maintaining the same UPN is sometimes not easy, and sometimes even not possible.
+
+## What we need
+
+* [Graph Explorer](https://developer.microsoft.com/en-us/graph/graph-explorer) - screenshots below show the sample tenant. We can use any other tenant, if we want
+* [Graph PowerShell SDK](https://learn.microsoft.com/en-us/powershell/microsoftgraph/installation?view=graph-powershell-1.0). The module we will use is *Microsoft.Graph.Users*.
+
+## Filtering by User Principal Name
+
+Let's say we look for the user *AdeleV@M365x214355.onmicrosoft.com* . It's quite easy to find a user with such *UserPrincipalName*. A simple `$filter` clause with the `eq` operator does the job:
+
+```markup
+users?$filter=UserPrincipalName eq 'AdeleV@M365x214355.onmicrosoft.com'
+```
+
+In the Graph Explorer, we see response code *200* and Adele Vance returned:
+
+![Graph Explorer with proper response](../../img/graph-user-by-email/20230926-061636-zjuKsAADfZ.png)
+
+## Filtering by email address
+
+There are cases when we not only need to check UPN. Sometimes, we need to find a user by their email address. Or, technically saying, by their *proxyAddresses* value. Let's first use the `$select` operator to inspect the property:
+
+![Graph request demonstrating format of proxyAddresses property](../../img/graph-user-by-email/20230926-062459-bXI4JEJFOa.png)
+
+We see that the address starts with `SMTP:` . Any additional addresses will start with `smtp:` . Now, let's try filtering:
+
+![Bad request when trying to filter the proxyAddresses](../../img/graph-user-by-email/20230926-062729-gWETAB7r0w.png)
+
+The solution for filtering a collection is shown in the [Use the filter query parameter to filter a collection of objects](https://learn.microsoft.com/en-us/graph/filter-query-parameter?tabs=http) article:
+
+![Example of using eq parameter to filter a collection](../../img/graph-user-by-email/20230926-063146-lxZBqa7TNp.png)
+
+Translating to our example it will be:
+
+```markup
+users?$filter=proxyAddresses/any(c:c eq 'SMTP:AdeleV@M365x214355.onmicrosoft.com')
+```
+
+It works fine with Graph Explorer:
+
+![Graph returning proper object based on proxy address filtering](../../img/graph-user-by-email/20230926-063844-RJrgGmCOSB.png)
+
+<Tip>
+
+In the query we used `c:c`. We can replace `c` with any word, if that makes things easier to read. For example it can be `address:address`. The format says to use `c` or `address` to name an element from the collection.
+
+</Tip>
+
+We can prove that the request is not case-sensitive by changing `SMTP` to `smtp` :
+
+![Using lower case for filtering returns proper data, too](../../img/graph-user-by-email/20230926-063958-aca6JzwefI.png)
+
+## Merging it together
+
+Joining two filter criteria is quite easy. We only need to add `or` between them:
+
+```markup
+# Line breaks added for visibility
+users?$filter=UserPrincipalName eq 'AdeleV@M365x214355.onmicrosoft.com' 
+or proxyAddresses/any(c:c eq 'SMTP:AdeleV@M365x214355.onmicrosoft.com')
+```
+
+## Translating into PowerShell
+
+Now let's repeat what we learned, but using PowerShell. We will need *Microsoft.Graph.Users* module. This article will not cover the process of granting permissions. If you need some help, have a look at [Get started with the Microsoft Graph PowerShell SDK](https://learn.microsoft.com/en-us/powershell/microsoftgraph/get-started?view=graph-powershell-1.0) or [How To Connect To Microsoft Graph API Using PowerShell (thesysadminchannel.com)](https://thesysadminchannel.com/how-to-connect-to-microsoft-graph-api-using-powershell).
+
+We start with connecting and then run `Get-MgUser` . Then we paste our filter query into the *-Filter* parameter:
+
+```powershell
+# Line breaks for visibility, again
+# Double quotes are prefered 
+# as we use single quotes in the query
+Get-MgUser -Filter "UserPrincipalName eq 'shared.mbx@rob234435.onmicrosoft.com'
+ or proxyAddresses/any(c:c eq 'smtp:shared.mbx@rob234435.onmicrosoft.com')"
+```
+
+Works like a charm! We get one user, as intended:
+
+![Output from Get-MgUser cmdlet returning a single user](../../img/graph-user-by-email/20230927-063052-X7N6EzZKst.png)
+
+Now we can extract the email address into the variable. This way we do not need to paste it twice:
+
+```powershell
+$email = 'shared.mbx@rob234435.onmicrosoft.com'
+Get-MgUser -Filter "UserPrincipalName eq '$email'
+ or proxyAddresses/any(c:c eq 'smtp:$email')"
+```
+
+We can also add *proxyAddresses* to the output:
+
+```powershell
+$email = 'shared.mbx@rob234435.onmicrosoft.com'
+$props = @("Id","UserPrincipalName","proxyAddresses")
+$mgUserParams = @{
+	Filter = "UserPrincipalName eq '$email'
+	 or proxyAddresses/any(c:c eq 'smtp:$email')"
+	Select = $props
+}
+Get-MgUser @mgUserParams | Select-Object $props
+# Using Format-List will not truncate the proxy addresses that much
+# Or at all? I don't know :)
+Get-MgUser @mgUserParams | Format-List $props
+```
+
+And here is the entire script in action:
+
+![Output from the entire script](../../img/graph-user-by-email/20230927-064051-h0PTJ1yqcz.png)
+
+## Summary
+
+We have expanded our search from one property to two, including one collection (or array, if someone prefers that name). The most difficult part in this procedure was to filter the collection of proxy addresses. However, the docs help, if you know what to look for.
