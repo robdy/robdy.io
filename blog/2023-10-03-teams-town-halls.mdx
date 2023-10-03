@@ -1,0 +1,110 @@
+---
+templateKey: blog-post
+title: All about Town Halls in Microsoft Teams
+date: 2023-10-03T04:44:00.0000000Z
+description: Microsoft introduced Town Halls to replace Live Events. This article gathers everything we know about the new functionality in Microsoft Teams.
+featuredpost: false
+tags:
+  - teams
+  - town hall
+  - live event
+---
+
+Microsoft announced Town Halls at the end of September 2023. Let's gather everything we know about it.
+
+## What is Town Hall in Teams?
+
+Town Hall is the name of a new virtual experience for big meetings. This is also the functionality that replaces Teams Live Events in 2024.
+
+Below you can find the list of features available for Town Halls:
+
+* Unified experience similar to Teams meetings
+* Third-party eCDN support
+
+* 💎Teams Premium adds Microsoft eCDN support that includes real-time monitoring (attendee count, peak concurrency, session duration, geographic locations, and more (not defined)
+* Green room with dedicated chat (this feature will also be added to meetings and webinars)
+
+* Manage what attendees see
+* Hide participant list
+
+* RTMP-in
+* RTMP-out
+
+* Structured Q&A
+* On-demand recording
+
+* Email communications (💎Teams Premium adds email customization)
+* Attendee reporting
+
+* Live translated captions from English, Japanese, Spanish, Portuguese, French, and Chinese
+* 💎Teams Premium adds German, Italian, Korean, and Russian for translated captions 
+
+## What are the limitations of Town Halls?
+
+* Up to 10,000 attendees (💎20,000 in Teams Premium)
+* Up to 15 concurrent events across the tenant (💎50 in Teams Premium)
+
+* Maximum duration of the event: 30 hours
+* Content is delayed about 15 seconds for attendees ([source](https://techcommunity.microsoft.com/t5/microsoft-teams-blog/introducing-town-halls-in-microsoft-teams-and-retiring-microsoft/bc-p/3941292/highlight/true#M13195))
+
+## What features were announced for Town Halls?
+
+* External presenters (planned for the end of October)
+* Rewind and pause during the event (planned for *coming months*)
+
+* Viewing the town hall in Viva Engage (planned for *coming months*)
+* PowerPoint Live ([source](https://techcommunity.microsoft.com/t5/microsoft-teams-blog/introducing-town-halls-in-microsoft-teams-and-retiring-microsoft/bc-p/3941101/highlight/true#M13191))
+
+## When will Teams Live Events retire?
+
+The [announcement post](https://techcommunity.microsoft.com/t5/microsoft-teams-blog/introducing-town-halls-in-microsoft-teams-and-retiring-microsoft/ba-p/3925739) describes the retirement timeline for Live Events:
+
+> After **September 30, 2024**, Teams Live Events will no longer be supported, and access will be discontinued. Customers will not be able to schedule, start, or join any events on Teams Live Events after this date. Existing recordings will be available to access until **December 31, 2024**.
+
+For government customers, the date is yet to be announced.
+
+It is currently not clear what will be the limits for Live Events in 2024. Currently, limits are [temporarily increased](https://aka.ms/Stream/Blog/LiveEventOptions) until December 31, 2023. That includes:
+
+* Event support for up to 20,000 attendees
+* 50 events can be hosted simultaneously across a tenant
+
+* Event duration of 16 hours per broadcast
+* Live events with up to 100,000 attendees planned through the Microsoft 365 Live Event Assistance Program
+
+## What is the green room experience for Town Halls?
+
+In the [announcement post](https://techcommunity.microsoft.com/t5/microsoft-teams-blog/introducing-town-halls-in-microsoft-teams-and-retiring-microsoft/ba-p/3925739) we have the green room experience screenshot:
+
+![Green room experience for Town Hall](../../img/teams-town-halls/green_room.png)
+
+We can see controls to start and end the meeting. We also have the red rectangle showing the content that will be presented to attendees when the meeting starts.
+
+## What are the admin settings for Team Hall in Teams?
+
+All the settings about Town Halls are held in the Teams events policy. They can be changed using [Set-CsTeamsEventsPolicy](https://learn.microsoft.com/en-us/powershell/module/teams/set-csteamseventspolicy?view=teams-ps) cmdlet. The available settings are:
+
+* *AllowTownhalls* - can either be *Enabled* (default value) or *Disabled*
+* *AllowedTownhallTypesForRecordingPublish* - possible values are *None*, *InviteOnly*, *EveryoneInCompanyIncludingGuests*, *Everyone* (default value)
+
+* *TownhallChatExperience* - can be *Optimized* (default value) or *None*
+The setting to allow town halls is self-explanatory. The *AllowedTownhallTypesForRecordingPublish* manages types of Town Hall where attendees can have recordings published.
+
+Chat experience setting controls whether the town hall organizer can enable *Comment Stream* chat experience.
+
+## Resources
+
+[Introducing Town Halls in Microsoft Teams and Retiring Microsoft Teams Live Events - Microsoft Community Hub](https://techcommunity.microsoft.com/t5/microsoft-teams-blog/introducing-town-halls-in-microsoft-teams-and-retiring-microsoft/ba-p/3925739)
+
+There are some resources to be available on October 5th: [Technical guidance and support resources](https://techcommunity.microsoft.com/t5/microsoft-teams-blog/introducing-town-halls-in-microsoft-teams-and-retiring-microsoft/ba-p/link%20tbd) and [Live Event Assistance Program](https://adoption.microsoft.com/en-us/virtual-event-guidance/assistance/).
+
+### Roadmap items
+
+There are two items describing Town Halls available in the roadmap: [123148: Microsoft Teams: Town Halls](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=123148) and [173182: Microsoft Teams: Team Halls (Premium)](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=173182).
+
+### Message Center entries
+
+So far, one Message Center entry was published about Town Hall: [MC678002 Introducing Microsoft Teams Town hall](https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC678002) ([non-admin link](https://m365admin.handsontek.net/introducing-microsoft-teams-town-hall/)). The other entry describes Live Events retirement: [MC678003 Microsoft Teams Live Event Retirement](https://admin.microsoft.com/Adminportal/Home?ref=MessageCenter%2F%3A%2Fmessages%2FMC678003) ([non-admin link](https://m365admin.handsontek.net/microsoft-teams-live-event-retirement/)).
+
+## Summary
+
+Town Hall seems to be a promising feature, solving the main issue we had with Live Events - a different interface. Will it fulfill the expectations? We shall see in the upcoming weeks.
