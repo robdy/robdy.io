@@ -22,7 +22,7 @@ In January 2023 Microsoft announced the retirement of wiki functionality in Team
 Below are the more important information from the article:
 
 * Wiki migration tool is generally available
-* OneNote is the tool to replace wiki in channels
+* OneNote is the tool replacing wiki in channels
 * Loop is the new platform for meeting notes
 * There's a script available to estimate the impact of this change
 * Microsoft has plenty of learning materials about OneNote
@@ -43,7 +43,7 @@ The entry was updated in June:
 
 ## When will wiki be retired from Teams?
 
-We are currently approaching last step of the Wiki removal. In January 2024 Wiki tab in channels and wiki app will not be reachable in Teams.
+We are currently approaching last step of the Wiki removal. In January 2024 Wiki tab in channels and Wiki app will not be reachable in Teams.
 
 When the last stage is rolled out, users will not be able to transfer their data. The only way to do access the data will be via SharePoint.
 
@@ -51,47 +51,31 @@ Currently, users are still able to export channel wiki into OneNote. For new cha
 
 ## What will change with Wiki tab?
 
-At the first stage, the Teams application will suggest adding OneNote tab:
+When entering the empty wiki, we get the suggestion to add **Notes** tab:
 
-![Top bar suggesting OneNote tab](../../img/teams-wiki-retirement/20230403-100825-HyLdRQf0Ri.png)
+![Suggestion to add Notes tab](../../img/teams-wiki-retirement/20231006-062515-58WloXFYAD.png)
 
-The empty Wiki tab will not be locked yet. We will still be able to make some edits.
+For any wiki with content, we can either access it via the Wiki app or export to Notes (=OneNote):
 
-When we go to the page with existing content, we will see a different bar:
+![Suggestion to view or migrate](../../img/teams-wiki-retirement/20231006-062807-aKhWyBiQD2.png)
 
-![Top bar proposing to migrate to OneNote](../../img/teams-wiki-retirement/zWcpmWZFjX.png)
+<Tip>
 
-That experience is now (as of April 2023) generally available.
+  We can _enforce_ this experience by adding content to empty wiki in the app. We will then have the option to export them to the **Notes** tab. 
 
-<Note>
+</Tip>
 
-  The bars will be visible to users with rights to add or remove tab in a channel. For others, there will be no bar.
+After the migration, Wiki tab will have one button, redirecting to the **Notes** tab:
 
-</Note>
+![Tab with the redirection button](../../img/teams-wiki-retirement/20231006-063252-MbqUF8PuZY.png)
 
-## How will the migration process look like?
+## How does the migration process look like?
 
-The yellow warning bar will be added to the top of wiki tab:
+We start in the wiki tab. It shows a button **Export to notes**:
 
-![Warning bar at the top of wiki tab](../../img/teams-wiki-retirement/2023-02-06_17_33_06-000086.png)
+![Suggestion to view or migrate](../../img/teams-wiki-retirement/20231006-062807-aKhWyBiQD2.png)
 
-The bar says:
-
-> Wiki tabs will go away in June 2023, you can export your content to a new Notes tab that will be created for this channel
-
-Once we click the **Get details** button we'll be redirected to the next screen giving more information:
-
-![Details screen](../../img/teams-wiki-retirement/2023-02-06_17_33_26-000087.png)
-
-The pop-up says:
-
-> What to expect when you export:
-> * Each wiki page **will be saved in as a separate page** (in OneNote) in the Notes tab
-> * Some changes to formatting such as font style and spacing may occur
-> * We'll keep a read-only version of your content in the Wiki app for reference
-> * In Notes, you can take notes and organize content for this channel
-
-After using **Export to Notes** button we'll see the progress screen:
+After clicking it we will see the progress screen:
 
 ![Progress screen](../../img/teams-wiki-retirement/2023-02-06_17_34_26-000089.png)
 
@@ -171,17 +155,21 @@ When the channel has the brackets, Notes tab might lead to incorrect section in 
 
 In some cases, the first section in the notebook was linked. In others, the random section.
 
-## Will private channel wiki be retired?
+### Section links stop working
 
-Yes, wiki tab will be retired from private channels, too. There is an important difference in terms of the migration. According to [Export a wiki to a OneNote notebook](https://support.microsoft.com/en-us/office/export-a-wiki-to-a-onenote-notebook-8cd8ab0c-2314-42b0-a1d0-5c6c4c5e1547):
+I would say this is expected. In Wiki we were able to get permalink of the section. Those links does not work in OneNote.
+
+## Are private channel wiki  retired?
+
+Yes, wiki tab are retired from private channels, too. However, they have no migration tool. According to [Export a wiki to a OneNote notebook](https://support.microsoft.com/en-us/office/export-a-wiki-to-a-onenote-notebook-8cd8ab0c-2314-42b0-a1d0-5c6c4c5e1547):
 
 > Private channel wikis will also be deprecated. Unlike with standard channels, there will be no migration experience for private channels, so users will need to copy-paste the content into OneNote manually.
 
-## Will meeting notes be retired?
+## Are meeting notes retired?
 
-Although meeting notes are based on the wiki functionality, the announcement doesn't cover it at all.
+Yes, meeting notes are replaced by Loop-powered solution: Collaborative Notes.
 
-If we dig more, we can find something about the meeting notes in the [roadmap entry 101509](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=101509). The entry initially said:
+The [roadmap entry for collaborative notes](https://www.microsoft.com/en-us/microsoft-365/roadmap?filters=&searchterms=101509) did not mention Loop before the official announcement. The entry initially said:
 
 > Every Teams meeting now comes with a collaborative OneNote canvas. Create notes from the Teams calendar or during a meeting. You can easily recall your notes and manage your tasks directly from OneNote.
 
@@ -196,6 +184,12 @@ If you want to read more about the Microsoft Loop, here are some useful resource
 * [Get started with Microsoft Loop](https://support.microsoft.com/en-us/office/get-started-with-microsoft-loop-9f4d8d4f-dfc6-4518-9ef6-069408c21f0c)
 * [Loop admin settings doc](https://learn.microsoft.com/en-us/sharepoint/manage-loop-components)
 * [Using the Preview Version of the Loop App](https://practical365.com/loop-app-preview/)
+
+<Tip>
+
+Do you know where are the notes created for a specific meeting? They land on OneDrive of the first person that clicked the **Notes** tab. Not very intuitive, but similar to how recordings are stored.
+
+</Tip>
 
 ## What's the difference between wiki and OneNote?
 
@@ -253,6 +247,26 @@ Next part is discovery - find out who uses wiki and prepare a targeted communica
 Last, but not least - stay in the loop. Get back to this post frequently for updates. Keep checking the [Message Center](https://admin.microsoft.com/#/MessageCenter) and [M365 Roadmap](https://www.microsoft.com/en-us/microsoft-365/roadmap). Make sure you don't miss important updates.
 
 You can also bookmark this support article [Export a wiki to a OneNote notebook](https://support.microsoft.com/en-us/office/export-a-wiki-to-a-onenote-notebook-8cd8ab0c-2314-42b0-a1d0-5c6c4c5e1547). It seems to have a lot of useful information (including timeline). Such information is not mentioned anywhere else.
+
+## What was the experience in the initial phases?
+
+At the first stage, the Teams application was suggesting adding OneNote tab:
+
+![Top bar suggesting OneNote tab](../../img/teams-wiki-retirement/20230403-100825-HyLdRQf0Ri.png)
+
+The empty Wiki tab was not locked yet. We were still be able to make some edits.
+
+When we went to the page with existing content, we were seeing a different bar:
+
+![Top bar proposing to migrate to OneNote](../../img/teams-wiki-retirement/zWcpmWZFjX.png)
+
+That experience was generally available around April 2023.
+
+<Note>
+
+  The bars were visible to users with rights to add or remove tab in a channel. For others, there was no bar.
+
+</Note>
 
 ## Summary
 
