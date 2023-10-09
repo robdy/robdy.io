@@ -20,40 +20,41 @@ Below you can find the list of features available for Town Halls:
 
 * Unified experience similar to Teams meetings
 * Third-party eCDN support
-
-* 💎Teams Premium adds Microsoft eCDN support that includes real-time monitoring (attendee count, peak concurrency, session duration, geographic locations, and more (not defined)
+* 💎Teams Premium adds Microsoft eCDN support that includes real-time monitoring (attendee count, peak concurrency, session duration, geographic locations, and undefined _more_)
 * Green room with dedicated chat (this feature will also be added to meetings and webinars)
-
 * Manage what attendees see
 * Hide participant list
-
 * RTMP-in
 * RTMP-out
-
 * Structured Q&A
 * On-demand recording
-
 * Email communications (💎Teams Premium adds email customization)
 * Attendee reporting
-
 * Live translated captions from English, Japanese, Spanish, Portuguese, French, and Chinese
-* 💎Teams Premium adds German, Italian, Korean, and Russian for translated captions 
+* 💎Teams Premium adds German, Italian, Korean, and Russian for translated captions
 
 ## What are the limitations of Town Halls?
 
 * Up to 10,000 attendees (💎20,000 in Teams Premium)
 * Up to 15 concurrent events across the tenant (💎50 in Teams Premium)
-
 * Maximum duration of the event: 30 hours
 * Content is delayed about 15 seconds for attendees ([source](https://techcommunity.microsoft.com/t5/microsoft-teams-blog/introducing-town-halls-in-microsoft-teams-and-retiring-microsoft/bc-p/3941292/highlight/true#M13195))
 
 ## What features were announced for Town Halls?
 
 * External presenters (planned for the end of October)
-* Rewind and pause during the event (planned for *coming months*)
+* Rewind and pause during the event (planned for _coming months_)
 
-* Viewing the town hall in Viva Engage (planned for *coming months*)
+* Viewing the town hall in Viva Engage (planned for _coming months_)
 * PowerPoint Live ([source](https://techcommunity.microsoft.com/t5/microsoft-teams-blog/introducing-town-halls-in-microsoft-teams-and-retiring-microsoft/bc-p/3941101/highlight/true#M13191))
+
+## How do you create a Town Hall in Teams?
+
+To create a Town Hall, go to calendar in Teams and choose **Town hall** from the **New meeting** dropdown:
+
+![Choosing Town Hall from the New meeting dropdown](/../../img/teams-town-halls/20231009-062358-X4bRviMot6.png)
+
+If you do not see **Town hall** option, that functionality is blocked for you (or the entire organization) by an admin policy.
 
 ## When will Teams Live Events retire?
 
@@ -67,7 +68,6 @@ It is currently not clear what will be the limits for Live Events in 2024. Curre
 
 * Event support for up to 20,000 attendees
 * 50 events can be hosted simultaneously across a tenant
-
 * Event duration of 16 hours per broadcast
 * Live events with up to 100,000 attendees planned through the Microsoft 365 Live Event Assistance Program
 
@@ -83,19 +83,28 @@ We can see controls to start and end the meeting. We also have the red rectangle
 
 All the settings about Town Halls are held in the Teams events policy. They can be changed using [Set-CsTeamsEventsPolicy](https://learn.microsoft.com/en-us/powershell/module/teams/set-csteamseventspolicy?view=teams-ps) cmdlet. The available settings are:
 
-* *AllowTownhalls* - can either be *Enabled* (default value) or *Disabled*
-* *AllowedTownhallTypesForRecordingPublish* - possible values are *None*, *InviteOnly*, *EveryoneInCompanyIncludingGuests*, *Everyone* (default value)
+* _AllowTownhalls_ - can either be _Enabled_ (default value) or *Disabled*
+* _AllowedTownhallTypesForRecordingPublish_ - possible values are _None_, _InviteOnly_, _EveryoneInCompanyIncludingGuests_, _Everyone_ (default value)
+* _TownhallChatExperience_ - can be _Optimized_ (default value) or _None_
+The setting to allow town halls is self-explanatory. The _AllowedTownhallTypesForRecordingPublish_ manages types of Town Hall where attendees can have recordings published.
 
-* *TownhallChatExperience* - can be *Optimized* (default value) or *None*
-The setting to allow town halls is self-explanatory. The *AllowedTownhallTypesForRecordingPublish* manages types of Town Hall where attendees can have recordings published.
-
-Chat experience setting controls whether the town hall organizer can enable *Comment Stream* chat experience.
+Chat experience setting controls whether the town hall organizer can enable _Comment Stream_ chat experience.
 
 ## Resources
 
-[Introducing Town Halls in Microsoft Teams and Retiring Microsoft Teams Live Events - Microsoft Community Hub](https://techcommunity.microsoft.com/t5/microsoft-teams-blog/introducing-town-halls-in-microsoft-teams-and-retiring-microsoft/ba-p/3925739)
+Below you can find link to the resources about Town Hall:
 
-There are some resources to be available on October 5th: [Technical guidance and support resources](https://techcommunity.microsoft.com/t5/microsoft-teams-blog/introducing-town-halls-in-microsoft-teams-and-retiring-microsoft/ba-p/link%20tbd) and [Live Event Assistance Program](https://adoption.microsoft.com/en-us/virtual-event-guidance/assistance/).
+* [Introducing Town Halls in Microsoft Teams and Retiring Microsoft Teams Live Events - Microsoft Community Hub](https://techcommunity.microsoft.com/t5/microsoft-teams-blog/introducing-town-halls-in-microsoft-teams-and-retiring-microsoft/ba-p/3925739)
+* [Technical guidance and support resources](https://support.microsoft.com/en-us/office/get-started-with-town-hall-in-microsoft-teams-33baf0c6-0283-4c15-9617-3013e8d4804f)
+* [Live Event Assistance Program](https://adoption.microsoft.com/en-us/virtual-event-guidance/assistance/) - regardless the name, it also covers Town Halls
+
+Some support articles are already available:
+
+* [Schedule a town hall in Microsoft Teams](https://support.microsoft.com/en-us/office/schedule-a-town-hall-in-microsoft-teams-d493b5cc-9f61-4dac-8027-d837dafb7a4c)
+* [Customize a town hall in Microsoft Teams](https://support.microsoft.com/en-us/office/customize-a-town-hall-in-microsoft-teams-ce5dbdff-d5ea-456e-87da-5fdcd93ae2d2)
+* [Town hall insights in Microsoft Teams](https://support.microsoft.com/en-us/office/town-hall-insights-in-microsoft-teams-def99575-61bf-4ea2-ad0e-c6e75dce7741)
+* [Manage town hall recordings in Microsoft Teams](https://support.microsoft.com/en-us/office/manage-town-hall-recordings-in-microsoft-teams-88ac3af7-db67-4556-a202-b73a1d6c2e46)
+* [Cancel a town hall in Microsoft Teams](https://support.microsoft.com/en-us/office/cancel-a-town-hall-in-microsoft-teams-0be88477-3ef5-4f01-88fd-96194f74300c)
 
 ### Roadmap items
 
