@@ -1,4 +1,3 @@
-import { reduce } from 'lodash';
 import React, { useState, useEffect } from 'react';
 
 const ReadingProgress = () => {
@@ -7,30 +6,38 @@ const ReadingProgress = () => {
 	const handleScroll = () => {
 		const contentDiv = document.getElementById('blog-post-content');
 		if (!contentDiv) return;
+		
+		const scrollWindow = window.scrollY;
+		if (scrollWindow === 0) {
+			setScrollProgress(0)
+			return
+		}
 
 		const contentHeight = contentDiv.clientHeight;
-		const scrollTop = contentDiv.scrollTop;
-		const scrollPercentage = (scrollTop / (contentHeight - contentDiv.clientHeight)) * 100;
+		const contentPosition = contentDiv.offsetTop;
+		const heightWindow = window.innerHeight;
+		const scrollDiv = scrollWindow - contentPosition;
+		const scrollPercentage = ((scrollDiv + heightWindow) / contentHeight) * 100;
 		setScrollProgress(scrollPercentage);
 	};
 
 	useEffect(() => {
-		const contentDiv = document.getElementById('content');
+		const contentDiv = document.getElementById('blog-post-content');
 
 		if (contentDiv) {
-			contentDiv.addEventListener('scroll', handleScroll);
+			window.addEventListener('scroll', handleScroll);
 
 			return () => {
-				contentDiv.removeEventListener('scroll', handleScroll);
+				window.removeEventListener('scroll', handleScroll);
 			};
 		}
 	}, []);
 
 	const progressBarStyle = {
-		width: `${scrollProgress}%`,
-		'background-color': 'red',
-		height: '10px',
+		'width': `${scrollProgress}%`,
+
 	};
+	console.log(scrollProgress)
 
 	return (
 		<div className="reading-progress-bar">
