@@ -7,6 +7,7 @@ import Comments from '../components/Comments'
 import Navbar from '../components/Navbar'
 import { Metadata } from '../components/Metadata'
 import useSiteMetadata from '../components/SiteMetadata'
+import ReadingProgress from '../components/ReadingProgress'
 
 const BlogPostTemplate = ({
   children,
@@ -58,7 +59,10 @@ const BlogPostTemplate = ({
             </div>
           ) : null}
         </div>
-        {children}
+        <ReadingProgress />
+        <div id="blog-post-content">
+          {children}
+        </div>
         <Comments />
       </div>
     </section>

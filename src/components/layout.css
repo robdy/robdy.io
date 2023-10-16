@@ -333,6 +333,18 @@ h1 {
 }
 /*#endregion Blog header */
 
+/*#region Reading progress bar */
+.reading-progress {
+  background-color: var(--blue-violet-crayola);
+  height: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+}
+/*#endregion Reading progress bar */
+
 /*#region Blog entry content */
 h2,
 h3,
