@@ -28,7 +28,7 @@
     "react-helmet": "^6.1.0",
     "remark-images": "^4.0.0",
     "uuid": "^9.0.1",
-    "webpack": "^5.88.2"
+    "webpack": "^5.89.0"
   },
   "keywords": [
     "gatsby"
