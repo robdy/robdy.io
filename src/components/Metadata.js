@@ -135,7 +135,7 @@ export const Metadata = ({ children, pathname}) => {
 			<script
 				async
 				defer
-				data-domain="robdy.io"
+				onload="this.setAttribute('data-domain',window.location.host)"
 				src="https://plausible.io/js/plausible.js"
 			></script>
 			{children}
