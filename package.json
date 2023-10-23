@@ -5,7 +5,7 @@
   "author": "Robert Dyjas",
   "dependencies": {
     "@mdx-js/react": "^2.3.0",
-    "gatsby": "^5.12.6",
+    "gatsby": "^5.12.8",
     "gatsby-core-utils": "^4.12.0",
     "gatsby-plugin-feed": "^5.12.1",
     "gatsby-plugin-image": "^3.12.1",
