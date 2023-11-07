@@ -2,6 +2,7 @@ const _ = require('lodash')
 const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 const { fmImagesToRelative } = require('gatsby-remark-relative-images-v2')
+const { execSync } = require("child_process")
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
@@ -87,6 +88,17 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       name: `slug`,
       node,
       value,
+    })
+
+    // Modification date from git
+    // https://pragmaticpineapple.com/add-updated-at-to-your-gatsby-blog/
+    const modificationTime = execSync(
+      `git log -1 --pretty=format:%aI ${node.internal.contentFilePath}`
+    ).toString()
+    actions.createNodeField({
+      node,
+      name: "modificationTime",
+      value: modificationTime,
     })
   }
 }

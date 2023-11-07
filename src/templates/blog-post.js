@@ -13,6 +13,7 @@ const BlogPostTemplate = ({
   children,
   date,
   description,
+  modificationTime,
   tags,
   title,
   relativePath,
@@ -23,6 +24,13 @@ const BlogPostTemplate = ({
     year: 'numeric',
   })
   const isoDate = date.toISOString()
+
+  const formattedModificationTime = modificationTime.toLocaleDateString('en-us', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+  })
+  const isoModificationTime = modificationTime.toISOString()
 
   return (
     <section className="section">
@@ -36,7 +44,7 @@ const BlogPostTemplate = ({
               Robert Dyjas
             </Link>
             {' on '}
-            <time datetime={isoDate}>{formattedDate}</time>
+            <time datetime={isoDate}>{formattedDate}</time>. Last edit: <time datetime={isoModificationTime}>{formattedModificationTime}</time>
             &nbsp;&bull;&nbsp;
             <a
               href={`https://github.com/robdy/robdy.io/edit/src/blog/${relativePath}`}
@@ -75,6 +83,7 @@ BlogPostTemplate.propTypes = {
   title: PropTypes.string,
   slug: PropTypes.string,
   relativePath: PropTypes.string,
+  modificationTime: PropTypes.instanceOf(Date),
 }
 
 const BlogPost = (props) => {
@@ -86,6 +95,7 @@ const BlogPost = (props) => {
         children={props.children}
         date={new Date(post.frontmatter.date)}
         description={post.frontmatter.description}
+        modificationTime={new Date(post.fields.modificationTime)}
         relativePath={post.parent.relativePath}
         tags={post.frontmatter.tags}
         title={post.frontmatter.title}
@@ -123,6 +133,10 @@ export const Head = ({ data: { mdx: post }, location: { pathname } }) => {
         property="article:published_time"
         content={`${post.frontmatter.date}`}
       />
+      <meta
+        property="og:modification_time"
+        content={`${post.fields.modificationTime}`}
+      />
     </Metadata>
   )
 }
@@ -138,6 +152,7 @@ export const pageQuery = graphql`
       }
       fields {
         slug
+        modificationTime
       }
       frontmatter {
         date
