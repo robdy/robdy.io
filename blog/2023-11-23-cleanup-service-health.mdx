@@ -47,9 +47,9 @@ In the article below I will include screenshots from the new designer. You can a
 
 Most of the actions will be renamed for readability. Screenshots might include either of the names. The screenshot below demonstrates renaming the action:
 
-![Renaming actions](../../img/cleanup-service-health/Untitled-0.png)
+![Renaming actions](../../img/cleanup-service-health/20231123-133701-ZMZDlLtphC.png)
 
-## Arbitrary values
+### Arbitrary values
 
 Some of the values are arbitrary. That means you can adjust them to your needs. You can make the flows run more frequently or pull more emails at once.
 
@@ -57,7 +57,7 @@ Some of the values are arbitrary. That means you can adjust them to your needs. 
 
 How many times do we need to read notifications older than a few hours? We usually don't need to know about something that happened long before our shift. The same applies to things that happened during our two-week (or more) vacation.
 
-Let's go to [make.powerautomate.com](https://make.powerautomate.com/) and create a flow. Under **Create*** *we will choose **Scheduled cloud flow**:
+Let's go to [make.powerautomate.com](https://make.powerautomate.com/) and create a flow. Under **Create** we will choose **Scheduled cloud flow**:
 
 ![Creating scheduled cloud flow](../../img/cleanup-service-health/20231111-172927-JopVZhT5gg.png)
 
@@ -81,6 +81,8 @@ The first action in the flow will be to get emails. We choose the *Get emails (V
 
 Note that some parameters are hidden under the *Show all* button (1):
 
+![Show all button to uncover hidden properties](../../img/cleanup-service-health/20231111-184033-yXSXusdY0p.png)
+
 </Tip>
 
 The next action will be *Apply to each*. We will pass *body/value* property to it:
@@ -96,6 +98,8 @@ Inside *Apply to each* we add the *Move email (V2)* action with the following pa
 
 *Message Id* is not displayed by default. To insert it type the backslash in the field (1). Then choose *Insert Dynamic Content* (2), type the name into the search field (3), and choose the property from the list (4):
 
+![Accessing Message Id property](../../img/cleanup-service-health/20231111-185450-b4yjof0XYz.png)
+
 </Tip>
 
 You can download the flow here: [ArchiveOldServiceHealthNotifications.zip](https://github.com/robdy/misc/raw/master/flows/ArchiveOldServiceHealthNotifications.zip).
@@ -106,7 +110,7 @@ The last (but not least) problem with Service Health email notifications is… u
 
 Regardless of the current status, we rarely need the full history. We need to know whether the issue is ongoing or already resolved. We can dig more ourselves if needed.
 
-Let's go to [make.powerautomate.com](https://make.powerautomate.com/) and create a flow. Under **Create*** *we will choose **Scheduled cloud flow**:
+Let's go to [make.powerautomate.com](https://make.powerautomate.com/) and create a flow. Under **Create** we will choose **Scheduled cloud flow**:
 
 ![Creating scheduled cloud flow](../../img/cleanup-service-health/20231111-172927-JopVZhT5gg-0.png)
 
@@ -114,7 +118,7 @@ We can choose how frequently the flow should run. I run it every hour in this ex
 
 ![Configuring scheduled flow properties](../../img/cleanup-service-health/20231111-173124-rWgbgOkAA1.png)
 
-The first action in the flow is to get emails (*Office 365 Outlook* > *Get emails (V3)*). We will use the following properties:
+The first action in the flow is to get emails. It is *Office 365 Outlook* > *Get emails (V3)*. We will use the following properties:
 
 * **Name**: Get emails
 * **Subject Filter**: Service Health
@@ -138,7 +142,11 @@ Inside the loop, we will add a *Data Operation* > *Compose* action. It will stor
 
 For some reason, the expression might be replaced by the Outlook icon with the text *Attachment* (as in the screenshot below). Do not worry, it will be fixed after saving and refreshing the page.
 
+![Incorrect input value shown in the action](../../img/cleanup-service-health/20231122-170311-Go5oJ3rmvv.png)
+
 </Warning>
+
+Here is how the *Compose* action should look like:
 
 ![Configuration of the Compose action](../../img/cleanup-service-health/20231122-165924-VsIZvP8qzN.png)
 
@@ -147,7 +155,7 @@ Now, the tricky part. We need to check if two emails are referring to the same i
 We use *Data Operation* > *Filter array* action. Its configuration is:
 
 * **Name**: Filter array
-* **Filter query**:
+* **Filter query**: `item()?['Subject']` (as an expression) is equal to `outputs('Email')?['subject'])` (as an expression)
 
 The action will find all emails with the same subject as the current item in the loop.
 
