@@ -1,4 +1,4 @@
----
+mi---
 templateKey: blog-post
 title: 3 ways to clean up Service Health email
 date: 2023-11-23T08:49:00.0000000Z
@@ -21,11 +21,11 @@ Working with Microsoft 365 often requires dealing with Service Health email noti
 
 ## Filter out unwanted services
 
-First and foremost, let's make the email never arrive. Using our admin account let's go to *Service Health* (1) > *Customize* ([direct link](https://admin.microsoft.com/Adminportal/Home#/servicehealth/:/shdpreferences)). From here, switch to the *Email* tab (3):
+First and foremost, let's make the email never arrive. Using our admin account let's go to **Service Health** (1) > **Customize** (2, [direct link](https://admin.microsoft.com/Adminportal/Home#/servicehealth/:/shdpreferences)). From here, switch to the **Email** tab (3):
 
 ![Opening Email settings of the Service Health](../../img/cleanup-service-health/20231108-143510-T5oZsGnvj9.png)
 
-Here we check the box to receive emails. Then we put our email address and scroll down to the *Include these services* section.
+Here we check the box to receive emails. Then we put our email address and scroll down to the **Include these services** section.
 
 If we do not manage some of the services within our organization, we can safely uncheck them. In my case, I am not interested in Azure Information Protection and Dynamics:
 
@@ -79,7 +79,7 @@ The first action in the flow will be to get emails. We choose the *Get emails (V
 * **Top**: 25
 <Tip>
 
-Note that some parameters are hidden under the *Show all* button (1):
+Note that some parameters are hidden under the **Show all** button (1):
 
 ![Show all button to uncover hidden properties](../../img/cleanup-service-health/20231111-184033-yXSXusdY0p.png)
 
@@ -96,7 +96,7 @@ Inside *Apply to each* we add the *Move email (V2)* action with the following pa
 
 <Tip>
 
-*Message Id* is not displayed by default. To insert it type the backslash in the field (1). Then choose *Insert Dynamic Content* (2), type the name into the search field (3), and choose the property from the list (4):
+*Message Id* is not displayed by default. To insert it type the backslash in the field (1). Then choose **Insert Dynamic Content** (2), type the name into the search field (3), and choose the property from the list (4):
 
 ![Accessing Message Id property](../../img/cleanup-service-health/20231111-185450-b4yjof0XYz.png)
 
