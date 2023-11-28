@@ -38,7 +38,9 @@ module.exports = {
     {
       resolve: `gatsby-plugin-sharp`,
       options: {
-        breakpoints: [471, 942, 1920]
+        defaults: {
+          breakpoints: [471, 942, 1920]
+        }
       }
     },
     'gatsby-transformer-sharp',

@@ -37,7 +37,6 @@ const ReadingProgress = () => {
 		'width': `${scrollProgress}%`,
 
 	};
-	console.log(scrollProgress)
 
 	return (
 		<div className="reading-progress-bar">
