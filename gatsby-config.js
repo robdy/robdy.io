@@ -21,11 +21,11 @@ module.exports = {
       },
     },
     {
-    resolve: 'gatsby-source-filesystem',
-    options: {
-      path: `${__dirname}/blog${process.env.NODE_ENV === 'production' ? '' : 'dev'}`,
-      name: 'articles',
-    },
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/blog${process.env.NODE_ENV === 'production' ? '' : 'dev'}`,
+        name: 'articles',
+      },
     },
     {
       resolve: 'gatsby-source-filesystem',
@@ -34,7 +34,15 @@ module.exports = {
         name: 'images',
       },
     },
-    'gatsby-plugin-sharp',
+    `gatsby-plugin-image`,
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        defaults: {
+          breakpoints: [471, 942, 1920]
+        }
+      }
+    },
     'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-plugin-mdx',
@@ -44,16 +52,6 @@ module.exports = {
             resolve: 'gatsby-remark-relative-images-v2',
             options: {
               // name: 'uploads',
-            },
-          },
-          {
-            resolve: 'gatsby-remark-images',
-            options: {
-              // It's important to specify the maxWidth (in pixels) of
-              // the content container as this plugin uses this as the
-              // base for generating different widths of each image.
-              maxWidth: 1920,
-              srcSetBreakpoints: [471, 942],
             },
           },
           {

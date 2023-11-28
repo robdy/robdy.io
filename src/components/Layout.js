@@ -6,6 +6,7 @@ import { NoteBlock, WarningBlock, TipBlock } from './Block'
 import { LinkToAnywhere } from './LinkToAnywhere'
 import { Header } from './Header'
 import { CodeBlock } from './CodeBlock'
+import { Image } from './Image'
 
 const TemplateWrapper = ({ children }) => {
 
@@ -24,6 +25,7 @@ const TemplateWrapper = ({ children }) => {
           h5: props => <Header level={'5'} {...props} />,
           h6: props => <Header level={'6'} {...props} />,
           pre: CodeBlock,
+          img: Image,
         }}
       >
         {children}
