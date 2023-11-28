@@ -3,18 +3,26 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import { graphql, useStaticQuery } from 'gatsby'
 
 export const Image = ({ alt, src }) => {
-	// const data = useStaticQuery(graphql`
-	// 	query ImageQuery {
-	// 		file(relativePath: {eq: "Untitled-8.png"}) {
-	// 			childImageSharp {
-	// 				gatsbyImageData
-	// 			}
-	// 			relativePath
-	// 		}
-	// 	}
-	// `)
-	
-	console.log({ alt, src})
-	return <p>{alt}</p>
-	// return <GatsbyImage image={data.file.childImageSharp.GatsbyImageData} />
+	const data = useStaticQuery(graphql`
+		query ImageQuery {
+			allFile {
+				nodes {
+					childImageSharp {
+						gatsbyImageData
+					}
+					relativePath
+					absolutePath
+				}
+				
+			}
+		}
+	`)
+	const srcAbsolute = src.slice(6).toString()
+	const relatedImage = data.allFile.nodes.find(node => node.absolutePath.includes(srcAbsolute) !== -1)
+
+	console.log({ alt, src, srcAbsolute, data, relatedImage })
+	return (<><p>{alt}</p>
+		<GatsbyImage image={relatedImage.childImageSharp.gatsbyImageData} alt={alt} title={alt} />
+		</>
+	)
 }
