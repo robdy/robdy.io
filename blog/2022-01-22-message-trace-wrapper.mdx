@@ -77,7 +77,7 @@ do {
   Start-Sleep -Seconds 1
 # The loop should end when there's no more messages
 # or when we reach last page
-} until { $null -eq $currentMessages -or $gmtParams.Page -gt $maxPage } 
+} until ( $null -eq $currentMessages -or $gmtParams.Page -gt $maxPage )
 ```
 
 ## Lowering memory usage
