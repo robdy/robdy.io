@@ -1,0 +1,257 @@
+---
+templateKey: blog-post
+title: Filtering Teams users by policy
+date: 2023-12-07T07:37:00.0000000Z
+description: How to get users with certain Teams policy assigned? Or with global policy? Or with all custom policies? You might save yourselves a headache.
+featuredpost: false
+tags:
+  - teams
+  - powershell
+  - snippet
+---
+
+Together with my colleague, Nuhu, I recently discussed getting users with certain Teams policy. Below I'm sharing tips on how to achieve this the optimal way.
+
+## Standard way
+
+Let's say we want to find all users with the policy assigned. We know the policy type (in the example below *TeamsEventsPolicy*). We also know the name (in the example it is *Allow Town Halls*)
+
+```powershell
+Get-CsOnlineUser |
+	Where-Object TeamsEventsPolicy -like "Allow Town Halls"
+```
+
+Let's look at the performance of this approach.
+
+Above we used *Get-CsOnlineUser* and then piped the result to *Where-Object*. This means we pull all the users to memory. We filter them afterward. That is not a big deal for small environments. But what if we have thousands of users in the organization?
+
+Let's check!
+
+## Using Filter parameter
+
+Let's modify our script to use *-Filter* parameter instead. We can use the `-eq` operator now
+
+```powershell
+Get-CsOnlineUser -Filter "TeamsEventsPolicy -like 'Allow Town Halls'"
+```
+
+## Testing the performance
+
+Now we will add some measurements to test the performance. We will also extract the policy type and name to variables for easier modification:
+
+```powershell
+# Modify here and it will apply to both cmdlets
+$policyType = 'TeamsEventsPolicy'
+$policyName = 'Allow Town Halls'
+
+$whereTime = Measure-Command -Expression {
+	$resUsingWhere = Get-CsOnlineUser |
+		Where-Object $policyType -like $policyName
+}
+$filterTime = Measure-Command -Expression {
+	$resUsingFilter = Get-CsOnlineUser -Filter "$policyType -like '$policyName'"
+}
+Write-Host "Using where:  $([math]::round($whereTime.TotalMilliseconds))"
+Write-Host "Using filter: $([math]::round($filterTime.TotalMilliseconds))"
+```
+
+![Using filter was 40 milliseconds faster](../../img/teams-users-by-policy/20231204-092236-ZcSUFOomLz.png)
+
+40 milliseconds - this is nothing. But what happens if we have more users in the organization - let's say more than 300k. And 10k of them have the policy assigned. The difference is more remarkable: 92 seconds using *Filter* and more than 2500 seconds (42 minutes) using *Where-Object*:
+
+![Performance comparison for a large number of users](../../img/teams-users-by-policy/2023-12-04_11_13_47-000800.png)
+
+When we specify the policy with only one user, the difference is huge. Using *Filter* finished in 2 seconds. I was not patient enough to wait another 40 mins 😉. I simply assumed the execution time would be similar. The script needs to pull all the users anyway.
+
+## Equality operator
+
+You might wonder why we use `-like` instead of `-eq` in the examples above. The reason is that its behavior is not consistent for getting policies. When using *Where-Object*:
+
+```powershell
+# This works
+Where-Object $policyType -like $policyName
+# While those do not work
+Where-Object $policyType -eq $policyName
+Where-Object $policyType -eq "host:$policyName"
+Where-Object $policyType -eq "tenant:$policyName"
+```
+
+<Tip>
+
+The word *tenant* before the policy name is for custom policies. The ones provided by Microsoft will have the word *host*.
+
+</Tip>
+
+To make *Where-Object* work we would need to filter by *Name property:*
+
+```powershell
+# This won't work as we access nested property
+Get-CsOnlineUser |
+	Where-Object $policyType.name -eq $policyName
+# We need to use expression
+Get-CsOnlineUser |
+	Where-Object {$_.$policyType.name -eq $policyName}
+```
+
+With *Filter* it is easier:
+
+```powershell
+# All of those work
+Get-CsOnlineUser -Filter "$policyType -eq '$policyName'"
+Get-CsOnlineUser -Filter "$policyType -like '$policyName'"
+Get-CsOnlineUser -Filter "$policyType -like 'tenant:$policyName'"
+Get-CsOnlineUser -Filter "$policyType -like 'host:$policyName'"
+```
+
+## Comparison statement or script block
+
+When using script block for filtering we wrap it in curly braces `{ ... }`. For some simple cases, we could also use a comparison statement:
+
+```powershell
+[PROPERTY] -[operator] [value]
+```
+
+Those two examples are equivalent:
+
+```powershell
+# Comparison statement
+Get-CsOnlineUser |
+		Where-Object $policyType -like $policyName
+# Script block
+Get-CsOnlineUser |
+		Where-Object {$_.$policyType -like $policyName}
+```
+
+I did not notice any performance difference between the comparison statement and the script block.
+
+## Comparison statement for Filter property
+
+There are plenty of filters that work properly with *Get-CsOnlineUser*. To return users with a specified policy we can use both `-like` and `-eq`:
+
+```powershell
+$policyType = 'TeamsEventsPolicy'
+$policyName = 'Allow Town Halls'
+# Return users with the specified policy
+Get-CsOnlineUser -Filter "$policyType -like '$policyName'"
+Get-CsOnlineUser -Filter "$policyType -eq '$policyName'"
+```
+
+```powershell
+$policyType = 'TeamsEventsPolicy'
+$policyName = 'Allow Town Halls'
+# Return users with the specified policy
+Get-CsOnlineUser -Filter "$policyType -like '$policyName'"
+Get-CsOnlineUser -Filter "$policyType -eq '$policyName'"
+```
+
+For `-like` wildcards are supported:
+
+```powershell
+# Includes all policies starting with 'Allow Town Halls'
+Get-CsOnlineUser -Filter "$policyType -like '$policyName*'"
+# Ending with 'Allow Town Halls'
+Get-CsOnlineUser -Filter "$policyType -like '*$policyName'"
+# Or containing 'Allow Town Halls'
+Get-CsOnlineUser -Filter "$policyType -like '*$policyName*'"
+```
+
+*Tenant* and *host* types work, too:
+
+```powershell
+# Users with global policy are not returned in any case below
+Get-CsOnlineUser -Filter "$policyType -like 'tenant:$policy'"
+Get-CsOnlineUser -Filter "$policyType -eq 'tenant:$policy'"
+Get-CsOnlineUser -Filter "$policyType -like 'host:$policy'"
+Get-CsOnlineUser -Filter "$policyType -eq 'host:$policy'"
+# This returns users with all custom policies
+Get-CsOnlineUser -Filter "$policyType -like 'tenant:*'"
+# This returns users with all default policies (except global)
+Get-CsOnlineUser -Filter "$policyType -like 'host:*'"
+```
+
+I did not find a way to get users with global policy using comparison statements. Worry not, script block to the rescue!
+
+## Script block for Filter property
+
+The majority of the comparison statements can be translated into a script block. Let's look at the examples from the previous section.
+
+```powershell
+# Return users with the specified policy
+Get-CsOnlineUser -Filter {TeamsEventsPolicy -like 'Allow Town Halls'}
+Get-CsOnlineUser -Filter {TeamsEventsPolicy -eq 'Allow Town Halls'}
+```
+
+For `-like` wildcards are supported:
+
+```powershell
+# Includes all policies starting with 'Allow Town Halls'
+Get-CsOnlineUser -Filter {TeamsEventsPolicy -like 'Allow Town Halls*'}
+# Ending with 'Allow Town Halls'
+Get-CsOnlineUser -Filter {TeamsEventsPolicy -like '*Allow Town Halls'}
+# Or containing 'Allow Town Halls'
+Get-CsOnlineUser -Filter {TeamsEventsPolicy -like '*Allow Town Halls*'}
+```
+
+*Tenant* and *host* types work, too:
+
+```powershell
+# Users with global policy are not returned in any case below
+Get-CsOnlineUser -Filter {TeamsEventsPolicy -like 'tenant:Allow Town Halls'}
+Get-CsOnlineUser -Filter {TeamsEventsPolicy -eq 'tenant:Allow Town Halls'}
+Get-CsOnlineUser -Filter {TeamsCallingPolicy -like 'host:AllowCalling'}
+Get-CsOnlineUser -Filter {TeamsCallingPolicy -eq 'host:AllowCalling'}
+# This returns users with all custom policies
+Get-CsOnlineUser -Filter {TeamsEventsPolicy -like 'tenant:*'}
+# This returns users with all default policies (except global)
+Get-CsOnlineUser -Filter {TeamsCallingPolicy -like 'host:*'}
+```
+
+## Users with global policy
+
+One special exception that can be achieved only using script block is getting users with default policy (*Global*):
+
+```powershell
+# Works
+Get-CsOnlineUser -Filter {TeamsCallingPolicy -eq $null}
+```
+
+## Passing variable to the script block
+
+You might have noticed that in script block examples we are not passing the variable. It does not work out of the box:
+
+```powershell
+# Will not work
+Get-CsOnlineUser -Filter {$policyType -eq $policyName}
+```
+
+Why? We can try to run the script block in PowerShell. We will see that the variable reference is treated as text:
+
+```powershell
+{$policyType -eq $policyName}
+# Will return
+PS> $policyType -eq $policyName
+```
+
+The screenshot shows the output:
+
+![Syntax error first and then script block transferred to text](../../img/teams-users-by-policy/20231206-171121-D1TjIxa40W.png)
+
+There is a workaround that we can use. We need to construct the script block first. Then we provide it to the *Filter* property: 
+
+```powershell
+$policyType = 'TeamsEventsPolicy'
+$policyName = 'Allow Town Halls'
+# For getting users with default policy
+$scriptBlockGlobal = 
+	[System.Management.Automation.ScriptBlock]::Create("$policyType" +' -eq $null')
+Get-CsOnlineUser -Filter $scriptBlockGlobal
+
+# For other filters
+$scriptBlock = 
+	[System.Management.Automation.ScriptBlock]::Create("$policyType -eq '$policyName'")
+Get-CsOnlineUser -Filter $scriptBlock
+```
+
+## Summary
+
+Filtering by policies in Teams PowerShell is not trivial. Having a bit of knowledge about script blocks and filter queries. Even with this, some cases might be not as easy as we think.
