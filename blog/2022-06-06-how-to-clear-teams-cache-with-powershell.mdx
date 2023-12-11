@@ -11,11 +11,15 @@ tags:
   - powershell
   - snippet
 ---
-How to clear Teams cache using PowerShell. Be careful about removing your custom backgrounds! 
-
-Clearing Teams cache is one of the first steps in troubleshooting client-side issues with Microsoft Teams. Very often it's the only step.
+Clearing Teams cache is one of the first steps in troubleshooting client-side issues with Microsoft Teams. Very often it's the one and only step.
 
 In this article I'm presenting a code snippet to automate this process. The code might then be used as a self-service activity. What do you think - how many tickets would be immediately solved if your users had such a tool?
+
+<Tip>
+
+  Update December 2023 - the article now covers both new Teams and classic Teams application
+
+</Tip>
 
 ## The manual way and its issue
 
@@ -32,7 +36,33 @@ The solution for above is to have a script doing it instead.
 
 There's one more thing to be aware of. Some of our client-side settings will still be lost. Example of these setting is the preview mode - we need to opt-in for it manually. So far I haven't found a way to cover these settings in the script.
 
-## The script
+## The script for new Teams
+
+The lines below will remove all the temporary files for new Teams client. It will, however, leave the _Backgrounds_ folder intact.
+
+The script also stops the Teams process on the machine. Once the cleanup is done, it starts it once again.
+
+```powershell
+$proc = Get-Process 'ms-teams' -ErrorAction SilentlyContinue
+$cacheFolderPath = "$($env:LOCALAPPDATA)\Packages\MSTeams_8wekyb3d8bbwe\LocalCache\Microsoft\MSTeams"
+$proc | Stop-Process
+$cacheItems = Get-ChildItem $cacheFolderPath -Exclude 'Backgrounds'
+$cacheItems | Remove-Item -Recurse -Force
+$teamsAppId = 'MSTeams_8wekyb3d8bbwe!MSTeams'
+$startProcessArgs = @{
+  FilePath = 'explorer.exe'
+  ArgumentList = "shell:AppsFolder\$teamsAppId"
+}
+Start-Process  @startProcessArgs
+```
+
+The differences between the script for new and classic Teams are:
+
+- Different process name (was _teams_, is _ms-teams_)
+- Different folder for storing cache
+- Different way to start the app - previously we started the executable, now we need to start [the Universal Windows App (UWP)](https://stackoverflow.com/q/46893260/9902555).
+
+## The script for classic Teams
 
 The lines below will remove all the temporary files from the _%appdata%\Microsoft\Teams_. It will, however, leave the _Backgrounds_ folder intact.
 
