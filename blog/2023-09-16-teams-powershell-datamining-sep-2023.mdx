@@ -31,6 +31,14 @@ However, there is more. Let's talk about them!
 
 ## Limit presenter role permissions
 
+<Tip>
+
+Update Feb 2024: According to Message Center entry MC715431 ([public link](https://m365admin.handsontek.net/microsoft-teams-limit-presenter-role-permissions-2/), [admin link](https://admin.microsoft.com/Adminportal/Home?ref=MessageCenter/:/messages/MC715431)) this feature will be rolled out in March/April 2024, depending on the release ring!
+
+Thanks to Rolf for bringing this up in the comments!
+
+</Tip>
+
 Let's start with a new tenant-wide setting for meetings: *LimitPresenterRolePermissions*. Tenant-wide means it's available for meeting configuration, not meeting policy. We can see the parameter returned by [Get-CsTeamsMeetingConfiguration](https://learn.microsoft.com/en-us/powershell/module/skype/get-csteamsmeetingconfiguration?view=skype-ps). We can set it using [Set-CsTeamsMeetingConfiguration](https://learn.microsoft.com/en-us/powershell/module/skype/set-csteamsmeetingconfiguration?view=skype-ps).
 
 The default value of *LimitPresenterRolePermissions* is false. It accepts a boolean value and we can already change this setting if we want:
