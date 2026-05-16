@@ -1,0 +1,49 @@
+---
+templateKey: blog-post
+title: Cleaning up completed ToDo tasks
+date: 2026-05-16T13:58:00.0000000Z
+description: When tasks are completed, we no longer need them. But how to remove them automatically?
+featuredpost: false
+tags:
+  - to do
+  - power automate
+---
+I started playing with Microsoft To Do automation a little bit more than ~~I should~~ usual. However, I quite quickly came up to API limitations. The maximum number of items to pull is 999. That includes completed tasks.
+I decided I need to clean up old tasks. To make sure I do not have this issue anymore, I'd need to schedule a Power Automate task.
+## Requirements
+- Power Automate license (included in M365 license - I have Business Premium)
+- Personal Microsoft To Do
+
+<Note>
+Commercial To Do should work in similar manner but I personally store tasks on personal account
+</Note>
+
+## Workflow
+Here are the steps of my workflow:
+1. List all to-do lists
+2. For each list list to do's
+3. Filter array to get only completed and older than a month (or any predefined number of days)
+4. Delete each task
+
+Here's the view of the steps I perform for each list:
+![Part of the flow that runs for each list](../../img/cleaning-up-completed-todo-tasks/Screenshot-2026-05-16-152033.png)
+## Steps
+To get only completed items we use:
+```
+@equals(item()?['status'],'completed')
+```
+To get only items that are older than 30 days, we can use:
+```
+@less(item()?['completedDateTime']?['dateTime'],addDays(utcNow(),-30))
+```
+<Note>
+For simplicity we do not consider time zones. We also splitted the filtering to two steps for easier troubleshooting
+</Note>
+## Complete flow
+You can download the flow from GitHub: [ArchiveAllButLastServiceHealthNotification.zip](https://github.com/robdy/misc/blob/master/flows/ArchiveAllButLastServiceHealthNotification.zip)
+## Note on run duration
+When I run the flow on 2000+ items, it took hours to complete. I gave up and deleted the items manually, letting the flow to cover the ongoing items:
+![Duration of flows run on bigger number of items](../../img/cleaning-up-completed-todo-tasks/Screenshot-2026-05-16-153231.png)
+
+
+
