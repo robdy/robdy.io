@@ -32,7 +32,7 @@ foreach ($post in @($newPosts)) {
   $post = @($newPosts)[0]
   #>
   $postPath = ($post.name.split('.'))[0]
-  git switch -c $postPath
+  git checkout $postPath 2>/dev/null || git checkout -b $postPath
   $postImgFolder = Join-Path $imgFolder $postPath
   if (-not (Test-Path $postImgFolder)) {
     Write-Error 'Image folder not found'
