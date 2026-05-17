@@ -32,7 +32,7 @@ foreach ($post in @($newPosts)) {
   $post = @($newPosts)[0]
   #>
   $postPath = ($post.name.split('.'))[0]
-  git checkout $postPath 2>/dev/null || git checkout -b $postPath
+  git checkout -B $postPath
   $postImgFolder = Join-Path $imgFolder $postPath
   if (-not (Test-Path $postImgFolder)) {
     Write-Error 'Image folder not found'
@@ -53,7 +53,7 @@ foreach ($post in @($newPosts)) {
     # Change images paths
     # from ![[IMG_4135.jpeg]] Image description
     # to   ![Using filter was 40 milliseconds faster](../../img/teams-users-by-policy/20231204-092236-ZcSUFOomLz.png)
-    if ($postContent[$i] -match '!\[\[(.*)\]\]\s*(\w+)') {
+    if ($postContent[$i] -match '!\[\[(.*)\]\]\s*([\w\s]+)') {
       $postContent[$i] = "![$($matches.2)](../../img/$postPath/$($matches.1))"
     }
     
@@ -70,6 +70,6 @@ foreach ($post in @($newPosts)) {
   git add . 
   $gitMessage = "Adds $postTitle"
   git commit -m $gitMessage
-  git push origin
+  git push origin -f
 }
 #endregion Processing
