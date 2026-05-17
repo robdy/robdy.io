@@ -47,6 +47,9 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
+        mdxOptions: {
+          remarkPlugins: [require("remark-gfm")],
+        },
         gatsbyRemarkPlugins: [
           {
             resolve: 'gatsby-remark-relative-images-v2',
