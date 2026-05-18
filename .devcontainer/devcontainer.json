@@ -2,7 +2,7 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/javascript-node
 {
 	"name": "Node.js",
-	"image": "mcr.microsoft.com/devcontainers/javascript-node:0-18",
+	"image": "mcr.microsoft.com/devcontainers/javascript-node",
 	
 	// Set *default* container specific settings.json values on container create.
 	"settings": {},
