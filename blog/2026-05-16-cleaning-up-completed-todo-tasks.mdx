@@ -8,7 +8,7 @@ tags:
   - to do
   - power automate
 ---
-I started playing with Microsoft To Do automation a little bit more than ~~I should~~ usual. However, I quite quickly came up to API limitations. The maximum number of items to pull is 999. That includes completed tasks.
+I started playing with Microsoft To Do automation a little bit more than usual (or perhaps more than *I should*). However, I quite quickly came up to API limitations. The maximum number of items to pull is 999. That includes completed tasks.
 I decided I need to clean up old tasks. To make sure I do not have this issue anymore, I'd need to schedule a Power Automate task.
 ## Requirements
 - Power Automate license (included in M365 license - I have Business Premium)
@@ -40,7 +40,7 @@ To get only items that are older than 30 days, we can use:
 For simplicity we do not consider time zones. We also splitted the filtering to two steps for easier troubleshooting
 </Note>
 ## Complete flow
-You can download the flow from GitHub: [ArchiveAllButLastServiceHealthNotification.zip](https://github.com/robdy/misc/blob/master/flows/ArchiveAllButLastServiceHealthNotification.zip)
+You can download the flow from GitHub: [CleanupCompletedOldTasks.zip](https://github.com/robdy/misc/blob/master/flows/CleanupCompletedOldTasks.zip)
 ## Note on run duration
 When I run the flow on 2000+ items, it took hours to complete. I gave up and deleted the items manually, letting the flow to cover the ongoing items:
 ![Duration of flows run on bigger number of items](../../img/cleaning-up-completed-todo-tasks/Screenshot-2026-05-16-153231.png)
