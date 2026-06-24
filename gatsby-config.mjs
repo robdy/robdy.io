@@ -1,4 +1,10 @@
-module.exports = {
+import remarkGfm from "remark-gfm"
+import { dirname } from "path"
+import { fileURLToPath } from "url"
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
+const config = {
   siteMetadata: {
     title: 'Robert Dyjas - blog',
     description: 'MS Teams and SfB expert. In my free time I write code',
@@ -60,6 +66,7 @@ module.exports = {
               destinationDir: 'static',
             },
           },
+          "remark-gfm"
         ],
       },
     },
@@ -132,3 +139,4 @@ module.exports = {
     },
   ],
 }
+export default config;
